@@ -1,0 +1,46 @@
+<!--MODAL POPUP DIALOG-->
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <span> User Confirmation </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+            <mat-icon>close</mat-icon>
+        </span>
+    </mat-toolbar>
+</h4>
+
+<h5 class="reset-label">Reset Account Balance</h5>
+
+<form [formGroup]="form" (ngSubmit)="onSave()" >
+    <div fxLayout="row" fxLayoutAlign="space-around">
+        <div [fxFlex]="showBalance ? '25' : '44'">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label">Account Number</mat-label>
+                <input matInput [formControl]="form.controls['accountNumber']" formControlName="accountNumber" readonly>
+            </mat-form-field>
+        </div>
+
+        <div [fxFlex]="showBalance ? '25' : '44'">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label">Account Name</mat-label>
+                <input matInput [formControl]="form.controls['accountName']" formControlName="accountName" readonly>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="showBalance" fxflex="10">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label">Balance</mat-label>
+                <input matInput [formControl]="form.controls['balance']" formControlName="balance" readonly>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="deactivate" fxLayout="row wrap" fxLayoutGap="30px">
+        <button mat-raised-button class="blue" [mat-dialog-close]="true" type="button">Close</button>
+        <button mat-raised-button class="green"
+            [disabled]="!form.valid" type="submit">Reset</button>
+
+        <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="submitButtonLoader"></mat-spinner>
+
+    </div>
+
+</form>

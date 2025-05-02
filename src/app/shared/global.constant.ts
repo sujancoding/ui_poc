@@ -1,0 +1,142 @@
+import { environment } from '../../environments/environment';
+
+export class GlobalConstants {
+    public static get API_BASE_URL(): string {
+        return environment.apiBaseUrl; //it fetches the latest value of environment.apiBaseUrl, which should have been set dynamically at runtime.
+    }
+    public static AUTH_API: string = "/v1/authenticate/login?";
+    public static AGENT_AUTH_API: string = "/v1/authenticate/agent-login"
+    public static REG_API: string = "/v1/assisted/consumer/application/new";
+    public static REG_COR_API: string = "/v1/assisted/corporate/application/new";
+    public static OTP_API: string = "/v1/authenticate/otp/validate";
+    public static MFA_API: string = "/v1/mfa/assisted/validate";
+    public static APP_UPD_API: string = "/v1/application/applicant/update";
+    public static APP_INQ: string = "/v1/application/{applicationId}";
+    public static APP_DOC_API: string = "/v1/application/document/add";
+    public static APP_DOCSUBMIT_API: string = "/v1/application/document/submit";
+    public static DOCUMENT_INQUIRY: string = "/v1/application/document/{documentId}";
+    public static APP_SUBMIT_API: string = "/v1/application/applicant/submit";
+    public static APP_FULFILMENT: string = "/v1/application/fulfillment";
+    public static BRANCH_DASHBOARD: string = "/v1/dashboard/user";
+    public static CUSTOMER_DASHBOARD : string = "/v1/dashboard/customer?";
+    public static APP_SEARCH: string = "/v1/applications/search?";
+    public static CUSTOMER_SEARCH_API : string = "/v1/customers?";
+    public static CUSTOMER_STATUS_UPDATE_API : string = "/v1/customers/{customer_id}/{action}";
+    public static CUSTOMER_INQUIRY_API: string = "/v1/customers/{customerId}"
+    public static FWP_VERIFY_API: string = "/v1/forgotpassword/initiate";
+    public static FWP_CHANGE_API: string = "/v1/forgotpassword/change";
+    public static ADD_PAYEE_API: string = "/v1/remit/customer/{customerId}/payee";
+    public static VIEW_PAYEE_API: string = "/v1/remit/customer/{customerId}/payee/{payeeId}?";
+    public static SEARCH_PAYEE_API: string = "/v1/remit/payee?";
+    public static BACKOFFICE_SEARCH_PAYEE_API: string = "/v1/remit/customer/{customerId}/payee?";
+    public static BACKOFFICE_VIEW_PAYEE_API : string = "/v1/remit/customer/{customerId}/payee?"
+    public static PAYEE_FULFILMENT: string = "/v1/remit/customer/{customerId}/payee/{payeeId}/{action}";
+    public static EXCHANGE_RATE_API: string = "/v1/remit/exchangerate";
+    public static BOOK_DEAL_API: string = "/v1/remit/deal/{agentId}";
+    public static GET_DEALS_API : string = "/v1/remit/deals/summary?";
+    public static GET_AGENT_API : string = "/v1/agent?";
+    public static ADD_TRANSACTION: string = "/v1/remit/{customerId}/transaction";
+    public static VIEW_TRANSACTION : string = "/v1/remit/transactions?";
+    public static TRANSACTION_SEARCH = "/v1/remit/transactions?";
+    public static ORG_SETTLEMENT_API = "/v1/remit/accounts/balance?entity=ORG";
+    public static POST_AGENT_SETTLEMENT_API = "/v1/remit/settlement/agent/{agentId}";
+    public static GET_AGENT_SETTLEMENT_HISTORY = "/v1/remit/settlements/history?";
+    public static CORPORATE_APPLICATION_UPDATE = "/v1/register/application/corporate/{applicationId}";
+    public static CORPORATE_APPLICATION_INQUIRY = "/v1/application/corporate/{applicationId}"
+    public static CORPORATE_ADD_DOCUMENT : string = "/v1/application/corporate/document/add";
+    public static CORPORATE_SUBMIT_DOCUMENT : string  = "/v1/application/corporate/document/submit";
+    public static CORPORATE_DOCUMENT_INQUIRY : string  = "/v1/application/corporate/document/{documentId}";
+    public static CORPORATE_SUBMIT_APPLICATION : string = "/v1/application/corporate/submit";
+    public static CORPORATE_APPLICATION_FULFILLMENT : string = "/v1/application/corporate/fulfillment";
+    public static AGENT_FULFILLMENT : string = "/v1/remit/transaction/status/{status}";
+    public static TRANSACTION_REPORTS : string = "/v1/remit/report/transactions?";
+    public static MANAGEMENT_REPORTS : string = "/v1/remit/report/management?";
+    public static QR_REGENERATE : string = "/v1/partners/{partner_id}/qr/generate";
+    public static MANAGEMENT_REPORTS_VALUES : string = "/v1/remit/report/type/transactions";
+    public static PRICING_API : string = "/v1/remit/forex/pricing";
+    public static BOOKING_API : string ="/v1/remit/forex/booking";
+    public static FOREX_INQUIRY : string = "/v1/remit/forex/inquiry?" ;
+    public static COMMISSION_MAINTANANCE_API : string = "/v1/remit/commission" ;
+    public static TRANSACTION_INQUIRY_API : string = "/v1/remit/transaction/inquiry?" ;
+    public static DEPOSITED_DOCUMENT_ENQUIRY : string =  "/v1/remit/transaction/document?";
+    public static SEARCH_ROLE_API : string = "/v1/roles" ;
+    public static GET_ACCESSCONTROLLIST_API : string = "/v1/role/accesslist" ;
+    public static ADD_ROLE_API : string = "/v1/role" ;
+    public static SEARCH_ROLE_WITH_ACCESSCONTROL_API : string = "/v1/role/{roleId}/accesslist" ;
+    public static UPSERT_ROLE_API : string = "/v1/role/{roleId}" ;
+    public static PIPS_API : string = "/v1/remit/pips";
+    public static AGENT_INQUIRY_API : string = "/v1/agent/{agentId}/inquiry" ;
+    public static ADD_AGENT_DOCUMENT : string = "/v1/agent/document"
+    public static GET_AGENT_DOCUMENT_ENQUIRY : string = "/v1/agent/document/{documentId}"
+    public static GET_STAFF_API : string = "/v1/staff?" ;
+    public static ADD_STAFF_API : string = "/v1/register/staff" ;
+    public static STAFF_INQUIRY_API : string = "/v1/staff/{id}" ;
+    public static UPDATE_STAFF_API : string = "/v1/staff/{staffId}" ;
+    public static REFRESH_JWT_TOKEN_API : string = "/v1/authenticate/refresh" ;
+    public static CANCEL_TRANSACTION_API : string = "/v1/remit/cancel/transaction/{transactionId}";
+    public static ACCOUNTS_MASTER_API : string = "/v1/remit/accounts/{entity}/balance?" ;
+    public static GET_TRANSACTION_ACK_API : string = "/v1/remit/transaction/ack/{transactionId}" ;
+    public static COUNTER_MAINTENANCE_API : string = "/v1/counter?" ;
+    public static ADD_COUNTER_MAINTENANCE_API : string = "/v1/counter" ;
+    public static UPDATE_COUNTER_MAINTENANCE_API : string = "/v1/counter/{counterId}" ;
+    public static CURRENCY_SEARCH_API : string = "/v1/mc/currency?" ;
+    public static ADD_CURRENCY_API : string = "/v1/mc/currency";
+    public static UPDATE_CURRENCY_API : string = "/v1/mc/currency/{currencyNo}";
+    public static CURRENCY_VALUE_INQUIRY_API : string = "/v1/mc/currency/inquiry/{currencyNo}" ;
+    public static MC_DEAL_INQUIRY_API : string = "/v1/mc/deal/inquiry?" ;
+    public static MC_DEAL_DETAIL_INQUIRY_API : string = "/v1/mc/deal/inquiry/{dealID}" ;
+    public static MC_BOOK_DEAL_API : string = "/v1/mc/deal/booking" ;
+    public static MC_TRANSACTION_INQUIRY : string = "/v1/report/mc/transaction?" ;
+    public static MC_STOCK_INVENTORY_INQUIRY_API : string = "/v1/mc/inventory/inquiry?" ;
+    public static MC_ADD_TRANSACTION_API : string = "/v1/mc/transaction/create" ;
+    public static MC_UPDATE_STOCK_INVENTORY_API : string = "/v1/mc/inventory/{ccyNo}" ;
+    public static MC_CUSTOMER_ACCOUNTS_INQUIRY : string = "/v1/mc/account/inquiry?" ;
+    public static MC_UPDATE_DEAL_API : string = "/v1/mc/deal/update/{dealId}" ;
+    public static RT_AGENT_LEDGER_API : string = "/v1/remit/report/ledger/transactions?" ;
+    public static MC_CUSTOMER_AC_LEDGER_API : string = "/v1/mc/report/ledger/transactions?" ;
+    public static MC_DAY_CLOSING_API : string = "/v1/mc/branch/closing" ;
+    public static MC_EXCHANGERATE : string = "/v1/mc/exchangerate?" ;
+    public static LOGOUT_API : string = "/v1/authenticate/logout" ;
+    public static MC_NOTES_API : string = "/v1/notes" ;
+    public static UPDATE_CUSTOMER_DOCUMENT : string = "/v1/customers/{customerId}/document"; 
+    public static CUSTOMER_DOCUMENT_INQUIRY : string = "/v1/customers/document/{documentId}";
+    public static ORGANISATION_ASSET_ACCOUNT_SETTLEMENT : string = "/v1/remit/settlement/org/{accountNo}" ;
+    public static ADD_SHIPMENT_API : string = "/v1/mc/shipment/{customerId}" ;
+    public static SHIPMENT_SEARCH_API : string = "/v1/mc/shipment/search?" ;
+    public static SHIPMENT_INQUIRY_API : string = "/v1/mc/shipment/inquiry/{shipmentId}" ;
+    public static SHIPMENT_UPDATE_API : string = "/v1/mc/shipment/update/{shipmentId}" ;
+    public static SHIPMENT_RECEIPT_API : string = "/v1/mc/shipment/receipt/{shipmentId}";
+    public static SHIPMENT_CUSTOMER_DETAIL_INQUIRY_API : string = "/v1/mc/shipment/inquiry/customer/{customerId}?" ;
+    public static CURRENCY_VALUE_UPSERT_API : string = "/v1/mc/currency/update/{currencyNo}" ;
+    public static CUSTOMER_ACCOUNTS_INQUIRY_API : string = "/v1/customers/account/inquiry/{customerId}";
+    public static CUSTOMER_ACCOUNTS_UPDATE_API : string = "/v1/customers/account/update" ;
+    public static MC_MANAGEMENT_REPORT_API : string = "/v1/report/mc/management?";
+    public static MC_TRANSACTION_REPORT_API : string = "/v1/mc/transaction/report?" ;
+    public static AGENT_ACCOUNTS_MARGIN_TIER_UPDATE_API : string = "/v1/remit/account/update/{accountNumber}" 
+    //Add URI - '/v1/mc/transactionmaster/inquiry' and variable name should be 'MC_TRANSACTION_DETAIL_INQUIRY' ; 
+    public static MC_TRANSACTION_DETAIL_INQUIRY = "/v1/mc/transactionmaster/inquiry?";
+    public static MC_CUSTOMER_ACCOUNTS_ASSET_DETAIL_API = "/v1/mc/org/asset/summary" ;
+    public static CUSTOMER_REGISTER_CONSUMER_INITIATE_API = "/v1/register/consumer/initiate" ;
+    public static CUSTOMER_REGISTER_CONSUMER_STEPUP_API = "/v1/register/consumer/stepup" ;
+    public static MC_BRANCH_CLOSE_INQUIRY_API = "/v1/mc/branch/close/inquiry?" ;
+    public static MC_BRANCH_OPERATION_STATUS_API = "/v1/mc/branch/operation/status" ;
+    public static MC_DEAL_MULTIPLE_CANCEL_API = "/v1/mc/deal/cancel" ;
+    public static CUSTOMER_LIST_REPORT_API = "/v1/report/customer/masterreport?"
+    public static BIZ_PROFILE_REPORT_API = "/v1/report/customer/bizprofile?";
+    public static RESET_ACCOUNT_BALANCE = "/v1/remit/account/{accountNo}/reset";
+    public static RESET_ACCOUNT_HISTORY = "/v1/remit/account/reset/history?";
+    public static MC_REPORT_LIST_API = "/v1/report/mc/reporttype";
+    public static MC_KYC_ADD_API = "/v1/mc/admin/report/kyc" ;
+    public static MC_KYC_UPDATE_API = "/v1/mc/admin/report/kyc/update" ;
+    public static MC_KYC_GET_API = "/v1/mc/admin/report/kyc" ;
+    public static MC_KYC_DELETE_API = "/v1/mc/admin/report/kyc/{id}" ;
+    public static RT_KYC_ADD_API = "/v1/remit/admin/report/kyc" ;
+    public static RT_KYC_UPDATE_API = "/v1/remit/admin/report/kyc/update" ;
+    public static RT_KYC_GET_API = "/v1/remit/admin/report/kyc" ;
+    public static RT_KYC_DELETE_API = "/v1/remit/admin/report/kyc/{id}" ;
+    public static RT_TRANSACTION_ADD_SCREENING_DOCUMENT_API="/v1/remit/transaction/document/add";
+}
+
+
+
+

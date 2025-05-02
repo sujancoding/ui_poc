@@ -1,0 +1,132 @@
+<!--Search filter Section-->
+<div>
+    <form [formGroup]="filterForm">
+      <div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1">
+
+        <div  fxLayout="row"  fxLayoutAlign="space-between">
+        
+        <div  fxLayout="row wrap"  fxLayoutGap="15px" style="align-items: center;margin-left: 15px;">
+  
+      
+  
+            <div fxLayout="column" style="margin-left: 10px;">
+              
+              <mat-form-field style="width: 250px;" appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Counter Id</mat-label>
+                <input matInput formControlName="counterId" [formControl]="filterForm.controls['counterId']">
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="column" style="margin-left: 10px;">
+                
+                <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Counter Ip</mat-label>
+                  <input matInput formControlName="counterIp" [formControl]="filterForm.controls['counterIp']">
+                </mat-form-field>
+                <div  class="message-block">
+                  <span class="error-message" *ngIf="filterForm.controls['counterIp'].hasError('pattern')">{{'invalidIpAddress'| label}}</span>
+              </div>
+              </div>
+
+              <div fxLayout="column" style="margin-left: 10px;">
+                
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Counter Type</mat-label>
+                    <mat-select formControlName="counterType" placeholder="--Select--" >
+                        <mat-option *ngFor="let counterType of getCounterType" [value]="counterType.internalValue"> {{counterType.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+              </div>
+  
+           
+              <button mat-raised-button [disabled]="!filterForm.valid" class="buttonApplyfilter" (click)="searchFilter()">
+                Apply Filter
+              </button>
+
+           </div>
+        
+  
+          <div fxLayout="row">
+            <button mat-raised-button class="register-btn" (click)="openAddCounter('','','')"><mat-icon>add</mat-icon> Counter </button>
+         </div>
+
+        </div>
+  
+      </div>
+    </form>
+  
+  
+  </div>
+
+
+
+<!--Table-->
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      <div [ngStyle]="changeTableHeight()" >
+        <table class="table">
+  
+          <thead>
+            <th>COUNTER ID</th>
+            <th>COUNTER IP</th>
+            <th>TYPE</th>
+            <th>LAST UPDATED DATE</th>
+            <th>LAST UPDATED BY</th>
+            <th>ACTIONS</th>
+          </thead>
+  
+          <tbody>
+            <tr *ngFor="let records of counterSearchRecords | slice: (p - 1) * itemsPerPage : p * itemsPerPage">
+            <td>
+                {{records.counterId}}
+            </td>
+            <td style="color: #123969;"> {{records.ipAddress}}</td>
+            <td>
+                {{records.counterType | counterTypeTransform}}
+            </td>
+            <td>  {{records.updatedDate ? (records.updatedDate | date : 'medium' ) : (records.createdDate | date :
+              'medium')}} </td>
+            <td> {{records.updatedBy ? records.updatedBy : records.createdBy}} </td>
+            
+            
+            <td>
+                <div fxLayout="row">
+                    <!-- <div class="example-button-container" >
+                        <button mat-icon-button [disabled]="true">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div> -->
+            
+                    <div class="example-button-container">
+                        <button mat-icon-button (click)="openAddCounter(records.counterId, records.ipAddress, records.counterType)">
+                            <mat-icon>create</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </td>
+  
+            </tr>
+  
+          </tbody>
+  
+        </table>
+      </div>
+  
+  
+      <!--Pagination-->
+      <mat-paginator class="pagination-class"
+      [length]="counterSearchRecords.length"
+      [pageSize]="itemsPerPage"
+      [pageIndex]="p - 1"
+      (page)="handlePageChange($event)"
+      ></mat-paginator>
+    </div>
+  
+  
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+    </div>
+  
+  </div>

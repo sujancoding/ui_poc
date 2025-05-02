@@ -1,0 +1,81 @@
+.card{
+    background-color: #123969;
+    height: 4.8cm;
+  
+  }
+ .mat-mdc-card .mat-mdc-card-content {
+    font-size: 1rem;
+    line-height: 23px;
+    /* padding: 14px; */
+}
+
+ .transactions{
+    color: white;
+    font-size: 14px;
+    //font-weight: bold;
+    text-align: start;
+ }
+.totTrans{
+    white-space: nowrap;
+    font-size: 13px;
+}
+  h6{
+      margin-left: 10px;
+      font-size: 11px;    
+  }
+  h3{
+      margin-left: 2cm;
+     margin-right: 0.3cm;
+      font-weight: bolder;
+      font-size: 15px;
+      }
+  .height{
+      height: 25px;
+  }   
+ .box{
+      background-color: white;
+      border-radius: 0.4cm;
+      margin: 1px;
+    }
+    @media only screen and (min-width: 1276) {
+       
+        
+         .transactions{
+            color: white;
+            font-weight: bold;
+            text-align: center;
+         }
+        .totTrans{
+            white-space: nowrap;
+            color: white;
+        }
+          h6{
+              margin-left: 10px;
+              font-size: 14px;    
+              color: #FFFFFF;
+          }
+          h3{
+              margin-left: 2cm;
+             margin-right: 0.3cm;
+            //  font-weight: bolder;
+              font-size: 14px;
+              color: #FFFFFF;
+              }
+          .height{
+              height: 50px;
+          }   
+         .box{
+              background-color: white;
+              border-radius: 0.4cm;
+              margin: 1px;
+            }
+      }    
+      .btn{
+        height:42.82px ;
+        width: 175.02px ;
+          }
+    
+.height1{
+    height: 45px;
+}
+

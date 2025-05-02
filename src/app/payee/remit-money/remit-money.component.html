@@ -1,0 +1,179 @@
+<!--Send Money -> customer mobile-->
+
+
+<mat-card appearance="outlined" class="example-card"  (click)="viewPayee()">
+    
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <div class="box">
+      <mat-icon class="wallet-icon">account_circle</mat-icon>
+    </div>
+    <div fxLayout="column" style="margin-left: -99px; line-height:1.1 ;" *ngFor="let payeeSearch of payeeSearch">
+      <p class="payeeName" style="margin-left: -10px; width:110px; height: 27px;">{{payeeSearch.NAME}}</p>
+      <mat-card-subtitle class="subGroups" style="color: #7b7b7b; margin-left: -7px; ">AC NO : {{payeeSearch.ACCOUNTNBR}} </mat-card-subtitle>
+    </div>
+    
+    <div fxLayout="column">
+      <p style="opacity:0;">s</p>
+      <mat-icon style="color: #b7b7b7;margin-top: -18px; margin-left: -13px;">navigate_next</mat-icon> 
+    </div>
+  </div>
+</mat-card>
+
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div fxLayout="row" fxLayoutGap="2px">
+  <mat-form-field  fxFlex="30" appearance="{{'formFieldAppearance' | label}}" >
+    <mat-label class="custom-label">You Send</mat-label>
+    <span matPrefix  class="{{selectedBaseCurrency}}" style="position: relative;top: -4px; left: -4px;"></span>
+    <mat-select [(value)]="selectedBaseCurrency">
+      <mat-option *ngFor="let country of baseCurrencyCode" [value]="country.FLAG" >
+        <span class="{{country.FLAG}}"></span>
+        {{country.CURRENCYCODE}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+<mat-form-field fxFlex="70" appearance="outline">
+    <mat-label class="custom-label">Amount </mat-label>
+    <input matInput  (keyup)="validateCustomerSends(multiplyValue)" [formControl]="form.controls['remitMoney']"  [(ngModel)]="multiplyValue"  appCommaSeparatedInput placeholder="0" >
+    <mat-error style="font-size: 13px; 
+    margin-top: -4px;"> 
+      <small *ngIf="form.controls['remitMoney'].hasError('pattern')" > *Sending Amount can have 2 decimal places  </small>
+                <small *ngIf="form.controls['remitMoney'].hasError('required')
+                && form.controls['remitMoney'].touched"> *Send Money required </small>
+                </mat-error>
+</mat-form-field>
+</div>
+
+<div fxLayout="row" fxLayoutGap="2px">
+
+<mat-form-field  fxFlex="30" appearance="{{'formFieldAppearance' | label}}" >
+  <mat-label class="custom-label">Payee Gets</mat-label>
+  <span matPrefix  class="{{selectedCountryCode}}" style="position: relative;top: -4px; left: -4px;"></span>
+  <mat-select  [(value)]="selectedCountryCode" (selectionChange)="selectCurrencyCode(selectedCountryCode)">
+    <mat-option *ngFor="let country of currencyCode" [value]="country.FLAG" >
+      <span class="{{country.FLAG}}"></span>
+      {{country.CURRENCYCODE}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+
+
+<mat-form-field fxFlex="70" appearance="outline">
+    <mat-label class="custom-label">Amount</mat-label>
+    <input matInput  (keyup)="validateRecipientGets(remitMoney)" [formControl]="form.controls['recipientGets']"   [(ngModel)]="remitMoney" appCommaSeparatedInput placeholder="0" > 
+    <mat-error> 
+      <small *ngIf="form.controls['recipientGets'].hasError('pattern')" > *Payee Gets must have 2 decimal places  </small>
+                <small *ngIf="form.controls['recipientGets'].hasError('required')
+                && form.controls['recipientGets'].touched"> *Payee Gets required </small>
+                </mat-error>
+</mat-form-field>
+
+</div>
+
+
+            
+<div class="send-money">
+      <mat-card appearance="outlined" class="card">
+       
+            <div fxLayoutAlign="space-between" style="padding-bottom: 0.1cm;">
+       <p  *ngFor="let payeeSearch of payeeSearch">Exchange Rate {{selectedCurrencyCode}}</p>
+       <p 
+       [ngStyle]="{'margin-left': ExchangeRate == 'Exchange Rate is not available, Please contact APT' ? '31px' : '0px',
+       'color':ExchangeRate == 'Exchange Rate is not available, Please contact APT' ? 'red' : 'white'}"
+       > {{ExchangeRate}} </p>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayoutAlign="space-between" style="padding-top: 0.1cm;">
+                <p>Admin Fee</p>
+                <p>{{adminFee}} SGD</p>
+                     </div> 
+       
+      </mat-card>
+ </div>
+
+ <!-- <div ">
+  <mat-form-field appearance="outline">
+    <mat-label class="custom-label">APT bank Account </mat-label>
+    <mat-select [formControl]="form.controls['orgNumber']">
+      <mat-option value="OCBC Bank A/C 1011020020">OCBC Bank A/C 1011020020</mat-option>
+      <mat-option value="DBS Bank A/C 2022030030">DBS Bank A/C 2022030030</mat-option>
+      <mat-option value="CASH (APT PREMISES)">CASH (APT PREMISES)</mat-option>
+    </mat-select>
+    <mat-error> 
+                <small *ngIf="form.controls['orgNumber'].hasError('required')
+                && form.controls['orgNumber'].touched"> *Organization Account Number required </small>
+                </mat-error>
+  </mat-form-field>
+  </div> -->
+
+<div >
+  <mat-form-field appearance="outline" style="height: 1.5cm;">
+    <mat-label class="custom-label">Purpose of Remittance </mat-label>
+    <mat-select [formControl]="form.controls['Remarks']" (selectionChange)="changePurposeOfRemittance(form.controls['Remarks'].value)" > 
+      <mat-option *ngFor="let options of purposeOfRemittanceArray" [value]="options.value" > {{options.value}} </mat-option>
+    </mat-select>
+    <mat-error> 
+      <small *ngIf="form.controls['Remarks'].hasError('required')
+      && form.controls['Remarks'].touched"> *Remarks required </small>
+      </mat-error>
+  </mat-form-field>
+
+  <mat-form-field   *ngIf="showOthersField" appearance="outline" >
+    <mat-label class="custom-label">Others</mat-label>
+    <input matInput (input)="form.controls.Others.setValue(form.controls.Others.value.toUpperCase())"
+     placeholder="Eg: HOUSE RENT" [formControl]="form.controls['Others']">
+</mat-form-field>
+<mat-error> 
+  <small *ngIf="form.controls['Others'].hasError('required')
+  && form.controls['Others'].touched"> *Others required </small>
+  </mat-error>
+</div>
+
+
+
+  <!--PAYMENT MODE OF CHARGES ROW-->
+  <div class="block">
+      <div class="sub-heads">
+              <span>Select Payment mode for charges</span>
+      </div>
+
+      <mat-radio-group [disabled]="isDisableSharingTypeRadioGroup"
+        style="font-size: 14px;"
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        (change)="sharingTypeChange($event)"
+        [formControl]="form.controls['sharingType']"
+        [(ngModel)]="selectedSharingType" >
+          <mat-radio-button class="example-radio-button" [value]="type.internalValue"
+          *ngFor="let type of sharingTypeArray" >
+          {{type.value}}
+          ( {{type.subValue}} )
+      </mat-radio-button>
+      </mat-radio-group>
+        
+
+
+  </div>
+
+
+ 
+
+
+<div class="button-layout" *ngIf="saveButton">
+    <button class="button1" mat-raised-button [disabled]="!form.valid" type="submit">NEXT</button>
+    </div>
+    <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loader"></mat-spinner>
+
+</form>
+
+
+
+   
+
+

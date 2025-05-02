@@ -1,0 +1,65 @@
+.header-container {
+    background-color: white;
+    padding: 18px;
+   }
+  
+   .head-label-1 {
+    font-size: 22px;
+    display: flex;
+    font-family: 'Roboto';
+    color: black;
+    font-weight: bold;
+  }
+  
+  .close-icon{
+    cursor: pointer;
+    color: gray;   
+    position: relative;
+    top: 3px;
+  }
+
+  .container{
+    background-color: #ddedff;
+    overflow-y: scroll;
+    height: 100px;
+  }
+
+  .container::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    background-color: transparent;
+  }
+  
+  .container::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background-color: rgba(156, 204, 234, 0.5);
+    box-shadow: 0 0 1px rgba(87, 86, 86, 0.5);
+  }
+  
+  .addButton {
+    background-color: #0072c7;
+    color: white;
+    height: 34px;
+    width: 75px;
+    top: 18px;
+    margin-left: 4px;
+    font-size: 17px;
+    border-radius: 8px;
+    }
+
+    .button{
+        display: flex;
+        justify-content: end;
+    }
+
+    .p{
+        color: #0072c7;
+        font-family: "Roboto";
+        margin-left: 15px;
+        line-height: 5px;
+    }
+
+    .ordered-list{
+        padding-bottom: 10px;
+        font-family: "Roboto";
+    }

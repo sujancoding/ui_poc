@@ -1,0 +1,39 @@
+<!--BACKOFFICE > APPROVE PAYEE > View -Agent-->
+
+<div>
+    <h4 mat-dialog-title>
+        <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+            <span> View Customer </span>
+            <span [mat-dialog-close]="true" style="cursor: pointer;">
+                <mat-icon>close</mat-icon>
+            </span>
+        </mat-toolbar>
+    </h4>
+</div>
+
+<div style="margin:65px;">
+<div>
+    <form [formGroup]="form">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxFlex="31">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label">Agent Name</mat-label>
+                <input matInput formControlName="Name" [formControl]="form.controls['Name']" [readonly]="isReadOnly">
+            </mat-form-field>
+        </div>
+        <div fxFlex="31">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label">Agent Id</mat-label>
+                <input matInput formControlName="Id" [formControl]="form.controls['Id']" [readonly]="isReadOnly">
+            </mat-form-field>
+        </div>
+        <div fxFlex="31">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label">Account Number</mat-label>
+                <input matInput formControlName="AccNo" [formControl]="form.controls['AccNo']" [readonly]="isReadOnly">
+            </mat-form-field>
+        </div>
+        </div>
+    </form>
+</div>
+</div>

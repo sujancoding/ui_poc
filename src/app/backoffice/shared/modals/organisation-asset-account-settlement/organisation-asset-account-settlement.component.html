@@ -1,0 +1,75 @@
+<!--MODAL POPUP DIALOG-->
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <span> Withdrawal </span>
+                <span [mat-dialog-close]="true" style="cursor: pointer;">
+                  <mat-icon>close</mat-icon>
+                  </span>
+    </mat-toolbar>
+  </h4>
+
+  <form [formGroup]="form" (ngSubmit)="onSave()">
+<div fxLayout="row" fxLayoutAlign="space-around">
+    <div fxFlex="44">
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Account Name</mat-label>
+    <input matInput [formControl]="form.controls['accountName']" formControlName="accountName" readonly>
+</mat-form-field>
+</div>
+
+
+<div fxFlex="44">
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Account No</mat-label>
+    <input matInput [formControl]="form.controls['accountNumber']" formControlName="accountNumber" readonly>
+</mat-form-field>
+</div>
+
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-around">
+
+<div fxFlex="44">
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label"> Balance Amount</mat-label>
+    <input matInput [formControl]="form.controls['outstandingBalance']" formControlName="outstandingBalance" readonly>
+</mat-form-field>
+</div>
+
+
+<div fxFlex="44" fxLayout="row" fxLayoutAlign="space-between">
+<div fxFlex="48">
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Withdrawal Amount(SGD)</mat-label>
+    <input matInput [formControl]="form.controls['settlementAmount']" formControlName="settlementAmount">
+    <mat-error > 
+        <small class="error-message" *ngIf="form.controls['settlementAmount'].hasError('required')
+                  && form.controls['settlementAmount'].touched"> Withdrawal Amount Required </small>
+                  <small class="error-message" *ngIf="form.controls['settlementAmount'].hasError('pattern')"> {{'onlyNumbers' | label}} </small> 
+                  </mat-error>
+</mat-form-field>
+</div>
+<div fxFlex="48">
+    <mat-form-field appearance="outline">
+        <mat-label class="custom-label">Remarks</mat-label>
+        <input matInput [formControl]="form.controls['remarks']" formControlName="remarks">
+        <mat-error>
+            <small class="error-message" *ngIf="form.controls['remarks'].hasError('required')
+          && form.controls['remarks'].touched"> Remarks Required </small>
+            <small class="error-message" *ngIf="form.controls['remarks'].hasError('pattern')">
+                {{'specialCharacterValidation' | label}} </small>
+        </mat-error>
+    </mat-form-field>
+</div>
+</div>
+</div>
+
+<div class="deactivate" fxLayout="row wrap" fxLayoutGap="30px">
+    <button mat-raised-button class="blue" [mat-dialog-close]="true" type="button">Close</button>
+    <button mat-raised-button  class="green" [mat-dialog-close]="true" *ngIf="showSubmitButton" [disabled]="!form.valid"  type="submit">Submit</button>
+
+        <mat-spinner  style="margin:0 auto;" diameter="40" *ngIf="submitButtonLoader"></mat-spinner>
+    
+   </div>
+
+ </form>

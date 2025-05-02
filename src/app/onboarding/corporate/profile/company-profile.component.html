@@ -1,0 +1,494 @@
+<!--BACKOFFICE REVIEWING APPLICATION SEARCH-->
+<div *ngIf="applicationFlag">
+    <h4 mat-dialog-title>
+      <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+          <span> View Application </span>
+          <span [mat-dialog-close]="true" style="cursor: pointer;">
+            <mat-icon>close</mat-icon>
+            </span>
+      </mat-toolbar>
+    </h4>
+    </div>
+
+
+<!--BACKOFFICE REVIEWING CUSTOMER SEARCH-->
+<div *ngIf="customerFlag">
+    <h4 mat-dialog-title>
+      <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+          <span> View Customer </span>
+          <span [mat-dialog-close]="true" style="cursor: pointer;">
+            <mat-icon>close</mat-icon>
+            </span>
+      </mat-toolbar>
+    </h4>
+    </div>
+
+<!--Added by Shafi @ 08/11/2022-->
+<!--BACKOFFICE > APPROVE PAYEE-->
+<div *ngIf="reviewCorporateCust">
+    <h4 mat-dialog-title>
+        <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+            <span> View Customer </span>
+            <span [mat-dialog-close]="true" style="cursor: pointer;">
+                <mat-icon>close</mat-icon>
+            </span>
+        </mat-toolbar>
+    </h4>
+</div>
+
+<div *ngIf="showEditableForBranchChannel">
+    <h4 mat-dialog-title>
+      <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+          <span> Edit Application </span>
+          <span [mat-dialog-close]="true" style="cursor: pointer;">
+            <mat-icon>close</mat-icon>
+            </span>
+      </mat-toolbar>
+    </h4>
+    </div>
+
+<form [formGroup]="form" (ngSubmit)="onSave()" 
+[ngClass]="{'scrollable-content': customerFlag || applicationFlag, 
+                  'mc-form-scrollable': showEmptyFields, 
+                  'appsearch-mc-form-scrollable': showEditableForBranchChannel }"
+>
+<div fxLayout="row wrap" fxLayoutAlign="space-between">
+
+    <div fxFlex="20" fxFlex.xs="100" *ngIf="showApplicationFields">
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label" class="labeltextdesktop">Company Name</mat-label>
+    <input matInput (input)="form.controls.CompanyName.setValue(form.controls.CompanyName.value.toUpperCase())" formControlName="CompanyName" [formControl]="form.controls['CompanyName']" [readonly]="isReadOnly">
+</mat-form-field>
+<div  class="message-block">
+    <span class="error-message" *ngIf=" form.controls['CompanyName'].hasError('pattern')">{{'onlyAlphabets'| label}}</span>
+    <span class="error-message" *ngIf=" form.controls['CompanyName'].hasError('isWhitespace')">This Field should not starts with whitespaces or fullstop</span>
+    <span class="error-message" *ngIf="form.controls['CompanyName'].hasError('required') && form.controls['CompanyName'].touched">Company Name Field Required </span> 
+    <span class="error-message" *ngIf=" form.controls['CompanyName'].hasError('maxlength')">The Company Name should not exceed more than 50 characters</span>
+</div>
+   </div>
+
+   <div fxFlex="14" fxFlex.xs="100" *ngIf="!showApplicationFields">
+    <mat-form-field appearance="outline">
+        <mat-label class="custom-label" class="labeltextdesktop">Company Name</mat-label>
+        <input matInput (input)="form.controls.CompanyName.setValue(form.controls.CompanyName.value.toUpperCase())" formControlName="CompanyName" [formControl]="form.controls['CompanyName']" [readonly]="isReadOnly">
+    </mat-form-field>
+    <div  class="message-block">
+        <span class="error-message" *ngIf=" form.controls['CompanyName'].hasError('pattern')">{{'NoSpecialCharacters'| label}}</span>
+        <span class="error-message" *ngIf=" form.controls['CompanyName'].hasError('isWhitespace')">This Field should not starts with whitespaces or fullstop</span>
+        <span class="error-message" *ngIf="form.controls['CompanyName'].hasError('required') && form.controls['CompanyName'].touched">Company Name Field Required </span> 
+        <span class="error-message" *ngIf=" form.controls['CompanyName'].hasError('maxlength')">The Company Name should not exceed more than 50 characters</span>
+    </div>
+       </div>
+
+        <!--Alias Name - not reqd field-->
+      <div fxFlex="8" fxFlex.xs="100" *ngIf="!showApplicationFields">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Code </mat-label>
+          <input matInput formControlName="aliasName" [formControl]="form.controls['aliasName']" [readonly]="isReadOnly">  
+        </mat-form-field>
+        <div  class="message-block">
+          <span class="error-message" *ngIf="form.controls['aliasName'].hasError('maxlength')"> Code cannot exceed 50 characters. </span>  
+          <span class="error-message"  *ngIf="form.controls['aliasName'].hasError('pattern')">{{'onlyNumbers'| label}}</span>
+           
+        </div>
+      </div> 
+
+   <div fxFlex="17" fxFlex.xs="100" >
+    <mat-form-field appearance="outline">
+      <mat-label class="custom-label" class="labeltextdesktop">Email Id </mat-label>
+      <input matInput placeholder="name@example.com" formControlName="email"  [formControl]="form.controls['email']" [readonly]="isReadOnly" >
+    </mat-form-field>
+    <div class="message-block">
+        <span class="error-message" *ngIf="form.controls['email'].hasError('maxlength')">{{'emailIdMaxLengthValidation'|label}}</span>
+      <span class="error-message" *ngIf="form.controls['email'].hasError('required') &&
+      form.controls['email'].touched"> Email ID field Required</span>
+      <span class="error-message" *ngIf="form.controls['email'].hasError('email')"> Enter Valid Email ID </span>
+    </div>
+  </div>
+
+    <div fxFlex="15" fxFlex.xs="45">
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label" class="labeltextdesktop">Reg No(ROC)</mat-label>
+    <input matInput [readonly]="isReadOnly" (input)="form.controls.RegNo.setValue(form.controls.RegNo.value.toUpperCase())" formControlName="RegNo" [formControl]="form.controls['RegNo']">
+</mat-form-field>
+<div  class="message-block">
+    <span class="error-message" *ngIf=" form.controls['RegNo'].hasError('pattern')">{{'NoSpecialCharacters'| label}}</span>
+    <span class="error-message" *ngIf=" form.controls['RegNo'].hasError('maxlength')">The Reg No should not exceed more than 20 characters</span>
+    <span class="error-message" *ngIf=" form.controls['RegNo'].hasError('whitespace')">This Field should not contain whitespaces</span>
+    <span class="error-message" *ngIf="form.controls['RegNo'].hasError('required') && form.controls['RegNo'].touched" >Reg No. Field Required</span> 
+</div>
+    </div>
+
+    <div fxFlex="20" fxFlex.xs="45">
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label" class="labeltextdesktop">Type</mat-label>
+    <mat-select [formControl]="form.controls['Type']" (selectionChange)="onSelectChange($event)" >
+      <mat-option value="LC" [disabled]="isReadOnly">Local Company</mat-option>
+      <mat-option value="RA" [disabled]="isReadOnly">Remittance agent</mat-option>
+      <mat-option value="OC" [disabled]="isReadOnly">Overseas Company</mat-option>
+    </mat-select>
+</mat-form-field>
+<div  class="message-block">
+    <span class="error-message" *ngIf="form.controls['Type'].hasError('required') && 
+    form.controls['Type'].touched" >Type field Required</span>
+    
+</div>
+</div>
+
+<div fxFlex="20" fxFlex.xs="45">
+    <mat-form-field appearance="outline">
+        <mat-label class="custom-label" class="labeltextdesktop">Nature Of Business</mat-label>
+        <mat-select [formControl]="form.controls['natureOfBusiness']" >
+          <mat-option *ngFor="let options of natureOfBusinessList" [value]="options.value" [disabled]="isReadOnly" > {{options.value}} </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div  class="message-block">
+        <span class="error-message" *ngIf="form.controls['natureOfBusiness'].hasError('required') && 
+        form.controls['natureOfBusiness'].touched" >Nature Of Business field Required</span>
+        
+    </div>
+    </div>
+
+</div>
+
+<div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <div fxFlex="14" fxFlex.xs="45">
+        <mat-form-field appearance="outline">
+            <mat-label class="custom-label" class="labeltextdesktop">Incorporation Date</mat-label>
+            <input  matInput  [matDatepicker]="datepicker" placeholder="DD/MM/YYYY" formControlName="IncDate" [formControl]="form.controls['IncDate']" [disabled]="isReadOnly">
+    <mat-datepicker-toggle matSuffix [for]="datepicker" [disabled]="isReadOnly"></mat-datepicker-toggle>
+    <mat-datepicker #datepicker>
+      <mat-datepicker-actions>
+        <button mat-button matDatepickerCancel>Cancel</button>
+        <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+      </mat-datepicker-actions>
+    </mat-datepicker>
+        </mat-form-field>
+        <div  class="message-block">
+            <span class="error-message" *ngIf="form.controls['IncDate'].hasError('required') && 
+                    form.controls['IncDate'].touched" >Incorporation Date field Required</span>
+            </div>
+            </div>
+        
+            <div fxFlex="13.5" fxFlex.xs="45">
+        <mat-form-field appearance="outline">
+            <mat-label class="custom-label" class="labeltextdesktop">Incorporation Place</mat-label>
+            <mat-select [formControl]="form.controls['IncPlace']">
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+                    <mat-label class="custom-label">Search Country</mat-label>
+                     <input matInput (input)="filteredIncorporationCountry(incorporationCountry)" [readonly]="isReadOnly" formControlName="incorporationCountry" [formControl]="form.controls['incorporationCountry']" #incorporationCountry>
+                     <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+                     <mat-error> 
+                                   <small *ngIf="form.controls['incorporationCountry'].hasError('pattern')"> {{'onlyAlphabets' | label}} </small>
+                                   </mat-error>
+                 </mat-form-field>
+              <mat-option *ngFor="let country of filterIncorporationCountry" [value]="country.COUNTRY" [disabled]="isReadOnly">{{country.COUNTRY}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div  class="message-block">
+        <span  class="error-message" *ngIf="form.controls['IncPlace'].hasError('required') && 
+        form.controls['IncPlace'].touched" >Incorporation Place field Required</span>
+        
+        </div>
+            </div>
+        <div fxFlex="31" fxFlex.xs="45">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label" class="labeltextdesktop">License number</mat-label>
+                <input matInput [readonly]="isReadOnly" (input)="form.controls.RemittanceLicense.setValue(form.controls.RemittanceLicense.value.toUpperCase())" formControlName="RemittanceLicense" [formControl]="form.controls['RemittanceLicense']">
+            </mat-form-field>
+            <div  class="message-block">
+                <span class="error-message" *ngIf=" form.controls['RemittanceLicense'].hasError('pattern')">{{'NoSpecialCharacters'| label}}</span>
+                <span class="error-message" *ngIf=" form.controls['RemittanceLicense'].hasError('maxlength')">This field have max 50 characters </span>
+                <span class="error-message" *ngIf=" form.controls['RemittanceLicense'].hasError('whitespace')">This field should not contain whitespaces</span>
+                <span class="error-message" *ngIf="form.controls['RemittanceLicense'].hasError('required') && form.controls['RemittanceLicense'].touched">License number field Required</span> 
+            </div>
+                </div>
+         
+                <div fxFlex="31" fxFlex.xs="45">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label" class="labeltextdesktop">Turn Over</mat-label>
+                        <input matInput [readonly]="isReadOnly" formControlName="TurnOver" [formControl]="form.controls['TurnOver']">   
+                    </mat-form-field>
+                    <div  class="message-block">
+                        <span class="error-message" *ngIf="form.controls['TurnOver'].hasError('maxlength')">{{'turnOverMaxLengthValidation'|label}}</span>
+                        <span class="error-message" *ngIf="form.controls['TurnOver'].hasError('required') && 
+                        form.controls['TurnOver'].touched" >Turn Over field Required</span>
+                        <span  class="error-message" *ngIf="form.controls['TurnOver'].hasError('pattern')">{{'onlyNumbers' | label}}</span>
+                        <span class="error-message" *ngIf=" form.controls['TurnOver'].hasError('whitespace')">This field should not contain whitespaces</span>
+
+                        </div>
+                        </div>        
+
+</div>
+
+<div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <div fxFlex="14" fxFlex.xs="45">
+        <mat-form-field appearance="outline">
+            <mat-label class="custom-label" class="labeltextdesktop">Valid From</mat-label>
+            <input matInput  [matDatepicker]="validFromDate" placeholder="DD/MM/YYYY" formControlName="ValidFrom" [disabled]="isReadOnly" [formControl]="form.controls['ValidFrom']" (dateChange)="validStartDateChange($event)">
+            <mat-datepicker-toggle matSuffix [for]="validFromDate" [disabled]="isReadOnly"></mat-datepicker-toggle>
+            <mat-datepicker #validFromDate>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+        </mat-form-field>
+        <div  class="message-block">
+            <span class="error-message" *ngIf=" form.controls['ValidFrom'].hasError('required') && 
+      form.controls['ValidFrom'].touched">Valid From field Required</span>
+      <span class="error-message" *ngIf=" form.controls['ValidFrom'].hasError('isValid')">The Valid Till & Valid From date should not be same</span>
+        </div>
+            </div>
+        
+            <div fxFlex="13.5" fxFlex.xs="45">
+        <mat-form-field appearance="outline">
+            <mat-label class="custom-label" class="labeltextdesktop">Valid Till</mat-label>
+         <input matInput  [matDatepicker]="validTillDate" placeholder="DD/MM/YYYY" formControlName="ValidTill" [disabled]="isReadOnly" [formControl]="form.controls['ValidTill']" (dateChange)="validEndDateChange($event)" [min]="tillStartDate">
+         <mat-datepicker-toggle matSuffix [for]="validTillDate" [disabled]="isReadOnly"></mat-datepicker-toggle>
+         <mat-datepicker #validTillDate>
+           <mat-datepicker-actions>
+             <button mat-button matDatepickerCancel>Cancel</button>
+             <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+           </mat-datepicker-actions>
+         </mat-datepicker>
+        </mat-form-field>
+        <div  class="message-block">
+            <span class="error-message" *ngIf="showValidMessage">The Valid Till date should greater than Valid From date</span>
+            <span class="error-message" *ngIf="form.controls['ValidTill'].hasError('required') && 
+            form.controls['ValidTill'].touched">Valid Till field Required</span>
+            <span class="error-message" *ngIf="form.controls['ValidTill'].hasError('inValid')">The Valid Till & Valid From date should not be same</span>
+        </div>
+        </div>
+
+        <div fxFlex="31" fxFlex.xs="45">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label" class="labeltextdesktop">Issuing Authority</mat-label>
+                <input matInput [readonly]="isReadOnly" (input)="form.controls.IssuingAuthority.setValue(form.controls.IssuingAuthority.value.toUpperCase())" formControlName="IssuingAuthority" [formControl]="form.controls['IssuingAuthority']">
+            </mat-form-field>
+            <div  class="message-block">
+                <span class="error-message" *ngIf=" form.controls['IssuingAuthority'].hasError('pattern')">{{'NoSpecialCharacters'| label}}</span>
+                <span class="error-message" *ngIf=" form.controls['IssuingAuthority'].hasError('maxlength')">This field have max 50 characters </span>
+                <span class="error-message" *ngIf=" form.controls['IssuingAuthority'].hasError('whitespace')">This field should not contain whitespaces</span>
+                <span class="error-message" *ngIf="form.controls['IssuingAuthority'].hasError('required') && form.controls['IssuingAuthority'].touched">Issuing Authority  field Required</span> 
+            </div>
+                </div>
+         
+                <div fxFlex="31" fxFlex.xs="45">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label" class="labeltextdesktop">Country</mat-label>
+           <mat-select [formControl]="form.controls['Country']">
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+                <mat-label class="custom-label">Search Country</mat-label>
+                 <input matInput (input)="searchCountry(profileCountry)" [readonly]="isReadOnly" formControlName="profileCountry" [formControl]="form.controls['profileCountry']" #profileCountry>
+                 <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+                 <mat-error> 
+                               <small *ngIf="form.controls['profileCountry'].hasError('pattern')"> {{'onlyAlphabets' | label}} </small>
+                               </mat-error>
+             </mat-form-field>
+             <mat-option  *ngFor="let nationality of filterCountries" [value]="nationality.COUNTRY" [disabled]="isReadOnly"> {{nationality.COUNTRY}} </mat-option>
+           </mat-select>
+           </mat-form-field>
+           <div  class="message-block">
+            <span class="error-message" *ngIf="form.controls['Country'].hasError('required') && 
+            form.controls['Country'].touched" >Country field Required</span>
+        </div>
+           </div>
+
+</div>
+
+  <!--Risk rating information-->
+
+  <div *ngIf="showRiskRatingField">
+    <h4 class="address-styles">Risk Rating: </h4>
+ 
+   <div>
+   
+     <div fxLayout="row wrap" fxLayoutAlign="space-between">
+   
+       <div fxFlex="50" fxFlex.xs="100">
+   
+         <mat-form-field appearance="outline">
+           <mat-label class="custom-label">Risk Rating </mat-label>
+           <mat-select [formControl]="form.controls['riskRating']">
+             <mat-option *ngFor="let options of getRiskRatingList" [value]="options.VALUE" [disabled]="isReadOnly"> {{options.DESC}} </mat-option>
+           </mat-select>
+         </mat-form-field>
+   
+       </div>
+   
+     </div>
+   </div>
+ 
+ </div>
+
+<h4 class="address-styles">Company Address</h4>
+<div fxLayout="row wrap" fxLayoutAlign="space-between">
+        
+            <div fxFlex="14" fxFlex.xs="20">
+        <mat-form-field appearance="outline">
+            <mat-label class="custom-label" class="labeltextdesktop">Level</mat-label>
+            <span matPrefix style="position: relative;top: -5px;">#&nbsp;</span>
+            <input [readonly]="isReadOnly" matInput formControlName="Level" [formControl]="form.controls['Level']">
+        </mat-form-field>
+        <div class="message-block">
+            <span class="error-message" *ngIf="form.controls['Level'].hasError('maxlength')">{{'levelMaxLengthValidation'|label}}</span>
+        <!-- <span class="error-message" *ngIf="form.controls['Level'].hasError('required') && 
+        form.controls['Level'].touched" >Level field Required</span> -->
+             <span  class="error-message"*ngIf="form.controls['Level'].hasError('pattern') && 
+        form.controls['Level'].touched" >Only Numbers</span>
+        <span class="error-message" *ngIf="form.controls['Level'].hasError('whitespace')" >whitespaces are not allowed</span>
+    </div>
+            </div>
+        
+            <div fxFlex="13.5" fxFlex.xs="19">
+        <mat-form-field appearance="outline">
+            <mat-label class="custom-label" class="labeltextdesktop">Unit</mat-label>
+            <input matInput [readonly]="isReadOnly" formControlName="Unit" [formControl]="form.controls['Unit']">
+        </mat-form-field>
+        <div class="message-block">
+            <span class="error-message" *ngIf="form.controls['Unit'].hasError('maxlength')">{{'unitMaxLengthValidation'|label}}</span> 
+        <!-- <span class="error-message" *ngIf="form.controls['Unit'].hasError('required') && 
+        form.controls['Unit'].touched" >Unit field Required</span> -->
+             <span class="error-message" *ngIf="form.controls['Unit'].hasError('pattern')" >{{'specialCharacterValidation' | label}}</span>
+        
+        </div>
+        </div>
+
+        <div fxFlex="31" fxFlex.xs="45" >
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label" class="labeltextdesktop">Building Name</mat-label>
+                <input matInput [readonly]="isReadOnly" (input)="form.controls.BuildingName.setValue(form.controls.BuildingName.value.toUpperCase())" formControlName="BuildingName" [formControl]="form.controls['BuildingName']">
+            </mat-form-field>
+            <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['BuildingName'].hasError('maxlength')">{{'buildingNameMaxLengthValidation'|label}}</span>
+                <span class="error-message" *ngIf=" form.controls['BuildingName'].hasError('pattern')">{{'specialCharacterValidation'| label}}</span>
+                <span class="error-message" *ngIf=" form.controls['BuildingName'].hasError('isWhitespace')">This field should not start with whitespaces</span>
+                <span class="error-message" *ngIf="form.controls['BuildingName'].hasError('required') && form.controls['BuildingName'].touched">Building Name field Required</span> 
+            </div>
+               </div>
+        
+    
+         <div fxFlex="31" fxFlex.xs="100" >
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label" class="labeltextdesktop">Street Name</mat-label>
+                <input matInput [readonly]="isReadOnly" (input)="form.controls.StreetName.setValue(form.controls.StreetName.value.toUpperCase())" formControlName="StreetName" [formControl]="form.controls['StreetName']">
+                </mat-form-field>
+                <div  class="message-block">
+                    <span class="error-message" *ngIf="form.controls['StreetName'].hasError('maxlength')">{{'streetNameMaxLengthValidation'|label}}</span>
+                    <span class="error-message" *ngIf=" form.controls['StreetName'].hasError('pattern')">{{'specialCharacterValidation'| label}}</span>
+                    <span class="error-message" *ngIf=" form.controls['StreetName'].hasError('isWhitespace')">This field should not start with whitespaces</span>
+                    <span class="error-message" *ngIf="form.controls['StreetName'].hasError('required') && form.controls['StreetName'].touched">Street Name field Required</span> 
+                </div>
+        </div>
+
+    </div>
+
+<div fxLayout="row wrap" fxLayoutAlign="space-between">
+    <div fxFlex="31" fxFlex.xs="45">
+        <mat-form-field appearance="outline">
+            <mat-label class="custom-label" class="labeltextdesktop">Country</mat-label>
+          <mat-select  [formControl]="form.controls['CountryOffice']">
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+                <mat-label class="custom-label">Search Country</mat-label>
+                 <input matInput (input)="filterCountry(companyCountry)" [readonly]="isReadOnly" formControlName="companyCountry" [formControl]="form.controls['companyCountry']" #companyCountry>
+                 <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+                 <mat-error> 
+                               <small *ngIf="form.controls['companyCountry'].hasError('pattern')"> {{'onlyAlphabets' | label}} </small>
+                               </mat-error>
+             </mat-form-field>
+            <mat-option  *ngFor="let country of filteredCountries" [value]="country.COUNTRY" [disabled]="isReadOnly"> {{country.COUNTRY}} </mat-option>
+        </mat-select>
+        </mat-form-field>
+        <div  class="message-block">
+            <span class="error-message" *ngIf="form.controls['CountryOffice'].hasError('required') && 
+            form.controls['CountryOffice'].touched" >Country field Required</span>
+        </div>
+    </div>
+          
+    <div fxFlex="31" fxFlex.xs="45">
+            <mat-form-field appearance="outline">
+                 <mat-label class="custom-label" class="labeltextdesktop">Postal code</mat-label>
+                <input matInput [readonly]="isReadOnly" formControlName="PostalCode" [formControl]="form.controls['PostalCode']" maxlength="10"> 
+                <mat-hint align="end">{{form.controls['PostalCode'].value?.length || 0}}/10</mat-hint>
+               </mat-form-field>
+               <div  class="message-block">
+                <span class="error-message" *ngIf=" form.controls['PostalCode'].hasError('pattern')">{{'onlyNumbers'| label}}</span>
+                <span class="error-message" *ngIf=" form.controls['PostalCode'].hasError('whitespace')">This field should not start contain whitespaces</span>
+                <span class="error-message" *ngIf="form.controls['PostalCode'].hasError('required') && form.controls['PostalCode'].touched">Postal code field Required</span> 
+            </div>
+    </div>   
+
+<div fxFlex="31" fxFlex.xs="100" >
+    <mat-form-field appearance="outline">
+        <mat-label class="custom-label" class="labeltextdesktop">Company Phone</mat-label>
+        <input matInput [readonly]="isReadOnly" formControlName="CompanyPhone" [formControl]="form.controls['CompanyPhone']" maxlength="15" [min]="8">
+        <mat-hint align="end">{{form.controls['CompanyPhone'].value?.length || 0}}/15</mat-hint>
+    </mat-form-field>
+    <div  class="message-block">
+        <span class="error-message" *ngIf=" form.controls['CompanyPhone'].hasError('pattern')">{{'onlyNumbers'| label}}</span>
+        <span class="error-message" *ngIf=" form.controls['CompanyPhone'].hasError('whitespace')">This field should not contain whitespaces</span>
+        <span class="error-message" *ngIf="form.controls['CompanyPhone'].hasError('isStartzero')">The Company Number should not start with zeros </span>
+        <span class="error-message" *ngIf="form.controls['CompanyPhone'].hasError('required') && form.controls['CompanyPhone'].touched">Company Phone field Required</span> 
+        <!-- <span class="error-message" *ngIf="form.controls['CompanyPhone'].hasError('minlength')">The Company Number should contain atleast 8 numbers</span> -->
+    </div>
+       </div>
+</div>
+<div *ngIf="saveBioInfo" style="text-align: center;">
+<button mat-raised-button color="primary" class="save-profile" [disabled]="!form.valid"  type="submit">Save</button> 
+</div>
+<mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loader"></mat-spinner>
+
+</form>
+
+<div style="margin-top: -35px;">
+<!--Customer search - approved listings-->
+<div *ngIf="customerFlag" fxLayout="row" fxLayoutAlign="space-between" >
+    <div>
+        <button mat-raised-button color="primary" [mat-dialog-close]="true" class="mat-raised-1" type="button">Close</button>
+        </div>
+    <div  class="deactivate" fxLayout="row" fxLayoutGap="30px">
+        <button mat-raised-button  *ngIf="customerDeactivate" class="red" (click)="openRejected()"  type="button">Deactivate</button>
+         <button mat-raised-button *ngIf="customerActivate" class="green" (click)="openActivated()"  type="button">Activate</button> 
+         <button mat-raised-button *ngIf="showSaveChangesButton" class="savechanges"  [disabled]="isFormControlChanged || !form.valid" (click)="updateCustomerBasicProfile()" type="button">Save Changes </button>
+    <button mat-raised-button  class="blue" *ngIf="showEditInfo" [disabled]="isDisableEditCustomerDetails"  type="button" (click)="editData()">Edit Details
+      <mat-icon class="edit-icon">create</mat-icon> 
+    </button>
+        
+        </div>
+        <div>
+        <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)="navigateCompanyAssociate()" class="mat-raised-2" type="button">Next</button>
+        </div>
+</div>
+
+
+
+<!--Application search - unapproved listings-->
+<div *ngIf="applicationFlag" class="dialogButton" fxLayout="row wrap" fxLayoutAlign="space-between">
+    <button mat-raised-button color="primary" class="mat-button" [mat-dialog-close]="true"    type="submit">Close</button>
+     <button mat-raised-button color="primary" class="mat-button" [mat-dialog-close]="true"   type="submit" (click)="openCompanyAssociate()">Next</button>
+     </div>
+
+     <!--gathering details of customers in person - MC-->   
+  <div *ngIf="showEmptyFields" fxLayout="row" fxLayoutAlign="space-between">
+    <div>
+     <button class="close-mat-btn" [disabled]="true" matStepperPrevious  type="button" mat-raised-button>Previous</button>
+   </div>
+   <div>
+    <button class="submit-mat-btn" (click)="onCompanyProfileOnboardingSubmit()"  type="button" [disabled]="!form.valid"  mat-raised-button color="primary">Save and Continue</button>
+   </div>
+ </div>    
+
+ <!--gathering details of customers in person (application search flow) - MC-->   
+<div *ngIf="showEditableForBranchChannel" class="btn-row-mc" fxLayout="row" fxLayoutAlign="space-between">
+    <div>
+     <button class="close-mat-btn" [mat-dialog-close]="true" type="button" mat-raised-button>Close</button>
+   </div>
+   <div>
+    <button class="submit-mat-btn" [mat-dialog-close]="true" (click)="onUpdateCompanyProfileMc()"  type="button" [disabled]="!form.valid" mat-raised-button color="primary">Save and Continue</button>
+   </div>
+  </div>   
+
+
+</div>
+

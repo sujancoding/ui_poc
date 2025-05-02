@@ -1,0 +1,122 @@
+p{
+    margin: 0.6cm;
+    height: 3px;
+}
+.sorting{
+    margin: 0.4cm;
+    height: 2px;
+}
+
+.filter-button{
+    height: 48px;
+    margin-top: 0.2cm;
+    font-weight: 12px;
+    padding-right: 0.7cm;
+}
+  
+  .p {
+    font-family: "Roboto";
+    font-size: 15px;
+    margin-left: 8px;
+    margin-bottom: 13px;
+  }
+
+   //for search button
+.buttonApplyfilter {
+  background-color: #123969;
+  color: white;
+  height: 48px;
+  /* margin-top: 46px; */
+  width: 123px;
+  }
+
+.settlement{
+    width: 9%;
+    height: 35px;
+    background-color: #043d7d;
+    top: 0.4cm;
+    border-radius: 10px;
+}
+.SettlementButton{
+    text-align: left;
+    margin-left: 12px;
+    
+}
+
+.icon{
+    color:rgb(18, 135, 231) 
+}
+
+mat-form-field{
+    padding: 0.1cm;
+}
+
+
+.previous-btn{
+    margin-left: 12px;
+    border-radius: 17px;
+    font-size: 15px;
+    background: #e1e1e1;
+    margin-bottom: 6px;
+  }
+  
+  .arrow-back-icon{
+    margin-top: -2px;
+    position: relative;
+    left: -7px;
+    cursor: pointer;
+  }
+
+  .center-content {
+    position: relative;
+    left: -14px;
+  }
+  
+
+//   //biz asked to show border for td and th
+// td{
+//   text-align: left;
+//     padding: 7px;
+//     font-style: normal;
+//     font-family: 'Roboto';
+//     font-weight: 540;
+//     font-size: medium;
+//     border: 0.1px solid #d3d3d3 !important;
+// }
+
+// th{
+//   padding: 10px;
+//   color: #252525d6;
+//   font-weight: 600;
+//   opacity: 20;
+//   font-size: 14px;
+//   font-family: 'Roboto';
+//   background-color: #f0f0f0;
+//   border: 0.1px solid #d3d3d3;
+// }
+
+.picture-as-pdf-icon{
+  color: black;
+}
+
+.negative-amount{
+  color: red;
+}
+
+.positive-amount{
+  color: rgb(0, 0, 0);
+}
+
+
+
+.search-filter-1{
+padding-top: 10px;
+  background-color: white;
+  /* margin-left: 12px; */
+  /* margin-right: 12px; */
+  border-radius: 10px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 22px;
+}

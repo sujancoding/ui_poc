@@ -1,0 +1,81 @@
+<!-- <div class="example-table"> -->
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+        <div [ngStyle]="changeTableHeight()">
+    <table class="table">
+    <thead>
+        <th>TXN ID & ON</th>
+        <th>Sender</th>
+        <th>Payee</th>
+        <th>Amount + Admin Fee & Currency</th>
+        <th>Contract Rate</th>
+        <!-- <th>Deal ID</th> -->
+        <th>Status</th>
+        <th> Receipt </th>
+    </thead>
+    
+    <tbody>
+        <tr *ngFor = "let agentRemittance of agentRemittance | slice: (p - 1) * itemsPerPage : p * itemsPerPage">
+    
+            <td>
+                 <div class="flex">
+                    <small class="font"> {{agentRemittance.TRANSACTIONID}} </small>
+                   <small style="white-space: nowrap;"> {{agentRemittance.CREATEDDATE | date:'medium'}} </small>
+                  </div> 
+            </td>
+            <td>{{agentRemittance.ORIGINATEDREMITTER}}</td>
+            <td>
+                <div fxLayout="column" style="margin-left: -25px;"> 
+                    <div fxLayout="row" fxLayoutAlign="space-evenly">
+                        <small class="font"> {{agentRemittance.ACCOUNTNBR}} </small>
+                        <small class="font"> {{agentRemittance.BANKNAME}} </small>
+                    </div> 
+
+                    <div fxLayout="row" fxLayoutAlign="space-evenly">
+                        <small> {{agentRemittance.NAME.length > 15 ? (agentRemittance.NAME | slice:0:15) + '...' : agentRemittance.NAME }}</small>
+                        <small> {{agentRemittance.SWIFTCODE}} </small>
+                    </div> 
+
+                </div>
+            </td>
+            <td>
+                <div fxLayout="row" fxLayoutGap="20px" style="margin-left: 18px;">
+                    <small style="font-weight:500;font-size:14px;white-space: nowrap;"> {{agentRemittance.AMOUNTSENT}} + {{agentRemittance.ORGCOMMISSION}} = {{agentRemittance.AMOUNTSENT + agentRemittance.ORGCOMMISSION | number : '1.0-2'}} SGD</small>
+                   <!-- <small style="font-weight:500;font-size:14px"> SGD </small> We get only SGD amount in response so ccycode is SGD here -->
+                  </div> 
+            </td>
+            <td> {{agentRemittance.CONTRACTRATE}} </td>
+            <!-- <td> {{agentRemittance.DEALID}} </td> -->
+            <td>
+                <div class="tags" [ngStyle]="{'color': getColor(agentRemittance.TXNSTATUS),'background-color': getBackgroundColor(agentRemittance.TXNSTATUS)}">
+                    <div  [ngStyle]="{'background-color': getColor(agentRemittance.TXNSTATUS)}" class="small-container"></div>
+                  <span class="status-tag">{{agentRemittance.TXNSTATUS}} </span>
+                  </div>
+            </td>
+            <td>
+                <div class="example-button-container">
+                    <button class="icon_button"  (click)="openRecieptDialog(agentRemittance.TRANSACTIONID,agentRemittance.ACCOUNTTITLE,
+                    agentRemittance.NAME,agentRemittance.ACCOUNTNBR,agentRemittance.BANKNAME,
+                    agentRemittance.SWIFTCODE,agentRemittance.COUNTRY,agentRemittance.TXNSTATUS,agentRemittance.AMOUNTSENT,agentRemittance.ORGEXCHRATE,agentRemittance.SENDCCY,
+                    agentRemittance.ORGCOMMISSION,agentRemittance.BRANCHNAME,agentRemittance.CUSTIDNBR,agentRemittance.ADDRESS,agentRemittance.STATE,agentRemittance.COUNTRY,agentRemittance.CUSTPHONENBR
+                    ,agentRemittance.CREATEDDATE,agentRemittance.CUSTDOB,agentRemittance.CUSTNATIONALITY,
+                    agentRemittance.CUSTOMERTYPE,agentRemittance.CUSTOMERID,agentRemittance.REMARKS,agentRemittance.ORIGINATEDREMITTER,agentRemittance.AMOUNTCONSUMED,agentRemittance.CONTRACTRATE, agentRemittance.AMOUNTSENTF ,agentRemittance.CONTRACTID, agentRemittance.PURPOSEOFREMITTANCE, agentRemittance.SHARINGTYPE, agentRemittance.ROUTINGCODE,agentRemittance.RELATIONSHIP)" mat-icon-button type="button">
+                    <mat-icon style="color: #000000;">receipt_long</mat-icon>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    </div>
+    <mat-paginator class="pagination-class"
+    [length]="agentRemittance.length"
+    [pageSize]="itemsPerPage"
+    [pageIndex]="p - 1"
+    (page)="handlePageChange($event)"
+  ></mat-paginator>    </div>
+     <!--Loader-->
+  <div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+    </div>
+    </div>

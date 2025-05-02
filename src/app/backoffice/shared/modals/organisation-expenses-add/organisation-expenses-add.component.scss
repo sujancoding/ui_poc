@@ -1,0 +1,33 @@
+.green{
+    background-color: #123969;
+    width: 3cm;
+    color: white;
+  }
+  
+  .blue{
+    background-color: #fcfcfc;
+    width: 3cm;
+    color: #123969;
+  }
+  
+  .deactivate{
+   justify-content: center;
+   align-items: center;
+   margin-top: 20px;
+   margin-bottom: 20px;
+   }
+
+   .task-header {
+font-size: 18px;
+    background-color:#123969;
+   color: white;
+   height: 50px;
+  
+   }
+  .error-message{
+    font-size: 14px;
+  }
+
+  mat-error{
+    margin-top: 10px;
+  }

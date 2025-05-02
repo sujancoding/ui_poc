@@ -1,0 +1,307 @@
+.profile-card{
+    background-color: #123969;
+    margin-top: 0.4cm;
+  }
+  .profile-card1{
+    background-color: #ffffff;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 11px;
+    height: 100px;
+    margin-top: 0px;
+  }
+
+
+
+  .mat-mdc-card.mat-mdc-card-content {
+    font-size: 1rem;
+    line-height: 0;
+    padding: 0;
+}
+
+.example-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.agent{
+  text-align: start;
+  font-size: 14px;
+  color: #fff;
+  background-color: #123969;
+  font-family: 'Roboto-Regular';
+  /* font-weight: 600; */
+  height: 29px;
+  margin-top: -7px;
+  margin-left: -7px;
+  margin-right: -7px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  padding: 4px;
+}
+
+.textField{
+  font-size: 12px;
+  margin-top: -10px;
+}
+
+.card-content{
+ margin: 0.1cm;
+}
+  .btn{
+    border-radius: 4px;
+    position: relative;
+    left: 8px;
+    background-color: #123969;
+    color: white;
+    height: 31px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      }
+
+      small{
+        margin: 0;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        color: #828282 ;
+    }
+    .flex{
+        display: flex;
+        flex-direction: column;
+        line-height: 0.4cm;
+    }
+    
+    .accountNumber{
+        font-weight:500;
+        font-size:12px;
+        color: black;
+    }
+    .font{
+        font-size: 10px;
+    }   
+  
+
+    .table{
+      border-spacing: 0;
+      border: 1px solid #a0a0a0;
+     
+     }
+
+     .loader-wrapper{
+      position: absolute;
+      top: 0;
+      left: 0;
+      zoom: 0.5;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    
+    }
+    ::ng-deep.loader-wrapper circle,.loader-wrapper circle {stroke: #123969 !important;
+    margin-top: 130px;}
+  
+     
+  
+      
+ 
+
+
+
+
+  .card{
+    background-color: #ffffff;
+    border: 1px solid rgb(209, 209, 209);
+    border-radius: 11px;
+    height: 327px;
+    margin-top: -5px;
+  
+  }
+ .mat-mdc-card .mat-mdc-card-content {
+    font-size: 1rem;
+    line-height: 23px;
+    /* padding: 14px; */
+}
+
+ .transactions{
+  color: #626262;
+  font-family: 'Roboto';
+  font-weight: 600;
+    font-size: 14px;
+    //font-weight: bold;
+    text-align: start;
+ }
+.totTrans{
+  //  white-space: nowrap;
+  font-size: 15px;
+// edited
+    text-align: left;
+    display: table-cell;
+    color: #4c4c4c;
+    font-family: 'Roboto';
+}
+
+//edited
+.allignright{
+  text-align: right; 
+  display:block; 
+  margin-top:-21px;
+  margin-right: 20px;
+  color: #828282;
+}
+  h6{
+      margin-left: 10px;
+      font-size: 11px;    
+  }
+  h3{
+      margin-left: 2cm;
+     margin-right: 0.3cm;
+      font-weight: bolder;
+      font-size: 15px;
+      }
+  .height{
+      height: 30px;
+  }   
+ .box{
+      background-color: white;
+      border-radius: 0.4cm;
+      margin: 1px;
+    }
+
+    pagination-controls {
+      text-align: center;
+      position: static;
+      justify-content: center;
+      width: 100%;
+      border: solid 0.2px rgb(160, 158, 158);
+    }
+    thead {
+      position: sticky;
+      top: -1px;
+     z-index: 2;
+    }
+
+    td {
+      text-align: left;
+    padding: 6px;
+    font-style: normal;
+    font-weight: 540;
+    background-color: white;
+    font-size: medium;
+    border: solid 0.5px #f1f1f1;
+    
+    border-bottom-width: 0.1px;
+    color: black;
+
+    }
+    
+    th {
+      padding: 6px;
+      /* color: #000; */
+      font-size: 12px;
+      background-color: #f0f0f0;
+      font-family: Roboto;
+      /* font-style: normal; */
+      border: solid 0.5px #ebe8e8;
+      white-space: nowrap;
+
+    }
+
+    .disabled-table {
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    .disabled-button{
+      pointer-events: none;
+      opacity: 0.2;
+      background-color: #626262;
+    }
+
+    .example-section {
+      display: flex;
+      align-content: center;
+      align-items: center;
+      margin-top: 3px;
+      color: #464646;
+    }
+    
+    .example-margin {
+      margin: 0 10px;
+    }
+
+    .no-btn{
+      background: #ffffff;
+    color: #123969 ;
+    border: 4px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .loader-container {
+      position: relative;
+      display: flex;
+  justify-content: center;
+  align-items: center;
+    }
+ .remraks-btn{
+  border-radius: 4px;
+  position: relative;
+  background-color: #e6e6e6;
+  color: #123969;
+  height: 30px;
+  right: 18px;
+  width: 51px;
+ }
+ .disabled-btn{
+  background-color: #e6e6e6;
+  pointer-events: none;
+  color: #a9a9a9;
+ }
+   
+ .agent-commission-row{
+  flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    place-content: stretch space-between;
+    margin-top: -7px;
+    margin-bottom: -16px;
+    margin-right: 9px;
+ }
+ .error-message{
+  font-size: 10px;
+  color: #e8316f;
+  padding-left: 5px;
+ }
+
+ 
+mat-error{
+  margin-top: 5px;
+  margin-left: -1px;
+}
+
+.info-icon{
+  font-size: 15px;
+  color: rgb(36, 36, 36);
+ }
+
+ .agent-fee-label{
+  margin-left: 15px;
+  color: #828282;
+  padding-top: -80px;
+  position: relative;
+  top: -7px;
+  left: -11px;
+ }
+    
+ .flex-5{
+  display: flex
+
+ }

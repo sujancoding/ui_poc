@@ -1,0 +1,9 @@
+
+<div class="success">
+    <p [ngClass]="{'rejection-message': messageToShow === 'Payee Rejected !', 'success-message': messageToShow !== 'Payee Rejected !'}"> {{messageToShow}} </p>
+    </div>
+
+
+<div class="close">
+<a class="link" routerLinkActive="active" [mat-dialog-close]="true">ok</a>
+</div>

@@ -1,0 +1,57 @@
+<!-- <div class="login-register" style="background-image: url(assets/images/background/login-register.jpg)"> -->
+    <div class="login-register">
+
+        <div class="login-register-box">
+            <mat-card appearance="outlined">
+                <mat-card-content>
+                    <form [formGroup]="mfaForm" (ngSubmit)="onSubmit()">
+                        <div class="text-center">
+                            <h2>Multi-factor authentication </h2>
+                        </div>
+                        <p class="text-center font-14">
+                            Enter the verification code from your authenticator app.
+                        </p>
+    
+                        <div fxLayout="column" fxLayoutAlign="space-around">
+                             <div fxFlex.gt-sm=" 100" fxFlex.gt-xs="100" fxFlex="100">
+                                <mat-form-field style="width: 100%" appearance="outline">
+                                  <input matInput  placeholder="Verification Code" type="password"  maxlength="6"  
+                                    [formControl]="mfaForm.controls['mfaCode']" />
+                                    <mat-hint align="end">{{mfaForm.controls['mfaCode'].value?.length || 0}}/6</mat-hint>
+                                </mat-form-field> 
+                                <div  class="message-block">
+                                  <span class="error-message" *ngIf="mfaForm.controls['mfaCode'].hasError('minlength')"> Code should contain atleast 6 numbers </span>
+                                  <span class="error-message" *ngIf="mfaForm.controls['mfaCode'].hasError('whitespace')">Code should not contain <br> whitespaces</span> 
+                                </div>
+                            </div>
+                            <p class="text-center font-12">
+                                Retry the code from authenticator app? 
+                            </p>
+                            
+                            <alert></alert>
+ 
+
+                            <!-- col full-->
+                            <div *ngIf="mfaValidation" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" class="signIn">
+                                <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20" type="submit"  [disabled]="!mfaForm.valid">
+                                Next
+                                </button>
+                            </div>
+
+                            <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loader"></mat-spinner>
+
+                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100" class="text-center">
+                                <span class="account">
+       
+                                     <button mat-raised-button color="secondary" type="button" class="btn-block btn-lg m-t-20 m-b-20" (click)="cancelMfa()">
+                                        Cancel
+                                    </button>
+        
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>

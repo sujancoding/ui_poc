@@ -1,0 +1,113 @@
+<!--MODAL POPUP DIALOG-->
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <span> New Settlement </span>
+                <span [mat-dialog-close]="true" style="cursor: pointer;">
+                  <mat-icon>close</mat-icon>
+                  </span>
+    </mat-toolbar>
+  </h4>
+
+  <form [formGroup]="form" (ngSubmit)="onSave()">
+<div fxLayout="row" fxLayoutAlign="space-around">
+    <div fxFlex="30">
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Agent Name</mat-label>
+    <input matInput [formControl]="form.controls['agentName']" formControlName="agentName" readonly>
+</mat-form-field>
+</div>
+
+<div fxFlex="30">
+   <div fxLayout="row" fxLayoutGap="20px">
+    <div fxFlex="47">
+        <mat-form-field appearance="outline">
+            <mat-label class="custom-label">Agent Id</mat-label>
+            <input matInput [formControl]="form.controls['agentID']" formControlName="agentID" readonly>
+        </mat-form-field>
+        </div>
+        
+        <div fxFlex="47">
+        <mat-form-field appearance="outline">
+            <mat-label class="custom-label">Agent Account No</mat-label>
+            <input matInput [formControl]="form.controls['AccountNumber']" formControlName="AccountNumber" readonly>
+        </mat-form-field>
+        </div>
+   </div>
+</div>
+<div fxFlex="30">
+    <mat-form-field appearance="outline">
+        <mat-label class="custom-label">Remarks</mat-label>
+        <input matInput [formControl]="form.controls['remarks']" formControlName="remarks">
+    </mat-form-field>
+    <span class="error-message" *ngIf="form.controls['remarks'].hasError('maxlength')">{{'transactionIdMaxlength'| label}}</span>
+    <span class="error-message" *ngIf=" form.controls['remarks'].hasError('pattern')">{{'specialCharacterValidation'| label}}</span>
+
+<div>
+
+</div>
+
+</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-around">
+
+<div fxFlex="30">
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Outstanding Balance Amount</mat-label>
+    <input matInput [formControl]="form.controls['OutstandingBalance']" formControlName="OutstandingBalance" readonly>
+</mat-form-field>
+</div>
+
+<div fxFlex="30">
+    <mat-form-field appearance="outline">
+        <mat-label class="custom-label">Settlement Type</mat-label>
+        <mat-select [formControl]="form.controls['settlementType']" (selectionChange)="selectSettlementType()">
+            <mat-option *ngFor="let typeList of settlementTypeArray" [value]="typeList.value">{{typeList.description}}</mat-option>
+          </mat-select>
+          <mat-hint align="start" class="container-hint"> 
+            <mat-icon class="user-icon"
+            #tooltip="matTooltip"
+            matTooltip="Agent"
+            matTooltipPosition="above"
+            matTooltipClass="accounts-custom-tooltip"
+            >account_circle</mat-icon>
+             <mat-icon *ngIf="showCollectionIcon" class="collection-icon" >arrow_forward</mat-icon> 
+             <mat-icon *ngIf="showHelpIcon" class="help-icon">help_outline</mat-icon>
+             <mat-icon *ngIf="showPayoutIcon" class="payout-icon">arrow_back</mat-icon> 
+             <mat-icon class="user-icon"
+             #tooltip="matTooltip"
+            matTooltip="APT"
+            matTooltipPosition="above"
+            matTooltipClass="accounts-custom-tooltip"
+             >account_balance</mat-icon>
+         </mat-hint>
+        <mat-error> 
+            <small class="error-message" *ngIf="form.controls['settlementType'].hasError('required')
+                      && form.controls['settlementType'].touched"> *Settlement Type Required </small>
+                      </mat-error>
+    </mat-form-field>
+    </div>
+
+<div fxFlex="30">
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Settlement Amount(SGD)</mat-label>
+    <input matInput [formControl]="form.controls['SettlementAmount']" formControlName="SettlementAmount">
+    <mat-error> 
+        <small class="error-message" *ngIf="form.controls['SettlementAmount'].hasError('required')
+                  && form.controls['SettlementAmount'].touched"> *Settlement Amount Required </small>
+                  <small class="error-message" *ngIf="form.controls['SettlementAmount'].hasError('pattern')"> {{'onlyNumbers' | label}} </small> 
+                  </mat-error>
+</mat-form-field>
+</div>
+
+</div>
+
+<div class="deactivate" fxLayout="row wrap" fxLayoutGap="30px">
+    <button mat-raised-button class="blue" [mat-dialog-close]="true" type="button">Close</button>
+    <button mat-raised-button  class="green" [mat-dialog-close]="true" *ngIf="showSubmitButton" [disabled]="!form.valid"  type="submit">Submit</button>
+
+        <mat-spinner  style="margin:0 auto;" diameter="40" *ngIf="submitButtonLoader"></mat-spinner>
+    
+   </div>
+
+ </form>

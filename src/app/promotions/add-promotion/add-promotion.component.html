@@ -1,0 +1,69 @@
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header">
+        <span> Add Promotion </span>
+        <span class="fx-spacer"></span>
+    </mat-toolbar>
+  </h4>
+
+  <form [formGroup]="form" (ngSubmit)="onSave()">
+
+<div fxLayout="row" fxLayoutGap="50px">
+<p>Start Date</p>
+
+<mat-form-field appearance="outline" style="width: 35%;font-size: 13px;">
+    <input matInput [matDatepicker]="datepicker" [min]="minDate" formControlName="startDate" [formControl]="form.controls['startDate']">
+    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+    <mat-datepicker #datepicker>
+      <mat-datepicker-actions>
+        <button mat-button matDatepickerCancel>Cancel</button>
+        <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+      </mat-datepicker-actions>
+    </mat-datepicker>
+    <mat-hint align="start">MM/DD/YYYY</mat-hint>
+    <mat-error>
+      <small *ngIf="form.controls['startDate'].hasError('required')"> {{'startDateRequired'|label}} </small>
+    </mat-error>
+  </mat-form-field>
+
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="55px">
+    <p>End Date</p>
+    
+    <mat-form-field appearance="outline" style="width: 35%;font-size: 13px;">
+        <input matInput [matDatepicker]="datepicker1" [min]="minDate" formControlName="endDate" [formControl]="form.controls['endDate']">
+        <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
+        <mat-datepicker #datepicker1>
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+        <mat-hint align="start">MM/DD/YYYY</mat-hint>
+        <mat-error>
+          <small *ngIf="form.controls['endDate'].hasError('required')"> {{'endDateRequired'|label}} </small>
+        </mat-error>
+      </mat-form-field>
+    
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="40px">
+        <p>Description</p>
+        
+        <mat-form-field appearance="outline" style="width: 350px;">
+            <textarea matInput formControlName="description" maxlength="250" [formControl]="form.controls['description']"></textarea>
+            <mat-hint style="font-size: 13px;" align="end">250 chars</mat-hint>
+            <mat-error>
+              <small *ngIf="form.controls['endDate'].hasError('required')"> {{'descriptionRequired'|label}} </small>
+            </mat-error>
+          </mat-form-field>
+        
+          </div>
+
+          <div class="deactivate" fxLayout="row wrap" fxLayoutAlign="space-around">
+            <button mat-raised-button class="blue" [mat-dialog-close]="true" type="button">Close</button>
+            <button mat-raised-button  class="green" [mat-dialog-close]="true"  type="submit">Submit</button>
+           </div>
+
+
+    </form>

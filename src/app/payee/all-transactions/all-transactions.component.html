@@ -1,0 +1,110 @@
+
+  <ng-container>
+    <div class="scrollbar" *ngIf = "contentIndividual">
+
+      <div style="min-height: 450px;">
+
+        <mat-card appearance="outlined" class="example-card" [ngClass]="{'blink_me': transactionLoader === true}" *ngFor="let transactions of transactionData" (click)="navigateReceipt(transactions.TRANSACTIONID,'I', transactionData.FOREXBOOKINGTYPE)">
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <div class="box">
+              <mat-icon class="wallet-icon">account_balance_wallet</mat-icon>
+            </div>
+            <div fxLayout="column" style="margin-left: -5px; line-height:1.1 ;">
+              <p class="payeeName" style="margin-left: -10px;height: 27px;">{{transactions.NAME.length > 15 ? (transactions.NAME | slice:0:15) + '...' : transactions.NAME }}</p>
+              <mat-card-subtitle class="subGroups" style="color: #7b7b7b; margin-left: -7px;font-size: 11.5px; "> {{transactions.CREATEDDATE | date:'medium'}} </mat-card-subtitle>
+            </div>
+            <div fxLayout="column" style="margin-left: -5px; line-height:1.1 ;">
+              <p class="payeeName" style="height: 27px;" >{{transactions.AMOUNTSENT | number : '1.0-2'}} SGD</p>
+              <mat-card-subtitle class="subgroups" style="margin-left: 5px;"  [ngStyle]="{'color': getColor(transactions.TXNSTATUS)}"> {{status}}</mat-card-subtitle>
+            </div>
+            <div fxLayout="column">
+              <p style="opacity:0;">s</p>
+              <mat-icon style="color: #b7b7b7;margin-top: -18px; margin-left: -13px;">navigate_next</mat-icon> 
+            </div>
+          </div>
+        </mat-card>
+      </div>               
+    </div>
+  </ng-container>
+  <div *ngIf = "contentCorporate">
+  <div class="refresh-btn">
+    <button *ngIf="refreshIcon" style="border: 1px solid #77bbcb;"  type="submit" mat-button color="primary" (click)="refresh()"> Refresh
+      <mat-icon class="refresh_icon">refresh</mat-icon>
+    </button>
+    </div>
+  
+   <div class="table-wrapper">
+        <div class="mat-elevation-z8">
+          <div [ngStyle]="changeTableHeight()">
+          <table class="table">
+              <thead>
+                  <th>Transaction ID</th>
+                  <th>Payee Name</th>
+                  <th>Account Number</th>
+                  <th>Payee Address</th>
+                  <th>Bank Info</th>
+                  <th> Status </th>
+                  <th>Transaction Date</th> 
+                  <th>View</th>
+              </thead>
+          
+              <tbody>
+                  <tr *ngFor = "let transactionData of transactionData | slice: (p - 1) * itemsPerPage : p * itemsPerPage;index as i;">
+                     <td> {{transactionData.TRANSACTIONID}} </td>
+                     <td>{{transactionData.NAME}}</td>
+                     <td>{{transactionData.ACCOUNTNBR}}</td>
+                     <td>{{transactionData.ADDRESS}} ,{{transactionData.STATE}}, {{transactionData.COUNTRY}}</td>
+                     <td> {{transactionData.BANKNAME}}, {{transactionData.SWIFTCODE}} ,{{transactionData.BRANCHNAME}} , {{transactionData.COUNTRY}}</td>
+                     <td>
+                      <div class="tags" [ngStyle]="{'color': getColor(transactionData.TXNSTATUS),'background-color': getBackgroundColor(transactionData.TXNSTATUS)}">
+                        <div  [ngStyle]="{'background-color': getColor(transactionData.TXNSTATUS)}" class="small-container"></div>
+                      <!-- <span class="status-tag"   #tooltip="matTooltip"
+                      [matTooltip]="getTooltipText(transactionData.TXNSTATUS)"
+                      matTooltipPosition="above"
+                      matTooltipClass="custom-tooltip"> 
+                      {{status}} </span> -->
+                       <span class="status-tag">{{status}} </span> 
+                      </div>
+                    </td>
+                     <!-- <td [ngStyle]="{'color': getColor(transactionData.TXNSTATUS)}">  </td> -->
+                     <td> {{transactionData.CREATEDDATE | date:'medium'}} </td>
+                     <td>
+                      <div fxLayout="row">
+                        <div class="example-button-container">
+                          <button mat-icon-button type="button" class="icon_button"  (click)="navigateReceipt(transactionData.TRANSACTIONID,'C', transactionData.FOREXBOOKINGTYPE)">
+                            <mat-icon>open_in_new</mat-icon>
+                          </button>
+                        </div>
+                      
+                      </div>
+                     </td>
+      
+                  </tr>
+              </tbody>
+          </table>
+          </div>
+          <mat-paginator class="pagination-class"
+               [length]="transactionData.length"
+               [pageSize]="itemsPerPage"
+               [pageIndex]="p - 1"
+               (page)="handlePageChange($event)">
+          </mat-paginator>
+          <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+        </div>
+        <div *ngIf="loader" class="loader-wrapper">
+          <mat-spinner> </mat-spinner>
+          </div>
+         
+          </div>
+        </div>
+
+        <ng-container *ngIf="showNoTransactionMessage">
+          <div style="display: flex;justify-content: center;margin-top: 24px;">
+            <div fxLayout="column" fxLayoutGap="5px" style="justify-content: center;">
+              <div class="hourglass-empty-circle">
+                <mat-icon class="hourglass-empty-icon">description</mat-icon>
+              </div>
+              <h5 class="no-transaction-message">No Transaction Records</h5>
+            </div>
+          </div>
+        </ng-container>

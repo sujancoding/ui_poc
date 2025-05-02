@@ -1,0 +1,411 @@
+<div class="scrollable-content">
+   
+    <form [formGroup]="form">
+        <div class="spinner-overlay" *ngIf="isScreenLoader">
+            <mat-spinner diameter="60"></mat-spinner>
+          </div>
+        <div>
+            <h4 class="subTitle-1">Basic Information</h4>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxFlex="36">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Company Name</mat-label>
+                        <input matInput
+                            (input)="form.controls.companyName.setValue(form.controls.companyName.value.toUpperCase())"
+                            formControlName="companyName" [formControl]="form.controls['companyName']">
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf="form.controls['companyName'].hasError('required') && form.controls['companyName'].touched">Company Name Field Required </span>
+                    </div>
+                </div>
+
+                <div fxFlex="24">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Email Address</mat-label>
+                        <input matInput 
+                            formControlName="emailId" [formControl]="form.controls['emailId']">
+                    </mat-form-field>
+                    <div class="message-block">
+                    <span *ngIf="form.controls['emailId'].hasError('emailId')" class="error-message"> {{'validEmailId'|label}} </span>
+                    <span *ngIf="form.controls['emailId'].hasError('required') && form.controls['emailId'].touched" class="error-message"> {{'emailIdRequired'|label}} </span>
+                </div>
+                </div>
+
+                <div fxFlex="18">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Phone Number </mat-label>
+                        <input matInput   [placeholder]="'phonenumber'|label" formControlName="phoneNo" maxlength="15"
+                          [formControl]="form.controls['phoneNo']">
+                          <mat-hint align="end" >{{form.controls['phoneNo'].value?.length || 0 }}/15</mat-hint>
+                        </mat-form-field>
+                        <div class="message-block">
+                    <span class="error-message" *ngIf=" form.controls['phoneNo'].hasError('pattern')">{{'onlyNumbers'|label}}</span>
+                    <span class="error-message" *ngIf="form.controls['phoneNo'].hasError('required') && form.controls['phoneNo'].touched"> Phone Number Required </span>
+                </div>
+                </div>
+
+                <div fxFlex="18">
+                    <mat-form-field appearance="outline">
+                        <input matInput (input)="form.controls.registrationNo.setValue(form.controls.registrationNo.value.toUpperCase())"
+                            formControlName="registrationNo" [formControl]="form.controls['registrationNo']">
+                        <mat-label class="custom-label">Reg No</mat-label>
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message"
+                            *ngIf=" form.controls['registrationNo'].hasError('pattern')">{{'NoSpecialCharacters'|
+                            label}}</span>
+                        <span class="error-message" *ngIf=" form.controls['registrationNo'].hasError('maxlength')">This field
+                            should not
+                            exceed more than 20 characters</span>
+                        <span class="error-message" *ngIf=" form.controls['registrationNo'].hasError('whitespace')">This field
+                            should not
+                            contain whitespaces</span>
+                        <span class="error-message"
+                            *ngIf="form.controls['registrationNo'].hasError('required') && form.controls['registrationNo'].touched">Reg
+                            No. Field
+                            Required</span>
+                    </div>
+                </div>
+
+
+               
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+
+                <div fxFlex="17">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Type</mat-label>
+                        <mat-select [(value)]="selectedValue" [formControl]="form.controls['type']">
+                            <mat-option *ngFor="let option of typeOptions" [value]="option.label">
+                                {{ option.label }}
+                              </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf="form.controls['type'].hasError('required') && 
+        form.controls['type'].touched">Type field Required</span>
+
+                    </div>
+                </div>
+
+                <div fxFlex="17">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Incorporation Place</mat-label>
+                        <mat-select [formControl]="form.controls['incPlace']">
+                            <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+                                <mat-label class="custom-label">Search Incorporation Country</mat-label>
+                                 <input matInput (input)="filterIncorporationCountry(incorporationCountry)" formControlName="incorporationCountry" [formControl]="form.controls['incorporationCountry']" #incorporationCountry>
+                                 <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+                                 <mat-error> 
+                                               <small *ngIf="form.controls['incorporationCountry'].hasError('pattern')"> {{'onlyAlphabets' | label}} </small>
+                                               </mat-error>
+                             </mat-form-field>
+                            <mat-option *ngFor="let incorporationCountry of filteredIncorporationCountriesArray" [value]="incorporationCountry.COUNTRY">
+                                {{incorporationCountry.COUNTRY}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf="form.controls['incPlace'].hasError('required') && 
+        form.controls['incPlace'].touched">Incorporation Place field Required</span>
+
+                    </div>
+                </div>
+
+                <div fxFlex="24">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Issusing Authority Country</mat-label>
+                        <mat-select [formControl]="form.controls['issuingCountry']">
+                            <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+                                <mat-label class="custom-label">Search Issuing Authority Country</mat-label>
+                                 <input matInput (input)="filterIssuingAuthorityCountry(issuingAuthorityCountry)" formControlName="issuingAuthorityCountry" [formControl]="form.controls['issuingAuthorityCountry']" #issuingAuthorityCountry>
+                                 <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+                                 <mat-error> 
+                                               <small *ngIf="form.controls['issuingAuthorityCountry'].hasError('pattern')"> {{'onlyAlphabets' | label}} </small>
+                                               </mat-error>
+                             </mat-form-field>
+                            <mat-option *ngFor="let issuingAuthorityPlace of filterIssuingAuthorityCountries" [value]="issuingAuthorityPlace.COUNTRY">
+                                {{issuingAuthorityPlace.COUNTRY}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf="form.controls['issuingCountry'].hasError('required') && 
+                form.controls['issuingCountry'].touched">Issusing Authority Country field Required</span>
+
+                    </div>
+                </div>
+                <div fxFlex="18">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Remittance license</mat-label>
+                        <input matInput
+                            (input)="form.controls.remittanceLicense.setValue(form.controls.remittanceLicense.value.toUpperCase())"
+                            formControlName="remittanceLicense" [formControl]="form.controls['remittanceLicense']">
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message"
+                            *ngIf=" form.controls['remittanceLicense'].hasError('pattern')">{{'NoSpecialCharacters'|
+                            label}}</span>
+                        <span class="error-message"
+                            *ngIf=" form.controls['remittanceLicense'].hasError('maxlength')">This field
+                            have max 20 characters </span>
+                        <span class="error-message"
+                            *ngIf=" form.controls['remittanceLicense'].hasError('whitespace')">This
+                            field should not contain whitespaces</span>
+                        <span class="error-message"
+                            *ngIf="form.controls['remittanceLicense'].hasError('required') && form.controls['remittanceLicense'].touched">Remittance
+                            license field Required</span>
+                    </div>
+                </div>
+                <div fxFlex="18">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Incorporation Date</mat-label>
+                        <input matInput [matDatepicker]="datepicker" placeholder="DD/MM/YYYY" formControlName="incDate"
+                            [formControl]="form.controls['incDate']">
+                        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datepicker>
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Cancel</button>
+                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf="form.controls['incDate'].invalid && form.controls['incDate'].dirty
+            && form.controls['incDate'].touched">Invalid Date Format</span>
+                        <span class="error-message" *ngIf="form.controls['incDate'].hasError('required') && 
+                        form.controls['incDate'].touched">Incorporation Date field Required</span>
+                    </div>
+                </div>
+
+               
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start">
+
+                <div fxFlex="18" style="margin-right: 32px;">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Turn Over</mat-label>
+                        <input matInput formControlName="turnOver" [formControl]="form.controls['turnOver']">
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf="form.controls['turnOver'].hasError('required') && 
+                            form.controls['turnOver'].touched">Turn Over field Required</span>
+                        <span class="error-message"
+                            *ngIf="form.controls['turnOver'].hasError('pattern')">{{'onlyNumbers' |
+                            label}}</span>
+                        <span class="error-message" *ngIf=" form.controls['turnOver'].hasError('whitespace')">This field
+                            should
+                            not contain whitespaces</span>
+                        <span class="error-message" *ngIf=" form.controls['turnOver'].hasError('maxlength')">This field
+                            have max 15 characters </span>
+                    </div>
+                </div>
+
+                <div fxFlex="15" style="margin-right: 32px;">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Issuing Authority</mat-label>
+                        <input matInput
+                            (input)="form.controls.issuingAuthority.setValue(form.controls.issuingAuthority.value.toUpperCase())"
+                            formControlName="issuingAuthority" [formControl]="form.controls['issuingAuthority']">
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message"
+                            *ngIf=" form.controls['issuingAuthority'].hasError('pattern')">{{'onlyAlphaNumericAndSpecificSpecialCharacter'|
+                            label}}</span>
+                        <span class="error-message"
+                            *ngIf=" form.controls['issuingAuthority'].hasError('maxlength')">This field
+                            have max 20 characters </span>
+                        <!-- <span class="error-message"
+                            *ngIf=" form.controls['issuingAuthority'].hasError('whitespace')">This field
+                            should not contain whitespaces</span> -->
+                        <span class="error-message"
+                            *ngIf="form.controls['issuingAuthority'].hasError('required') && form.controls['issuingAuthority'].touched">Issuing
+                            Authority field Required</span>
+                    </div>
+                </div>
+
+                <div fxFlex="16">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Valid From</mat-label>
+                        <input matInput [matDatepicker]="validFromDate" placeholder="DD/MM/YYYY"
+                            formControlName="validFrom" [formControl]="form.controls['validFrom']" [readonly]="true"
+                            (dateChange)="validStartDateChange($event)" (click)="validFromDate.open()">
+                        <mat-datepicker-toggle matSuffix [for]="validFromDate"></mat-datepicker-toggle>
+                        <mat-datepicker #validFromDate>
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Cancel</button>
+                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf=" form.controls['validFrom'].hasError('required') && 
+          form.controls['validFrom'].touched">Valid From field Required</span>
+                    </div>
+                </div>
+
+                <div fxFlex="16" style="margin-left: 34px;">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Valid Till</mat-label>
+                        <input matInput [matDatepicker]="validTillDate" placeholder="DD/MM/YYYY"
+                            formControlName="validTill" [readonly]="true" [formControl]="form.controls['validTill']"
+                            (dateChange)="validEndDateChange($event)" (click)="validTillDate.open()"
+                            [min]="tillStartDate">
+                        <mat-datepicker-toggle matSuffix [for]="validTillDate"></mat-datepicker-toggle>
+                        <mat-datepicker #validTillDate>
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Cancel</button>
+                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf="showValidMessage">The Valid Till date should greater than
+                            Valid From
+                            date</span>
+                        <span class="error-message" *ngIf="form.controls['validTill'].hasError('required') && 
+                form.controls['validTill'].touched">Valid Till field Required</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <h4 class="subTitle-2">Office Address</h4>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+
+                <div fxFlex="11">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Level</mat-label>
+                        <span matPrefix style="position: relative;top: -5px;">#&nbsp;</span>
+                        <input matInput formControlName="level" [formControl]="form.controls['level']">
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf="form.controls['level'].hasError('required') && 
+            form.controls['level'].touched">{{'levelRequired'| label}}</span>
+                        <span class="error-message" *ngIf="form.controls['level'].hasError('pattern')">{{'onlyNumbers'| label}}</span>
+                        <span class="error-message" *ngIf="form.controls['level'].hasError('whitespace')">whitespaces
+                            are not
+                            allowed</span>
+                        <span class="error-message" *ngIf=" form.controls['level'].hasError('maxlength')">Max 256 numbers
+                            allowed</span>
+                    </div>
+                </div>
+
+                <div fxFlex="11">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Unit</mat-label>
+                        <input matInput formControlName="unit" [formControl]="form.controls['unit']">
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf="form.controls['unit'].hasError('required') && 
+            form.controls['unit'].touched">{{'unitRequired'| label}}</span>
+                        <span class="error-message" *ngIf="form.controls['unit'].hasError('pattern') && 
+            form.controls['unit'].touched">{{'onlyNumbers'| label}}</span>
+                        <span class="error-message" *ngIf="form.controls['unit'].hasError('whitespace')">whitespaces are
+                            not
+                            allowed</span>
+                        <span class="error-message" *ngIf=" form.controls['unit'].hasError('maxlength')">Max 256 numbers
+                            allowed</span>
+                    </div>
+                </div>
+
+                <div fxFlex="28">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Building Name</mat-label>
+                        <input matInput
+                            (input)="form.controls.buildingName.setValue(form.controls.buildingName.value.toUpperCase())"
+                            formControlName="buildingName" [formControl]="form.controls['buildingName']">
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message"
+                            *ngIf=" form.controls['buildingName'].hasError('pattern')">{{'onlyAlphabets'| label}}</span>
+                        <span class="error-message" *ngIf=" form.controls['buildingName'].hasError('isWhitespace')">This
+                            field
+                            should not start with whitespaces</span>
+                        <span class="error-message"
+                            *ngIf="form.controls['buildingName'].hasError('required') && form.controls['buildingName'].touched">BuildingName field Required</span>
+                        <span class="error-message" *ngIf=" form.controls['buildingName'].hasError('maxlength')">This
+                            field
+                            should not exceed more than 256 characters</span>
+                    </div>
+                </div>
+
+
+                <div fxFlex="28">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Street Name</mat-label>
+                        <input matInput
+                            (input)="form.controls.streetName.setValue(form.controls.streetName.value.toUpperCase())"
+                            formControlName="streetName" [formControl]="form.controls['streetName']">
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message"
+                            *ngIf=" form.controls['streetName'].hasError('pattern')">{{'NoSpecialCharacters'|
+                            label}}</span>
+                        <span class="error-message" *ngIf=" form.controls['streetName'].hasError('isWhitespace')">This
+                            field
+                            should not start with whitespaces</span>
+                        <span class="error-message"
+                            *ngIf="form.controls['streetName'].hasError('required') && form.controls['streetName'].touched">{{'streetnameRequired'| label}}</span>
+                        <span class="error-message" *ngIf=" form.controls['streetName'].hasError('maxlength')">This
+                            field
+                            should not exceed more than 256 characters</span>
+                    </div>
+                </div>
+                <div fxFlex="12">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Country</mat-label>
+                        <mat-select [formControl]="form.controls['country']">
+                            <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+                                <mat-label class="custom-label">Search Country</mat-label>
+                                 <input matInput (input)="filterCountry(companyCountry)" formControlName="companyCountry" [formControl]="form.controls['companyCountry']" #companyCountry>
+                                 <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+                                 <mat-error> 
+                                               <small *ngIf="form.controls['companyCountry'].hasError('pattern')"> {{'onlyAlphabets' | label}} </small>
+                                               </mat-error>
+                             </mat-form-field>
+                            <mat-option *ngFor="let country of filteredCountries" [value]="country.COUNTRY">
+                                {{country.COUNTRY}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf="form.controls['country'].hasError('required') && 
+                    form.controls['country'].touched">{{'countryRequired'| label}}</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div fxLayout="row">
+                <div fxFlex="24.5">
+                    <mat-form-field appearance="outline">
+                        <mat-label class="custom-label">Postal Code</mat-label>
+                        <input matInput formControlName="postalCode" [formControl]="form.controls['postalCode']" maxlength="10">
+                        <mat-hint align="end">{{form.controls['postalCode'].value?.length || 0}}/10</mat-hint>
+                    </mat-form-field>
+                    <div class="message-block">
+                        <span class="error-message" *ngIf=" form.controls['postalCode'].hasError('pattern')">{{'onlyNumbers'| label}}</span>
+                    </div>
+                </div>
+                </div>
+        </div>
+
+
+    </form>
+
+</div>
+<div *ngIf="saveBioInfo" style="position: relative;top: 20px;" fxLayout="row wrap" fxLayoutAlign="space-between">
+    <button mat-raised-button class="stepper-back-btn" [mat-dialog-close]="true" type="button">Close</button>
+
+    <div  class="deactivate" fxLayout="row" fxLayoutGap="30px">
+        <button mat-raised-button [disabled]="isDisableDeactive" (click)="openDeactivated()"  class="red"   type="button">Deactivate</button>
+        <button mat-raised-button [disabled]="isDisableActive" (click)="openActivated()" class="green"  type="button">Activate</button>
+        </div>
+
+    <button mat-raised-button class="save-profile" matStepperNext (click)="onSave()" [disabled]="!form.valid"
+        type="submit">Save and Continue</button>
+</div>
+

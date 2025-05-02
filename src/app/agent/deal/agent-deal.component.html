@@ -1,0 +1,124 @@
+
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1" >
+
+  <div class="div-height-1" fxLayout="row" fxLayoutGap="10px">
+  
+    <div fxLayout="column"> 
+    <mat-form-field appearance="{{'formFieldAppearance' | label}}" fxFlex="20">
+      <mat-label class="custom-label">Initiated By</mat-label>
+      <mat-select [(ngModel)]="initiatedBy" [ngModelOptions]="{standalone: true}">
+        <mat-option *ngFor="let orgArray of orgArray" [value]="orgArray"> {{orgArray}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+    
+    <button mat-raised-button fxFlex="10" (click)="applyFilter(initiatedBy)"
+      class="buttonApplyfilter">
+     
+     Apply Filter</button>
+  
+  
+  
+  </div>
+ 
+</div>
+
+<div class="mat-elevation-z8" >
+  <div [ngStyle]="changeTableHeight()" >
+    <table  class="table" >
+      <thead>
+              <th>DEAL ID</th>
+              <th>Initiated By</th>
+              <th>Agent</th>
+              <th>Actual Deal Amount</th>
+              <th>Exch Rate (FCY to SGD)</th> 
+              <th>Deal Balance</th> 
+              <th>Deal By & Date</th>     
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let deal of getDeals | slice: (p - 1) * itemsPerPage : p * itemsPerPage">
+        <tr>
+              <td class="font1" (click)="toggleExpansionPanel(deal)"> {{deal.DEALID}} 
+                <mat-icon *ngIf="expandedRecord != deal" style="position: relative;top: 7px" >expand_more</mat-icon>  
+                <mat-icon *ngIf="expandedRecord == deal" style="position: relative;top: 7px">expand_less</mat-icon>
+              </td>
+
+              <td> {{deal.INITIATEDBY}} </td>
+
+              <td>  
+                <div class="flex">
+                 <small class="accountNumber"> {{deal.AGENTACCTNUMBER}} </small>
+                <small class="font">{{deal.ENTITYNAME}} </small>
+               </div>
+              
+                 </td>
+                 <td> <div class="flex">
+                  <small> {{deal.BUYCURRENCY}} {{deal.BUYAMOUNT | number}}</small>
+                 <small> {{deal.SELLCURRENCY}} {{deal.SELLAMOUNT | number}}  </small>
+                </div>  </td>   
+                 
+              <td class="bold"> {{deal.BUYEXCHRATE}} </td>
+
+              <td>
+                <div class="flex">
+                  <small> {{deal.BUYCURRENCY}} {{deal.DEALBALANCE / deal.BUYEXCHRATE | number}}</small>
+                  <small> {{deal.SELLCURRENCY}} {{deal.DEALBALANCE | number}}   </small>
+                </div>
+              </td>
+
+              <td> <div class="flex">
+                <small style="font-size:16px"> {{deal.DEALBY}} </small>
+               <small class="date"> {{deal.DEALDATE | date:'medium'}} </small>
+              </div>  </td>   
+
+          </tr> 
+          <tr *ngIf="expandedRecord == deal" style="height: 80px; overflow-y: scroll;">
+            <td colspan="7">
+            <ng-container *ngIf="loading; else dataContent">
+              <div style="text-align: center; padding: 20px;" >
+                <mat-spinner diameter="30" strokeWidth="2"></mat-spinner>
+              </div>
+            </ng-container>
+            <ng-template #dataContent>
+              <ng-container *ngIf="getTransactionInquiry.length > 0; else noData">
+                <div *ngFor="let transaction of getTransactionInquiry; let i = index" style="width: 166%;">
+                  <div fxLayout="row" style="height: 30px;">
+                    <h3 class="txn-id-content">
+                      <div>Transaction Id {{ i+1 }} :</div>
+                      <div class="id-value">{{ transaction.TRANSACTIONID }}</div>
+                    </h3>
+                    <mat-icon class="forward-arrow-icon">arrow_forward</mat-icon>
+                    <h3 class="txn-id-content">
+                      <div>Transaction Amount :</div>
+                      <div class="id-value">{{ transaction.AMOUNT }} SGD</div>
+                    </h3>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-template #noData>
+                <div style="margin: 10px;font-family: 'Roboto';font-weight: 500;color: #cb3e3e;">No Records Found!</div>
+              </ng-template>
+            </ng-template>
+          </td>
+          </tr>
+          
+        </ng-container>
+      </tbody>
+  </table>
+  </div>
+   <!--Loader-->
+   <div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+    </div>
+
+    <mat-paginator class="pagination-class"
+    [length]="getDeals.length"
+    [pageSize]="itemsPerPage"
+    [pageIndex]="p - 1"
+    (page)="handlePageChange($event)"
+  ></mat-paginator>  
+</div>
+
+
+ 
+  

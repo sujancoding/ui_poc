@@ -1,0 +1,266 @@
+<div>
+
+
+  <div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter">
+    <form [formGroup]="filterForm" >
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+
+    <div class="inner-container" style="    width: 100%;margin-left: 10px;">
+  
+      
+          <!--Removed *ngIf="showAction" because we are going to show filter button in both Posted and UnPosted Transaction Screen in BackOffice-->
+          <button mat-raised-button (click)='xpandStatus = !xpandStatus' class="applyFilter-btn">
+            <mat-icon class="add-filter-icon">add</mat-icon>
+            Filter
+          </button>
+  
+  
+      <mat-form-field style="width: 40%;
+      margin: 6px;margin-top: 10px;" appearance="{{'formFieldAppearance' | label}}">
+      <mat-label class="custom-label">Search Applicant</mat-label>
+        <input matInput 
+        (input)="onApplicantNameChange()"
+          formControlName="ApplicantName" [formControl]="filterForm.controls['ApplicantName']" class="form-control"
+          type="text" [(ngModel)]="searchName">
+        <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+      </mat-form-field>
+  
+      <mat-icon  matTooltipPosition="above"
+      matTooltipClass="custom-tooltip" class="tooltip-warning-icon" matTooltip="3 Characters Minimum">error_outline</mat-icon> 
+  
+     
+      
+    </div>
+
+    <div  *ngIf="showAddCustomerBtn">
+      <button [matMenuTriggerFor]="menu" class="btnAdd" mat-raised-button   >
+        <mat-icon> add </mat-icon>
+         Application
+      </button>
+      <mat-menu #menu="matMenu" >
+        <div class="menu-container">
+        <button class="menu-item" mat-menu-item (click)="openApplication('I')">Consumer</button>
+        <button class="menu-item" mat-menu-item (click)="openApplication('C')">Corporate</button>
+        </div>
+      </mat-menu>
+    </div>
+
+  </div>
+  
+
+    <mat-divider></mat-divider>
+  
+    <div  class="custom-filter-values">
+      <div *ngFor="let filterValues of filterValues" fxLayout="column" class="margin-space" fxLayoutGap="2px">
+        <p class="filter-key"> {{filterValues.fieldName ? filterValues.fieldName : ""}} </p>
+        <p class="filter-value"> {{filterValues.value ? filterValues.value : ""}} </p>
+      </div>
+  
+     
+    </div>
+  
+    
+  
+      <div fxLayout="column" fxLayoutGap="1px">
+  
+        <div class="div-height" fxLayout="row" fxLayoutGap="10px">
+  
+  
+  
+        </div>
+        <mat-accordion #accordion="matAccordion">
+          <mat-expansion-panel style="width: fit-content;background-color: #ffffff;z-index: 999;"
+            #mapanel="matExpansionPanel" [(expanded)]="xpandStatus">
+  
+             <h4 class="filter-title"> Filters </h4>
+          <!-- <mat-divider> </mat-divider> -->
+  
+          <div fxLayout="column" style="margin-top: 16px;" > 
+           
+            <mat-form-field fxFlex="20"  appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Applicant Name</mat-label>
+              <input matInput formControlName="ApplicantName" [formControl]="filterForm.controls['ApplicantName']" 
+              (input)="filterForm.controls.ApplicantName.setValue(filterForm.controls.ApplicantName.value.toUpperCase())"  type="text" [(ngModel)]="searchName" >
+            </mat-form-field>
+            
+            <small class="error-message" *ngIf="filterForm.controls['ApplicantName'].hasError('pattern')" >{{'alphabetsWithSpecificSplChars'| label}}</small>     
+          </div>
+        
+          <div fxLayout="row" class="row-items" fxLayoutGap="10px">
+
+
+          <div fxLayout="column" fxFlex="50"> 
+            
+            <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Phone</mat-label>
+              <input matInput  formControlName="phoneNo" [formControl]="filterForm.controls['phoneNo']" placeholder="Phone No" type="text" [(ngModel)]="searchNumber">
+              <mat-icon matPrefix class="formfield-icon">phone</mat-icon>
+            </mat-form-field>
+            <small class="error-message" *ngIf="filterForm.controls['phoneNo'].hasError('pattern')" > No Special Characters and  Alphabets are Allowed </small> 
+          </div>
+
+          <div fxLayout="column" fxFlex="50" > 
+          
+            <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Email Id</mat-label>
+              <input matInput  formControlName="emailId" [formControl]="filterForm.controls['emailId']" placeholder="Email ID"  [(ngModel)]="searchEmailId">
+              <mat-icon matPrefix class="formfield-icon">email</mat-icon>
+            </mat-form-field>
+            <small class="error-message" *ngIf="filterForm.controls['emailId'].hasError('email')" > {{'validEmailId'|label}}  </small> 
+          </div>
+
+          </div>
+  
+            <div fxLayout="row" class="row-items" fxLayoutGap="10px">
+  
+  
+              
+                <div fxLayout="column" fxFlex="50"> 
+                  
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Type</mat-label>
+                  <mat-select [(ngModel)]="selectedAppType" placeholder="--Select--" [ngModelOptions]="{standalone: true}">
+                    <mat-option value=""> --Select-- </mat-option>
+                    <mat-option  value="I"> Individual </mat-option>
+                    <mat-option  value="C"> Business </mat-option>
+                  </mat-select>  
+                </mat-form-field>  
+                </div>
+              
+  
+              
+                <div fxLayout="column" fxFlex="50" > 
+                 
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Status</mat-label>
+                  <mat-select [(ngModel)]="selectedStatus" placeholder="--Select--" [ngModelOptions]="{standalone: true}">
+                    <mat-option value=""> --Select-- </mat-option>
+                    <mat-option value="PENDING"> Pending for Approval </mat-option>
+                    <mat-option  value="NEW"> Draft </mat-option>
+                    <mat-option  value="REJECTED"> Rejected </mat-option>
+                    <mat-option  value="APPROVED"> Converted </mat-option>
+                  </mat-select>  
+                </mat-form-field>  
+              </div>  
+              
+
+            </div>
+  
+            <mat-action-row style="padding: 0px !important;">
+              <div fxLayout="row" fxLayoutAlign="space-between" style="width: 100%;">
+                <div>
+                  <button  mat-flat-button class="close-button" (click)="xpandStatus = !xpandStatus" type="button">Close</button>
+                </div>
+              <div fxLayout="row">
+                <button mat-flat-button class="reset-button" (click)="resetFilter()" type="button">Reset</button>
+                <button mat-flat-button class="submit-button" [disabled]="!filterForm.valid"
+                (click)="applyFilter(searchName,searchNumber,selectedAppType,selectedStatus, searchEmailId)">
+                  Apply Filter</button>
+              </div>
+              </div>
+            </mat-action-row>
+  
+          </mat-expansion-panel>
+        </mat-accordion>
+  
+  
+  
+      </div>
+  
+    </form>
+  
+  
+  
+  
+  </div>
+
+
+
+
+</div>
+
+<span fxLayout="row" style="margin-top: -24px;margin-left: -16px;">
+  <p class="show-results">Showing</p> <p class="show-results" style="color: black;font-weight: 700;"> {{recordsCount}} </p> <p class="show-results">results</p> 
+ </span>
+
+
+
+<div class="table-wrapper">
+<div class="mat-elevation-z8" >
+  <div [ngStyle]="changeTableHeight()">
+    <table  class= "table" >
+     
+      <thead>
+        <tr>
+              <th style="white-space:nowrap;">TYPE</th>
+              <th>APPLICATION ID</th>
+              <th>APPLICANT ID</th>
+              <th>NAME</th>
+              <th>STATUS</th>
+              <th>NATIONALITY</th>
+              <th>PHONE</th>
+              <th>CREATED DATE</th>
+              <th>ACTIONS</th>
+              </tr>
+      </thead>
+     
+      <tbody>
+        <tr *ngFor="let search of applicationListings | slice: (p - 1) * itemsPerPage : p * itemsPerPage ">
+            <td style="width:1%;">
+              <mat-icon class="customer-type-icon" *ngIf="search.APPLICATIONTYPE == 'I'">person</mat-icon>
+              <mat-icon class="customer-type-icon" *ngIf="search.APPLICATIONTYPE == 'C'">domain</mat-icon>  
+            </td>
+            <td>{{search.APPLICATIONID}} </td>
+            <td>{{search.ID}} </td>
+            <td style="color: #0176d3;">{{search.NAME}}</td>
+            <td>
+              <div class="tags" [ngStyle]="{'color': getColor(search.STATUS),'background-color': getBackgroundColor(search.STATUS)}">
+                <div  [ngStyle]="{'background-color': getColor(search.STATUS)}" class="small-container"></div>
+              <span class="status-tag"   #tooltip="matTooltip"
+              [matTooltip]="getTooltipText(search.STATUS)"
+              matTooltipPosition="above"
+              matTooltipClass="custom-tooltip"> 
+              {{search.STATUS | uppercase}} </span>
+              </div>
+            </td>
+          
+            <td> 
+              <!-- <div *ngIf="search.NATIONALITY == null">Nil</div>  -->
+              <div> {{search.NATIONALITY}} </div>
+            </td>
+            <td>{{search.PHONENBR}}</td>
+            <td>{{search.CREATEDDATE | date:'medium' }}</td>
+            <td> <div class="example-button-container">
+              <button  mat-icon-button class="launch-icon" (click)="openDialog(search.APPLICATIONID,search.APPLICATIONTYPE, search.ID, search.CHANNEL)" aria-label="Example icon button with a menu icon">
+                <mat-icon>zoom_out_map</mat-icon> 
+              </button>
+            </div>
+            </td>
+        </tr>
+      </tbody>
+     
+  </table>
+  </div>
+  <mat-paginator class="pagination-class"
+  [length]="applicationListings.length"
+  [pageSize]="itemsPerPage"
+  [pageIndex]="p - 1"
+  (page)="handlePageChange($event)"
+></mat-paginator>
+</div> 
+<!--Loader-->
+<div *ngIf="loader" class="loader-wrapper">
+  <mat-spinner> </mat-spinner>
+  </div>
+ </div>
+ 
+ 
+ 
+
+
+  <!-- <div class="addApplicant">
+  <button class="btnAdd" (click)="openApplication()" mat-mini-fab aria-label="Example icon button with a plus icon" >
+    <mat-icon> add </mat-icon>
+  </button>
+</div> -->

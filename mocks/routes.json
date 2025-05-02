@@ -1,0 +1,7 @@
+{
+"/v1/application/applicant/update": "/applicationUpdate",
+"/v1/application/document/add":"/Documents",
+"/v1/application/document/submit":"/Submit-Document",
+"/v1/remit/customer/payee":"/Add-Payee",
+"/v1/application/applicant/submit":"/Submit-Application"
+}

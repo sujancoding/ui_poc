@@ -1,0 +1,248 @@
+@import "src/assets/styles/buttons/button.scss";
+.header{
+    margin: 15px;
+    border: 1px solid #e8e8e8;
+    width: 1173px;
+    border-radius: 10px;
+}
+
+.mat-mdc-radio-group{
+    margin-left: 8px;
+    margin-top: -21px;
+    margin-bottom: 5px;
+ }
+ .mat-mdc-radio-button{
+    margin-right: 12px;
+    font-family: serif;
+    font-size: 21px;
+ }
+
+ .name-field{
+   
+    /* margin-top: 32px; */
+    color: #737373;
+    font-size: 16px;
+    line-height: 0px;
+ }
+ 
+
+.label{
+    font-size: 16px;
+    color: #656565;
+    font-family: 'Roboto';
+    
+}
+
+.value{
+    color: #a5a5a5;
+    font-size: 18px;
+    
+}
+
+
+.currency-label{
+    font-family: 'Roboto';
+    font-size: larger;
+    color: #ffffff;
+    /* margin: 35px; */
+    margin-top: 26px;
+    position: inherit;
+}
+
+
+.currency-dropdown {
+    background: #123969;
+    border: 1px solid #123969;
+    /* border-radius: 11px; */
+    width: 100px;
+    height: 37px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+:host ::ng-deep mat-form-field .mat-mdc-form-field-outline-start {
+    background-color: white !important;
+  }
+  
+  :host ::ng-deep mat-form-field .mat-mdc-form-field-outline-gap {
+    background-color: white !important;
+  }
+  
+  :host ::ng-deep mat-form-field .mat-mdc-form-field-outline-end {
+    background-color: white !important;
+  }
+
+.rectangular-btn{
+    font-size: 18px;
+    height: 45px;
+    color: white;
+    border: solid 0.1px white;
+} 
+.timer-content-layout{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: -49px;
+}
+.timer-content{
+    background-color: #3B5472;
+    height: 55px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+}
+
+.info-content{
+    background-color: #f3f3f3;
+    height: 55px;
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+}
+
+.info-content-layout{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.info-icon{
+    margin: 18px;
+    color: #959595;
+    margin-left: 109px;
+}
+
+.arrow-icon{
+    margin-top: 14px;
+    margin-left: 4px;
+    /* font-size: 23px; */
+    margin-right: 22px;
+}
+.icon1{
+ color: #95E0B5;
+ font-size: 45px;
+}
+.icon2{
+    color: #95E0B5;
+ margin-left: -15px;
+ font-size: 45px;
+}
+.icon3{
+    margin-left: -15px;
+ font-size: 45px;
+    color: #27AE60;
+}
+.icon4{
+    margin-left: -15px;
+ font-size: 45px;
+    color: #27AE60; 
+}
+.text-label{
+    color: white;
+    font-family: 'Roboto';
+}
+
+.text-label-2{
+    color: white;
+    font-family: 'Roboto';
+}
+
+.timer-small-container{
+        width: 100px;
+        background-color: black;
+        color: green;
+        border-radius: 10px;
+        height: 41px;
+        margin: 12px;
+        display: flex;
+}
+
+.book-now-btn{
+    background-color: #123969; 
+    color: white;
+    font-size: 22px;
+    height: 58px;
+    width: 17%;
+    border-radius: 12px;
+}
+
+.whole-btn{
+    text-align: right;
+    width: 1159px;
+    margin-right: -19px;
+}
+
+.button-content-layout{
+    justify-content: center;
+    align-items: end;
+    display: flex;
+
+}
+.reset-btn{
+    background-color: #123969;
+    color: #dedede;
+    font-size: 18px;
+    width: 158%;
+    height: 45px;
+}
+.label1{
+    color:#1E74E8;
+    font-family: Roboto;
+    font-size: 14px;
+    
+}
+.label2{
+    font-family: Roboto;
+    font-size: 18px;
+    white-space: nowrap;
+    margin-left: -26px;
+}
+.e-icon{
+    margin: 6px;
+    color: white;
+}
+
+.get-quote-loader{
+    position: relative;
+    right: 20px;
+    margin-top: 7px;
+    width: 40px;
+    
+}
+
+:host ::ng-deep .mat-mdc-progress-spinner circle, .mat-mdc-progress-spinner circle {   
+    stroke: #108cdf;
+}
+.Drop-down {
+    width: 80%;
+    font-size: 14px;
+ }
+
+.flexibledates-label{
+    margin-bottom: 1px;
+    margin-top: -6px;
+    font-size: 14px;
+    color: #929292;
+    font-weight: 700;
+    font-family: 'Roboto';
+} 
+
+.calendar-button{
+    width: 140px;
+    height: 36px;
+    position: relative;
+    top: 8px;
+    background-color: #123969;
+
+    .btn-label{
+        color: white;
+    font-size: 14px;
+    font-family: 'Roboto';
+    }
+}
+ 

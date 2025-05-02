@@ -1,0 +1,53 @@
+.header{
+    margin: 0px;
+    height: 83px;
+    color: #8e8a8a;
+    margin-left: 9px;
+   
+}
+.welcome-text{
+    font-size: 20px;
+    color: #123969;
+}
+.label-text{
+    color: black;
+    font-weight: 800;
+}
+
+.row{
+    justify-content: space-between;
+    display: flex;
+    margin: 20px;
+}
+.create-icon{
+    font-size: 31px;
+    position: relative;
+    left: -3px;
+}
+
+.example-button-container {
+    width: 60px;
+    height: 41px;
+  }
+.icon_button {
+    color: #123969;
+    height: 46px;
+    width: 46px;
+  }
+
+
+.addApplicant{
+    text-align: right;
+    margin: 10px;
+} 
+   
+.btnAdd{
+   background-color: #123969;
+   width: 84px;
+   height: 80px;
+}
+
+.selected{
+    background-color: #e3f2ff;
+}
+

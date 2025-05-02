@@ -1,0 +1,462 @@
+<div *ngIf="showMatToolbar" fxLayout="row" fxLayoutAlign="space-between center" class="header-container">
+    
+  <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+
+    <span class="head-label-1">Edit Shipment </span>
+
+  </div>
+  <div>
+    <span [mat-dialog-close]="true" class="close-icon">
+      <mat-icon>close</mat-icon>
+    </span>
+  </div>
+</div>
+<div [ngClass]="{'scrollable-content': showMatToolbar == true}">
+<!--Wrapped in row : shipment search navigation and submit button-->
+
+<div fxLayout="row" fxLayoutAlign="space-between" style="    margin-top: -8px;
+    margin-bottom: 2px;">
+
+  <!-- <button mat-button class="previous-btn" (click)="goToShipmentSearch()">
+    <mat-icon class="arrow-back-icon">keyboard_arrow_left</mat-icon>
+    Shipment Search</button> -->
+
+    <!-- <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
+    <button class="btn-save" mat-raised-button color="primary" type="button"  (click)="onCaptureDenomination()"> Capture Denomination  
+    </button>
+
+    <div style="justify-content: right;margin-bottom: -16px;" *ngIf="!showShipmentSearch" >
+      <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px" style="margin-top: -14px;">
+      <div>
+        <mat-form-field appearance="outline" class="status-dropdown">
+          <mat-label class="custom-label">Shipment Status</mat-label>
+          <mat-select [(value)]="selectedValue" [formControl]="statusFormControl">
+            <mat-option *ngFor="let option of shipmentStatusOptions" [disabled]="option.isDisable" [value]="option.value">
+              {{ option.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+      <button mat-raised-button type="button" (click)="updateShipment()"  [disabled]="isDisableSaveBtn()" class="updateShipmentButton">Update</button>
+    </div>
+    </div>  
+    </div>
+
+    <button *ngIf="showShipmentSearch" class="btn-save" mat-raised-button color="primary" type="button" [disabled]="isDisableSaveBtn()"  (click)="onSaveShipment()"> Save/Print  
+      <mat-icon style="margin-left: 20px;">print</mat-icon>
+    </button>
+    </div> -->
+    
+    </div>
+
+
+
+<!--Wrapped in row : customer card , airway card -->
+<div fxLayout="row" fxLayoutAlign="space-between">
+
+<mat-card appearance="outlined" class="responsiveCard">
+   
+    <mat-card-content>
+  
+   
+    <div [ngStyle]="contentScrollable()">
+
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row" fxLayoutGap="10px">
+        <div>
+        <mat-icon class="icon">person</mat-icon>
+        </div>
+        <div>
+          <P class="p1">Customer Details</P>
+        </div>
+      </div>
+        <div>
+          <mat-radio-group [(ngModel)]="selectedOption" (change)="onSelectionChange($event)"
+           fxLayout="row" fxLayoutGap="30px" class="Shipment-type-radio-button">
+            <mat-radio-button [disabled]="isDisableOptions" value="E">Export</mat-radio-button>
+            <mat-radio-button [disabled]="isDisableOptions" value="I">Import</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <form [formGroup]="customerForm">
+        <div fxLayout="row">
+      
+          <div fxLayout="row" fxLayoutGap="5px" style="width: -webkit-fill-available;">
+      
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 100%;">
+              <mat-label class="custom-label">Customer Name</mat-label>
+              <input matInput formControlName="customerNameControl"  [readonly]="isDisableOptions"
+                [formControl]="customerForm.controls['customerNameControl']" [matAutocomplete]="auto" 
+                (keyup.enter)="onEnterKey($event,customerForm.get('customerNameControl')?.value || '')">
+                <mat-error *ngIf="customerForm.controls['customerNameControl'].hasError('minlength')">
+                  Enter atleast 3 characters.
+                </mat-error>
+              <mat-hint class="function-hint">(F1 for search customer)</mat-hint>
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                (optionSelected)="onOptionSelectedCustomer($event)">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">{{option.NAME}} :
+                  {{option.CUSTOMERID}}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <!-- <div  class="message-block">
+              <span class="error-message"*ngIf="customerForm.controls['customerNameControl'].hasError('required')
+              && customerForm.controls['customerNameControl'].touched"> {{'customerNameRequired' | label}} </span> 
+            </div> -->
+            <div>
+              <button [disabled]="isDisableButtons" mat-flat-button class="fetchCustomerButton" *ngIf="launchButton"
+                (click)="openCustomerSearch()" type="button">
+                <mat-icon>zoom_out_map</mat-icon>
+              </button>
+              <mat-spinner style="position: relative;top: 15px;left: 6px;" diameter="40"
+                *ngIf="openCustomerSearchloader"></mat-spinner>
+            </div>
+          </div>
+      
+        </div>
+      
+        <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 12px;">
+          <div fxFlex="48">
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label">Shipped Date</mat-label>
+              <input matInput  [matDatepicker]="datepicker" formControlName="shippedDate" [formControl]="customerForm.controls['shippedDate']" [readonly]="readOnly">
+              <mat-datepicker-toggle matSuffix [for]="datepicker" [disabled]="isDisableButtons"></mat-datepicker-toggle>
+              <mat-datepicker #datepicker>
+                <mat-datepicker-actions> 
+                  <button mat-button matDatepickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+            </mat-form-field>
+            <div  class="message-block">
+              <span class="error-message" *ngIf="customerForm.controls['shippedDate'].hasError('required')
+              && customerForm.controls['shippedDate'].touched"> {{'shippedDateRequired' | label}} </span> 
+            </div>
+          </div>
+        
+        <div fxFlex="48">
+        <mat-form-field appearance="{{'formFieldAppearance' | label}}"  >
+          <mat-label class="custom-label">Shipping Address</mat-label>
+          <input matInput formControlName="shippingAddress" [formControl]="customerForm.controls['shippingAddress']" [readonly]="readOnlyDetails">
+        </mat-form-field>
+        <div  class="message-block">
+          <span class="error-message" *ngIf="customerForm.controls['shippingAddress'].hasError('required')
+          && customerForm.controls['shippingAddress'].touched"> {{'shippingAddressRequired' | label}} </span> 
+        </div>
+        </div>
+        
+        </div>
+      
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <div fxFlex="48">
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label">Bank Name </mat-label>
+                <mat-select [formControl]="customerForm.controls['bankName']">
+                  <mat-option *ngFor="let bank of bankNameArray" [value]="bank.VALUE" [disabled]="isDisableOptions">{{bank.VALUE}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex="48" style="display: flex;">
+          <p class="group">Contact Details : </p>
+          <p class="subGroup"> {{customerPhnNo}} </p>
+          </div>
+        </div>
+      
+      </form>
+   
+  
+  
+  </div>
+  </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined" class="responsiveCard">
+    <!-- <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+      </div> -->
+    <mat-card-content>
+    <div [ngStyle]="contentScrollable()">
+
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row" fxLayoutGap="10px">
+        <div>
+        <mat-icon class="airplaneIcon">local_airport</mat-icon>
+        </div>
+        <div>
+          <P class="p1">Airway Details</P>
+        </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="end" style="position: relative;top: -7px;" fxLayoutGap="10px">
+          <button class="btn-save" mat-raised-button color="primary" type="button"  (click)="onCaptureDenomination()"> Capture Denomination  
+          </button>
+      
+          <div style="justify-content: right;margin-bottom: -16px;" *ngIf="!showShipmentSearch" >
+            <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px" style="margin-top: -14px;">
+            <div>
+              <mat-form-field appearance="outline" class="status-dropdown">
+                <mat-label class="custom-label">Shipment Status</mat-label>
+                <mat-select [(value)]="selectedValue" [formControl]="statusFormControl">
+                  <mat-option *ngFor="let option of shipmentStatusOptions" [disabled]="option.isDisable" [value]="option.value">
+                    {{ option.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+            <button mat-raised-button type="button" (click)="updateShipment()"  [disabled]="isDisableSaveBtn() || isDisabled" class="updateShipmentButton">Update</button>
+          </div>
+          </div>  
+          </div>
+      
+          <button *ngIf="showShipmentSearch" class="btn-save" mat-raised-button color="primary" type="button" [disabled]="isDisableSaveBtn() || isDisabled"  (click)="onSaveShipment()"> Save/Print  
+            <mat-icon style="margin-left: 20px;">print</mat-icon>
+          </button>
+          </div>
+
+      </div>
+
+      <form [formGroup]="airwayDetailsForm">
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+
+          <div fxFlex="48">
+        <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+          <mat-label class="custom-label">Flight No</mat-label>
+          <input matInput formControlName="flightNo" [formControl]="airwayDetailsForm.controls['flightNo']" [readonly]="readOnlyDetails">
+        </mat-form-field>
+        <div  class="message-block">
+          <span class="error-message" *ngIf="airwayDetailsForm.controls['flightNo'].hasError('required')
+          && airwayDetailsForm.controls['flightNo'].touched"> {{'flightNoRequired' | label}} </span> 
+          <span class="error-message" *ngIf="airwayDetailsForm.controls['flightNo'].hasError('pattern')">{{'onlyAlphaNumericAndSpecificSpecialCharacter' | label}}</span> 
+        </div>
+        </div>
+        
+
+        <div fxFlex="48">
+        <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+          <mat-label class="custom-label">Airway Baggage reference number</mat-label>
+          <input matInput formControlName="referenceNumber" [formControl]="airwayDetailsForm.controls['referenceNumber']" [readonly]="readOnlyDetails">
+        </mat-form-field>
+        <div  class="message-block">
+          <span class="error-message" *ngIf="airwayDetailsForm.controls['referenceNumber'].hasError('required')
+          && airwayDetailsForm.controls['referenceNumber'].touched"> {{'referenceNumberRequired' | label}} </span> 
+          <span class="error-message" *ngIf="airwayDetailsForm.controls['referenceNumber'].hasError('pattern')">{{'onlyAlphaNumericAndSpecificSpecialCharacter' | label}}</span> 
+        </div>
+        </div>
+
+        </div>
+
+       
+
+
+       <div fxLayout="row" fxLayoutGap="20px">
+
+      <div fxFlex="48">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Destination </mat-label>
+            <mat-select [formControl]="airwayDetailsForm.controls['destinationCountry']">
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+                <mat-label class="custom-label">Search Country</mat-label>
+                 <input matInput (input)="filterDestinationCountry(destinationSearchCountry)" formControlName="destinationSearchCountry" [formControl]="airwayDetailsForm.controls['destinationSearchCountry']" #destinationSearchCountry [readonly]="readOnlyDetails">
+                 <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+                 <mat-error> 
+                               <small *ngIf="airwayDetailsForm.controls['destinationSearchCountry'].hasError('pattern')">  {{'onlyAlphabets' | label}}  </small>
+                               </mat-error>
+             </mat-form-field>
+              <mat-option *ngFor="let country of filteredCountries" [value]="country.COUNTRY" [disabled]="readOnlyDetails">{{country.COUNTRY}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div  class="message-block">
+          <span class="error-message" *ngIf="airwayDetailsForm.controls['destinationCountry'].hasError('required')
+          && airwayDetailsForm.controls['destinationCountry'].touched"> {{'destinationRequired' | label}} </span>
+      </div>
+      </div>
+ 
+        <div>
+        <button mat-stroked-button class="buttonApplyfilter" type="button" (click)="openAddBag('ADD','')" [disabled]="readOnlyDetails">
+          <mat-icon class="add-filter-icon">add_circle_outline</mat-icon>
+          Bag Details
+        </button>
+        </div>
+
+      </div>
+
+      <P class="baggageLists">Baggage lists</P>
+
+      <div class="chip-container" >
+        <div class="chip" *ngFor="let chips of bagSequenceRow; index as i;" (click)="openAddBag('UPD', chips)"
+        #tooltip="matTooltip" [ngClass]="{ 'disable-chip': readOnlyDetails }"
+                matTooltip="bag number | bag dimension | bag weight"
+                matTooltipPosition="above"
+                matTooltipClass="accounts-custom-tooltip"
+                
+        >
+          {{chips.number}} | {{chips.dimension}} | {{chips.weight}}
+          <mat-icon class="closebtn" (click)="removeChip(chips, i)">cancel</mat-icon>
+        </div>
+      </div>
+
+      <!-- <div class="chip" *ngFor="let chips of bagSequenceRow; index as i;">
+        {{chips.number}} | {{chips.dimension}} | {{chips.weight}}
+       
+        <mat-icon class="closebtn" (click)="removeChip(chips,i)">cancel</mat-icon>
+      </div> -->
+      
+   </form>
+  </div>
+  </mat-card-content>
+  </mat-card>
+
+ 
+  </div>
+
+
+<!-- <span class="title">Deal Listings</span> -->
+
+<!--Table section-->
+<form [formGroup]="tableForm">
+<div class="table-wrapper" >
+    <div class="mat-elevation-z8" >
+      <div [ngStyle]="changeTableHeight()">
+        <table  class= "table" >
+         
+          <thead>
+            <tr>
+                  <th>TYPE</th>
+                  <th>CURRENCY NUMBER</th>
+                  <th>CURRENCY CODE</th>
+                  <th *ngIf="!showMatToolbar" >F.AMOUNT</th>
+                  <th *ngIf="showMatToolbar"> F.AMOUNT </th>
+                  <th>RATE USD</th>
+                  <th>AMOUNT USD</th>
+                   <th>VALUE DATE</th> 
+                   <th>REMARKS</th>  
+                  <th> ACTIONS</th>
+                  </tr>
+          </thead>
+         
+          <tbody>
+            <tr *ngFor="let search of dealListings | slice: (p - 1) * itemsPerPage : p * itemsPerPage ;index as i;">
+                  <td>{{search.buySellInd}}</td>
+                  <td>{{search.ccyNo}}</td>
+                  <td>{{search.ccyCode}}</td>
+  
+                  <!--Amount F value as normal text/label-->
+                  <td *ngIf="!showMatToolbar">
+                    <div fxLayout="row" fxLayoutAlign="space-between">
+                    <div class="td-amount-row">
+                    {{search.amountF | number}}
+                    </div>
+                    <div class="td-icon-row" *ngIf="(search.ccyCode == 'VND' || search.ccyCode == 'IDR' || search.ccyCode == 'JPY' || search.ccyCode == 'KHR' || search.ccyCode == 'KRW') && !showUndoButton[i]">
+                      <button mat-icon-button type="button" 
+                      #tooltip="matTooltip"
+                      matTooltip="Add three zeores"
+                      matTooltipPosition="above"
+                      matTooltipClass="accounts-custom-tooltip"
+                      (click)="calculateFamount(search.amountF,i,rateUsdTemplate.value,search.ccyCode)" class="downloadButton"> 
+                        <mat-icon style="font-size: 20px !important;">functions</mat-icon>  
+                        </button>
+                    </div>
+
+                    <div  class="td-icon-row" *ngIf="(search.ccyCode == 'VND' || search.ccyCode == 'IDR' || search.ccyCode == 'JPY' || search.ccyCode == 'KHR' || search.ccyCode == 'KRW') && showUndoButton[i]">
+                      <button mat-icon-button type="button" 
+                      #tooltip="matTooltip"
+                      matTooltip="Undo"
+                      matTooltipPosition="above"
+                      matTooltipClass="accounts-custom-tooltip"
+                      (click)="undoFamount(search.amountF,i,rateUsdTemplate.value,search.ccyCode)" class="downloadButton"> 
+                        <mat-icon>undo</mat-icon>  
+                        </button>
+                    </div>
+
+                    </div>
+
+                  </td>
+
+  <!--Actual Amount value as normal text/label, this td only shown for update shipment entry point-->
+  <td *ngIf="showMatToolbar">
+   {{search.actualAmount}}
+  </td>
+  
+                  <td>
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 107px;">
+                    <mat-label class="custom-label">Rate(USD)</mat-label>
+                    <input matInput (blur)="onBlurRate($event,i,rateUsdTemplate.value,search.amountF,search.actualAmount,search.ccyCode)"
+                    [formControlName]="'rateUsd'+ i"
+                       #rateUsdTemplate  placeholder="Enter rate" [readonly]="readOnlyDetails">
+                  </mat-form-field>
+                  <div  class="message-block">
+                    <span class="table-rate-error-message" *ngIf="tableForm.controls['rateUsd' + i]?.hasError('pattern')">{{'onlyNumbersAndDecimalPoint' | label}}</span> 
+                  </div>
+                  </td>
+
+                  <td [ngClass]="{'highlight-red': search.amount === 'N/A', 'highlight-black': search.amount !== 'N/A'}">
+                     {{search.amount ? (search.amount | number ) : "" }} 
+                     </td>  <!--USD AMOUNT-->
+                  <!--If amount is "N/A" - highlight in red color , use ngClass-->
+
+                   <td>{{search.valueDate ? (search.valueDate | date : 'mediumDate') : ""}}</td> 
+
+
+                   <td style="color: red;">{{search.remarks ? search.remarks : ""}}</td> 
+                  
+                 
+                 
+                  <td>  <!--Display delete icon in red color-->
+                    <button mat-button class="delete-icon" 
+                    #tooltip="matTooltip"
+                    matTooltip="Remove"
+                    matTooltipPosition="above"
+                    matTooltipClass="accounts-custom-tooltip"
+                    [disabled]="isDisableRemoveIcon" (click)="removeRecord(i)" type="button">
+                    <mat-icon>remove_circle_outline</mat-icon> 
+                  </button>    
+                
+  
+  
+                </td>  
+            </tr>
+          </tbody>
+         
+      </table>
+      </div>
+      <mat-paginator class="pagination-class"
+      [length]="dealListings.length"
+      [pageSize]="itemsPerPage"
+      [pageIndex]="p - 1"
+      (page)="handlePageChange($event)"
+    ></mat-paginator>
+    </div> 
+    <!--Loader-->
+    <div *ngIf="tableLoader" class="loader-wrapper">
+      <mat-spinner > </mat-spinner>
+      </div>
+     </div>
+     </form>
+
+     <div class="btn" >  
+      <!--show this button in remittance backoffice send money screen-->
+    <!-- <div class="mat-elevation-z8" style="justify-content: right;" *ngIf="showOKButton" >
+      <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
+      <div>
+        <mat-form-field appearance="outline" class="status-dropdown">
+          <mat-label class="custom-label">Shipment Status</mat-label>
+          <mat-select [(value)]="selectedValue" [formControl]="statusFormControl">
+            <mat-option *ngFor="let option of shipmentStatusOptions" [disabled]="option.isDisable" [value]="option.value">
+              {{ option.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button fxFlex="10" type="button" (click)="updateShipment()"  [disabled]="isDisableSaveBtn()" class="updateShipmentButton">Update</button>
+    </div>  
+    </div> -->
+
+    
+
+      </div>
+     </div>
+      
+    

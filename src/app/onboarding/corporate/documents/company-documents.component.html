@@ -1,0 +1,770 @@
+
+<!--BACKOFFICE REVIEWING APPLICATION SEARCH-->
+<div *ngIf="applicationFlag">
+  <h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <span> View Application </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+          <mat-icon>close</mat-icon>
+          </span>
+    </mat-toolbar>
+  </h4>
+</div>
+
+<!--BACKOFFICE REVIEWING CUSTOMER SEARCH-->
+<div *ngIf="customerFlag">
+  <h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <span> View Customer </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+          <mat-icon>close</mat-icon>
+          </span>
+    </mat-toolbar>
+  </h4>
+</div>
+
+<!--BACKOFFICE MC => Editing documents-->
+<div *ngIf="showEditableForBranchChannel">
+  <h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <span> Edit Application </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+          <mat-icon>close</mat-icon>
+          </span>
+    </mat-toolbar>
+  </h4>
+</div>
+
+<!--BACKOFFICE APPLICATION SEARCH - IF NO DOCUMENTS FOUND (SHOW THIS MESSAGE)-->
+<div *ngIf="showNoDocuments" [ngClass]="{'zero-content':customerFlag || applicationFlag }" class="box-position" fxLayoutAlign="center">
+  <div class="box">
+    <mat-icon class="report_icon">error_outline</mat-icon>
+ <h4 style="font-size:40px;font-family:'Roboto';color: #123969;font-weight: 650;">NO DOCUMENTS FOUND </h4>
+</div>
+</div>
+
+<form *ngIf="!showNoDocuments" [formGroup]="form" (ngSubmit)="onSave('this.id')" 
+[ngClass]="{'scrollable-content': customerFlag  || applicationFlag ,
+            'appsearch-mc-form-scrollable': showEditableForBranchChannel,
+          'scrollable-form-mc': showEmptyFields} ">
+
+          <div class="spinner-overlay" *ngIf="isScreenLoader">
+            <mat-spinner diameter="60"></mat-spinner>
+          </div>
+  
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+    
+          <!-- Multiple Owner NRIC Field -->
+          <div>
+            <div *ngFor="let owner of owners ; let i=index">
+            <div class="dropzone">
+              <h4 class="subTitle"> {{ owner.name }} OWNER NRIC/PASSPORT</h4>
+              <div class="container">
+                 <img [src]="fileOwnerData[i]" *ngIf="showImageOwner[i]" height="220" width="100%">
+                <!--this object tag only enables when document type is pdf or docs-->
+                <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatOwner[i]"
+                  (click)="loadBinaryData('OWNER_NRIC',ownerNRIC,'blurPdf',i)">
+                  <object class="content" style="cursor: pointer;" [data]="pdfUrlOwner[i]" type="application/pdf" width="100%"
+                    height="220"> </object>
+                </button>
+                <button class="btn" *ngIf="showOWNER[i]"  (click)="loadBinaryData('OWNER_NRIC',ownerNRIC,'',i)"
+                  type="button">{{buttonMessage}} <br>
+                  <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+                </button>
+                <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noOwnerDocument[i]" >{{noDocumentMessage}}  </button>
+                <button class="btn" *ngIf="uploadIconOWNER[i]"> <mat-icon class="icon">file_upload</mat-icon> </button>
+                <input type="file" *ngIf="showOwnerInput[i]" [attr.disabled]="disableOwnerInput[i] ? '' : null"
+                  (change)="onSelectFile($event,ownerNRIC, 'OWNER_NRIC',i)" formControlName="ownerNric"
+                  [formControl]="form.controls['ownerNric']">
+              </div>
+              <button type="button" mat-raised-button color="primary" *ngIf="reuploadOwner[i]" style="margin-top: 5px;">
+                Reupload </button>
+              <input type="file" class="reupload-input" *ngIf="reuploadOwner[i]"
+                (change)="onSelectFile($event,ownerNRIC,'OWNER_NRIC',i)" formControlName="ownerNric"
+                [formControl]="form.controls['ownerNric']">
+              <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadOWNER[i]"></mat-spinner>
+              <!-- <mat-error *ngIf=" form.controls['ownerNric'].hasError('required') &&
+          form.controls['ownerNric'].touched && uploadIconOWNER"> *Owner NRIC Image Required </mat-error> -->
+          <div>
+            <button mat-raised-button  class="blue" *ngIf="showEditInfoOwner[i]" [disabled]="isDisableEditOwnerNric[i]"  type="button" (click)="editData('1006','Owner NRIC is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+            <button mat-raised-button type="button"  class="file-reupload" *ngIf="showReuploadCustomerOwnerNric[i]"> Upload <mat-icon>file_upload</mat-icon>
+            <input type="file" (change)="onSelectFile($event,ownerNRIC,'OWNER_NRIC',i)" formControlName="ownerNric"
+            [formControl]="form.controls['ownerNric']">
+            </button>
+          </div>
+
+            </div>
+          </div>
+        </div>
+    
+        <!-- Multiple Dealer NRIC Field -->
+          <div>
+            <div *ngFor="let dealer of dealers ; let i=index">
+            <div class="dropzone">
+              <h4 class="subTitle">{{ dealer.name }} DEALER NRIC/PASSPORT </h4>
+              <div class="container">
+                <img [src]="fileDealerData[i]" *ngIf="showImageDealer[i]" height="220" width="100%">
+                <!--this object tag only enables when document type is pdf or docs-->
+                <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatDealer[i]"
+                  (click)="loadBinaryData('DEALER_NRIC',dealerNRIC,'blurPdf',i)">
+                  <object class="content" style="cursor: pointer;" [data]="pdfUrlDealer[i]" type="application/pdf" width="100%"
+                    height="220"> </object>
+                </button>
+                <button class="btn" *ngIf="showDEALER[i]"  (click)="loadBinaryData('DEALER_NRIC',dealerNRIC,'',i)"
+                  type="button">{{buttonMessage}} <br>
+                  <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+                </button>
+                <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noDealerDocument[i]" >{{noDocumentMessage}}  </button>
+                <button class="btn" *ngIf="uploadIconDEALER[i]"> <mat-icon class="icon">file_upload</mat-icon> </button>
+                <input type="file" *ngIf="showDealerInput[i]" [attr.disabled]="disableDealerInput[i] ? '' : null"
+                  (change)="onSelectFile($event,dealerNRIC, 'DEALER_NRIC',i)" formControlName="dealerNric"
+                  [formControl]="form.controls['dealerNric']">
+              </div>
+              <button type="button" mat-raised-button color="primary" *ngIf="reuploadDealer[i]" style="margin-top: 5px;">
+                Reupload </button>
+              <input type="file" class="reupload-input" *ngIf="reuploadDealer[i]"
+                (change)="onSelectFile($event,dealerNRIC,'DEALER_NRIC',i)" formControlName="dealerNric"
+                [formControl]="form.controls['dealerNric']">
+              <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadDEALER[i]"></mat-spinner>
+              <!-- <mat-error *ngIf=" form.controls['dealerNric'].hasError('required') &&
+          form.controls['dealerNric'].touched && uploadIconDEALER"> *Dealer NRIC Image Required </mat-error> -->
+          <div>
+            <button mat-raised-button  class="blue" *ngIf="showEditInfoDealer[i]" [disabled]="isDisableEditDealerNric[i]"  type="button" (click)="editData('1007','Dealer NRIC is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+            <button mat-raised-button type="button" class="file-reupload" *ngIf="showReuploadCustomerDealerNric[i]"> Upload <mat-icon>file_upload</mat-icon>
+            <input type="file" (change)="onSelectFile($event,dealerNRIC,'DEALER_NRIC',i)" formControlName="dealerNric"
+            [formControl]="form.controls['dealerNric']">
+            </button>
+          </div>
+            </div>
+            </div>
+          </div>
+    
+          <!-- Multiple Runner NRIC field -->
+          <div>
+            <div *ngFor="let runner of runners ; let i=index">
+            <div class="dropzone">
+              <h4 class="subTitle"> {{ runner.name }} RUNNER NRIC/PASSPORT </h4>
+              <div class="container">
+                <img [src]="fileRunnerData[i]" *ngIf="showImageRunner[i]" height="220" width="100%">
+                <!--this object tag only enables when document type is pdf or docs-->
+                <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatRunner[i]"
+                  (click)="loadBinaryData('RUNNER_NRIC',runnerNRIC,'blurPdf',i)">
+                  <object class="content" style="cursor: pointer;" [data]="pdfUrlRunner[i]" type="application/pdf" width="100%"
+                    height="220"> </object>
+                </button>
+                <button class="btn" *ngIf="showRUNNER[i]"  (click)="loadBinaryData('RUNNER_NRIC',runnerNRIC,'',i)"
+                  type="button">{{buttonMessage}} <br>
+                  <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+                </button>
+                <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noRunnerDocument[i]" >{{noDocumentMessage}}  </button>
+                <button class="btn" *ngIf="uploadIconRUNNER[i]"> <mat-icon class="icon">file_upload</mat-icon> </button>
+                <input type="file" *ngIf="showRunnerInput[i]" [attr.disabled]="disableRunnerInput[i] ? '' : null"
+                  (change)="onSelectFile($event,runnerNRIC, 'RUNNER_NRIC',i)" formControlName="runnerNric"
+                  [formControl]="form.controls['runnerNric']">
+              </div>
+              <button type="button" mat-raised-button color="primary" *ngIf="reuploadRunner[i]" style="margin-top: 5px;">
+                Reupload </button>
+              <input type="file" class="reupload-input" *ngIf="reuploadRunner[i]"
+                (change)="onSelectFile($event,runnerNRIC,'RUNNER_NRIC',i)" formControlName="runnerNric"
+                [formControl]="form.controls['runnerNric']">
+              <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadRUNNER[i]"></mat-spinner>
+              <!-- <mat-error *ngIf=" form.controls['runnerNric'].hasError('required') &&
+          form.controls['runnerNric'].touched && uploadIconRUNNER"> *Runner NRIC Image Required </mat-error> -->
+          <div>
+            <button mat-raised-button  class="blue" *ngIf="showEditInfoRunner[i]" [disabled]="isDisableEditRunnerNric[i]"  type="button" (click)="editData('1008','Runner NRIC is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+            <button mat-raised-button type="button"  class="file-reupload" *ngIf="showReuploadCustomerRunnerNric[i]"> Upload <mat-icon>file_upload</mat-icon>
+            <input type="file" (change)="onSelectFile($event,runnerNRIC,'RUNNER_NRIC',i)" formControlName="runnerNric"
+            [formControl]="form.controls['runnerNric']">
+            </button>
+          </div>
+            </div>
+            </div>
+          </div>
+          
+          <!-- ACRA field -->
+          <div>
+            <div class="dropzone">
+              <h4 class="subTitle"> ACRA/BUSINESS PROFILE </h4>
+              <div class="container">
+                <img *ngIf="showImageAcra" [src]="fileAcraData[0]" height="220" width="100%">
+                <!--this object tag only enables when document type is pdf or docs-->
+                <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatAcra"
+                  (click)="loadBinaryData('ACRA',acra,'blurPdf', 0)">
+                  <object class="content" style="cursor: pointer;" [data]="pdfUrlAcra" type="application/pdf" width="100%"
+                    height="220"> </object>
+                </button>
+                <button class="btn" *ngIf="uploadIconACRA"> <mat-icon class="icon">file_upload</mat-icon> </button>
+                <button class="btn" *ngIf="showACRA"  (click)="loadBinaryData('ACRA',acra,'', 0)"
+                  type="button">{{buttonMessage}} <br>
+                  <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+                </button>
+                <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noAcraDocument" >{{noDocumentMessage}}  </button>
+                <input type="file" *ngIf="showAcraInput" [attr.disabled]="disableAcraInput ? '' : null"
+                  (change)="onSelectFile($event,acra, 'ACRA',0)" formControlName="acra" [formControl]="form.controls['acra']">
+                <!-- It will preview image/pdf file which user selected-->
+              </div>
+              <button type="button" mat-raised-button color="primary" *ngIf="reuploadAcra" style="margin-top: 5px;">
+                Reupload </button>
+              <input type="file" class="reupload-input" *ngIf="reuploadAcra" (change)="onSelectFile($event,acra,'ACRA',0)"
+                formControlName="acra" [formControl]="form.controls['acra']">
+              <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadACRA"></mat-spinner>
+              <!-- <mat-error *ngIf="form.controls['acra'].hasError('required') &&
+                   form.controls['acra'].touched && uploadIconACRA"> *ACRA Image Required </mat-error> -->
+                   <div>
+                    <button mat-raised-button  class="blue" *ngIf="showEditInfoAcra" [disabled]="isDisableEditAcra"  type="button" (click)="editData('1005','Acra is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+                    <button mat-raised-button type="button"  class="file-reupload" *ngIf="showReuploadCustomerAcra"> Upload <mat-icon>file_upload</mat-icon>
+                    <input type="file" (change)="onSelectFile($event,acra,'ACRA',0)"
+                    formControlName="acra" [formControl]="form.controls['acra']">
+                    </button>
+                  </div>
+            </div>
+          </div>
+      
+  
+    
+ <!-- INCORPORATION_CERTIFICATE field -->
+ <div>
+  <div class="dropzone">
+    <h4 class="subTitle"> INCORPORATION CERTIFICATE </h4>
+    <div class="container">
+      <img *ngIf="showImageIncorporationCert" [src]="fileIncorporationCertData[0]" height="220" width="100%">
+      <!--this object tag only enables when document type is pdf or docs-->
+      <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatIncorporationCert"
+        (click)="loadBinaryData('INCORPORATION_CERTIFICATE',incorporationCertificate,'blurPdf', 0)"> <!--PASS DOCUMENT AS IN DOCUMENT ID MAPPER-->
+        <object class="content" style="cursor: pointer;" [data]="pdfUrlIncorporationCert" type="application/pdf" width="100%"
+          height="220"> </object>
+      </button>
+      <button class="btn" *ngIf="uploadIconIncorporationCert"> <mat-icon class="icon">file_upload</mat-icon> </button>
+      <button class="btn" *ngIf="showIncorporationCert"  (click)="loadBinaryData('INCORPORATION_CERTIFICATE',incorporationCertificate,'', 0)" 
+        type="button">{{buttonMessage}} <br>
+        <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+      </button>
+      <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noIncorporationCertDocument" >{{noDocumentMessage}}  </button>
+      <input type="file" *ngIf="showIncorporationCertInput" [attr.disabled]="disableIncorporationCertInput ? '' : null"
+        (change)="onSelectFile($event,incorporationCertificate, 'INCORPORATION_CERTIFICATE',0)" formControlName="incorporationCertificate" [formControl]="form.controls['incorporationCertificate']">
+      <!-- It will preview image/pdf file which user selected-->
+    </div>
+    <button type="button" mat-raised-button color="primary" *ngIf="reuploadIncorporationCert" style="margin-top: 5px;">
+      Reupload </button>
+    <input type="file" class="reupload-input" *ngIf="reuploadIncorporationCert" (change)="onSelectFile($event,incorporationCertificate,'INCORPORATION_CERTIFICATE',0)"
+      formControlName="incorporationCertificate" [formControl]="form.controls['incorporationCertificate']">
+    <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadIncorporationCert"></mat-spinner>
+  
+         <div>
+          <button mat-raised-button  class="blue" *ngIf="showEditInfoIncorporationCert" [disabled]="isDisableEditIncorporationCert"  type="button" (click)="editData('1009','Incorporation Certificate is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+          <button mat-raised-button type="button"  class="file-reupload" *ngIf="showReuploadIncorporationCert"> Upload <mat-icon>file_upload</mat-icon>
+          <input type="file" (change)="onSelectFile($event,incorporationCertificate,'INCORPORATION_CERTIFICATE',0)"
+          formControlName="incorporationCertificate" [formControl]="form.controls['incorporationCertificate']">
+          </button>
+        </div>
+  </div>
+</div>
+  
+
+ <!-- ARTICLES_ASSOCIATION field -->
+
+ <div>
+  <div class="dropzone">
+    <h4 class="subTitle"> ARTICLES OF ASSOCIATION </h4>
+    <div class="container">
+      <img *ngIf="showImageArticlesAssociation" [src]="fileArticlesAssociationData[0]" height="220" width="100%">
+      <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatArticlesAssociation"
+        (click)="loadBinaryData('ARTICLES_ASSOCIATION', articlesAssociation, 'blurPdf', 0)">
+        <object class="content" style="cursor: pointer;" [data]="pdfUrlArticlesAssociation" type="application/pdf" width="100%" height="220"> </object>
+      </button>
+      <button class="btn" *ngIf="uploadIconArticlesAssociation"> <mat-icon class="icon">file_upload</mat-icon> </button>
+      <button class="btn" *ngIf="showArticlesAssociation"  (click)="loadBinaryData('ARTICLES_ASSOCIATION', articlesAssociation, '', 0)" type="button">{{buttonMessage}} <br>
+        <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+      </button>
+      <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noArticlesAssociationDocument">{{noDocumentMessage}}</button>
+      <input type="file" *ngIf="showArticlesAssociationInput" [attr.disabled]="disableArticlesAssociationInput ? '' : null"
+        (change)="onSelectFile($event, articlesAssociation, 'ARTICLES_ASSOCIATION', 0)" formControlName="articlesAssociation" [formControl]="form.controls['articlesAssociation']">
+    </div>
+    <button type="button" mat-raised-button color="primary" *ngIf="reuploadArticlesAssociation" style="margin-top: 5px;">
+      Reupload </button>
+    <input type="file" class="reupload-input" *ngIf="reuploadArticlesAssociation" (change)="onSelectFile($event, articlesAssociation, 'ARTICLES_ASSOCIATION', 0)"
+      formControlName="articlesAssociation" [formControl]="form.controls['articlesAssociation']">
+    <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadArticlesAssociation"></mat-spinner>
+    <div>
+      <button mat-raised-button  class="blue" *ngIf="showEditInfoArticlesAssociation" [disabled]="isDisableEditArticlesAssociation" type="button" (click)="editData('1010','Articles of Association is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+      <button mat-raised-button type="button"  class="file-reupload" *ngIf="showReuploadArticlesAssociation"> Upload <mat-icon>file_upload</mat-icon>
+        <input type="file" (change)="onSelectFile($event, articlesAssociation, 'ARTICLES_ASSOCIATION', 0)"
+        formControlName="articlesAssociation" [formControl]="form.controls['articlesAssociation']">
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+ <!-- BANK_LICENSE field -->
+ <div>
+  <div class="dropzone">
+    <h4 class="subTitle"> BANK LICENSE </h4>
+    <div class="container">
+      <img *ngIf="showImageBankLicense" [src]="fileBankLicenseData[0]" height="220" width="100%">
+      <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatBankLicense"
+        (click)="loadBinaryData('BANK_LICENSE', bankLicense, 'blurPdf', 0)">
+        <object class="content" style="cursor: pointer;" [data]="pdfUrlBankLicense" type="application/pdf" width="100%" height="220"> </object>
+      </button>
+      <button class="btn" *ngIf="uploadIconBankLicense"> <mat-icon class="icon">file_upload</mat-icon> </button>
+      <button class="btn" *ngIf="showBankLicense"  (click)="loadBinaryData('BANK_LICENSE', bankLicense, '', 0)" type="button">{{buttonMessage}} <br>
+        <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+      </button>
+      <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noBankLicenseDocument">{{noDocumentMessage}}</button>
+      <input type="file" *ngIf="showBankLicenseInput" [attr.disabled]="disableBankLicenseInput ? '' : null"
+        (change)="onSelectFile($event, bankLicense, 'BANK_LICENSE', 0)" formControlName="bankLicense" [formControl]="form.controls['bankLicense']">
+    </div>
+    <button type="button" mat-raised-button color="primary" *ngIf="reuploadBankLicense" style="margin-top: 5px;">
+      Reupload </button>
+    <input type="file" class="reupload-input" *ngIf="reuploadBankLicense" (change)="onSelectFile($event, bankLicense, 'BANK_LICENSE', 0)"
+      formControlName="bankLicense" [formControl]="form.controls['bankLicense']">
+    <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadBankLicense"></mat-spinner>
+    <div>
+      <button mat-raised-button  class="blue" *ngIf="showEditInfoBankLicense" [disabled]="isDisableEditBankLicense" type="button" (click)="editData('1011','Bank License is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+      <button mat-raised-button type="button"  class="file-reupload" *ngIf="showReuploadBankLicense"> Upload <mat-icon>file_upload</mat-icon>
+        <input type="file" (change)="onSelectFile($event, bankLicense, 'BANK_LICENSE', 0)"
+        formControlName="bankLicense" [formControl]="form.controls['bankLicense']">
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+ <!-- TRADE_LICENSE field -->
+
+ <div>
+  <div class="dropzone">
+    <h4 class="subTitle"> TRADE LICENSE </h4>
+    <div class="container">
+      <img *ngIf="showImageTradeLicense" [src]="fileTradeLicenseData[0]" height="220" width="100%">
+      <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatTradeLicense"
+        (click)="loadBinaryData('TRADE_LICENSE', tradeLicense, 'blurPdf', 0)">
+        <object class="content" style="cursor: pointer;" [data]="pdfUrlTradeLicense" type="application/pdf" width="100%" height="220"> </object>
+      </button>
+      <button class="btn" *ngIf="uploadIconTradeLicense"> <mat-icon class="icon">file_upload</mat-icon> </button>
+      <button class="btn" *ngIf="showTradeLicense"  (click)="loadBinaryData('TRADE_LICENSE', tradeLicense, '', 0)" type="button">{{buttonMessage}} <br>
+        <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+      </button>
+      <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noTradeLicenseDocument">{{noDocumentMessage}}</button>
+      <input type="file" *ngIf="showTradeLicenseInput" [attr.disabled]="disableTradeLicenseInput ? '' : null"
+        (change)="onSelectFile($event, tradeLicense, 'TRADE_LICENSE', 0)" formControlName="tradeLicense" [formControl]="form.controls['tradeLicense']">
+    </div>
+    <button type="button" mat-raised-button color="primary" *ngIf="reuploadTradeLicense" style="margin-top: 5px;">
+      Reupload </button>
+    <input type="file" class="reupload-input" *ngIf="reuploadTradeLicense" (change)="onSelectFile($event, tradeLicense, 'TRADE_LICENSE', 0)"
+      formControlName="tradeLicense" [formControl]="form.controls['tradeLicense']">
+    <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadTradeLicense"></mat-spinner>
+    <div>
+      <button mat-raised-button  class="blue" *ngIf="showEditInfoTradeLicense" [disabled]="isDisableEditTradeLicense" type="button" (click)="editData('1012','Trade License is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+      <button mat-raised-button type="button"  class="file-reupload" *ngIf="showReuploadTradeLicense"> Upload <mat-icon>file_upload</mat-icon>
+        <input type="file" (change)="onSelectFile($event, tradeLicense, 'TRADE_LICENSE', 0)"
+        formControlName="tradeLicense" [formControl]="form.controls['tradeLicense']">
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+ <!-- AML_POLICY_AND_PROCEDURES field -->
+
+ <div>
+  <div class="dropzone">
+    <h4 class="subTitle"> AML POLICY AND PROCEDURES </h4>
+    <div class="container">
+      <img *ngIf="showImageAmlPolicyAndProcedures" [src]="fileAmlPolicyAndProceduresData[0]" height="220" width="100%">
+      <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatAmlPolicyAndProcedures"
+        (click)="loadBinaryData('AML_POLICY_AND_PROCEDURES', amlPolicyAndProcedures, 'blurPdf', 0)">
+        <object class="content" style="cursor: pointer;" [data]="pdfUrlAmlPolicyAndProcedures" type="application/pdf" width="100%" height="220"> </object>
+      </button>
+      <button class="btn" *ngIf="uploadIconAmlPolicyAndProcedures"> <mat-icon class="icon">file_upload</mat-icon> </button>
+      <button class="btn" *ngIf="showAmlPolicyAndProcedures"  (click)="loadBinaryData('AML_POLICY_AND_PROCEDURES', amlPolicyAndProcedures, '', 0)" type="button">{{buttonMessage}} <br>
+        <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+      </button>
+      <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noAmlPolicyAndProceduresDocument">{{noDocumentMessage}}</button>
+      <input type="file" *ngIf="showAmlPolicyAndProceduresInput" [attr.disabled]="disableAmlPolicyAndProceduresInput ? '' : null"
+        (change)="onSelectFile($event, amlPolicyAndProcedures, 'AML_POLICY_AND_PROCEDURES', 0)" formControlName="amlPolicyAndProcedures" [formControl]="form.controls['amlPolicyAndProcedures']">
+    </div>
+    <button type="button" mat-raised-button color="primary" *ngIf="reuploadAmlPolicyAndProcedures" style="margin-top: 5px;">
+      Reupload </button>
+    <input type="file" class="reupload-input" *ngIf="reuploadAmlPolicyAndProcedures" (change)="onSelectFile($event, amlPolicyAndProcedures, 'AML_POLICY_AND_PROCEDURES', 0)"
+      formControlName="amlPolicyAndProcedures" [formControl]="form.controls['amlPolicyAndProcedures']">
+    <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadAmlPolicyAndProcedures"></mat-spinner>
+    <div>
+      <button mat-raised-button  class="blue" *ngIf="showEditInfoAmlPolicyAndProcedures" [disabled]="isDisableEditAmlPolicyAndProcedures" type="button" (click)="editData('1013','AML Policy and Procedures are editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+      <button mat-raised-button type="button"  class="file-reupload" *ngIf="showReuploadAmlPolicyAndProcedures"> Upload <mat-icon>file_upload</mat-icon>
+        <input type="file" (change)="onSelectFile($event, amlPolicyAndProcedures, 'AML_POLICY_AND_PROCEDURES', 0)"
+        formControlName="amlPolicyAndProcedures" [formControl]="form.controls['amlPolicyAndProcedures']">
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+ <!-- AUDIT_REPORT field -->
+
+ <div>
+  <div class="dropzone">
+    <h4 class="subTitle"> AUDIT REPORT </h4>
+    <div class="container">
+      <img *ngIf="showImageAuditReport" [src]="fileAuditReportData[0]" height="220" width="100%">
+      <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatAuditReport"
+        (click)="loadBinaryData('AUDIT_REPORT', auditReport, 'blurPdf', 0)">
+        <object class="content" style="cursor: pointer;" [data]="pdfUrlAuditReport" type="application/pdf" width="100%" height="220"> </object>
+      </button>
+      <button class="btn" *ngIf="uploadIconAuditReport"> <mat-icon class="icon">file_upload</mat-icon> </button>
+      <button class="btn" *ngIf="showAuditReport"  (click)="loadBinaryData('AUDIT_REPORT', auditReport, '', 0)" type="button">{{buttonMessage}} <br>
+        <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+      </button>
+      <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noAuditReportDocument">{{noDocumentMessage}}</button>
+      <input type="file" *ngIf="showAuditReportInput" [attr.disabled]="disableAuditReportInput ? '' : null"
+        (change)="onSelectFile($event, auditReport, 'AUDIT_REPORT', 0)" formControlName="auditReport" [formControl]="form.controls['auditReport']">
+    </div>
+    <button type="button" mat-raised-button color="primary" *ngIf="reuploadAuditReport" style="margin-top: 5px;">
+      Reupload </button>
+    <input type="file" class="reupload-input" *ngIf="reuploadAuditReport" (change)="onSelectFile($event, auditReport, 'AUDIT_REPORT', 0)"
+      formControlName="auditReport" [formControl]="form.controls['auditReport']">
+    <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadAuditReport"></mat-spinner>
+    <div>
+      <button mat-raised-button  class="blue" *ngIf="showEditInfoAuditReport" [disabled]="isDisableEditAuditReport" type="button" (click)="editData('1014','Audit Report is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+      <button mat-raised-button type="button"  class="file-reupload" *ngIf="showReuploadAuditReport"> Upload <mat-icon>file_upload</mat-icon>
+        <input type="file" (change)="onSelectFile($event, auditReport, 'AUDIT_REPORT', 0)"
+        formControlName="auditReport" [formControl]="form.controls['auditReport']">
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+ <!-- LATEST_AML_AUDIT_REPORT field -->
+
+ <div>
+  <div class="dropzone">
+    <h4 class="subTitle"> LATEST AML AUDIT REPORT </h4>
+    <div class="container">
+      <img *ngIf="showImageAmlAuditReport" [src]="fileAmlAuditReportData[0]" height="220" width="100%">
+      <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatAmlAuditReport"
+        (click)="loadBinaryData('LATEST_AML_AUDIT_REPORT', amlAuditReport, 'blurPdf', 0)">
+        <object class="content" style="cursor: pointer;" [data]="pdfUrlAmlAuditReport" type="application/pdf" width="100%" height="220"> </object>
+      </button>
+      <button class="btn" *ngIf="uploadIconAmlAuditReport"> <mat-icon class="icon">file_upload</mat-icon> </button>
+      <button class="btn" *ngIf="showAmlAuditReport"  (click)="loadBinaryData('LATEST_AML_AUDIT_REPORT', amlAuditReport, '', 0)" type="button">{{buttonMessage}} <br>
+        <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+      </button>
+      <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noAmlAuditReportDocument">{{noDocumentMessage}}</button>
+      <input type="file" *ngIf="showAmlAuditReportInput" [attr.disabled]="disableAmlAuditReportInput ? '' : null"
+        (change)="onSelectFile($event, amlAuditReport, 'LATEST_AML_AUDIT_REPORT', 0)" formControlName="amlAuditReport" [formControl]="form.controls['amlAuditReport']">
+    </div>
+    <button type="button" mat-raised-button color="primary" *ngIf="reuploadAmlAuditReport" style="margin-top: 5px;">
+      Reupload </button>
+    <input type="file" class="reupload-input" *ngIf="reuploadAmlAuditReport" (change)="onSelectFile($event, amlAuditReport, 'LATEST_AML_AUDIT_REPORT', 0)"
+      formControlName="amlAuditReport" [formControl]="form.controls['amlAuditReport']">
+    <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadAmlAuditReport"></mat-spinner>
+    <div>
+      <button mat-raised-button  class="blue" *ngIf="showEditInfoAmlAuditReport" [disabled]="isDisableEditAmlAuditReport" type="button" (click)="editData('1015','Latest AML Audit Report is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+      <button mat-raised-button type="button"  class="file-reupload" *ngIf="showReuploadAmlAuditReport"> Upload <mat-icon>file_upload</mat-icon>
+        <input type="file" (change)="onSelectFile($event, amlAuditReport, 'LATEST_AML_AUDIT_REPORT', 0)"
+        formControlName="amlAuditReport" [formControl]="form.controls['amlAuditReport']">
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+ <!-- LATEST_ORGANISATION_STRUCTURE field -->
+
+ <div>
+  <div class="dropzone">
+    <h4 class="subTitle"> LATEST ORGANISATION STRUCTURE </h4>
+    <div class="container">
+      <img *ngIf="showImageOrganisationStructure" [src]="fileOrganisationStructureData[0]" height="220" width="100%">
+      <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatOrganisationStructure"
+        (click)="loadBinaryData('LATEST_ORGANISATION_STRUCTURE', organisationStructure, 'blurPdf', 0)">
+        <object class="content" style="cursor: pointer;" [data]="pdfUrlOrganisationStructure" type="application/pdf" width="100%" height="220"> </object>
+      </button>
+      <button class="btn" *ngIf="uploadIconOrganisationStructure"> <mat-icon class="icon">file_upload</mat-icon> </button>
+      <button class="btn" *ngIf="showOrganisationStructure"  (click)="loadBinaryData('LATEST_ORGANISATION_STRUCTURE', organisationStructure, '', 0)" type="button">{{buttonMessage}} <br>
+        <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+      </button>
+      <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noOrganisationStructureDocument">{{noDocumentMessage}}</button>
+      <input type="file" *ngIf="showOrganisationStructureInput" [attr.disabled]="disableOrganisationStructureInput ? '' : null"
+        (change)="onSelectFile($event, organisationStructure, 'LATEST_ORGANISATION_STRUCTURE', 0)" formControlName="organisationStructure" [formControl]="form.controls['organisationStructure']">
+    </div>
+    <button type="button" mat-raised-button color="primary" *ngIf="reuploadOrganisationStructure" style="margin-top: 5px;">
+      Reupload </button>
+    <input type="file" class="reupload-input" *ngIf="reuploadOrganisationStructure" (change)="onSelectFile($event, organisationStructure, 'LATEST_ORGANISATION_STRUCTURE', 0)"
+      formControlName="organisationStructure" [formControl]="form.controls['organisationStructure']">
+    <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadOrganisationStructure"></mat-spinner>
+    <div>
+      <button mat-raised-button  class="blue" *ngIf="showEditInfoOrganisationStructure" [disabled]="isDisableEditOrganisationStructure" type="button" (click)="editData('1016','Latest Organisation structure is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+      <button mat-raised-button type="button"  class="file-reupload" *ngIf="showReuploadOrganisationStructure"> Upload <mat-icon>file_upload</mat-icon>
+        <input type="file" (change)="onSelectFile($event, organisationStructure, 'LATEST_ORGANISATION_STRUCTURE', 0)"
+        formControlName="organisationStructure" [formControl]="form.controls['organisationStructure']">
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+ <!-- MANAGEMENT_LIST field -->
+
+ <div>
+  <div class="dropzone">
+      <h4 class="subTitle"> MANAGEMENT LIST </h4>
+      <div class="container">
+          <img *ngIf="showImageManagementList" [src]="fileManagementListData[0]" height="220" width="100%">
+          <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatManagementList"
+              (click)="loadBinaryData('MANAGEMENT_LIST', managementList, 'blurPdf', 0)">
+              <object class="content" style="cursor: pointer;" [data]="pdfUrlManagementList" type="application/pdf" width="100%" height="220"></object>
+          </button>
+          <button class="btn" *ngIf="uploadIconManagementList"> <mat-icon class="icon">file_upload</mat-icon> </button>
+          <button class="btn" *ngIf="showManagementList" (click)="loadBinaryData('MANAGEMENT_LIST', managementList, '', 0)" type="button">{{buttonMessage}} <br>
+              <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+          </button>
+          <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noManagementListDocument">{{noDocumentMessage}}</button>
+          <input type="file" *ngIf="showManagementListInput" [attr.disabled]="disableManagementListInput ? '' : null"
+              (change)="onSelectFile($event, managementList, 'MANAGEMENT_LIST', 0)" formControlName="managementList" [formControl]="form.controls['managementList']">
+      </div>
+      <button type="button" mat-raised-button color="primary" *ngIf="reuploadManagementList" style="margin-top: 5px;">
+          Reupload
+      </button>
+      <input type="file" class="reupload-input" *ngIf="reuploadManagementList" (change)="onSelectFile($event, managementList, 'MANAGEMENT_LIST', 0)"
+          formControlName="managementList" [formControl]="form.controls['managementList']">
+      <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadManagementList"></mat-spinner>
+      <div>
+          <button mat-raised-button class="blue" *ngIf="showEditInfoManagementList" [disabled]="isDisableEditManagementList" type="button" (click)="editData('1017','Management List is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon></button>
+          <button mat-raised-button type="button" class="file-reupload" *ngIf="showReuploadManagementList"> Upload <mat-icon>file_upload</mat-icon>
+              <input type="file" (change)="onSelectFile($event, managementList, 'MANAGEMENT_LIST', 0)"
+              formControlName="managementList" [formControl]="form.controls['managementList']">
+          </button>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+ <!-- ID_COPIES field -->
+
+ <div>
+  <div class="dropzone">
+      <h4 class="subTitle"> ID COPIES </h4>
+      <div class="container">
+          <img *ngIf="showImageIdCopies" [src]="fileIdCopiesData[0]" height="220" width="100%">
+          <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatIdCopies"
+              (click)="loadBinaryData('ID_COPIES', idCopies, 'blurPdf', 0)">
+              <object class="content" style="cursor: pointer;" [data]="pdfUrlIdCopies" type="application/pdf" width="100%" height="220"></object>
+          </button>
+          <button class="btn" *ngIf="uploadIconIdCopies"> <mat-icon class="icon">file_upload</mat-icon> </button>
+          <button class="btn" *ngIf="showIdCopies" (click)="loadBinaryData('ID_COPIES', idCopies, '', 0)" type="button">{{buttonMessage}} <br>
+              <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+          </button>
+          <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noIdCopiesDocument">{{noDocumentMessage}}</button>
+          <input type="file" *ngIf="showIdCopiesInput" [attr.disabled]="disableIdCopiesInput ? '' : null"
+              (change)="onSelectFile($event, idCopies, 'ID_COPIES', 0)" formControlName="idCopies" [formControl]="form.controls['idCopies']">
+      </div>
+      <button type="button" mat-raised-button color="primary" *ngIf="reuploadIdCopies" style="margin-top: 5px;">
+          Reupload
+      </button>
+      <input type="file" class="reupload-input" *ngIf="reuploadIdCopies" (change)="onSelectFile($event, idCopies, 'ID_COPIES', 0)"
+          formControlName="idCopies" [formControl]="form.controls['idCopies']">
+      <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadIdCopies"></mat-spinner>
+      <div>
+          <button mat-raised-button class="blue" *ngIf="showEditInfoIdCopies" [disabled]="isDisableEditIdCopies" type="button" (click)="editData('1018','ID Copies is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon></button>
+          <button mat-raised-button type="button" class="file-reupload" *ngIf="showReuploadIdCopies"> Upload <mat-icon>file_upload</mat-icon>
+              <input type="file" (change)="onSelectFile($event, idCopies, 'ID_COPIES', 0)"
+              formControlName="idCopies" [formControl]="form.controls['idCopies']">
+          </button>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- KYC_FORM field -->
+<div>
+  <div class="dropzone">
+      <h4 class="subTitle"> KYC FORM </h4>
+      <div class="container">
+          <img *ngIf="showImageKycForm" [src]="fileKycFormData[0]" height="220" width="100%">
+          <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatKycForm"
+              (click)="loadBinaryData('KYC_FORM', kycForm, 'blurPdf', 0)">
+              <object class="content" style="cursor: pointer;" [data]="pdfUrlKycForm" type="application/pdf" width="100%" height="220"></object>
+          </button>
+          <button class="btn" *ngIf="uploadIconKycForm"> <mat-icon class="icon">file_upload</mat-icon> </button>
+          <button class="btn" *ngIf="showKycForm" (click)="loadBinaryData('KYC_FORM', kycForm, '', 0)" type="button">{{buttonMessage}} <br>
+              <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+          </button>
+          <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noKycFormDocument">{{noDocumentMessage}}</button>
+          <input type="file" *ngIf="showKycFormInput" [attr.disabled]="disableKycFormInput ? '' : null"
+              (change)="onSelectFile($event, kycForm, 'KYC_FORM', 0)" formControlName="kycForm" [formControl]="form.controls['kycForm']">
+      </div>
+      <button type="button" mat-raised-button color="primary" *ngIf="reuploadKycForm" style="margin-top: 5px;">
+          Reupload
+      </button>
+      <input type="file" class="reupload-input" *ngIf="reuploadKycForm" (change)="onSelectFile($event, kycForm, 'KYC_FORM', 0)"
+          formControlName="kycForm" [formControl]="form.controls['kycForm']">
+      <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadKycForm"></mat-spinner>
+      <div>
+          <button mat-raised-button class="blue" *ngIf="showEditInfoKycForm" [disabled]="isDisableEditKycForm" type="button" (click)="editData('1019','KYC Form is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon></button>
+          <button mat-raised-button type="button" class="file-reupload" *ngIf="showReuploadKycForm"> Upload <mat-icon>file_upload</mat-icon>
+              <input type="file" (change)="onSelectFile($event, kycForm, 'KYC_FORM', 0)"
+              formControlName="kycForm" [formControl]="form.controls['kycForm']">
+          </button>
+      </div>
+  </div>
+</div>
+
+<!-- WOLFSBERG_FORM field -->
+<div>
+  <div class="dropzone">
+      <h4 class="subTitle"> WOLFSBERG FORM </h4>
+      <div class="container">
+          <img *ngIf="showImageWolfsbergForm" [src]="fileWolfsbergFormData[0]" height="220" width="100%">
+          <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatWolfsbergForm"
+              (click)="loadBinaryData('WOLFSBERG_FORM', wolfsbergForm, 'blurPdf', 0)">
+              <object class="content" style="cursor: pointer;" [data]="pdfUrlWolfsbergForm" type="application/pdf" width="100%" height="220"></object>
+          </button>
+          <button class="btn" *ngIf="uploadIconWolfsbergForm"> <mat-icon class="icon">file_upload</mat-icon> </button>
+          <button class="btn" *ngIf="showWolfsbergForm" (click)="loadBinaryData('WOLFSBERG_FORM', wolfsbergForm, '', 0)" type="button">{{buttonMessage}} <br>
+              <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+          </button>
+          <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noWolfsbergFormDocument">{{noDocumentMessage}}</button>
+          <input type="file" *ngIf="showWolfsbergFormInput" [attr.disabled]="disableWolfsbergFormInput ? '' : null"
+              (change)="onSelectFile($event, wolfsbergForm, 'WOLFSBERG_FORM', 0)" formControlName="wolfsbergForm" [formControl]="form.controls['wolfsbergForm']">
+      </div>
+      <button type="button" mat-raised-button color="primary" *ngIf="reuploadWolfsbergForm" style="margin-top: 5px;">
+          Reupload
+      </button>
+      <input type="file" class="reupload-input" *ngIf="reuploadWolfsbergForm" (change)="onSelectFile($event, wolfsbergForm, 'WOLFSBERG_FORM', 0)"
+          formControlName="wolfsbergForm" [formControl]="form.controls['wolfsbergForm']">
+      <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadWolfsbergForm"></mat-spinner>
+      <div>
+          <button mat-raised-button class="blue" *ngIf="showEditInfoWolfsbergForm" [disabled]="isDisableEditWolfsbergForm" type="button" (click)="editData('1020','Wolfsberg Form is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon></button>
+          <button mat-raised-button type="button" class="file-reupload" *ngIf="showReuploadWolfsbergForm"> Upload <mat-icon>file_upload</mat-icon>
+              <input type="file" (change)="onSelectFile($event, wolfsbergForm, 'WOLFSBERG_FORM', 0)"
+              formControlName="wolfsbergForm" [formControl]="form.controls['wolfsbergForm']">
+          </button>
+      </div>
+  </div>
+</div>
+
+
+<!-- ONBOARDING_DOCUMENT field -->
+<div>
+  <div class="dropzone">
+      <h4 class="subTitle"> ONBOARDING DOCUMENT </h4>
+      <div class="container">
+          <img *ngIf="showImageOnboardingDoc" [src]="fileOnboardingDocData[0]" height="220" width="100%">
+          <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatOnboardingDoc"
+              (click)="loadBinaryData('ONBOARDING_DOCUMENT', onboardingDoc, 'blurPdf', 0)">
+              <object class="content" style="cursor: pointer;" [data]="pdfUrlOnboardingDoc" type="application/pdf" width="100%" height="220"></object>
+          </button>
+          <button class="btn" *ngIf="uploadIconOnboardingDoc"> <mat-icon class="icon">file_upload</mat-icon> </button>
+          <button class="btn" *ngIf="showOnboardingDoc" (click)="loadBinaryData('ONBOARDING_DOCUMENT', onboardingDoc, '', 0)" type="button">{{buttonMessage}} <br>
+              <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+          </button>
+          <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noOnboardingDocument">{{noDocumentMessage}}</button>
+          <input type="file" *ngIf="showOnboardingDocInput" [attr.disabled]="disableOnboardingDocInput ? '' : null"
+              (change)="onSelectFile($event, onboardingDoc, 'ONBOARDING_DOCUMENT', 0)" formControlName="onboardingDoc" [formControl]="form.controls['onboardingDoc']">
+      </div>
+      <button type="button" mat-raised-button color="primary" *ngIf="reuploadOnboardingDoc" style="margin-top: 5px;">
+          Reupload
+      </button>
+      <input type="file" class="reupload-input" *ngIf="reuploadOnboardingDoc" (change)="onSelectFile($event, onboardingDoc, 'ONBOARDING_DOCUMENT', 0)"
+          formControlName="onboardingDoc" [formControl]="form.controls['onboardingDoc']">
+      <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadOnboardingDoc"></mat-spinner>
+      <div>
+          <button mat-raised-button class="blue" *ngIf="showEditInfoOnboardingDoc" [disabled]="isDisableEditOnboardingDoc" type="button" (click)="editData('1021','onboardingDoc is editable',i)">Edit Details<mat-icon class="edit-icon">create</mat-icon></button>
+          <button mat-raised-button type="button" class="file-reupload" *ngIf="showReuploadOnboardingDoc"> Upload <mat-icon>file_upload</mat-icon>
+              <input type="file" (change)="onSelectFile($event, onboardingDoc, 'ONBOARDING_DOCUMENT', 0)"
+              formControlName="onboardingDoc" [formControl]="form.controls['onboardingDoc']">
+          </button>
+      </div>
+  </div>
+</div>
+
+
+ 
+  
+ </div>
+
+
+  <div *ngIf="saveDocuments" style="text-align: center;">
+    <button  mat-raised-button type="submit" class="save-documents" [disabled]="!form.valid" color="primary">Save</button>
+    </div>
+    <mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loader"></mat-spinner>
+  
+  </form>
+
+<div style="margin-top:-20px">
+<!--BACKOFFICE REVIEWING APPLICATION SEARCH-->
+  <div class="dialogButtonAppSearch" *ngIf="applicationFlag" style="display: flex;">
+    <button  mat-raised-button color="primary" class="mat-button" [mat-dialog-close]="true" (click)="back()"  type="button">Back</button>
+    <div *ngIf="approverejectFlag" class="approve-reject" fxLayout="row wrap" fxLayoutGap="30px">
+      <button mat-raised-button class="red" (click)="openRejected()"   type="submit">Reject</button>
+      <button mat-raised-button  class="green" (click)="openApproved()"  type="submit">Approve</button>
+    </div>
+  </div>
+
+<!--BACKOFFICE REVIEWING CUSTOMER SEARCH-->
+  <div *ngIf="customerFlag" fxLayout="row" class="dialogButton" fxLayoutAlign="space-between">
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" class="mat-button" type="button" (click)="customerBack()" >Back</button> 
+  </div> 
+
+   <!--gathering details of customers in person - MC-->   
+   <div *ngIf="showEmptyFields" fxLayout="row" fxLayoutAlign="space-between">
+    <div>
+     <button class="close-mat-btn"  matStepperPrevious  type="button" mat-raised-button>Previous</button>
+   </div>
+   <div>
+    <button class="submit-mat-btn" (click)="onCompanyDocumentsOnboardingSubmit()"  type="button"   mat-raised-button color="primary">Save and Close</button>
+   </div>
+ </div>    
+
+ 
+
+ <!--Application search => Edit MC Documents-->   
+ <div *ngIf="showEditableForBranchChannel" fxLayout="row" class="btn-row-mc" fxLayoutAlign="space-between">
+  <div>
+   <button class="close-mat-btn" [mat-dialog-close]="true" (click)="goToCompanyAssociatesAppSearch()" type="button" mat-raised-button>Previous</button>
+ </div>
+
+ <div *ngIf="showApplicationFulfillmentBtnMc" fxLayout="row" fxLayoutGap="26px">
+  <!-- Approve Reject btn -->
+  <button class="green-approve-btn" (click)="openApproved()"  type="button" mat-raised-button>Approve</button>
+    <button class="red-reject-btn" (click)="openRejected()" type="button" mat-raised-button >Reject</button>
+</div>
+
+ <div>
+  <button class="submit-mat-btn" (click)="onCompanyDocumentsOnboardingEditSubmit()"  type="button"   mat-raised-button color="primary">Save and Close</button>
+ </div>
+</div>    
+
+</div>

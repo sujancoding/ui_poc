@@ -1,0 +1,52 @@
+  .header-container {
+      background-color: #123969;
+      padding: 18px;
+  }
+
+
+  .close-icon {
+      cursor: pointer;
+      color: white;
+      position: relative;
+      top: 3px;
+  }
+
+  .head-label-1 {
+      font-size: 20px;
+      display: flex;
+      font-family: 'Roboto';
+      color: white;
+  }
+
+  .label {
+      font-family: 'Roboto';
+      font-size: 20px;
+      margin-left: 14px;
+      color: grey;
+      position: relative;
+      top: 2px;
+  }
+
+  .value {
+      font-family: 'Roboto';
+      font-size: 20px;
+      margin-left: 14px;
+  }
+
+  .yes-btn {
+      background-color: #123969;
+      color: white;
+      width: 94px;
+      height: 41px;
+  }
+
+  .no-btn {
+      background-color: white;
+      color: #123969;
+  }
+
+  .btn-row {
+      justify-content: right;
+      margin-right: 15px;
+      margin-bottom: 24px;
+  }

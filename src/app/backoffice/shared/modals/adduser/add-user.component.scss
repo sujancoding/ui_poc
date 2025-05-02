@@ -1,0 +1,132 @@
+
+
+.task-header {
+font-size: 18px;
+    background-color:#123969;
+    color: white;
+    height: 50px;
+   
+}
+form{
+    height: 440px;
+    overflow: auto;
+    margin-top: -20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.filter-subTitle{
+  font-family: Roboto;
+  color: #444444;
+  margin-bottom: 7px;
+  font-size: 16px;
+  }
+.subGroup{
+    padding-left: 9px;
+    font-family: 'Roboto';
+}  
+
+.label{
+    margin-bottom: 5px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    color: #171717;
+    margin-top: 10px;
+    margin-left: -1px;
+  }
+.form-field{
+    font-size: 15px;
+    margin-left: 8px;
+}  
+
+.m-top{
+    margin-top: -15px;
+
+}
+
+button{
+    border-radius: 1cm;
+}
+.mat-mdc-button{
+    width: 24%;
+    border-radius: 1cm;
+    color: white;
+    height: 42px;
+    background-color: #123969;
+}
+
+.dialogButton{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+
+    
+}
+
+.message-block .error-message {
+    // Hidden by default
+    display: none;
+  }
+  
+  .message-block .error-message:first-child {
+    display: block;
+    color: #e8316f;
+    white-space: break-spaces;
+    font-size: 14px;
+    margin: -7px 0px 7px 7px;
+    font-family: 'Roboto';
+  }
+  
+.close-button{
+    width: 105px;
+    height: 45px;
+      border-radius: 0.2cm;
+      background-color: #F4F4F4;
+      cursor: pointer;
+      color: #123969;
+      font-family: 'Roboto';
+      font-size: 15px;
+  }
+  
+  .submit-button{
+    width: 140px;
+    height: 45px;
+    border-radius: 0.2cm;
+    margin-left: 10px;
+    background-color: #123969;
+    font-family: 'Roboto';
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+  }
+
+  .button-row{
+    place-content: stretch space-between;
+    align-items: stretch;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: right;
+    padding-top: 10px;
+    margin-top: -8px;
+  }
+
+  
+  ::ng-deep .mat-mdc-select-panel::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+}

@@ -1,0 +1,93 @@
+
+
+<div class="row" fxLayoutAlign="space-around" style="height: 1cm;">
+    <h5> Last update {{myDate | date}}</h5>
+    <div>
+      <button mat-button style="margin-top:15px;text-align: center;" (click)="refresh()">
+        <mat-icon class="refresh_icon">refresh</mat-icon>
+      </button>
+    </div>
+</div>
+<mat-form-field appearance="outline" style="height: 2.5cm;font-size: 12px;">
+    <mat-icon class="icon" matPrefix="search">search</mat-icon>
+    <mat-label class="custom-label">Search</mat-label>
+    <input matInput type="text" [(ngModel)]="searchValue">
+</mat-form-field>
+
+
+
+<!-- <div>
+ <table class="table">
+
+    <thead>
+
+       <tr>
+        <th>Country</th>
+        <th>Currency Code</th>
+        <th>Exchange Rate</th>
+      </tr> 
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor= "let rate of rates | searchCurrency:searchValue">
+      <td>
+        <span style="font-size: x-large;" class="flag-icon flag-icon-{{ rate.CCYFLAG }}"></span>
+       
+    </td>
+      <td>{{rate.CCYCODE}}</td>
+      <td>{{rate.EXCHRATE}}
+        <span *ngIf="errorMessage">Please Contact Admin</span>
+      </td> 
+
+      </tr>
+
+    </tbody>
+     
+ <div *ngIf="loader" class="loader-wrapper">
+  <mat-spinner [diameter]="70"> </mat-spinner>
+</div>
+  </table>
+
+</div> -->
+
+<div class="table-wrapper">
+  <div class="mat-elevation-z8" >
+    <div [ngStyle]="changeTableHeight()">
+      <table  class= "table" >
+       
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Currency Code</th>
+            <th>Exchange Rate</th>
+                </tr>
+        </thead>
+       
+        <tbody>
+
+          <tr *ngFor= "let rate of rates | searchCurrency:searchValue">
+          <td>
+            <span style="font-size: x-large;" class="{{ rate.CCYFLAG }}"></span>
+           
+        </td>
+          <td>{{rate.CCYCODE}}</td>
+          <td>{{rate.EXCHRATE}}
+            <span *ngIf="errorMessage">Please Contact Admin</span>
+          </td> 
+    
+          </tr>
+    
+        </tbody>
+       
+    </table>
+    </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div> 
+  <!--Loader-->
+  <div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+    </div>
+   </div>
+   

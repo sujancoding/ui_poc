@@ -1,0 +1,52 @@
+<!--Success receipt for sending money backoffice-->
+
+
+
+<mat-card appearance="outlined" class="card" id="my-node">
+    <mat-card-content>
+        <div class="text-center">
+            <mat-icon>check_circle</mat-icon>
+        </div>
+        <h3 class="title">Transfer Complete.</h3>
+
+        <mat-divider inset></mat-divider>
+
+        <div class="body">
+            <div fxLayout="row">
+                <p class="label">Recipient :</p>
+                <p class="value"> {{payeeName}} </p>
+            </div>
+
+            <div fxLayout="row">
+                <p class="label">Recipeint Number :</p>
+                <p class="value"> {{referenceNumber}} </p>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxLayout="row">
+                    <p class="label">Amount Sent :</p>
+                    <p class="value"> {{customerSends}} SGD </p>
+                </div>
+                <div fxLayout="row">
+                    <p class="label">Transfer Fee :</p>
+                    <p class="value"> {{adminFee}} SGD </p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="center" style="margin-top:61px ;">
+            <button style="width: 20%;border-radius: 0.2cm;height: 40px;" mat-raised-button color="primary"
+              (click)="downloadReceipt()"  type="button"> Download  </button>
+        </div>
+
+    </mat-card-content>
+</mat-card>
+
+
+<h6 style="text-align: center;">This Remittance is Initiated Successful !</h6>
+
+<div class="text-center">
+    <a routerLink="/agent/agent-sendmoney" routerLinkActive="active">Go Back!</a>
+</div>

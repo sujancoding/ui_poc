@@ -1,0 +1,220 @@
+<!-- <div class="header mat-elevation-z1">
+    <div class="row">
+    <h5 class="welcome-text"> Hello {{userName | titlecase}} ! </h5>
+    <h5> {{myDate | date}}</h5> 
+    </div>
+</div> -->
+
+<!--Table-->
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      <div [style.height.px]="changeTableHeight()" [style.overflow-y]="getOverFlow()"> 
+      <table class="table">
+        <thead>
+          <tr>
+            <th rowspan="2">CURRENCY </th>
+            <th colspan="2">TO CONSUMER</th>
+            <th colspan="2">TO CORPORATE</th>
+            <th colspan="2">TO AGENT</th> 
+            <th rowspan="2">LAST UPDATED BY</th>
+            <th rowspan="2">ACTIONS</th>
+            </tr>
+            <tr>
+              <th>Org</th>
+              <th>Bank</th>
+        
+              <th>Org</th>
+              <th>Bank</th>
+        
+              <th>Org</th>
+              <th>Bank</th>
+              </tr>
+      
+        </thead>
+    
+        <tbody>
+         
+    
+            <tr *ngFor="let commissionArrayList of commissionArrayList | keyvalue  "  >
+              <td> {{commissionArrayList.key}} </td>
+              <!--Consumer Org-->
+              <td>
+                  <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                      <mat-label class="custom-label">Shared</mat-label>
+                      <input matInput value="{{commissionArrayList.value.individual.orgShared}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                      <mat-label class="custom-label">Ours</mat-label>
+                      <input matInput value="{{commissionArrayList.value.individual.orgOurs}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                  </mat-form-field>
+  
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                    <mat-label class="custom-label">They</mat-label>
+                    <input matInput value="{{commissionArrayList.value.individual.orgThey}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                </mat-form-field>
+  
+                </div>
+                
+              </td>
+               <!--Consumer Bank-->
+              <td >
+                <div fxLayout="row">
+                  <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Shared</mat-label>
+                        <input matInput value="{{commissionArrayList.value.individual.bankShared}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                      <mat-label class="custom-label">Ours</mat-label>
+                      <input matInput value="{{commissionArrayList.value.individual.bankOurs}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                  </mat-form-field>
+  
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                    <mat-label class="custom-label">They</mat-label>
+                    <input matInput  value="{{commissionArrayList.value.individual.bankThey}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                </mat-form-field>
+  
+                </div>
+
+                </div>
+              </td>
+
+               <!--Corporate Org-->
+              <td >
+                <div fxLayout="row">
+                  <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Shared</mat-label>
+                        <input matInput value="{{commissionArrayList.value.corporate.orgShared}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                      <mat-label class="custom-label">Ours</mat-label>
+                      <input matInput value="{{commissionArrayList.value.corporate.orgOurs}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                  </mat-form-field>
+  
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                    <mat-label class="custom-label">They</mat-label>
+                    <input matInput value="{{commissionArrayList.value.corporate.orgThey}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                </mat-form-field>
+  
+                </div>
+                </div>
+              </td>
+
+               <!--Corporate Bank-->
+               <td >
+                <div fxLayout="row">
+                  <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Shared</mat-label>
+                        <input matInput value="{{commissionArrayList.value.corporate.bankShared}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                      <mat-label class="custom-label">Ours</mat-label>
+                      <input matInput value="{{commissionArrayList.value.corporate.bankOurs}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                  </mat-form-field>
+  
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                    <mat-label class="custom-label">They</mat-label>
+                    <input matInput value="{{commissionArrayList.value.corporate.bankThey}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                </mat-form-field>
+  
+                </div>
+                </div>
+              </td>
+
+               <!--Agent Org-->
+               <td >
+                <div fxLayout="row">
+                  <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Shared</mat-label>
+                        <input matInput value="{{commissionArrayList.value.agent.orgShared}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                      <mat-label class="custom-label">Ours</mat-label>
+                      <input matInput value="{{commissionArrayList.value.agent.orgOurs}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                  </mat-form-field>
+  
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                    <mat-label class="custom-label">They</mat-label>
+                    <input matInput value="{{commissionArrayList.value.agent.orgThey}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                </mat-form-field>
+  
+                </div>
+                </div>
+              </td>
+
+               <!--Agent Bank-->
+               <td >
+                <div fxLayout="row">
+                  <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Shared</mat-label>
+                        <input matInput value="{{commissionArrayList.value.agent.bankShared}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                      <mat-label class="custom-label">Ours</mat-label>
+                      <input matInput value="{{commissionArrayList.value.agent.bankOurs}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                  </mat-form-field>
+  
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                    <mat-label class="custom-label">They</mat-label>
+                    <input matInput value="{{commissionArrayList.value.agent.bankThey}}" [disabled]="isFieldDisabled" [readonly]="isFieldReadOnly">
+                </mat-form-field>
+  
+                </div>
+                </div>
+              </td>
+
+
+              <td > {{commissionArrayList.value.updatedBy}} </td>
+              <td>
+                <div fxLayout="row">
+                  <div class="example-button-container">
+                    <button mat-icon-button type="button" (click)="openEditDialog($event,commissionArrayList)" class="icon_button" >
+                      <mat-icon class="create-icon">create</mat-icon> 
+                    </button>
+                  </div>
+                  <div class="example-button-container">
+                    <button mat-icon-button type="button" class="icon_button" [disabled]="isDisableDeleteIcon">
+                      <mat-icon>delete</mat-icon> 
+                    </button>
+                    </div>
+                    </div>
+              </td>
+            </tr>
+         
+    
+        </tbody>
+    
+      </table>
+    </div>
+    <!--Pagination-->
+    <mat-paginator class="pagination-class"
+    [length]="commissionArrayList.length"
+    [pageSize]="itemsPerPage"
+    [pageIndex]="p - 1"
+    (page)="handlePageChange($event)"
+    ></mat-paginator>
+      </div>
+      <!--Loader-->
+      <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+      </div>
+    </div>
+
+      
+
+    <!-- <div class="addApplicant">
+        <button class="btnAdd" [disabled]="isDisableAddButton" (click)="addCommission()"  mat-mini-fab aria-label="Example icon button with a plus icon" >
+          <mat-icon> add </mat-icon>
+        </button>
+    </div> -->

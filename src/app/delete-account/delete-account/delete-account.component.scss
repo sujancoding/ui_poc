@@ -1,0 +1,89 @@
+.center-element{
+    text-align: center;
+}
+
+.header-1{
+    font-weight: 600;
+    font-size: 19px;
+    font-family: 'Roboto';
+}
+
+.header-2{
+    font-family: 'Roboto';
+    font-size: 16px;
+    position: relative;
+    top: -10px;
+    color: #474747;
+}
+
+.container{
+    border: 1px dotted rgb(0, 0, 0);
+    height: 150px;
+    width: 100%;
+    border-radius: 10px;
+    margin-left: -1px;
+}
+
+.left-element{
+    text-align: left;
+    margin-left: 10px;
+    margin: 12px;
+}
+
+.header-3{
+    font-family: 'Roboto';
+    font-size: 16px;
+}
+
+.phone-icon{
+    font-size: 50px;
+    position: relative;
+    top: -9px;
+    left: -22px;
+    color: #5b5b5b;
+}
+
+.email-icon{
+    font-size: 50px;
+    position: relative;
+    top: -9px;
+    color: #5b5b5b;
+}
+
+.values{
+    font-family: 'Roboto';
+    font-size: 16px;
+    position: relative;
+    top: -10px;
+    color: #5b5b5b;
+}
+
+.tel-value{
+    font-family: "Roboto";
+    font-size: 16px;
+    position: relative;
+    top: -10px;
+    left: -3px;
+    color: #5b5b5b;
+}
+
+.center-container{
+    height: 100vh;
+    display: flex;
+    background-size: cover;
+    align-items: center;  
+    justify-content: center;
+}
+
+.container-layout{
+    max-width: 400px;
+    min-width: 280px;
+   // margin: 12px auto;
+    vertical-align: middle;
+    position: relative;
+    top: -90px;
+}
+
+.sub-container{
+    margin: 10px;
+}

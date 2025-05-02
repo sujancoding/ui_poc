@@ -1,0 +1,388 @@
+@import "src/assets/styles/buttons/button.scss";
+@import 'swiper/css';
+  @import 'swiper/css/navigation';
+  @import 'swiper/css/pagination';
+
+//@import "swiper/swiper.scss";
+.circular-btn {
+  width: 79px;
+  height: 75px;
+  }
+  
+  p .c {
+    white-space: pre;
+  }
+ 
+
+  
+
+  .row-content{
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+    left: 234px;
+    top: -125px;
+  }
+  .mySwiper{
+    width: 509px;
+    height: 162px;
+  }
+  
+  .name {
+    font-size: 16px;
+    margin-bottom: 0;
+    text-align: center;
+    margin-top: 7px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    line-height: 25px;
+    color: #1C1939;
+    cursor: pointer;
+  }
+  
+  small {
+    padding-left: 5px;
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    color: #929292;
+  }
+  .icon-display {
+    transform: scale(2);
+ }
+  .add-payee {
+    margin-top: 11px;
+  }
+  
+  .payee {
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 0;
+    margin-top: 7px;
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 20px;
+    color: #37474f;
+  }
+  
+  .circle {
+   background: #e0e0e0;
+    padding-top: 0px;
+    margin-right: 6px;
+    width: 79px;
+    height: 75px;
+    border-radius: 2cm;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .human-icon {
+    color: #a3a3a3;
+    font-size: 18px;
+    margin-top: 0.4cm;
+  
+  
+  }
+
+  .payee-icon{
+    font-size: 46px;
+    position: relative;
+    bottom: 16px;
+    right: 11px;
+  
+  }
+  
+  .flex {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+  }
+  
+  .money-sent {
+    color: #9EA6BE;
+    padding-top: 0.2cm;
+    font-size: 13px;
+  }
+  
+  .payeeName {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 650;
+    font-size: 14px;
+    padding-left: 2px;
+    margin-top: 17px;
+    color: #1C1939;
+  }
+  
+  .subGroups {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 0px;
+    // padding-left: 9px;
+    color: #2d2d2d;
+    white-space: nowrap;
+  }
+  
+  
+  .title {
+    font-family: "Roboto";
+    /* font-style: normal; */
+    /* font-weight: 700; */
+    font-size: 18px;
+    line-height: 0px;
+    color: #1C1939;
+    display: inline;
+  
+  }
+  
+  .example-card {
+    border: 0.1px solid gainsboro;
+    border-radius: 0.4cm;
+    // height: 102px;
+    height: 85px;
+    width: 100%;
+    margin-left: 0px;
+  }
+  
+  .routerLink {
+    margin-right: 15px;
+    color: #123969;
+    cursor: pointer;
+  }
+  
+  
+  .scrollbar {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 25px;
+  }
+  
+  
+  .flex_box {
+    display: flex;
+    justify-content: space-between;
+    height: 48px;
+    /* margin-top: -8px; */
+    margin-left: 7px;
+  }
+  
+  .align_left {
+    font-weight: bold;
+    display: inline;
+    font-family: 'Roboto';
+  }
+  
+  .align_right {
+    text-align: right;
+    margin-top: 18px;
+    color: #123969;
+    margin-right: 19px;
+    border-radius: 1cm;
+    height: 33px;
+    background-color: #ffffff;
+  }
+  
+ 
+  .scroll {
+    width: 95%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: -1px;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+  }
+  
+  .wallet-icon {
+    font-size: 37px;
+  }
+  
+  .box {
+    padding: 11px;
+    height: 57px;
+    // width: 64px;
+    width: 57px;
+    background-color: #adcdf463;
+    // color: #123969;
+    // color: #363636;
+    // border-radius: 13px;
+    border-radius: 28px;
+    // margin-top: -14px;
+    margin-left: 12px;
+    margin-top: 12px;;
+  }
+  
+  .card-button {
+    height: 21px;
+    margin-top: -6px;
+    border-radius: 1cm;
+    background-color: #77cbfd85;
+    line-height: 20px;
+  }
+  
+  .divider {
+    margin-top: -4px;
+    width: 65%;
+    margin-left: 86px;
+  }
+  
+  .arrow-icon {
+    text-align: right;
+    margin-top: -8px;
+    margin-right: 10px;
+    color: #b7b7b7;
+  }
+
+  @media only screen and (min-width: 768px) { /* Anything larger than a tablet */
+    .align_left {
+      font-size: 24px; /* Increases every font size */
+    }
+  } 
+
+  .container-section{
+    height: 234px;
+    border: 1px solid grey;
+    border-radius: 26px;
+  }
+
+  .rectangular-upper-container{
+    background-color: #123969;
+    height: 70px;
+    border-top-left-radius: 26px;
+    border-top-right-radius: 26px;
+  }
+
+  .profile-circle{
+    background: #dbdbdb;
+    padding-top: 32px;
+    margin-right: 6px;
+    width: 95px;
+    height: 95px;
+    border-radius: 7cm;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    bottom: 37px;
+    left: 20px;
+  }
+
+  .profile-icon{
+    font-size: 58px;
+    position: relative;
+    right: 17px;
+    bottom: 31px;
+  }
+
+  .logged-in-user{
+    line-height: 0px;
+    margin-top: 5px;
+    color: #979797;
+    font-family: 'Roboto';
+  }
+
+  .user-name{
+    line-height: 0px;
+    color: #000000;
+    font-family: 'Roboto';
+  }
+
+  .profile-info{
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+    left: 12px;
+  }
+
+  .label-1{
+    line-height: 0px;
+    font-family: 'Roboto';
+    color: black;
+  }
+
+  .label-2{
+    line-height: 0px;
+    margin-top: 10px;
+    font-family: 'Roboto';
+    color: #123969;
+    font-size: 29px;
+  }
+
+  /* Set top-lef and bottom-left corner radius */
+/*TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+:host ::ng-deep .mat-form-field-outline-start {
+  border-radius: 15px 0 0 15px !important;
+  min-width: 15px !important;
+}
+
+/* Set top-right and bottom-right corner radius */
+/*TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+:host ::ng-deep .mat-form-field-outline-end {
+  border-radius: 0 15px 15px 0 !important;
+}
+
+  .reduce-width{
+    width: 30% !important;
+   
+    font-size: 14px;
+   
+ }
+ .search-btn {
+  height: 52px;
+  background-color: #123969;
+  color: white;
+  margin-top: 3px;
+  font-size: 17px;
+  font-family: 'Roboto';
+  margin-left: 10px;
+  border-radius: 16px;
+  width: 90px;
+}
+.message-block .error-message  {
+  // Hidden by default
+  display: none;
+}
+.message-block .error-message:first-child {
+  display: block;
+  font-size: 14px;
+  white-space: nowrap;
+  color: red;
+  margin-left: 21px;
+  margin-top: 7px;
+}
+.tags
+{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.status-tag
+{
+  line-height: 20px;
+  padding: 5px 10px;
+  margin: 3px 0;
+  display: inline-block;
+  font-family: Roboto;
+  white-space: nowrap;
+}
+
+.small-container{
+  border: 1px solid #e6e6e6;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 12px;
+  left: 5px;
+  border-radius: 5px;
+
+}

@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /#/authentication/login
+Disallow: /#/authentication/login-business
+Disallow: /#/authentication/login-agent
+Disallow: /admin/
+Allow: /
+
+Sitemap: https://www.aptonline.com.sg/sitemap.xml

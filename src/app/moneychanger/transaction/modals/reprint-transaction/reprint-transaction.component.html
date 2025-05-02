@@ -1,0 +1,37 @@
+<!-- Mat Dialog - toolbar -->
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <span> Reprint Transaction </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+            <mat-icon>close</mat-icon>
+        </span>
+    </mat-toolbar>
+</h4>
+
+<div class="content">
+
+<!--Place mat form field in center where label is 'Transaction ID'-->
+<!--Place close and print button below the mat form field-->
+
+<!-- Onclick print button : trigger a function called print(transactionId) where it contains one parameter , should pass user feed transaction ID -->
+ <!-- Onclick close button : close the dialog using [mat-dialog-close]="true" -->
+ <form [formGroup]="txnForm">
+    <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width:363px">
+        <mat-label class="custom-label">Transaction ID</mat-label>
+        <input matInput formControlName="txnId" [formControl]="txnForm.controls['txnId']">
+    </mat-form-field>
+    <span class="error-message" *ngIf="txnForm.controls['txnId'].hasError('required') &&
+        txnForm.controls['txnId'].touched"> Transaction Id Required </span>
+    <span class="error-message" *ngIf="txnForm.controls['txnId'].hasError('maxlength')"> {{'transactionIdMaxlength'|label}} </span>
+    <span class="error-message" *ngIf="txnForm.controls['txnId'].hasError('minlength')"> {{'transactionIdMinlength'|label}} </span>
+    <span class="error-message" *ngIf="txnForm.controls['txnId'].hasError('pattern')"> {{'onlyNumbersAndDecimalPoint'|label}} </span>
+    <div class="btn">
+        <button type="button" class="close-btn" mat-dialog-close>Close</button>
+        <button type="button" [disabled]="!txnForm.valid" (click)="print()" class="print-btn">Print</button>
+    </div>
+    </form>
+</div>
+
+
+
+

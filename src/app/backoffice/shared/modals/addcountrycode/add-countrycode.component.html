@@ -1,0 +1,59 @@
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+      <span> Add Country Code </span>
+      <span [mat-dialog-close]="true" style="cursor: pointer;">
+        <mat-icon>close</mat-icon>
+        </span>
+  </mat-toolbar>
+    </h4>
+<div style="margin:5px;">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- <div  style="text-align: center;margin-top: 95px;">
+<mat-form-field  style="max-width: 60%;" appearance="outline">
+    <mat-label class="custom-label">Country Code</mat-label>
+        <input matInput type="text" formControlName="countryCode" [formControl]="form.controls['countryCode']" [matAutocomplete]="auto">
+        <mat-autocomplete  #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        
+</mat-form-field>
+</div> -->
+
+<div fxLayout="row" fxLayoutAlign="space-around">
+  <div fxflex="13">
+    <!-- <mat-form-field  appearance="outline">
+      <mat-label class="custom-label">Country Code</mat-label>
+      <input matInput type="text" formControlName="countryCode" [formControl]="form.controls['countryCode']" [matAutocomplete]="auto">
+      <mat-autocomplete  #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+      </mat-autocomplete>
+    </mat-form-field> -->
+    <mat-form-field appearance="fill">
+      <mat-label class="custom-label">Select Country Code</mat-label>
+      <mat-select formControlName="countryCode" [formControl]="form.controls['countryCode']">
+        <mat-option *ngFor="let countryCode of countryCode" [value]="countryCode" > {{countryCode}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div fxflex="13">
+    <mat-form-field  appearance="outline">
+      <mat-label class="custom-label">Exchange Rate</mat-label>
+      <input matInput type="text" formControlName="exchangeRate" [formControl]="form.controls['exchangeRate']">
+      <mat-error>
+        <small *ngIf="form.controls['exchangeRate'].hasError('pattern')"  class="text-danger support-text"> Enter Valid Exchange Rate </small>
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>
+<div class="addButton">
+<button mat-raised-button *ngIf="submitButton" color="primary" class="mat-button" [disabled]="!form.valid" [mat-dialog-close]="true" type="submit">Add</button>
+<mat-spinner class="loader" diameter="40" *ngIf="loader"></mat-spinner>
+</div>
+
+</form>
+</div>

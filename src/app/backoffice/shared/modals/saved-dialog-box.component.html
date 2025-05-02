@@ -1,0 +1,50 @@
+<div *ngIf="showValidMessage">
+    <div class="show-message" style="color:#27AE60;">
+        <p class="font-label">Record Saved Successfully.</p>
+    </div>
+
+    <div class="routerLink">
+        <a [mat-dialog-close]="true" routerLinkActive="active">Ok</a>
+    </div>
+</div>
+
+<div *ngIf="showValidMessageForMc">
+    <div class="show-message" style="color:#27AE60;">
+        <p class="font-label">Record Saved Successfully.</p>
+    </div>
+
+    <div class="routerLink">
+        <a [mat-dialog-close]="true" [routerLink]="['/moneychanger-deals/view-deals']" routerLinkActive="active">Ok</a>
+    </div>
+</div>
+
+<div *ngIf="showValidMessageForMcTT">
+    <div class="show-message" style="color:#27AE60;">
+        <p class="font-label">Record Saved Successfully.</p>
+    </div>
+
+    <div class="routerLink">
+        <a [mat-dialog-close]="true" [routerLink]="['/moneychanger-transaction/view-transaction']" routerLinkActive="active">Ok</a>
+    </div>
+</div>
+
+
+<div *ngIf="showInvalidMessage">
+    <div class="show-message" style="color: #cc3a3a;">
+        <p class="font-label" style="margin-left: -8px;"> {{showMessage}} </p>
+    </div>
+
+    <div class="routerLink">
+        <a [mat-dialog-close]="true" routerLinkActive="active">Ok</a>
+    </div>
+</div>
+
+<div *ngIf="showEmptyMessage">
+    <div class="show-message" style="color: #cc3a3a;">
+        <p class="font-label">The Exchange Rate should contain values</p>
+    </div>
+ 
+    <div class="routerLink">
+        <a [mat-dialog-close]="true" routerLinkActive="active">Ok</a>
+    </div>
+</div>

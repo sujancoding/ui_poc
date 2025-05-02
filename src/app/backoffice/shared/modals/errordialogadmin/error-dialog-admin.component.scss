@@ -1,0 +1,84 @@
+.Position{
+    text-align: center;
+    margin-top: 45px;
+}
+
+.error-icon{
+    transform: scale(3);
+    color: red;
+    position: relative;
+    top: -20px;
+}
+
+.warning-icon{
+    transform: scale(3);
+    color: #ffd200;
+    position: relative;
+    top: -20px;
+}
+
+.text-message{
+    font-family: 'Roboto';
+    line-height: 6px;
+    color: #363636;
+}
+
+.text-message-bold{
+    font-family: 'Roboto';
+    width: 490px;
+    height: 80px;
+    padding: 8px;
+}
+
+.error-message-container{
+    width: 500px;
+    background-color: #ff696945;
+    height: 80px;
+    overflow-y: scroll;
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.warning-message-container{
+    width: 500px;
+    background-color:  #fff88245 ;
+    height: 80px;
+    overflow-y: scroll;
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message-container::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: transparent;
+  }
+  
+  .error-message-container::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background-color: rgba(156, 204, 234, 0.5);
+    box-shadow: 0 0 1px rgba(87, 86, 86, 0.5);
+  }
+
+  .warning-message-container::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: transparent;
+  }
+  
+  .warning-message-container::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background-color: rgba(156, 204, 234, 0.5);
+    box-shadow: 0 0 1px rgba(87, 86, 86, 0.5);
+  }
+
+.close-btn{
+    background-color: #123969;
+    color: white;
+}

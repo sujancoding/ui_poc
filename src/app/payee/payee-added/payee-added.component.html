@@ -1,0 +1,88 @@
+<div  class="text-center">
+    <h4 class="success"> Success!</h4>
+    </div>
+    <div class="wholecard">
+    <mat-card appearance="outlined" class="card">
+        <mat-card-content>
+            <div class="text-center">
+        <mat-icon>check_circle</mat-icon>
+        </div>
+        <h3>Payee added.</h3>
+    
+        <mat-divider inset></mat-divider>
+        <div class="row1" >
+        <div class="flex">
+            <h4>
+              <small>Recipeint</small>
+              {{nameTest}}
+            </h4>
+          </div>
+
+          <div class="flex">
+            <h4>
+              <small>Relationship</small>
+              {{relationship}}
+            </h4>
+          </div>
+        </div>
+        
+          <div class="flex">
+            <h4>
+              <small>Recipeint Number</small>
+              {{accNumTest}}
+            </h4>
+          </div>
+        
+    
+          <div class="row2" fxLayoutGap="80px">
+            <div class="flex"  style="margin-inline: 10px;">
+                <h4>
+                  <small>Nationality</small>
+                  {{payeeNationality}}
+                </h4>
+              </div>
+        
+              <div class="flex">
+                <h4>
+                  <small>Bank Name</small>
+                 {{bankName}}
+                </h4>
+              </div>
+                
+           </div>        
+    
+            
+           <div class="row3" fxLayoutGap="50px">
+            <div class="flex" style="margin-inline: 1px;">
+                <h4>
+                  <small class="noWrap">Bank Swift Code</small>
+                  {{bankSwiftcode ? bankSwiftcode : "N/A"}}
+                </h4>
+              </div>
+        
+              <div class="flex">
+                <h4>
+                  <small class="noWrap">Bank Location</small>
+                  {{bankLocation}}
+                </h4>
+              </div>
+                
+           </div>   
+           
+           <div class="flex">
+            <h4>
+              <small class="noWrap">{{bankCodeType | titlecase}}</small>
+              {{bankRoutingCode ? bankRoutingCode : "N/A"}}
+            </h4>
+          </div>
+         
+        
+    </mat-card-content>
+    </mat-card>
+    </div>
+    
+    <h6 style="text-align: center;">Payee will be approved within 24 hours</h6>
+    
+    <div class="text-center">
+    <a (click)="goBack()" routerLinkActive="active">Go Back!</a>
+    </div>

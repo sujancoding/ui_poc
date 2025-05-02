@@ -1,0 +1,105 @@
+.buttonApplyfilter {
+  background-color: #123969;
+  color: white;
+  height: 48px;
+  margin-top: 5px;
+  width: 100px;
+  margin-left: 11px;
+}
+
+.p {
+    font-family: 'Roboto';
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 25px;
+    margin-bottom: 3px;
+}
+
+.message-block .error-message {
+    // Hidden by default
+    display: none;
+}
+
+.message-block .error-message:first-child {
+    display: block;
+    color: #e8316f;
+    margin-bottom: 5px;
+    margin-top: -20px;
+    margin-left: 6px;
+    font-size: 14px;
+    font-family: "Roboto";
+    white-space: break-spaces;
+}
+
+.filter-container {
+    display: flex;
+    place-content: flex-start;
+}
+
+
+
+.fliter-btn {
+    display: flex;
+    place-content: initial;
+    margin-left: 20px;
+}
+
+.disabled {
+    opacity: 0.5;
+   pointer-events: none;
+}
+
+.save-icon{
+    color: #58bcc0;
+}
+
+.center-content {
+    position: relative;
+    left: -14px;
+  }
+  
+ 
+  .search-filter-1{
+padding-top: 10px;
+    background-color: white;
+    /* margin-left: 12px; */
+    /* margin-right: 12px; */
+    border-radius: 10px;
+    height: 90px;
+    margin-bottom: 17px;
+  }
+  
+//biz asked to show border for td and th
+// td{
+//     text-align: left;
+//       padding: 7px;
+//       font-style: normal;
+//       font-family: 'Roboto';
+//       font-weight: 540;
+//       font-size: medium;
+//       border: 0.1px solid #d3d3d3 !important;
+//   }
+  
+//   th{
+//     padding: 10px;
+//     color: #252525d6;
+//     font-weight: 600;
+//     opacity: 20;
+//     font-size: 14px;
+//     font-family: 'Roboto';
+//     background-color: #f0f0f0;
+//     border: 0.1px solid #d3d3d3;
+//   }
+
+  .picture-as-pdf-icon{
+    color: black;
+    font-size: 26px;
+  }
+
+  .negative-amount{
+    color: red;
+  }
+  
+  .positive-amount{
+    color: rgb(0, 0, 0);
+  }

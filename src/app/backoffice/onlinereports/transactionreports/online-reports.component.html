@@ -1,0 +1,390 @@
+<!-- Advanced Filter Section -->
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter">
+ 
+    <div  fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between">
+
+    <div class="inner-container">
+
+      <button mat-raised-button (click)='xpandStatus = !xpandStatus' class="applyFilter-btn">
+        <mat-icon class="add-filter-icon">add</mat-icon>
+         Filter
+      </button>
+
+    </div>
+  
+  </div>
+    <mat-divider></mat-divider>
+
+    <div class="custom-filter-values" style="overflow-y: scroll;">
+      <div *ngFor="let filterValues of filterValues" fxLayout="column" class="margin-space" fxLayoutGap="2px">
+        <p class="filter-key"> {{filterValues.fieldName ? filterValues.fieldName : ""}} </p>
+     
+          <p class="filter-value"
+    [matTooltip]="filterValues.value"
+    [matTooltipDisabled]="filterValues.value.length <= 40"
+    matTooltipClass="custom-tooltip"
+  >
+    {{ getTruncatedText(filterValues.value, 40) }}
+        </p>
+     
+      </div>
+
+
+    </div>
+
+
+    
+    <div fxLayout="column" fxLayoutGap="1px">
+
+      <div class="div-height" fxLayout="row" fxLayoutGap="10px">
+
+
+
+      </div>
+      <mat-accordion #accordion="matAccordion">
+        <mat-expansion-panel style="width: fit-content;background-color: #ffffff;z-index: 999;position: relative;margin-top: -4px;"
+          #mapanel="matExpansionPanel" [(expanded)]="xpandStatus">
+
+          <form [formGroup]="form">
+
+          <h4 class="filter-title"> Filters </h4>
+
+          <div class="content">
+
+<!-- Sender Party - Name,Nric,PhoneNo,Type -->
+          <div fxLayout="column" class="row-items">
+
+            <h4 class="filter-header"> Sender Party </h4>
+            <div fxLayout="row" fxLayoutAlign="space-around" style="margin-left: -5px;">
+ <!-- Customer Name Field-->
+              <div>
+                <mat-form-field style="width: 370px;" appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Customer Name</mat-label>
+                  <input matInput [(ngModel)]="searchCustomerName" [formControl]="form.controls['accountTitle']"
+                    type="text" placeholder="Enter Customer Name" (input)="form.controls.accountTitle.setValue(form.controls.accountTitle.value.toUpperCase())">
+                </mat-form-field>
+                <small class="error-message" *ngIf="form.controls['accountTitle'].hasError('pattern')" > {{'alphabetsWithSpecificSplChars'| label}} </small>  
+              </div>
+<!-- NRIC field -->
+              <div fxFlex="20">
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">NRIC </mat-label>
+                  <input matInput maxlength="9"
+                    (input)="form.controls.idNumber.setValue(form.controls.idNumber.value.toUpperCase())"
+                    [(ngModel)]="idNbr" [formControl]="form.controls['idNumber']" type="text"
+                    placeholder="Enter NRIC No">
+                  <mat-icon matPrefix class="formfield-icon">note</mat-icon>
+                  <mat-hint align="end">{{form.controls['idNumber'].value?.length || 0}}/9</mat-hint>
+                </mat-form-field>
+                <small class="idNbr-error-message" *ngIf="form.controls['idNumber'].hasError('pattern')">
+                  {{'NRIC_Validation' | label}} </small>
+              </div>
+<!-- Customer Phone Number Field -->
+              <div fxFlex="20">
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">PhoneNumber</mat-label>
+                  <input matInput maxlength="15" [(ngModel)]="phnNumber" [formControl]="form.controls['phoneNumber']"
+                    placeholder="Enter Phone No">
+                  <mat-icon matPrefix class="formfield-icon">phone</mat-icon>
+                  <mat-hint align="end">{{form.controls['phoneNumber'].value?.length || 0}}/15</mat-hint>
+                  <mat-error>
+                    <small *ngIf="form.controls['phoneNumber'].hasError('maxlength')">Max 15 numbers</small>
+                    <small *ngIf="form.controls['phoneNumber'].hasError('pattern')">{{'onlyNumbers'| label}}</small>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+<!-- Customer Type Field -->
+              <div fxFlex="20">
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Type</mat-label>
+                  <mat-select [formControl]="form.controls['customerType']" #selectedType placeholder="Select Type">
+                    <mat-option [value]="type" (click)="selectedOffer = type" *ngFor="let type of offers"> {{type}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            </div>
+          </div>
+<!-- Reciever Party - Payee Name,PhoneNo,AgentName,ForeginCurrency-->
+          <div fxLayout="column" class="row-items">
+
+            <h4 class="filter-header"> Receiving Party </h4>
+            <div fxLayout="row" fxLayoutAlign="space-around" style="margin-left: -5px;">
+ <!-- Payee Name Field-->
+              <div>
+                <mat-form-field  style="width: 370px;" appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Payee Name</mat-label>
+                  <input matInput [(ngModel)]="payeeName" (input)="form.controls.payeeName.setValue(form.controls.payeeName.value.toUpperCase())" [formControl]="form.controls['payeeName']" type="text"
+                    placeholder="Enter Payee Name">
+                  <mat-error>
+                    <small *ngIf="form.controls['payeeName'].hasError('pattern')">{{'splCharsValidation' | label}} </small>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+<!-- Payee PhoneNumber Field-->
+              <div fxFlex="20">
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">PhoneNumber</mat-label>
+                  <input matInput maxlength="15" [(ngModel)]="payeePhnNumber"
+                    [formControl]="form.controls['payeePhoneNumber']" placeholder="Enter Phone No">
+                  <mat-hint align="end">{{form.controls['payeePhoneNumber'].value?.length || 0}}/15</mat-hint>
+                  <mat-error>
+                    <small *ngIf="form.controls['payeePhoneNumber'].hasError('maxlength')">Max 15 numbers</small>
+                    <small *ngIf="form.controls['payeePhoneNumber'].hasError('pattern')">{{'onlyNumbers'|
+                      label}}</small>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+<!-- AgentName Field-->
+              <div fxFlex="20">
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Agent Name</mat-label>
+                  <input matInput [(ngModel)]="agentName" (input)="form.controls.agentName.setValue(form.controls.agentName.value.toUpperCase())" [formControl]="form.controls['agentName']" type="text"
+                    placeholder="Enter Agent Name">
+                </mat-form-field>
+              </div>
+<!-- ForeginCurrency Field -->
+              <div fxFlex="20">
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label"> Foreign Currency</mat-label>
+                  <span matPrefix class="{{selectedCountryCode}}"
+                    style="position: relative;top: -4px; left: -4px;"></span>
+                  <mat-select [(value)]="selectedCountryCode" (selectionChange)="selectCurrencyCode(selectedCountryCode)"
+                    placeholder="--Select--" [formControl]="form.controls['foreginCurrency']">
+                    <mat-option *ngFor="let country of currencyCodeArray" [value]="country.FLAG">
+                      <span class="{{country.FLAG}}"></span>
+                      {{country.CURRENCYCODE}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            </div>
+          </div>
+
+           <!-- Transaction Status  -->
+           <div fxLayout="column" class="row-items">
+            <h4 class="filter-header"> Transaction Status  </h4>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+<!-- Transaction Status Field-->
+              <div fxFlex="32.7">
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Transaction Status</mat-label>
+                  <mat-select #selectedStatus [formControl]="form.controls['status']" placeholder="Status" multiple>
+                    <mat-option *ngFor="let status of getTransactionStatus" [value]="status.NO"> {{status.TXNSTATUS}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex="32.7">
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Payment Mode</mat-label>
+                  <mat-select #selectedPaymentMode [formControl]="form.controls['paymentMode']" placeholder="Payment Mode">
+                    <mat-option value="">--Select--</mat-option>
+                    <mat-option value="PayNow">PayNow</mat-option>
+                    <mat-option value="Cash">Cash</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex="32.7">
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Suspicious</mat-label>
+                  <mat-select #selectedSuspicious [formControl]="form.controls['suspicious']" placeholder="Suspicious">
+                    <mat-option value="">--Select--</mat-option>
+                    <mat-option value="Yes">Yes</mat-option>
+                    <mat-option value="No">No</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              
+            </div>
+
+
+
+          </div>
+
+                    <!-- Authorised Status & Day Range - Transaction Status,Day Range , StartDate , EndDate -->
+                    <div fxLayout="column" class="row-items">
+                      <h4 class="filter-header">  Authorised Date </h4>
+                      <div fxLayout="row" fxLayoutGap="12px">
+          
+          <!-- Day Range Field-->
+                        <div>
+                          <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 322px;">
+                            <mat-label class="custom-label">Day Range</mat-label>
+                            <mat-select #selectedAuthoriseDayRange (selectionChange)="onSelectionChange($event,selectedAuthoriseDayRange.value,'AUTHORISED')"
+                              placeholder="Date Range" [formControl]="form.controls['authorisedDayRange']">
+                              <mat-option *ngFor="let days of daysRange" [disabled]="days.DISABLED" [value]="days.DAYS"> {{days.DAYRANGE}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+          <!-- Start Date Field-->
+                        <div>
+                          <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 330px;">
+                            <mat-label class="custom-label">Start Date</mat-label>
+                            <input matInput [matDatepicker]="authorisedDatePicker" placeholder="Start Date(MM/DD/YYYY)" [min]="minStartDate"
+                              [formControl]="form.controls['authorisedStartDate']" [disabled]="disableAuthorisedDateField" 
+                              (dateChange)="onAuthorisedStartDateChange($event)">
+                            <mat-datepicker-toggle matSuffix [for]="authorisedDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #authorisedDatePicker></mat-datepicker>
+                            <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                          </mat-form-field>
+                        </div>
+          <!-- End Date Field-->
+                        <div>
+                          <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 330px;">
+                            <mat-label class="custom-label">End Date</mat-label>
+                            <input matInput [matDatepicker]="authorisedDatePicker2" placeholder="End Date(MM/DD/YYYY)" 
+                              [formControl]="form.controls['authorisedEndDate']" [disabled]="disableAuthorisedDateField" [min]="minAuthorisedEndDate"
+                              [max]="maxAuthorisedEndDate" (dateChange)="onAuthorisedEndDateChange($event)">
+                            <mat-datepicker-toggle matSuffix [for]="authorisedDatePicker2"></mat-datepicker-toggle>
+                            <mat-datepicker #authorisedDatePicker2></mat-datepicker>
+                            <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                          </mat-form-field>
+                        </div>
+          
+          
+                      </div>
+          
+          
+          
+                    </div>
+
+                    
+  <!--Day Range -Day Range , StartDate , EndDate -->
+          <div fxLayout="column" class="row-items">
+            <h4 class="filter-header"> Transaction Date </h4>
+            <div fxLayout="row" fxLayoutGap="12px">
+
+<!-- Day Range Field-->
+              <div>
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 370px;">
+                  <mat-label class="custom-label">Day Range</mat-label>
+                  <mat-select #selectedDayRange (selectionChange)="onSelectionChange($event,selectedDayRange.value,'INITIATED')"
+                    placeholder="Date Range" [formControl]="form.controls['dayRange']">
+                    <mat-option *ngFor="let days of daysRange" [disabled]="days.DISABLED" [value]="days.DAYS"> {{days.DAYRANGE}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+<!-- Start Date Field-->
+              <div>
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 305px;">
+                  <mat-label class="custom-label">Start Date</mat-label>
+                  <input matInput [matDatepicker]="picker" placeholder="Start Date(MM/DD/YYYY)"
+                    [formControl]="form.controls['startDate']" [disabled]="disableDateField"
+                    [min]="minStartDate"
+                    (dateChange)="onStartDateChange($event)">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                </mat-form-field>
+              </div>
+<!-- End Date Field-->
+              <div>
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 305px;">
+                  <mat-label class="custom-label">End Date</mat-label>
+                  <input matInput [matDatepicker]="picker2" placeholder="End Date(MM/DD/YYYY)" 
+                    [formControl]="form.controls['endDate']" [disabled]="disableDateField" [min]="minEndDate"
+                    [max]="maxEndDate" (dateChange)="onEndDateChange($event)">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                  <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                </mat-form-field>
+              </div>
+
+
+            </div>
+
+
+
+          </div>
+
+          </div>
+
+          <mat-action-row style="padding: 0px !important;">
+            <div fxLayout="row" fxLayoutAlign="space-between" style="width: 100%;height: 53px;">
+ <!-- Close Button -->
+              <div>
+                <button  mat-flat-button class="close-button" (click)="xpandStatus = !xpandStatus" type="button">Close</button>
+              </div>
+            <div fxLayout="row">
+ <!-- Reset Button -->
+              <button mat-flat-button class="reset-button" (click)="resetFilter()" type="button">Reset</button>
+ <!-- Apply Filter Button -->
+              <button mat-flat-button class="submit-button" [disabled]="!form.valid"
+                (click)="applyFilter(searchCustomerName,idNbr,phnNumber,payeePhnNumber,payeeName,agentName)">
+                Fetch</button>
+            </div>
+            </div>
+          </mat-action-row>
+
+          </form>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
+
+    </div>
+
+ 
+
+
+
+
+</div>
+
+<span fxLayout="row"  style="margin-top: -14px;
+margin-left: -13px;
+margin-bottom: 14px;">
+  <p class="show-results">Showing</p> <p class="show-results" style="color: black;font-weight: 700;"> {{recordsCount ? recordsCount : ""}} </p> <p class="show-results">results</p> 
+ </span>
+
+<!--Table-->
+<div>
+  <div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      <div [ngStyle]="tableHeight()">
+        <table class="table">
+  
+          <thead>
+            <tr *ngIf="retrievedReportsData">
+              <th *ngFor="let headers of reportDatas[0] | keys"> {{headers | uppercase}} </th>
+            </tr>
+  
+  
+          </thead>
+  
+          <tbody *ngIf="retrievedReportsData">
+          
+            <tr *ngFor="let datas of reportDatas | slice: (p - 1) * itemsPerPage : p * itemsPerPage  ">
+              <td *ngFor="let list of datas | keys"> {{datas[list]}} </td>
+            </tr>
+  
+          </tbody>
+  
+          <tbody *ngIf="noReportsData">
+            <tr>
+              <td>No Datas Found</td>
+            </tr>
+          </tbody>
+  
+        </table>
+      </div>
+      <!--Pagination-->
+      <mat-paginator class="pagination-class"
+  [length]="reportDatas.length"
+  [pageSize]="itemsPerPage"
+  [pageIndex]="p - 1"
+  (page)="handlePageChange($event)"
+  ></mat-paginator>
+    </div>
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+    </div>
+  </div>
+  </div>

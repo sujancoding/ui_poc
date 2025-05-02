@@ -1,0 +1,86 @@
+.card{
+   background-color: #ffffff;
+   border: 0.1px solid #bfbfbf;
+   border-radius: 5px;
+
+    
+    }
+    mat-icon{
+       color: #123969;
+       font-size: 40px;
+      
+    }
+
+    .flex{
+   
+      margin: 0 auto;
+      
+      h4{
+         font-size: 14px;
+         font-weight: 500;
+         margin-bottom: 4px;
+         color: #000000;
+         font-family: 'Roboto';
+        
+        small{
+         font-size: 14px;
+         opacity: 0.5;
+         display: block;
+        
+         color: #6b6b6b;
+         font-family: 'Roboto';
+   
+      }
+    }
+      
+   }
+   
+   .row2{
+      display: flex;
+    margin-right: 56px;
+    margin-left: -9px;
+   }
+   
+   mat-divider{
+      background-color: white;
+   }
+
+   .row3{
+      display: flex;
+      margin-right: 43px;
+      margin-bottom:0.5cm ;
+   }
+   .noWrap{
+      white-space: nowrap;
+   }
+
+   h3{
+      text-align: center;
+      color: #000000;
+      margin-top: 0.2cm;
+      font-family: 'Roboto';
+      /* font-style: normal; */
+      /* font-weight: 700; */
+      font-size: 20px;
+  
+   }
+
+   h4{
+      font-weight: bold;
+   }
+
+   .success{
+      font-family: 'Roboto-Regular';
+   
+    font-size: 20px;
+
+   }
+   .wholecard{
+      display: flex ;
+      justify-content: space-around;
+   }
+   .row1{
+      display: flex;
+      margin-left: -45px;
+      margin-right: -10px;
+   }

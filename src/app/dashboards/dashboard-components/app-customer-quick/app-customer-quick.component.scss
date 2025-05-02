@@ -1,0 +1,256 @@
+.table {
+  border-spacing: 0;
+  width: 100%;
+  height: 80px;
+  background-color: white;
+  border: 0.5px solid #00000036;
+}
+
+
+.button {
+  width: 50px;
+  height: 50px;
+}
+
+p .c {
+  white-space: pre;
+}
+
+.name {
+  font-size: 14px;
+  margin-bottom: 0;
+  text-align: center;
+  margin-top: 7px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
+  color: #1C1939;
+}
+
+small {
+  padding-left: 5px;
+  font-family: 'Roboto';
+  
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: #9EA6BE;
+}
+
+.add-payee {
+  margin-top: 11px;
+}
+
+.payee {
+ // font-weight: bold;
+  line-height: 1.4;
+  margin-bottom: 0;
+  margin-top: 7px;
+  font-family: 'Roboto';
+ // font-weight: 600;
+  font-size: 14px;
+  color: #37474f;
+}
+
+.circle {
+  background-color:rgba(217, 217, 217, 0.41);
+  padding-top: 0.2cm;
+  margin-right: 6px;
+  width: 50px;
+  height: 50px;
+  border-radius: 2cm;
+  text-align: center;
+}
+
+.status {
+  color: #123969;
+ 
+  margin-top: 1px;
+  margin-left: -9px;
+  
+
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
+
+.money-sent {
+  color: #9EA6BE;
+  padding-top: 0.2cm;
+  font-size: 13px;
+}
+
+.payeeName {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 650;
+  font-size: 14px;
+  padding-left: 2px;
+  margin-top: 17px;
+  color: #1C1939;
+}
+
+.subGroups {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 0px;
+  // padding-left: 9px;
+  color: #2d2d2d;
+  white-space: nowrap;
+}
+
+
+.title {
+  font-family: "Roboto", 'Roboto', Arial;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #1C1939;
+  display: inline;
+
+}
+
+.example-card {
+  border: 0.1px solid gainsboro;
+  border-radius: 0.4cm;
+  // height: 102px;
+  height: 85px;
+  width: 100%;
+  margin-left: 0px;
+}
+
+
+.routerLink {
+  margin-right: 15px;
+  color: #123969;;
+  cursor: pointer;
+}
+
+
+.scrollbar {
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 25px;
+}
+
+
+.flex_box {
+  display: flex;
+  justify-content: space-between
+}
+
+.align_left {
+  display: inline;
+  font-family: "Roboto", 'Roboto', Arial;
+}
+
+.align_right {
+  text-align: right;
+  margin-top: 18px;
+  color: #123969;
+  ;
+  border-radius: 1cm;
+  height: 33px;
+  background-color: #ffffff;
+}
+
+
+.wallet-icon {
+  font-size: 37px;
+  color: #00000070;
+}
+
+.box {
+  padding: 11px;
+  height: 57px;
+  // width: 64px;
+  width: 57px;
+  background-color: #adcdf463;
+  // color: #123969;
+  // color: #363636;
+  // border-radius: 13px;
+  border-radius: 28px;
+  // margin-top: -14px;
+  margin-left: 12px;
+  margin-top: 12px;;
+}
+
+.card-button {
+  height: 21px;
+  margin-top: -6px;
+  border-radius: 1cm;
+  background-color: #77cbfd85;
+  line-height: 20px;
+}
+
+.divider {
+  margin-top: -4px;
+  width: 65%;
+  margin-left: 86px;
+}
+
+.arrow-icon {
+  // text-align: right;
+  // margin-top: -8px;
+  // margin-right: 10px;
+  color: #b7b7b7;
+}
+
+.container{
+  overscroll-behavior-y: contain;
+}
+
+.loader-wrapper{
+  text-align: center;
+  zoom: 0.2;
+  margin: 117px;
+
+}
+::ng-deep.loader-wrapper circle,.loader-wrapper circle {stroke: #123969 !important;
+margin-top: 130px;}
+
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.no-transaction-message{
+  position: relative;
+  top: -20px;
+  color: grey;
+}
+
+.hourglass-empty-circle{
+    height: 129px;
+    width: 129px;
+    border-radius: 77px;
+    border: 1px solid #e8e8e86b;
+    background-color: #e3e3e3e6;;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    position: relative;
+    left: 17px;
+}
+
+.hourglass-empty-icon{
+  position: relative;
+    top: 38px;
+    /* bottom: 1%; */
+    left: -12px;
+    font-size: 48px;
+    color: grey;
+
+}

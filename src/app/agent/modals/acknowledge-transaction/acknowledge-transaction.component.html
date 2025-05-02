@@ -1,0 +1,66 @@
+<h4 mat-dialog-title>
+    <mat-toolbar  class="task-header" fxLayout="row" fxLayoutAlign="space-between center">
+        <span> Edit Transactions </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+          <mat-icon>close</mat-icon>
+        </span>
+    </mat-toolbar>
+  </h4>
+
+<div class="info" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-label class="custom-label" class="labelText">
+    Sender
+</mat-label> 
+
+<h5 class="value"> {{senderName}} </h5>
+</div>
+
+<div class="info" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-label class="custom-label" class="labelText" >
+        Payee
+    </mat-label> 
+    <div style="text-align:right" >
+    <p class="value" style="white-space:nowrap;height: 2px;"> {{payeeName.length > 15 ? (payeeName | slice:0:15) + '...' : payeeName }} </p>
+     <p class="value" style="inline-size: 274px;">{{payeeAccountNo}}, {{payeeBank}},{{swiftCode}} ,{{payeeCountry}} </p> 
+   </div>
+</div>
+
+
+<div class="info" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-label class="custom-label" class="labelText">
+        Status
+    </mat-label> 
+ 
+    <div fxFlex="48" style="font-size:13px;" *ngIf="showAcknowledgementDropdown">   
+    <mat-form-field appearance="outline">
+        <mat-label class="custom-label"> Status </mat-label>
+        <mat-select [(ngModel)]="selectedStatus" [ngModelOptions]="{standalone: true}">
+          <mat-option (click)="transactionStatusUpdate('ACKNOWLEDGED')" value="ACKNOWLEDGED">Acknowledged</mat-option>
+          <!-- <mat-option (click)="transactionStatusUpdate('DEPOSITED')" value="DEPOSITED">Deposited</mat-option> -->
+        </mat-select>
+    </mat-form-field>
+    </div>
+
+<div fxFlex="48" style="font-size:13px;" *ngIf="showDepositedDropdown">   
+    <mat-form-field appearance="outline">
+        <mat-label class="custom-label"> Status </mat-label>
+        <mat-select [(ngModel)]="selectedStatus" [ngModelOptions]="{standalone: true}">
+          <!-- <mat-option (click)="transactionStatusUpdate('ACKNOWLEDGED')" value="ACKNOWLEDGED">Acknowledged</mat-option> -->
+          <mat-option (click)="transactionStatusUpdate('DEPOSITED')" value="DEPOSITED">Deposited</mat-option>
+        </mat-select>
+    </mat-form-field>
+    </div>
+</div>
+
+<div class="info" style="margin-right: -36px;" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-label class="custom-label" class="labelText">
+        Upload
+    </mat-label> 
+    
+    <input type="file" [disabled]="isDisabled" (change)="onSelectFile($event)" >
+</div>
+
+<div  class="dialogButton" fxLayout="row wrap" fxLayoutAlign="space-around">
+    <button mat-raised-button  class="mat-button" [mat-dialog-close]="true"  type="button">Close</button>
+     <button mat-raised-button  class="submit-button" [mat-dialog-close]="true" [disabled]="disableUpdateButton" (click)="updateTransactionStatus(selectedStatus)" type="submit">Update</button>
+</div> 

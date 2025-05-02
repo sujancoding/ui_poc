@@ -1,0 +1,247 @@
+<div *ngIf="datasFulfilled">
+
+<div fxLayout="row" fxLayoutAlign="space-between center" style="background-color: #123969;height: 50px;">
+
+
+
+   <div fxLayout="column"> 
+       <h4 *ngIf="editRolePairs" class="title">Edit Role</h4>
+       <span *ngIf="addRolePairs" class="sub-heads">Create a new one !</span>
+       <!-- <span *ngIf="editRolePairs"  class="sub-heads">Role Id : {{roleId ? roleId : "Not found"}} </span> -->
+    </div>
+
+    <span [mat-dialog-close]="true" class="close-btn">
+        <mat-icon class="close-icon">close</mat-icon>
+    </span>
+
+</div>
+
+<form class="form" [formGroup]="form" >
+
+
+    <div fxLayout="column">
+
+      <div fxLayout="row-wrap" fxLayoutAlign="space-between">
+        <div fxFlex="40" fxFlex.xs="100">
+          <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Role Id </mat-label>
+              <input matInput [readonly]="isReadOnly" (input)="form.controls.roleId.setValue(form.controls.roleId.value.toUpperCase())"
+                  formControlName="roleId" [formControl]="form.controls['roleId']">
+          </mat-form-field>
+          <div class="message-block">
+              <span class="error-message" *ngIf="form.controls['roleId'].hasError('required') &&
+           form.controls['roleId'].touched"> *Role Id Field Required </span>
+          </div>
+      </div>
+  
+          <div fxFlex="55" fxFlex.xs="100">
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Role Code </mat-label>
+                  <input matInput [readonly]="isReadOnly" (input)="form.controls.roleCode.setValue(form.controls.roleCode.value.toUpperCase())"
+                      formControlName="roleCode" [formControl]="form.controls['roleCode']">
+              </mat-form-field>
+              <div class="message-block">
+                  <span class="error-message" *ngIf="form.controls['roleCode'].hasError('required') &&
+               form.controls['roleCode'].touched"> *Role Code Field Required </span>
+              </div>
+          </div>
+      </div>
+     
+     <div [fxLayout]="showStatusDropdown ? 'row' : 'column'" [fxLayoutAlign]="showStatusDropdown ? 'space-between' : 'start stretch'">
+        <div [fxFlex]="showStatusDropdown ? 47 : 100" [fxFlex.xs]="showStatusDropdown ? 47 : 100">
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Role Name </mat-label>
+                <input matInput [readonly]="isReadOnly" (input)="form.controls.roleName.setValue(form.controls.roleName.value.toUpperCase())"
+                    formControlName="roleName" [formControl]="form.controls['roleName']">
+            </mat-form-field>
+            <div class="message-block">
+                <span class="error-message" *ngIf="form.controls['roleName'].hasError('required') &&
+             form.controls['roleName'].touched"> *Role Name Field Required </span>
+                <span class="error-message" *ngIf="form.controls['roleName'].hasError('pattern')">{{'onlyAlphabets'|
+                    label}}</span>
+                <span class="error-message" *ngIf="form.controls['roleName'].hasError('isWhitespace')">This field should
+                    not start with spaces or fullstop</span>
+            </div>
+          </div>
+          <div [fxFlex]="showStatusDropdown ? 47 : 100" [fxFlex.xs]="showStatusDropdown ? 47 : 100" *ngIf="showStatusDropdown">
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Status</mat-label>
+              <mat-select [formControl]="form.controls['status']">
+                <mat-option *ngFor="let status of statusArray" [value]="status.id">
+                  {{status.status}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+      </div>
+
+    </div>
+
+    <h4 class="title-privileges">Privileges</h4>
+
+    <div fxLayout="row" fxLayoutGap="20px" style="margin-top: -17px;">
+
+      <div>
+        <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 149px;">
+            <mat-label class="custom-label">Product Code</mat-label>
+            <mat-select [formControl]="form.controls['productCode']" #selectedProductCode (selectionChange)="productCodeSelection(selectedProductCode.value)">
+                <mat-option *ngFor="let productCode of productCodeList" [value]="productCode">
+                    {{ productCode | uppercase }}
+                  </mat-option>              
+            </mat-select>
+          </mat-form-field>
+          </div>
+
+        <div>
+        <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+            <mat-label class="custom-label">Functions</mat-label>
+            <mat-select [formControl]="form.controls['module']" #moduleKey (selectionChange)="moduleSelection(moduleKey)">
+                <mat-option *ngFor="let parentNode of getAccessControlList | keyvalue" [value]="parentNode.key">
+                    {{ parentNode.key | uppercase }}
+                  </mat-option>              
+            </mat-select>
+          </mat-form-field>
+          </div>
+
+          <div style="width: -webkit-fill-available;">
+          <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+            <mat-label class="custom-label">Access Control List</mat-label>
+            <mat-select [formControl]="form.controls['function']" #functionKey (selectionChange)="functionSelection(functionKey)">
+                <mat-option *ngFor="let function of getFunctionList" [value]="function.name">
+                  {{ function.accessId }} - {{ function.name }} - {{ function.action }}
+                  </mat-option> 
+            </mat-select>
+          </mat-form-field>
+          </div>
+
+          <!-- <div> -->
+          <!-- <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+            <mat-label class="custom-label">Access</mat-label>
+            <mat-select [formControl]="form.controls['access']">
+                <mat-option *ngFor="let access of getActionList" [value]="access">
+                    {{ access }}
+                  </mat-option> 
+            </mat-select>
+          </mat-form-field> -->
+          <!-- </div> -->
+
+          <div class="btn-div">  
+            <button mat-raised-button [disabled]="!form.valid" (click)="addRecord()"
+            class="buttonAddRole">
+           Add Record
+          </button>
+           </div>
+
+    </div>
+
+    <div class="table-wrapper"  style="margin: 0px !important;border: 1px solid white;">
+        <div class="mat-elevation-z8" >
+          <div [ngStyle]="changeTableHeight()">
+            <table  class= "table" >
+             
+              <thead>
+                <tr>
+                      <th>FUNCTION</th>
+                      <th>ACCESS CONTROL LIST</th>
+                      <!-- <th>ACCESS</th> -->
+                      <th>ACTIONS</th>
+                      </tr>
+              </thead>
+             
+              <tbody>
+                <tr *ngFor="let records of manualRecords | slice: (p - 1) * itemsPerPage : p * itemsPerPage">
+                  
+                <td> {{records.module | uppercase}} </td>
+                <td> {{records.accessId}} - {{records.name}} - {{records.action}}  </td>
+                <!-- <td>
+                  <mat-form-field appearance="{{ 'formFieldAppearance' | label }}" class="access-table-formfield">
+                    <mat-label class="custom-label">Access</mat-label>
+                    <mat-select [(value)]="records.ACTION" (selectionChange)="onActionChange($event.value, records)">
+                      <mat-option [disabled]="isFieldDisabled"  [value]="records.ACTION">{{ records.ACTION }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                    </td> -->
+                <td> 
+                    <button mat-button class="delete-icon"  (click)="deleteRecord(records.name,records.id)" >
+                    <mat-icon>delete_outline</mat-icon> 
+                  </button>    
+                </td>  
+                
+                </tr>
+              </tbody>
+             
+          </table>
+          </div>
+          <mat-paginator class="pagination-class"
+          [length]="manualRecords.length"
+          [pageSize]="itemsPerPage"
+          [pageIndex]="p - 1"
+          (page)="handlePageChange($event)"
+        ></mat-paginator>
+        </div> 
+        <!--Loader-->
+        <div *ngIf="loader" class="loader-wrapper">
+          <mat-spinner diameter="50"> </mat-spinner>
+          </div>
+         </div> 
+
+        
+          
+
+</form>
+
+
+
+<div fxLayout="row" *ngIf="addRolePairs"  fxLayoutAlign="space-between">
+ 
+
+  <div class="alert-box">  
+    <alert></alert>
+    </div>
+
+    <div style="margin-right: 30px;">
+    <button mat-flat-button class="close-button" [mat-dialog-close]="true" type="button">Close</button>
+    <button mat-flat-button class="submit-button" (click)="onSave()" type="submit" [disabled]="isDisabledSubmit()">
+      Submit</button>
+      </div>
+
+  </div>
+
+ 
+    <div fxLayout="row" *ngIf="editRolePairs" fxLayoutAlign="space-between">
+
+    <div class="alert-box">  
+    <alert></alert>
+    </div>
+
+    <div style="margin-right: 30px;">
+    <button mat-flat-button class="close-button" [mat-dialog-close]="true" type="button">Close</button>
+    <button mat-flat-button class="submit-button" (click)="updateChanges()" type="submit" [disabled]="isDisabledSubmit()">
+      Update changes</button>
+      </div>
+
+      </div>
+  
+
+</div>
+
+<div *ngIf="datasNotFound">
+  <div fxLayout="row" fxLayoutAlign="space-between center" style="background-color: #123969;">
+
+
+
+    <div fxLayout="column"> 
+        <h4 class="title">Edit Role</h4>
+        <span  class="sub-heads"> No Datas Found ! </span>
+     </div>
+ 
+     <span [mat-dialog-close]="true" class="close-btn">
+         <mat-icon class="close-icon">close</mat-icon>
+     </span>
+ 
+ </div>
+    
+
+
+</div>
+        

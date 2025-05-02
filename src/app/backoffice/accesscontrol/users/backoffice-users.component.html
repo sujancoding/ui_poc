@@ -1,0 +1,95 @@
+<!--Search Card-->
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1">
+  <form [formGroup]="filterForm">
+        <div  fxLayout="row wrap" fxLayoutAlign="space-between"style="position: relative;
+      place-content: stretch space-between;top: 11px;">
+    <div  fxLayout="row" fxLayoutGap="15px" style=" margin-left: 15px; display: flex; align-items: center;">
+
+      <div fxLayout="column" style=" position: relative;margin-left: 10px;"> 
+        <mat-form-field style="width: 350px;font-size: 15px;"  appearance="{{'formFieldAppearance' | label}}">
+          <mat-label class="custom-label">User Name</mat-label>
+          <input (input)="filterForm.controls.staffName.setValue(filterForm.controls.staffName.value.toUpperCase())"  matInput formControlName="staffName" [formControl]="filterForm.controls['staffName']" type="text" placeholder="User Name" >
+        </mat-form-field>
+        <small class="error-message" *ngIf="filterForm.controls['staffName'].hasError('pattern')" > No Special Characters and Numbers are Allowed </small>     
+      </div>
+      
+     
+    
+      <button mat-raised-button type="button" (click)="applyFilter()" [disabled]="!filterForm.valid" 
+        class="buttonApplyfilter">
+       Apply Filter</button>
+
+   </div>   
+   <div>  
+    <button mat-raised-button  (click)="addUser()"
+    class="buttonAddUser">
+    <mat-icon class="icon" matPrefix="Filter">add</mat-icon>
+   User</button>
+   </div>
+
+    </div>
+   </form>
+    </div>
+
+
+    <!--Table-->
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      <div [ngStyle]="changeTableHeight()">
+      <table class="table">
+    
+        <thead>
+    
+         
+            <th>USER ID</th>
+            <th>USER NAME</th>
+            <th>ROLE NAME </th>
+            <th>STATUS</th>
+            <th>CREATION DATE</th>
+            <th>ACTIONS </th> 
+     
+          
+    
+        </thead>
+    
+        <tbody>
+          <tr *ngFor="let searchUserArray of searchStaffArray | slice: (p - 1) * itemsPerPage : p * itemsPerPage">
+            <td> {{searchUserArray.staffId}} </td>
+            <td style="color: #0176d3;"> {{searchUserArray.staffName}} </td>
+            <td> {{searchUserArray.designation}} </td>
+            <td> 
+              <div class="tags" [ngStyle]="{'color': getColor(searchUserArray.status),'background-color': getBackgroundColor(searchUserArray.status)}">
+                <div  [ngStyle]="{'background-color': getColor(searchUserArray.status)}" class="small-container"></div>
+              <span class="status-tag"   #tooltip="matTooltip"
+              [matTooltip]="getTooltipText(searchUserArray.status)"
+              matTooltipPosition="above"
+              matTooltipClass="custom-tooltip"> 
+              {{searchUserArray.status | uppercase}} </span>
+              </div>  
+            </td>
+            <td> {{searchUserArray.createdDate  | date:'medium'}} </td>
+            <td> 
+              <button mat-button class="launch-icon" (click)="updateUser(searchUserArray.staffId)">
+                <mat-icon>create</mat-icon> 
+              </button>   
+            </td>
+
+          </tr>
+    
+        </tbody>
+    
+      </table>
+    </div>
+    <!--Pagination-->
+    <mat-paginator class="pagination-class"
+    [length]="searchStaffArray.length"
+    [pageSize]="itemsPerPage"
+    [pageIndex]="p - 1"
+    (page)="handlePageChange($event)"
+  ></mat-paginator>
+      </div>
+      <!--Loader-->
+      <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+      </div>
+      </div>

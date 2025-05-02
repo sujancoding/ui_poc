@@ -1,0 +1,255 @@
+<!--Search filter Section-->
+
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter">
+  <form [formGroup]="filterForm">
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+
+      <div class="inner-container" style="width: 100%;">
+
+
+        <button mat-raised-button (click)='xpandStatus = !xpandStatus' class="applyFilter-btn">
+          <mat-icon class="add-filter-icon">add</mat-icon>
+          Filter
+        </button>
+
+
+         <mat-form-field style="width: 40%;
+  margin: 8px;" appearance="{{'formFieldAppearance' | label}}">
+          <mat-label class="custom-label">Search Customer Name</mat-label>
+          <input matInput formControlName="custName" (input)="onCustomerNameChange()"
+            [formControl]="filterForm.controls['custName']" class="form-control" type="text"
+            [(ngModel)]="searchCustomerName">
+          <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+        </mat-form-field>
+
+
+      </div>
+
+      <div>
+        <button mat-raised-button class="register-btn" (click)="navigateToAddShipment()"><mat-icon>add</mat-icon>
+          Shipment </button>
+      </div>
+
+    </div>
+
+
+
+    <mat-divider></mat-divider>
+
+    <div class="custom-filter-values">
+      <div *ngFor="let filterValues of filterValues" fxLayout="column" class="margin-space" fxLayoutGap="2px">
+        <p class="filter-key"> {{filterValues.fieldName ? filterValues.fieldName : ""}} </p>
+        <p class="filter-value"> {{filterValues.value ? filterValues.value : ""}} </p>
+      </div>
+
+
+    </div>
+
+
+
+    <div fxLayout="column" fxLayoutGap="1px">
+
+      <div fxLayout="row" fxLayoutGap="10px">
+
+
+
+      </div>
+      <mat-accordion #accordion="matAccordion">
+        <mat-expansion-panel style="width: fit-content;background-color: #ffffff;z-index: 999;"
+          #mapanel="matExpansionPanel" [(expanded)]="xpandStatus">
+
+          <h4 class="filter-title"> Filters </h4>
+          <!-- <mat-divider> </mat-divider> -->
+
+          <div fxLayout="column">
+          <div fxLayout="column" fxFlex="100">
+          
+            <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Customer Name</mat-label>
+              <input matInput
+                (input)="filterForm.controls.custName.setValue(filterForm.controls.custName.value.toUpperCase())"
+                formControlName="custName" [formControl]="filterForm.controls['custName']" class="form-control"
+                type="text" [(ngModel)]="searchCustomerName">
+              <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="column" fxFlex="100">
+           
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+              <mat-label class="custom-label">Shipment Id</mat-label>
+              <input matInput formControlName="shipmentId" [formControl]="filterForm.controls['shipmentId']">
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxLayout="column" fxFlex="48">
+             
+          
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Start Date</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="startDate"
+                    [formControl]="filterForm.controls['startDate']" (dateChange)="onStartDateChange($event)"
+                    [min]="minStartDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                </mat-form-field>
+              
+            </div>
+
+            <div fxLayout="column" fxFlex="48">
+              
+             
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">End Date</mat-label>
+                  <input matInput formControlName="endDate" [formControl]="filterForm.controls['endDate']"
+                    [matDatepicker]="picker2" (dateChange)="onEndDateChange($event)" [min]="minEndDate"
+                    [max]="maxEndDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                  <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                </mat-form-field>
+             
+            </div>
+
+
+          </div>
+          </div>
+
+          <mat-action-row style="padding: 0px !important;">
+            <div fxLayout="row" fxLayoutAlign="space-between" style="width: 100%;">
+              <div>
+                <button mat-flat-button class="close-button" (click)="xpandStatus = !xpandStatus"
+                  type="button">Close</button>
+              </div>
+              <div>
+                <button mat-flat-button class="reset-button" (click)="resetFilter()" type="button">Reset</button>
+                <button mat-flat-button class="submit-button" [disabled]="!filterForm.valid" (click)="searchFilter()">
+                  Apply Filter</button>
+              </div>
+            </div>
+          </mat-action-row>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
+
+    </div>
+
+  </form>
+
+
+
+
+</div>
+
+
+
+
+
+<div class="table-wrapper">
+  <div class="mat-elevation-z8" >
+    <div [ngStyle]="changeTableHeight()">
+      <table  class= "table" >
+       
+        <thead>
+          <tr>
+                <th>SHIPMENT ID</th>
+                <th>CUSTOMER NAME</th>
+                <th>SHIPMENT DATE</th>
+                <th>STATUS</th>
+                <th>ACTIONS</th>
+               
+                </tr>
+        </thead>
+       
+        <tbody>
+          <ng-container *ngFor="let search of shipmentListings | slice: (p - 1) * itemsPerPage : p * itemsPerPage ">
+          <tr>
+            <td> {{search.shipmentId}}
+              <!-- <mat-icon *ngIf="expandedRecord != search.shipmentId" style="position: relative;top: 7px" >expand_more</mat-icon>  
+              <mat-icon *ngIf="expandedRecord == search.shipmentId" style="position: relative;top: 7px">expand_less</mat-icon>   -->
+            </td>
+            <td>{{search.customerName}}</td>
+            <td>{{search.shippedDate}}</td>
+            <td>
+              <button class="tags" [ngStyle]="{'color': getColor(search.status),'background-color': getBackgroundColor(search.status)}">
+                <div  [ngStyle]="{'background-color': getColor(search.status)}" class="small-container"></div>
+              <span class="status-tag"
+              #tooltip="matTooltip"
+            [matTooltip]="getToolTipText(search.status)"
+            matTooltipPosition="above"
+            matTooltipClass="custom-tooltip"
+              > 
+              {{search.status}} </span>
+              </button>
+            </td>
+            <td>
+              <div fxLayout="row" fxLayoutAlign="space-around">
+                <div>
+                  <button mat-icon-button class="editButton" (click)="openEditShipmentModal(search.shipmentId)"> 
+                  <mat-icon>create</mat-icon>  
+                  </button>
+                </div>
+                <div>
+                  <button mat-icon-button class="downloadButton" (click)="downloadShipmentReceipt(search.shipmentId)"> 
+                  <mat-icon>receipt_long</mat-icon>  
+                  </button>
+                </div>
+              </div>
+              <!--Add another icon 'Edit' : implement click event and call function 'openEditShipmentModal(search.shipmentId)'-->
+            </td>
+          </tr>
+
+          <!-- <tr *ngIf="expandedRecord == search" style="height: 80px; overflow-y: scroll;">
+            <td colspan="6">
+            <ng-container *ngIf="loading; else dataContent">
+              <div style="text-align: center; padding: 20px;" >
+                <mat-spinner diameter="30" strokeWidth="2"></mat-spinner>
+              </div>
+            </ng-container>
+            <ng-template #dataContent>
+              <ng-container *ngIf="getDealInquiry.length > 0; else noData">
+                <div *ngFor="let list of shipmentDetailInquiry; let i = index" style="width: 166%;">
+                  <div fxLayout="row" style="height: 30px;">
+                    <h3 class="txn-id-content">
+                      <div>Deal Id {{ i+1 }} :</div>
+                      <div class="id-value">{{ list.DEALID }}</div>
+                    </h3>
+                    <mat-icon class="forward-arrow-icon">arrow_forward</mat-icon>
+                    <h3 class="txn-id-content">
+                      <div>Deal Amount :</div>
+                      <div class="id-value">{{ list.AMOUNT }} SGD</div>
+                    </h3>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-template #noData>
+                <div style="margin: 10px;font-family: 'Roboto';font-weight: 500;color: #cb3e3e;">No Records Found!</div>
+              </ng-template>
+            </ng-template>
+          </td>
+          </tr> -->
+
+          </ng-container>
+        </tbody>
+    </table>
+    </div>
+    <mat-paginator class="pagination-class"
+    [length]="shipmentListings.length"
+    [pageSize]="itemsPerPage"
+    [pageIndex]="p - 1"
+    (page)="handlePageChange($event)"
+  ></mat-paginator>
+  </div> 
+  <!--Loader-->
+  <div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+    </div>
+   </div>
+   
+
+

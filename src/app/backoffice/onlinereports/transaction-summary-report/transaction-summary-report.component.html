@@ -1,0 +1,240 @@
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter">
+   
+    <div class="inner-container">
+  
+      
+          <button mat-raised-button (click)='xpandStatus = !xpandStatus' class="applyFilter-btn">
+            <mat-icon class="add-filter-icon">add</mat-icon>
+            Filter
+          </button>
+  
+  
+     <!--removed formfield and mat tooltip icon here-->
+     
+    </div>
+  
+    <mat-divider></mat-divider>
+  
+    <div  class="custom-filter-values">
+      <div *ngFor="let filterValues of filterValues" style="margin-left: 20px;" fxLayout="column" class="margin-space" fxLayoutGap="-5px">
+        <p class="filter-key"> {{filterValues.fieldName ? filterValues.fieldName : ""}} </p>
+        <p  class="filter-value"> {{filterValues.value ? filterValues.value : ""}} </p>
+      </div>
+  
+     
+    </div>
+  
+    
+  
+      <div fxLayout="column" fxLayoutGap="1px">
+  
+        <div class="div-height" fxLayout="row" fxLayoutGap="10px">
+  
+  
+  
+        </div>
+        <mat-accordion #accordion="matAccordion">
+          <mat-expansion-panel style="width: fit-content;background-color: #ffffff;z-index: 999;"
+            #mapanel="matExpansionPanel" [(expanded)]="xpandStatus">
+
+            <form [formGroup]="form" >
+  
+             <h4 class="filter-title"> Filters </h4>
+          <!-- <mat-divider> </mat-divider> -->
+        <div fxLayout="row"  fxLayoutAlign="space-between">
+
+            <div fxLayout="column" fxFlex="48">
+                
+                <mat-form-field appearance="outline" >
+                    <mat-label class="custom-label">Reports Name</mat-label>
+                    <mat-select [formControl]="form.controls['reportName']" [(ngModel)]="selectedReport"
+                        style="font-family: 'Roboto';" (selectionChange)="onChangeReportName(selectedReport)">
+                        <mat-option *ngFor="let values of getReports" [value]="values.VALUE"> {{values.TEXT}} </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="message-block">
+                    <span class="error-message"
+                        *ngIf="form.controls['reportName'].hasError('required') && form.controls['reportName'].touched">Report
+                        Name field
+                        Required </span>
+                </div>
+            </div>
+        
+            <div fxLayout="column" fxFlex="48">
+                
+                <mat-form-field appearance="outline" >
+                    <mat-label class="custom-label">Customer Type</mat-label>
+                    <mat-select [formControl]="form.controls['customerType']" style="font-family: 'Roboto';">
+                        <mat-option *ngFor="let values of customerTypeArray" [disabled]="values.disabled" [value]="values.value"> {{values.description}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+        </div>
+
+            <div  >
+  
+              <!--Day Range Dropdown Field-->
+    <div fxLayout="column" fxFlex="100">
+      
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Day Range</mat-label>
+          <mat-select #selectedDayRange (selectionChange)="dayRangeSelection(selectedDayRange.value)"
+            [formControl]="form.controls['dayRange']">
+            <mat-option style="cursor:pointer" value="Current Date"> Current Date </mat-option>
+            <mat-option style="cursor:pointer" value="10days"> Last 10 Days</mat-option>
+            <mat-option style="cursor:pointer" value="15days">Last 15 Days</mat-option>
+            <mat-option style="cursor:pointer" value="30days">Last 30 Days</mat-option>
+            <mat-option style="cursor:pointer" value="custom date"> Custom dates </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+  
+            
+            </div>
+  
+          
+            <div fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 16px;">
+  
+             
+ 
+     
+        <!-- [ngClass]="{'disableState': selectedDayRange.value != 'custom date'}" -->
+      
+          <div fxLayout="column" fxFlex="48" >
+          
+          
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Start Date</mat-label>
+                <input matInput [matDatepicker]="picker"  formControlName="startDate" [formControl]="form.controls['startDate']" 
+                (dateChange)="onStartDateChange($event)" [disabled]="disableDateField"  [min]="minStartDate" >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+              </mat-form-field>
+              <div class="message-block">
+                <span class="error-message"
+                  *ngIf="form.controls['startDate'].hasError('required') && form.controls['startDate'].touched">Start Date
+                  Required </span>
+            </div>
+          </div>
+        
+    
+  
+    
+  
+  
+ 
+    <!-- [ngClass]="{'disableState': selectedDayRange.value != 'custom date'}" -->
+   
+      <div fxLayout="column" fxFlex="48">
+      
+        
+          <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+            <mat-label class="custom-label">End Date</mat-label>
+            <input matInput formControlName="endDate" [formControl]="form.controls['endDate']" 
+             [matDatepicker]="picker2" [disabled]="disableDateField"  (dateChange)="onEndDateChange($event)"   [min]="minEndDate" [max]="maxEndDate" >
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+          </mat-form-field>
+          <div class="message-block">
+            <span class="error-message"
+              *ngIf="form.controls['endDate'].hasError('required') && form.controls['endDate'].touched">End Date
+              Required </span>
+          </div>
+        
+      </div>
+     
+  
+  
+  
+  
+            </div>
+  
+  
+            <mat-action-row style="padding: 0px !important;">
+              <div fxLayout="row" fxLayoutAlign="space-between" style="width: 100%;height: 53px;">
+                <div>
+                 <button  mat-flat-button class="close-button" (click)="xpandStatus = !xpandStatus" type="button">Close</button>
+                 </div>
+              <div fxLayout="row">
+                <button mat-flat-button class="reset-button" (click)="resetFilter()" type="button">Reset</button>
+                <button mat-flat-button class="submit-button" [disabled]="!form.valid"
+                  (click)="searchFilter(selectedDayRange.value,selectedReport)">
+                  Fetch</button>
+              </div>
+              </div>
+            </mat-action-row>
+  
+            </form>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+  
+  
+  
+      </div>
+  
+    
+  
+  
+  
+  
+  </div>
+  
+  
+   <span fxLayout="row" style="    margin-top: -16px;
+    height: 47px;
+   margin-left: 12px;">
+    <p class="show-results">Showing</p> <p class="show-results" style="color: black;font-weight: 700;"> {{count ? count : "0"}} </p> <p class="show-results">results</p> 
+   </span>
+  <!--Table-->
+  <div>
+  <div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      <div [ngStyle]="tableHeight()">
+        <table class="table">
+  
+          <thead>
+            <tr *ngIf="retrievedReportsData">
+              <th *ngFor="let headers of reportDatas[0] | keys"> {{headers | uppercase}} </th>
+            </tr>
+  
+  
+          </thead>
+  
+          <tbody *ngIf="retrievedReportsData">
+          
+            <tr *ngFor="let datas of reportDatas | slice: (p - 1) * itemsPerPage : p * itemsPerPage  ">
+              <td *ngFor="let list of datas | keys"> {{datas[list]}} </td>
+            </tr>
+  
+          </tbody>
+  
+          <tbody *ngIf="noReportsData">
+            <tr>
+              <td>No Datas Found</td>
+            </tr>
+          </tbody>
+  
+        </table>
+      </div>
+      <!--Pagination-->
+      <mat-paginator class="pagination-class"
+  [length]="reportDatas.length"
+  [pageSize]="itemsPerPage"
+  [pageIndex]="p - 1"
+  (page)="handlePageChange($event)"
+  ></mat-paginator>
+    </div>
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+    </div>
+  </div>
+  </div>
+  
+  
+  

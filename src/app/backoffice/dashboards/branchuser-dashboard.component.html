@@ -1,0 +1,370 @@
+<!--Application FlexBox-->
+
+<div class="header mat-elevation-z1">
+  <div class="row">
+  <h5 class="welcome-text"> Hello {{branchUserName}} !</h5>
+  <h5> {{myDate | date}}</h5> 
+  </div>
+</div>
+
+<div class="spinner-container" >
+<div class="spinner-overlay" *ngIf="isLoading">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
+
+<div fxLayout="row wrap">
+  <!--Application Widget-->
+  
+    <div  class="flexbox-item1" fxFlex="36" fxFlex.xs="100" fxFlex.md="48" fxFlex.sm="100">
+       <div  style="height: 30px;" fxLayout="row" fxLayoutGap="64px">
+        <h5 class="application">Account Opening</h5>
+        <h6 class="text" style="position: relative;top: 30px;left: -73px;">Individual</h6>
+        </div>
+
+<div class="display-line" fxLayout="row" style="position: relative;
+top: 24px;margin-top: 8px;" >
+
+  <div style="display: flex;" *ngIf="applicationIndStatus.length > 0 ; else nullApplicationIndStatus">  
+  <div *ngFor="let status of getApplicationStatus('APPLICATION','I')">
+    <div class="circle" (click)="routeApplicationListings(status.name,'I')" [ngStyle]="{'color': getColor(status.name)}" [class.disabled]="disableApplicationLink">
+      <a>{{status.value}}</a>
+      <div class="status"> {{status.name}} </div>
+    </div>
+    </div>
+  </div>
+  <ng-template   #nullApplicationIndStatus>
+    <div  *ngFor="let noStatus of noStatus">
+      <div (click)="routeApplicationListings(noStatus.name,'I')" class="circle" [ngStyle]="{'color': getColor(noStatus.name)}" [class.disabled]="disableApplicationLink">
+        <a>{{noStatus.value}}</a>
+        <div class="status">{{noStatus.name}}</div>
+      </div>
+      </div>
+  </ng-template>
+
+
+          </div>
+
+          <div class="height">
+            <div *ngIf="applicationOverallStatus.length > 0 ; else nullApplicationOverallStatus">
+          <ng-container *ngFor="let reports of getTotalApplications('APPLICATION','OVERALLTOTAL')">
+            <div class="number" (click)="routeApplicationListings(reports.name)" style="position: relative;top: -35px;" [class.disabled]="isDisabled ? true : null">
+              <a [ngStyle]="{'color': getColor(status.name)}">{{reports.value}}</a>
+              <div class="font" [ngStyle]="{'color': getColor(status.name)}">OVERALL TOTAL </div>
+            </div>
+          </ng-container>
+          </div>
+          <ng-template   #nullApplicationOverallStatus>
+            <div class="number" style="position: relative;top: -35px;" [class.disabled]="isDisabled ? true : null">
+              <a> 0 </a>
+              <div class="font">OVERALL TOTAL </div>
+            </div>
+
+          </ng-template>
+
+          </div>
+       
+          <mat-divider class="widget-divider" style="width: 58%;"></mat-divider>
+          
+
+        <div class="p-l">
+          <h6 class="text">business / Corporate</h6>
+          </div>
+         
+          <div class="display-line" fxLayout="row">
+          
+            <div style="display: flex;" *ngIf="applicationIndStatus.length > 0 ; else nullApplicationCorStatus">  
+            <div *ngFor="let reports of getApplicationStatus('APPLICATION','C')">
+              <div class="circle" (click)="routeApplicationListings(reports.name,'C')" [class.disabled]="disableApplicationLink">
+                <a> {{reports.value}}</a>
+                <div class="status"> {{reports.name}} </div>
+                </div>
+            </div>
+           </div>
+          
+            <ng-template  #nullApplicationCorStatus>
+              <div *ngFor="let items of noStatus">
+              <div class="circle" (click)="routeApplicationListings(items.name,'C')" [ngStyle]="{'color': getColor(items.name)}" [class.disabled]="disableApplicationLink">
+                <a>{{items.value}}</a>
+                <div class="status">{{items.name}}</div>
+              </div>
+              </div>
+            </ng-template>
+            <!-- </div> -->
+              
+    </div>
+    
+    </div>
+ <!-- Remmitance FlexBox   -->
+ 
+  
+    <div class="flexbox-item2" fxFlex="26" fxFlex.xs="100" fxFlex.md="48" fxFlex.sm="100">
+            <h5 class="remittance1">Remittance</h5>
+
+            <ng-container *ngIf="totalTransactionCount !== undefined ; else nullTransactionTotalCount">
+              <div class="spacing">
+                <div class="circle2" [class.disabled]="isDisabled ? true : null">
+                <a> {{totalTransactionCount}} </a>
+                <div class="font"> TOTAL </div>
+              </div>
+              </div>
+            </ng-container>
+
+            <ng-template #nullTransactionTotalCount>
+              <div class="spacing">
+                <div class="circle2" [class.disabled]="isDisabled ? true : null">
+                <a> 0 </a>
+                <div class="font" style="    position: relative;top: 27px;left: 2px;"> TOTAL </div>
+              </div>
+              </div>
+            </ng-template>
+      
+   <div fxLayout="row" fxLayoutAlign="space-around center" style="margin-top: 24px;">
+  <ng-container *ngIf="unpostedTransactionCount !== undefined ; else nullTransactionCount">
+    <div class="circle" style="color: #ffa500;" (click)="routeTransactionListings('unposted')" [class.disabled]="disableUnpostedLink">
+      <a> {{unpostedTransactionCount}} </a>
+      <div class="status"> UNPOSTED </div>
+    </div>
+    <div class="circle" style="color:green;" (click)="routeTransactionListings('posted')" [class.disabled]="disablePostedLink">
+      <a> {{postedTransactionCount}} </a>
+      <div class="status"> POSTED </div>
+    </div>
+
+  </ng-container>
+
+  <ng-template #nullTransactionCount>
+    <div class="circle" style="color: #ffa500;" (click)="routeTransactionListings('unposted')" [class.disabled]="disableUnpostedLink">
+      <a> Nil </a>
+      <div class="status"> UNPOSTED </div>
+    </div>
+    <div class="circle" style="color:green;" (click)="routeTransactionListings('posted')" [class.disabled]="disablePostedLink">
+      <a> Nil</a>
+      <div class="status"> POSTED </div>
+    </div>
+  </ng-template>
+</div>
+  
+    </div>
+    
+    
+
+  <!--Exchange Rate FlexBox -->
+
+     <div class="flexbox-item3" fxFlex="30" fxFlex.xs="100" fxFlex.md="48" fxFlex.sm="100"> 
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <h5 class="application">Exchange Rate</h5>
+        <div style="padding-top: 0.3cm;">
+          <div fxLayout="row" fxLayoutGap="10px">
+            <button (click)="getExchRate()" mat-stroked-button [disabled]="disableExchRateLink">
+              <mat-icon >refresh</mat-icon>
+            </button>
+        <button mat-stroked-button [routerLink]="['/daily-setup/exchange-rate']" [disabled]="disableExchRateLink">View all</button>
+      </div>
+        </div>
+        </div>
+       
+              <div class="scroll-rates">
+               
+                <div  *ngIf="exchangeRate != null ; else noRatesMessage"> 
+               <ng-container *ngFor="let exchangeRate of exchangeRate">
+                <div class="scroll">
+                <div>
+                 <h6 class="leftalign"> <div style="font-size: 19px;color: #2165b7;"> <span style="font-size: x-large; margin-right: 13px;" class="{{exchangeRate.CCYFLAG}}"> </span>
+                   {{exchangeRate.CCYCODE}} 
+                  </div>
+                </h6>  
+                <h6 class="rightalign"> {{exchangeRate.EXCHRATE}}  </h6>
+                </div>
+                </div>
+               </ng-container>
+               </div>
+
+               <ng-template #noRatesMessage>
+               <div class="no-rates-container">
+                <a class="link" >
+                    Kindly add rates !
+                    </a>
+              </div>
+              </ng-template>
+
+               </div>
+           
+               <div class="rate-spinner" *ngIf="rateLoader">
+                <mat-spinner style="margin-top: 120px;" diameter="50"></mat-spinner>
+              </div>
+      
+          
+       
+
+        </div> 
+
+</div>
+
+
+
+<!--Customer -->
+<div fxLayout="row wrap">
+    <div class="flexbox-item1" fxFlex="36" fxFlex.xs="100" fxFlex.md="48" fxFlex.sm="100">
+
+        <div style="height: 30px;" fxLayout="row" fxLayoutGap="64px">
+            <h5 class="application">Customer</h5>
+            <h6 class="text" style="position: relative;top: 22px;left: -15px;">Individual</h6>
+            </div>
+    
+    <div class="display-line" style="position: relative;
+    top: 24px;" >
+     <div style="display: flex;" *ngIf="customerIndStatus.length > 0 ; else nullCustomerIndStatus">  
+      <div *ngFor="let status of getCustomerStatus('CUSTOMER','I')">
+        <div  class="customer-widget-circle"  [class.disabled]="disableCustomerLink || isDisableTotalCustomer(status.name,'I')"  [ngStyle]="{'color': getColor(status.name)}">
+          <!-- BACKUP CODE for above circle where class is "customer-widget-circle" : (click)="routeCustomerListings(status.name,'I')" -->
+          <a>{{status.value}}</a>
+          <div class="status"> {{status.name}} </div>
+        </div>
+      </div>
+
+      </div>
+
+      <ng-template #nullCustomerIndStatus>
+        <div  *ngFor="let noCustomerStatus of noCustomerStatus">
+          <div  [class.disabled]="disableCustomerLink" class="customer-widget-circle" [ngStyle]="{'color': getColor(noCustomerStatus.name)}">
+            <!-- BACKUP CODE for above circle where class is "customer-widget-circle" : (click)="routeCustomerListings(noCustomerStatus.name,'I')" -->
+            <a>{{noCustomerStatus.value}}</a>
+            <div class="status">{{noCustomerStatus.name}}</div>
+          </div>
+          </div>
+      </ng-template>
+              </div>
+              
+
+              <div class="height">
+                <div *ngIf="customerOverallStatus.length > 0 ; else nulltotalCustomerstatus">
+                <ng-container *ngFor="let status of getTotalCustomer('CUSTOMER','OVERALLTOTAL')">
+                  <div class="number" style="position: relative;top: -35px;" [class.disabled]="isDisabled ? true : null">
+                    <a>{{status.value}}</a>
+                    <div class="font">OVERALL TOTAL </div>
+                  </div>
+                </ng-container>
+                </div>
+
+                <ng-template   #nulltotalCustomerstatus>
+                  <div class="number" style="position: relative;top: -35px;" [class.disabled]="isDisabled ? true : null">
+                    <a>0</a>
+                    <div class="font">OVERALL TOTAL </div>
+                  </div>
+
+                </ng-template>
+
+               
+                </div>
+            
+              <mat-divider class="widget-divider" style="width: 58%;"></mat-divider>
+              
+    
+            <div class="p-l">
+              <h6 class="text">business / Corporate</h6>
+              </div>
+             
+              <div class="display-line" >
+ <div style="display: flex;" *ngIf="testCustomerStatus.length > 0 ; else nullcustomerstatus">
+                <div *ngFor="let reports of getCustomerStatus('CUSTOMER','C')">
+                  <div class="customer-widget-circle"  [class.disabled]="disableCustomerLink || isDisableTotalCustomer(reports.name,'C')" [ngStyle]="{'color': getColor(reports.name)}">
+                    <!-- BACKUP CODE: <div class="customer-widget-circle" (click)="routeCustomerListings(reports.name,'C')"  [class.disabled]="disableCustomerLink || isDisableTotalCustomer(reports.name,'C')" [ngStyle]="{'color': getColor(reports.name)}"> -->
+                    <a>{{reports.value}}</a>
+                    <div class="status"> {{reports.name}} </div>
+                  </div>
+                </div>
+</div>
+
+ <ng-template   #nullcustomerstatus>
+              <div  *ngFor="let noCustomerStatus of noCustomerStatus">
+              <div   [class.disabled]="disableCustomerLink" class="customer-widget-circle" [ngStyle]="{'color': getColor(noCustomerStatus.name)}">
+                <!-- BACKUP CODE for above circle where class is "customer-widget-circle" :  (click)="routeCustomerListings(noCustomerStatus.name,'C')" -->
+                <a>{{noCustomerStatus.value}}</a>
+                <div class="status">{{noCustomerStatus.name}}</div>
+              </div>
+              </div>
+            </ng-template>
+           
+                  </div>
+                </div>
+                
+        <!--Payee FlexBox-->
+        <div class="flexbox-item2" fxFlex="26" fxFlex.xs="100" fxFlex.md="48" fxFlex.sm="100">
+          <h5 class="remittance1">Payee</h5>
+<div class="container" *ngIf="payeeCount.length > 0 ; else nullPayeeCount">
+          <ng-container *ngFor="let reports of getPayeeCount('PAYEE','PENDING')">
+            <div class="padding-left">
+              <div class="pending-for-approval" [class.disabled]="disablePayeeLink" [routerLink]="['/customer/approve-payee']"  [ngStyle]="{'color': getColor(reports.name)}">
+              <a style="position: relative;
+              top: 6px;">{{reports.value}}</a>
+              <div class="payee-status"> {{reports.name}} </div>
+            </div>
+            </div>
+          </ng-container>
+   </div> 
+
+   <ng-template #nullPayeeCount>
+      <div class="padding-left">
+        <div class="pending-for-approval" [class.disabled]="disablePayeeLink" [routerLink]="['/customer/approve-payee']"  [ngStyle]="{'color': getColor('PENDING')}">
+        <a>0</a>
+        <div class="payee-status"> PENDING </div>
+      </div>
+      </div>
+   </ng-template>
+ 
+
+  </div>
+  
+</div>
+</div>
+
+
+<!--Promotion-->
+    <!-- <div class="flexbox-item3" fxFlex="30" fxFlex.xs="100" fxFlex.md="48" fxFlex.sm="100">
+      <div style="height: 30px;" fxLayout="row" fxLayoutAlign="space-between">
+        <h5 class="application">Promotion</h5>
+        <div style="padding-top: 0.3cm;">
+        <button mat-stroked-button disabled>View all</button>
+        </div>
+        </div>
+<div style="height: 15px; padding-left: 0.8cm;">
+<h6>Bus driver: 5$ cashback</h6>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-around">
+  <div style="height: 6px;">
+  <p>Buhari</p>
+  </div>
+  <div style="height: 6px;">
+  <p>12 Dec 2021 - 20 Dec 2021</p>
+  </div>
+</div>
+<div style="height: 30px;padding-left: 0.8cm;">
+<h6>10,000 SGD remittance gets<br>free admin fee</h6>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-around">
+  <div style="height: 6px;">
+  <p>Buhari</p>
+  </div>
+  <div style="height: 6px;">
+  <p>12 Dec 2021 - 20 Dec 2021</p>
+  </div>
+</div>
+
+<div style="height: 30px;padding-left: 0.8cm;">
+<h6>5,000 SGD remittance gets 1%<br>cashback</h6>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-around">
+  <div>
+  <p>Buhari</p>
+  </div>
+  <div>
+  <p>12 Dec 2021 - 20 Dec 2021</p>
+  </div>
+</div>  
+
+</div> -->
+
+
+

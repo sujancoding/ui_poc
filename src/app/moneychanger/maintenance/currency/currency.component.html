@@ -1,0 +1,175 @@
+ <!--toolbar-->
+ <div fxLayout="row" *ngIf="showToolBarContent" fxLayoutAlign="space-between center" class="header-container">
+    
+  <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+
+    <span class="head-label-1">Currency Listings </span>
+
+  </div>
+  <div>
+    <span (click)="onClose()" class="close-icon">
+      <mat-icon>close</mat-icon>
+    </span>
+  </div>
+</div>
+
+
+<!--Search filter Section-->
+<div>
+    <form [formGroup]="filterForm">
+      <div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1">
+        <div  fxLayout="row"  fxLayoutAlign="space-between">
+<div>
+          <div fxLayout="row wrap"  fxLayoutGap="15px" style="margin-left: 15px; margin-top:15px;">
+  
+            <div fxLayout="column" style="margin-left: 10px;">
+              
+              <mat-form-field style="width: 250px;" appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Ccy No</mat-label>
+                <input matInput formControlName="currencyNo" [formControl]="filterForm.controls['currencyNo']">
+              </mat-form-field>
+              <!-- updated validation and error message for currenct no  -->
+              <div  class="message-block">
+              <div class="error-message" *ngIf="filterForm.controls['currencyNo'].hasError('maxlength')"> {{'currencyNoMaxlength' | label}} </div>  
+              </div>
+            </div>
+
+            <div fxLayout="column" style="margin-left: 10px;">
+                
+                <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Ccy Code</mat-label>
+                  <input matInput formControlName="currencyCode" [formControl]="filterForm.controls['currencyCode']"  [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onOptionSelectedCurrencyCode($event)">
+                    <mat-option *ngFor="let option of filteredOptions | async"  [value]="option.ccyCode">{{option.ccyCode}} </mat-option>
+                </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="column" style="margin-left: 10px;">
+              
+                <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Ccy Name</mat-label>
+                    <input matInput formControlName="currencyName" [formControl]="filterForm.controls['currencyName']"  [matAutocomplete]="auto1">
+                    <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayCurrencyName" (optionSelected)="onOptionSelectedCurrencyName($event)">
+                      <mat-option *ngFor="let option of filteredCurrencyNameOptions | async"  [value]="option.ccyName">{{option.ccyName}} </mat-option>
+                  </mat-autocomplete>
+                  </mat-form-field>
+              </div>
+  
+           
+              <button mat-raised-button [disabled]="!filterForm.valid" class="buttonApplyfilter" (click)="searchFilter()">
+                Apply Filter
+              </button>
+           
+
+          </div>
+  </div>
+         <div >
+            <button mat-raised-button class="register-btn" (click)="openAddCurrency('','','','','','')"><mat-icon>add</mat-icon>   Currency </button>
+          </div>
+
+        </div>
+  
+      </div>
+    </form>
+  
+  
+  </div>
+
+
+
+<!--Table-->
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      <div [ngStyle]="changeTableHeight()" >
+        <table class="table">
+  
+          <thead>
+            <th>CURRENCY NO</th>
+            <th>CURRENCY CODE</th>
+            <th>CURRENCY NAME</th>
+            <th> UNITS </th>
+            <th>VARIANCE PERCENTAGE (%)</th>
+            <th>VARIANCE EXCH RATE</th>
+            <th>LAST UPDATED DATE</th>
+            <th>LAST UPDATED BY</th>
+            <th>ACTIONS</th>
+          </thead>
+  
+          <tbody>
+            <tr *ngFor="let records of currencySearchRecords | slice: (p - 1) * itemsPerPage : p * itemsPerPage"
+            (dblclick)="showToolBarContent ? getCurrency(records.ccyNo, records.ccyCode, records.ccyName) : null">
+            <td>
+                {{records.ccyNo}}
+            </td>
+            <td> {{records.ccyCode}}</td>
+            <td>
+                {{records.ccyName}}
+            </td>
+            <td>
+              {{records.units}}
+          </td>
+            <td>
+              {{records.variancePercentage}}
+          </td>
+          <td>
+            {{records.varianceRate}}
+        </td>
+            <td>  {{records.updatedDate ? (records.updatedDate | date : 'medium' ) : (records.createdDate | date :
+              'medium')}} </td>
+            <td> {{records.updatedBy ? records.updatedBy : records.createdBy}} </td>
+           
+            
+            
+            <td>
+                <div fxLayout="row">
+                    <!-- <div class="example-button-container" >
+                        <button mat-icon-button [disabled]="true">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div> -->
+            
+                    <div fxLayout="row" >
+                    <div class="example-button-container">
+                        <button mat-icon-button #tooltip="matTooltip" matTooltip="Edit" matTooltipPosition="above"
+                        matTooltipClass="accounts-custom-tooltip" type="button" (click)="openAddCurrency(records.ccyNo, records.ccyCode, records.ccyName, records.variancePercentage, records.varianceRate, records.units)">
+                            <mat-icon>create</mat-icon>
+                        </button>
+                    </div>
+
+                    <div class="example-button-container">
+                      <button mat-icon-button #tooltip="matTooltip" matTooltip="Currency Value Setup" matTooltipPosition="above"
+                      matTooltipClass="accounts-custom-tooltip" type="button" (click)="openAddCurrencyValue(records.ccyNo, records.ccyCode, records.ccyName)">
+                          <mat-icon>money</mat-icon>
+                      </button>
+                  </div>
+                  </div>
+
+                </div>
+            </td>
+  
+            </tr>
+  
+          </tbody>
+  
+        </table>
+      </div>
+  
+  
+      <!--Pagination-->
+      <mat-paginator class="pagination-class"
+      [length]="currencySearchRecords.length"
+      [pageSize]="itemsPerPage"
+      [pageIndex]="p - 1"
+      (page)="handlePageChange($event)"
+      ></mat-paginator>
+    </div>
+  
+  
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+    </div>
+  
+  </div>
+

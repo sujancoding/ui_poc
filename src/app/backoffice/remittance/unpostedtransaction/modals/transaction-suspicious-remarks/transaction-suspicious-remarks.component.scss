@@ -1,0 +1,62 @@
+.task-header {
+  font-size: 18px !important;
+  background-color: #123969;
+  color: white;
+  height: 50px;
+}
+
+.content {
+  margin: 15px;
+}
+
+.btn {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px 3px 0px 178px
+}
+
+.save-btn {
+  height: 37px;
+  width: 85px;
+  font-size: 18px;
+  border-radius: 0.2cm;
+  background-color: #123969;
+  color: white;
+  border: none;
+}
+
+.close-btn {
+  height: 37px;
+  width: 85px;
+  border-radius: 0.2cm;
+  background-color: #e6e6e6;
+  color: #123969;
+  font-size: 16px;
+  border: none;
+}
+
+.error-message {
+  display: block;
+  color: #e8316f;
+  margin-left: 10px;
+  font-size: 12px;
+  font-family: Roboto;
+  position: relative;
+  top: -10px;
+}
+
+.close-button {
+  height: 37px;
+  font-size: 16px;
+  border-radius: 0.2cm;
+  background-color: #123969;
+  color: white;
+  margin-top: 6px;
+  margin-left: 291px;
+}
+
+.disabled-btn {
+  background-color: #e6e6e6;
+  pointer-events: none;
+  color: #a9a9a9;
+}

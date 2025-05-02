@@ -1,0 +1,65 @@
+
+<!-- ============================================================== -->
+<!-- THIS COMPONENT IS NOT USED -->
+<!-- ============================================================== -->
+
+<!--CLOSE ICON-->
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+      <span> Edit and Save </span>
+      <span [mat-dialog-close]="true" style="cursor: pointer;">
+        <mat-icon>close</mat-icon>
+        </span>
+  </mat-toolbar>
+    </h4>
+<!--CONTENT STARTS HERE-->
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div fxLayout="row" fxLayoutAlign="space-around">
+
+<div fxLayout="column"> 
+<p class="p">Currency Code</p>    
+<div fxLayout="row" fxLayoutGap="11px" style="margin-top: 24px;margin-left: 9px;">
+    <span style="font-size: 24px;" class="{{flag}}"></span>
+    <label class="text"> {{currencyCode}} </label>
+</div>
+</div>
+
+<div>
+<div fxLayout="column"> 
+    <p class="p"> Consumer </p> 
+    <mat-form-field fxFlex="20" appearance="{{'formFieldAppearance' | label}}">
+      <input matInput value="{{consumerRate}}" appNumbersOnly>
+    </mat-form-field>
+</div>
+</div>
+
+<div>
+<div fxLayout="column"> 
+    <p class="p"> Corporate </p> 
+    <mat-form-field fxFlex="20" appearance="{{'formFieldAppearance' | label}}">
+      <input matInput  value="{{corporateRate}}">
+    </mat-form-field>
+</div>
+</div>
+
+<div>
+<div fxLayout="column"> 
+    <p class="p"> Agent </p> 
+    <mat-form-field fxFlex="20" appearance="{{'formFieldAppearance' | label}}">
+      <input matInput  value="{{agentRate}}">
+    </mat-form-field>
+</div>
+</div>
+
+</div>
+
+<mat-divider> </mat-divider>
+
+<!-- Button -->
+
+<div fxLayout="row" fxLayoutAlign="end" style="height: 37px;margin-top: 19px;" >
+    <button class="no-button" [mat-dialog-close]="true" mat-flat-button>Cancel</button>
+    <button class="yes-button"  mat-raised-button color="primary">Save</button>
+</div>
+
+</form>

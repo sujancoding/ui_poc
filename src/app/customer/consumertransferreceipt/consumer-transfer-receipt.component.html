@@ -1,0 +1,123 @@
+<!-- Reciept for Consumer -->
+
+    <div  >
+        
+        <div class="inner-box" >
+          <div class="box" id="content1" #content1>
+            <div fxLayout="column" fxLayoutAlign="space-between center" style="height: 185px;">
+                <div style=" height: 46px;">
+                    <h5 class="receipt-text">Transfer Receipt</h5>
+                </div>
+                <div class="icon">
+                    <mat-icon style="transform: scale(1.5); color: white;">done</mat-icon>
+                </div>
+                <mat-divider style="width: 90%;margin-top: 20px;"></mat-divider>
+                <div>
+                    <div fxLayout="column" fxLayoutAlign="space-between" class="content-1">
+                        <span class="payeegets-label">Payee Gets Amount</span>
+                        <span  class="payeegets-value">{{ amountSentF | number : '1.2-2' }} {{sendCurrency}}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+            <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 45px">
+                <div class="content-container">
+                    <div>
+                        <p class="label">Reference Number</p>
+                        <p style="margin-top: -6px" class="value">{{referenceIdNumber}}</p>
+                    </div>
+                </div>
+                <div class="content-container">
+                    <p class="label">Payment Date</p>
+                    <p  style="margin-top: -6px" class="value">{{formattedDate}}</p>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 10px">
+                <div class="content-container">
+                    <div>
+                        <p  class="label">Sender Name</p>
+                        <p  style="margin-top: -6px" class="value">{{customerName}}</p>
+                    </div>
+                </div>
+                <div class="content-container">
+                    <p  class="label">Reciever Name</p>
+                    <p  style="margin-top: -6px"class="value">{{payeeName}}</p>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 10px">
+                <div class="content-container">
+                    <div>
+                        <p  class="label">Account Number</p>
+                        <p  style="margin-top: -6px" class="value"> {{accountNo ? accountNo : "Acc No not found"}} </p>
+                    </div>
+                </div>
+                <div class="content-container">
+                    <p  class="label">Relationship</p>
+                    <p  style="margin-top: -6px"class="value">{{ relationship }}</p>
+                    </div>
+             </div>
+
+             <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 10px">
+                <div class="content-container-1">
+                    <div>
+                        <p  class="label">Swift Code & Routing/Sort Code</p>
+                    <p  style="margin-top: -6px"class="value"> {{swiftCode ? swiftCode : "N/A"}} & {{routingCode ? routingCode : "N/A"}} </p>
+                
+                    </div>
+                </div>
+
+        </div>
+        <div>
+<div class="summary-container">
+    <p class="summary-label">Transfer Summary</p>
+    <div fxLayout="column" fxLayoutAlign="space-between" style="position: relative;top: -13px;">
+<div fxLayout="row" fxLayoutAlign="space-between" >
+    <div  fxLayout="column" fxLayoutAlign="space-between">
+      <p class="label" style="line-height: 5px;">Amount</p>
+      <p class="value">{{amountSent}} SGD</p>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-between">
+        <p class="label-1" style="line-height: 5px;">Admin Fee</p>
+        <p class="value-1">{{commission}} SGD</p>
+    </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between">
+
+    <div fxLayout="column" fxLayoutAlign="space-between" class="small-container">
+        <p class="label" style="line-height: 5px;">Exchange rate</p>
+        <p class="value">{{orgExchangeRate}}</p>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-between" class="small-container">
+        <p class="label-1" style="line-height: 5px;">Total amount</p>
+        <p class="value-1" style="margin-top: 8px;">{{amountSent + commission  | number : '1.0-2' }} SGD</p>
+    </div>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between" >
+
+    <div fxLayout="column" fxLayoutAlign="start" class="small-container">
+        <p class="label" style="line-height: 5px;">Status</p>
+        <p class="value" [ngStyle]="{'color': getColor(txnStatus)}">{{status}}</p>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="start" class="small-container">
+        <p class="label-1" >Payment mode for charges</p>
+        <p class="value-1" >{{displaySharingType}}</p>
+      </div>
+      
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+</div>
+<div class="center" *ngIf="downloadReceiptButton" style="margin-top: 41px;text-align: center;">
+    <button class="download-btn" (click)="downloadReceipt()" mat-raised-button color="primary" type="button">Download</button>
+</div>
+<mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loader"></mat-spinner>
+
+

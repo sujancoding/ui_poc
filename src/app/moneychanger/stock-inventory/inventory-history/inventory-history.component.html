@@ -1,0 +1,133 @@
+<!--CUSTOMER AC HISTORY-->  
+<!-- Filter Section -->
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1" >
+
+    <form [formGroup]="filterForm">
+        <div  fxLayout="row" fxLayoutGap="10px" style="margin-left: 15px;align-items: center;">
+
+            <mat-icon class="arrow-back-icon" (click)="goToInventory()">keyboard_arrow_left</mat-icon>
+
+            <div fxLayout="column">
+                
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Ccy Name</mat-label>
+                        <input formControlName="currencyName" [formControl]="filterForm.controls['currencyName']" matInput
+                            class="form-control" readonly="true">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="column" style="margin-right: 10px;">
+                
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Start Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="startDate"
+                            [formControl]="filterForm.controls['startDate']" (dateChange)="onStartDateChange($event)" [min]="minStartDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="column">
+               
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                        <mat-label class="custom-label">End Date</mat-label>
+                        <input matInput formControlName="endDate" [formControl]="filterForm.controls['endDate']"
+                            [matDatepicker]="picker2" (dateChange)="onEndDateChange($event)" [min]="minEndDate" [max]="maxEndDate" >
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                        <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+            <button [disabled]="!filterForm.valid" mat-raised-button  (click)="searchFilter()"
+                class="buttonApplyfilter">Fetch</button>
+        </div>
+    </form>
+
+</div>
+
+
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+    
+    <div [ngStyle]="changeTableHeight()">
+    <table class="table">
+    <thead>
+        <th>CURRENCY CODE</th>
+        <th>CURRENCY NO</th>
+        <th>COUNTER TYPE</th>
+        <th>ACTUAL STOCK</th>
+        <th>OPENING ACTUAL STOCK</th> 
+        <th>AVERAGE COST</th>
+        <!-- Though we have the table header as 'DATE' in the Customer Accounts History, here it needs to be changed to 'DATE'. -->
+        <th>DATE</th>
+         <th>ACTION</th> 
+</thead>
+    
+<tbody>
+   
+    <tr *ngFor="let search of inventoryHistoryArray | slice: (p - 1) * itemsPerPage : p * itemsPerPage;">
+        <td>{{search.ccyCode}}</td>
+
+        <td>{{search.ccyNo}}</td>
+
+        <td>
+          <div *ngIf="search.counterType == 'W'"> Wholesale </div>
+          <div *ngIf="search.counterType == 'R'"> Retail </div>
+        </td>
+
+
+        <td [ngClass]="{'negative-amount': search.actualStock < 0, 'positive-amount': search.actualStock >= 0}">{{search.actualStock | number}}</td>
+
+
+        <td [ngClass]="{'negative-amount': search.openingBalanceActualStock < 0, 'positive-amount': search.openingBalanceActualStock >= 0}">{{search.openingBalanceActualStock | number}}</td> 
+
+
+
+        <td>{{search.avgCost}}</td>
+
+        <td>
+          <div>
+            <div> {{search.updatedBy ? search.updatedBy : search.createdBy }}</div>
+            <!-- We should patch recored date here -->
+            <div class="sub-value"> {{search.recordDate ? (search.recordDate | date : 'medium') : (search.createdDate | date : 'medium') }} </div>
+            </div>
+        </td>
+
+        <td>
+          <div>
+            <button
+            #tooltip="matTooltip"
+            matTooltip="Download Transaction Summary"
+            matTooltipPosition="above"
+            matTooltipClass="accounts-custom-tooltip"
+           class="icon_button" mat-icon-button type="button"
+           (click)="downloadLedgerFile(search.ccyNo, search.ccyCode, search.recordDate)"> 
+            <mat-icon class="picture-as-pdf-icon">picture_as_pdf</mat-icon>    
+            </button>
+         </div>
+        </td>
+    </tr>
+</tbody>
+</table>
+</div>
+<mat-paginator class="pagination-class"
+[length]="inventoryHistoryArray.length"
+[pageSize]="itemsPerPage"
+[pageIndex]="p - 1"
+(page)="handlePageChange($event)"
+></mat-paginator>
+</div>
+ <!--Loader-->
+<div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+</div>
+</div>
+
+

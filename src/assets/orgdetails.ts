@@ -1,0 +1,1 @@
+export const orgName : string = "ARCADE PLAZA TRADERS PTE LTD"

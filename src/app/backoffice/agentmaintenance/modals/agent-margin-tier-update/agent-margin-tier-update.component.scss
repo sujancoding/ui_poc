@@ -1,0 +1,79 @@
+.task-header {
+font-size: 18px;
+    background-color: #123969;
+    color: white;
+    height: 50px;
+}
+
+.label{
+    font-size: 16px;
+    font-family: 'Roboto';
+    color: rgb(78, 78, 78);
+}
+  
+.value{
+      font-size: 16px;
+      font-family: 'Roboto';
+      color: rgb(0, 0, 0);
+}
+
+.content{
+    overflow-y: scroll;
+    //margin-bottom: 15px;
+}
+
+.margin-button {
+    text-align: right;
+    position: relative;
+    right: 13px;
+    margin-bottom: 10px;
+}
+
+.close-mat-button {
+    height: 45px;
+    font-size: 18px;
+    background-color: #edf5ff;
+    color: #123969;
+}
+
+.chkbox-margin {
+    margin: 0 12px;
+  }
+
+  .message-block .error-message {
+    display: none;
+  }
+  
+  .message-block .error-message:first-child {
+    display: block;
+    color: #e8316f;
+    margin-bottom: 5px;
+    margin-top: -20px;
+    margin-left: 6px;
+    font-size: 14px;
+    font-family: "Roboto";
+    white-space: break-spaces;
+  }
+
+
+  .edit-icon{
+    color: #123969 ;
+    margin-inline: -4px;
+  }
+  
+  .save-icon{
+    color: #12dc4c ;
+    margin-inline: -4px;
+  }
+
+  // .sub-value{
+  //   color: grey;
+  // }
+  
+  // .updated-by-area{
+  //   position: relative;
+  //     bottom: 5px;
+  // }
+  .table{
+    height: 189px !important;
+  }

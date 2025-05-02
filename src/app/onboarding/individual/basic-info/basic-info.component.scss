@@ -1,0 +1,235 @@
+
+// form{
+//   margin: 5px;
+// }  
+.scrollable-form{
+  height: 426px;
+    overflow-y: scroll;
+    margin-right: 17px;
+    margin-left: 17px;
+}
+   
+   .mat-mdc-radio-button ~ .mat-radio-button {  
+     margin-left: 15px;
+   
+   }  
+   
+   .dialogButton{
+    margin-left: 8px;
+    margin-right: 8px;
+   }  
+.mat-mdc-button{
+  width: 13%;
+  margin: 0.4cm;
+}
+
+.mat-raised{
+  width: 10%;
+  height: 1cm;
+  margin-top: 0.5cm;
+  margin-left: 0cm;
+  margin-right: 0.3cm;
+}
+
+.basic-information{
+  background-color: white;
+}
+
+.address-styles{
+  margin-top: 8px;
+    /* font-style: normal; */
+    /* font-weight: 600; */
+    margin-bottom: 10px;
+    font-family: "Roboto";
+    font-size: 16px;
+}
+
+.section-divider{
+  margin-top: 15px;
+}
+
+.task-header {
+font-size: 18px;
+  background-color:#123969;
+ color: white;
+ height: 50px;
+ 
+
+}
+.fx-spacer {
+  flex: 1 1 auto;
+}
+
+.blue{
+  background-color: #123969 ;
+  width: 128px;
+  color: white;
+}
+
+.red{
+background-color:#EB5757;
+width: 128px;
+color: white;
+}
+.green{
+  background-color:#198754;
+  color:white;
+width: 3cm;
+}
+
+.deactivate{
+ justify-content: center;
+ align-items: center;
+  margin: 20px;
+ }
+
+ small{
+  clear: both;
+  display: inline-block;
+  overflow: hidden;
+ // white-space: nowrap;
+ }
+ .wrapMargin{
+  margin-top: -1px;
+ }
+.wraptext{
+    white-space: nowrap;
+    margin-left: -10px;
+}
+
+//  .customerReviewButton{
+//    margin-left: 290px;
+//  }
+.close-btn{
+  width: 119px;
+  height: 40px;
+  margin-left: 20px;
+  margin-top: 18px;
+}
+.icon_button{
+  margin-left: 10px;
+}
+
+.edit-icon{
+  font-size: 20px;
+}
+ .size{
+  width: 3cm;
+ }
+//Added by shafi @ 09/11/2022
+//Triggers on modalpopup > Application Search > on click launch icon
+//  @media screen and (min-width:500px) {
+//   form{
+//     margin: 17px;
+//     height: 452px;
+//     overflow-y: scroll;
+//   }  
+//  }
+
+ .message-block .error-message{
+  display: none;
+}
+.message-block .error-message:first-child{
+  display: block;
+  color: #e8316f;
+  margin-top: -10px;
+  margin-left: 6px;
+  font-size: 70%;
+  white-space: break-spaces;
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.saveBasicInfoButton{
+  width: 100%;
+    font-weight: 100;
+    font-size: 17px;
+    margin-bottom: 12px;
+    height: 43px;
+    font-family: 'Roboto';
+    background-color: #123969;
+    color: white;
+    position: relative;
+    top: 10px;
+}
+.saveBasicInfoLayout{
+  text-align: center;
+}
+@media screen and (min-width:600px) {
+  .saveBasicInfoButton{
+    width: 30%;
+      font-weight: 100;
+      font-size: 17px;
+      margin-bottom: 12px;
+      height: 43px;
+      font-family: 'Roboto';
+      background-color: #123969;
+      color: white;
+      position: relative;
+      top: 100px;
+  }
+  .saveBasicInfoLayout{
+    text-align: end;
+  }
+  
+  
+ }
+  
+.tooltip-message{
+  color:#949494;
+  cursor: pointer;
+  position: relative;
+  top: 2px;
+  left: 9px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar-thumb {
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.scrollable-form-mc{
+  height: 321px;
+  overflow-y: scroll; 
+ // margin: 17px;
+}
+
+.submit-mat-btn{
+  height: 47px;
+}
+.close-mat-btn{
+  width: 118px;
+  height: 47px;
+}
+.btn-row{
+  margin-top: 18px;
+}
+
+.btn-row-mc{
+  margin-top: 10px;
+  margin-left: 14px;
+    margin-right: 14px 
+}
+
+.red-highlight-btn{
+  background-color: orange;
+  width: 3cm;
+  color: white;
+}
+
+.savechanges{
+  background-color: #198754;
+  color: white;
+}

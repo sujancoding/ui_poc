@@ -1,0 +1,79 @@
+<div class="header mat-elevation-z1">
+  <div class="row">
+    <div fxLayout="column">
+    <div class="title-welcome-msg"> Hello {{staffUserName}} </div>
+  <div class="welcome-msg"> Welcome to MoneyChanger !  </div>
+  </div>
+  <h5 class="welcome-msg"> {{myDate | date : 'mediumDate'}}</h5> 
+  </div>
+</div>
+
+
+<!-- COMMENTED STOCK INVENTORY TABLE CODE ON 05 FEB 2024, AS PER REQUIREMENT .. WILL REMOVE THIS CODE IN GG FRWD ..
+<div class="table-wrapper">
+    <div class="mat-elevation-z8" >
+      <div [ngStyle]="changeTableHeight()">
+        <table  class= "table" >
+         
+          <thead>
+            <tr>
+                  <th>CURRENCY CODE</th>
+                  <th>CURRENCY NO</th>
+                  <th>CURRENCY NAME</th>
+                  <th>COUNTER TYPE</th>
+                  <th>ACTUAL STOCK</th>
+                   <th>DEAL STOCK</th> 
+                  <th>AVERAGE COST</th>
+                  <th>LAST UPDATED ON</th>
+                  </tr>
+          </thead>
+         
+          <tbody>
+            <tr *ngFor="let search of stockListings | slice: (p - 1) * itemsPerPage : p * itemsPerPage ">
+                <td>{{search.ccyCode}}</td>
+                  <td>{{search.ccyNo}}</td>
+                  <td>{{search.ccyName}}</td>
+                  <td>
+                    <div *ngIf="search.counterType == 'W'"> Wholesale </div>
+                    <div *ngIf="search.counterType == 'R'"> Retail </div>
+                  </td>
+                  <td [ngClass]="{'negative-amount': search.actualStock < 0, 'positive-amount': search.actualStock >= 0}">{{search.actualStock | number}}</td>
+                   <td [ngClass]="{'negative-amount': search.dealStock < 0, 'positive-amount': search.dealStock >= 0}">{{search.dealStock | number}}</td> 
+                  <td>{{search.avgCost}}</td>
+                  <td>
+                    <div>
+                      <div> {{search.updatedBy ? search.updatedBy : search.createdBy }}</div>
+                      <div class="sub-value"> {{search.updatedDate ? (search.updatedDate | date : 'medium') : (search.createdDate | date : 'medium') }} </div>
+                      </div>
+                  </td>
+            </tr>
+          </tbody>
+         
+      </table>
+      </div>
+      <mat-paginator class="pagination-class"
+      [length]="stockListings.length"
+      [pageSize]="itemsPerPage"
+      [pageIndex]="p - 1"
+      (page)="handlePageChange($event)"
+    ></mat-paginator>
+    </div> 
+   Loader
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+      </div>
+     </div> -->
+    <div class="branch-mssg-container">
+      <mat-card appearance="outlined" class="card-outline">
+        <mat-card-header [ngClass]="isBranchOpen ? 'branch-open-label' : 'branch-close-label'">
+          <mat-card-title *ngIf="!loader" class="card-title"> {{ isBranchOpen ? branchOpenMessage : branchClosedMessage }} </mat-card-title>
+        </mat-card-header>
+         <div *ngIf="loader" class="loader-wrapper">
+          <mat-spinner> </mat-spinner>
+          </div> 
+        <mat-card-content class="branch-hint-text">
+          <p *ngIf="!loader" class="card-content-text"> {{ isBranchOpen ? branchOpenHintMessage : branchClosedHintMessage }} </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+

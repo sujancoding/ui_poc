@@ -1,0 +1,78 @@
+.message-block .error-message {
+  display: none;
+}
+
+.message-block .error-message:first-child {
+  display: block;
+  color: #e8316f;
+  margin-bottom: 5px;
+  margin-top: -10px;
+  margin-left: 6px;
+  font-size: 14px;
+  white-space: break-spaces;
+  font-family: Roboto;
+}
+
+.head-label-2 {
+  font-size: 15px;
+  margin-top: 5px;
+  font-family: 'Roboto';
+  font-weight: 600;
+}
+
+.head-label-1 {
+  font-size: 18px;
+  display: flex;
+  font-family: 'Roboto';
+  color: white;
+}
+
+.register-btn {
+  width: 120px;
+  margin: auto;
+}
+
+.formfield-section {
+  width: 90%;
+  margin-left: 20px;
+  margin-top: 12px;
+}
+
+
+.header-container {
+ background-color: #123969;
+ height: 50px;
+ padding-left: 18px;
+}
+
+.check-box {
+  margin-top: 5px;
+  font-size: 15px;
+  color: black;
+}
+
+.close-icon{
+  cursor: pointer;
+  color: white;   
+  position: relative;
+  top: 3px;
+  margin-left: -40px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:horizontal {
+  height: 24px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
+}

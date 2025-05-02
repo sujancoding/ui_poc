@@ -1,0 +1,306 @@
+ 
+<!--Search filter Section-->
+<div>
+
+  <div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter">
+    <form [formGroup]="filterForm" >
+      <div fxLayout="row" fxLayoutAlign="space-between">
+    <div class="inner-container">
+
+          <button mat-raised-button (click)='xpandStatus = !xpandStatus' class="applyFilter-btn">
+            <mat-icon class="add-filter-icon">add</mat-icon>
+           Filter
+          </button>
+  
+  <mat-form-field  style="width: 400px;
+  margin: 10px;" appearance="{{'formFieldAppearance' | label}}">
+    <mat-label class="custom-label">Contract Number</mat-label>
+    <input (input)="onContractIdChange()"  formControlName="contractNumber" [formControl]="filterForm.controls['contractNumber']"  [(ngModel)]="searchContractNumber"  matInput >
+  </mat-form-field>
+  <!-- <span class="contractId-validation-message" > (*Please input full contract Id) </span> -->
+
+              
+          
+  
+      <mat-icon  matTooltipPosition="above"
+      matTooltipClass="custom-tooltip" class="tooltip-warning-icon" matTooltip="Please enter full valid contract number">error_outline</mat-icon> 
+  
+     
+    </div>
+
+    <div>
+      <button  mat-raised-button class="btnAdd" [disabled]="isDisableAddContract" (click)="addContracts()"  mat-mini-fab aria-label="Example icon button with a plus icon" >
+        <mat-icon style="padding-top: -1px;"> add </mat-icon> Contract
+      </button>
+    </div>
+      </div>
+    <mat-divider></mat-divider>
+  
+    <div  class="custom-filter-values" fxLayoutGap="30px">
+      <div *ngFor="let filterValues of filterValues" fxLayout="column" class="margin-space" fxLayoutGap="5px">
+        <p class="filter-key" style="    position: relative;
+    top: 12px;"> {{filterValues.fieldName ? filterValues.fieldName : ""}} </p>
+        <p class="filter-value"> {{filterValues.value ? filterValues.value : ""}} </p>
+      </div>
+  
+     
+    </div>
+  
+    
+  
+      <div fxLayout="column" fxLayoutGap="1px">
+  
+        <div class="div-height" fxLayout="row" fxLayoutGap="10px">
+  
+  
+  
+        </div>
+        <mat-accordion #accordion="matAccordion">
+          <mat-expansion-panel style="width: fit-content;background-color: #ffffff;z-index: 999;"
+            #mapanel="matExpansionPanel" [(expanded)]="xpandStatus">
+  
+             <h4 class="filter-title"> Filters </h4>
+          <!-- <mat-divider> </mat-divider> -->
+  
+           <div fxLayout="column" *ngIf="showAgentFilter"> 
+  <p class="p"> Agent Name </p> 
+  <mat-form-field fxFlex="20" appearance="{{'formFieldAppearance' | label}}">
+    <mat-select  [formControl]="filterForm.controls['agentName']" [(ngModel)]="searchAgent" >
+      <mat-option *ngFor="let list of agentLists" [value]="list.ENTITYNAME"> {{list.ENTITYNAME}} </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+        
+  
+            <div fxLayout="row" class="row-items">
+  
+              <span>
+              <div fxLayout="column" style="margin-right: 10px;"> 
+  <p class="p"> Contract Number </p> 
+  <mat-form-field  style="width: 245px;" appearance="{{'formFieldAppearance' | label}}">
+    <input (input)="onContractIdUppercase()" formControlName="contractNumber" [formControl]="filterForm.controls['contractNumber']"  [(ngModel)]="searchContractNumber"  matInput >
+  </mat-form-field>
+  <!-- <span class="contractId-validation-message" > (*Please input full contract Id) </span> -->
+</div>
+            </span>
+
+            <span>
+              <div fxLayout="column"> 
+  <p class="p"> Status </p> 
+  <mat-form-field  style="width: 245px;" appearance="{{'formFieldAppearance' | label}}">
+    <mat-select  [formControl]="filterForm.controls['contractStatus']"  [(ngModel)]="searchStatus" >
+      <mat-option value="">--Select--</mat-option>
+      <mat-option value="ACTIVE">Active</mat-option>
+      <mat-option value="EXPIRED">Expired</mat-option>
+      <mat-option value="CLOSED">Closed</mat-option>
+      <mat-option value="ENDS TODAY">Ends Today</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+            </span>
+  
+            </div>
+  
+            
+  
+            <div fxLayout="row" class="row-items">
+  
+              <span>
+              <div fxLayout="column" style="margin-right: 10px;">
+                <p class="p">Start Date</p>
+                <div>
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 245px;">
+                    <input matInput [matDatepicker]="picker"  formControlName="startDate" [formControl]="filterForm.controls['startDate']" 
+                    (dateChange)="onStartDateChange($event)"  [min]="minStartDate" >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+              </span>
+  
+              <span>
+              <div fxLayout="column">
+                <p class="p">End Date</p>
+                <div>
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 245px;">
+                    <input matInput formControlName="endDate" [formControl]="filterForm.controls['endDate']" 
+                     [matDatepicker]="picker2" (dateChange)="onEndDateChange($event)"   [min]="minEndDate" [max]="maxEndDate" >
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+              </span>
+  
+            </div>
+  
+  
+            <mat-action-row style="padding: 0px !important;">
+              <div fxLayout="row" fxLayoutAlign="space-between" style="width: 100%;">
+                <div>
+                  <button  mat-flat-button class="close-button" (click)="xpandStatus = !xpandStatus" type="button">Close</button>
+                </div>
+              <div fxLayout="row">
+                <button mat-flat-button class="reset-button" (click)="resetFilter()" type="button">Reset</button>
+                <button mat-flat-button class="submit-button" [disabled]="!filterForm.valid"
+                (click)="applyFilter(searchContractNumber,searchStatus,searchAgent)">
+                  Apply Filter</button>
+              </div>
+              </div>
+            </mat-action-row>
+  
+          </mat-expansion-panel>
+        </mat-accordion>
+  
+  
+  
+      </div>
+  
+    </form>
+  
+  
+  
+  
+  </div>
+
+  <span fxLayout="row" style="margin-top: -31px;margin-left: 12px;
+  position: relative;
+  top: 14px;">
+    <p class="show-results">Showing</p> <p class="show-results" style="color: black;font-weight: 700;"> {{recordsCount}} </p> <p class="show-results">results</p> 
+   </span>
+
+<div class="table-wrapper">
+  <div class="mat-elevation-z8" >
+    <div [ngStyle]="changeTableHeight()">
+    <table class="table">
+        <thead>
+          <th style="padding-left: 20px;">CONTRACT NUMBER</th>
+          <th>CONTRACT STATUS</th>
+          <th>TRADE DATE & TIME</th>
+          <th>FX CONTRACT RATE</th>
+          <th *ngIf="showClientRate">CLIENT RATE</th> <!--show client rate only for backoffice users-->
+          <th>CONTRACT BALANCE (FCY)</th>
+          <th>CONTRACT BALANCE (LCY)</th>
+          <th>TRADE INITIATED BY</th>
+        </thead>
+        <tbody *ngIf="showFetchedData">
+          <tr  *ngFor="let testArray of getContracts | slice: (p - 1) * itemsPerPage : p * itemsPerPage">
+            <td class="cellValue-1" style="padding-left: 20px;"> {{testArray.bookingId}}</td>
+            <td>
+              <div class="tags" [ngStyle]="{'color': getColor(testArray.status),'background-color': getBackgroundColor(testArray.status)}">
+                <div  [ngStyle]="{'background-color': getColor(testArray.status)}" class="small-container"></div>
+              <span class="status-tag"   #tooltip="matTooltip"
+              [matTooltip]="getTooltipText(testArray.status)"
+              matTooltipPosition="above"
+              matTooltipClass="custom-tooltip"> 
+              {{testArray.status | uppercase}} </span>
+              </div>
+
+              <p class="text-label">
+               Valid Till {{testArray.validTill | date:'d MMM y , h:mm:ss'}}</p>
+
+            </td>
+           
+            <td>
+                <p class="cellValue-1">{{testArray.txnDateTime | date:'d MMM y , h:mm:ss'}}</p>
+                <!-- <p class="cellValue-2">{{testArray.txnDateTime}}<span class="cellValue-2">(SGT)</span></p> -->
+            </td>
+            <td>
+      <div fxLayout="column" fxLayoutAlign="space-evenly none" >
+        <div fxLayout="row " fxLayoutAlign="initial baseline" style="line-height: 0px;">
+                <p class="cellValue-2">SELL</p>
+                <p fxLayoutAlign="end" class="cellValue-1"> {{testArray.sellCurrency}} 1 =
+                {{testArray.buyCurrency}} {{testArray.sellRate}}</p>
+              </div>
+              <div fxLayout="row " fxLayoutAlign="initial baseline" style="line-height: 0px;">
+                  <p class="cellValue-2">BUY</p>
+                  <p fxLayoutAlign="end" class="cellValue-1"> {{testArray.buyCurrency}} 1 =
+                    {{testArray.sellCurrency}} {{testArray.rate}}</p>
+                  </div>
+                </div>
+            </td>
+            <td *ngIf="showClientRate"> {{testArray.clientRate}} </td> <!--show client rate only for backoffice users-->
+            <td>
+              
+              <p class="cellValue-2"> {{testArray.buyCurrency}} <span class="cellValue-1" style="margin-top: 2px;"> {{testArray.txnAmount | number : '1.0-2'}}</span> </p>
+                
+              
+            </td>
+            <td >
+              <p class="cellValue-2"> {{testArray.sellCurrency}} <span class="cellValue-1" style="margin-top: 2px;">{{testArray.contractBalance | number : '1.0-2'}}</span> </p>
+            </td>
+      
+            <td>
+                <p class="cellValue-1">{{testArray.entityId}}</p>
+                <p class="cellValue-2" style="color: #123969">{{testArray.createdBy}}</p>
+            </td>
+        </tr>
+        </tbody>
+
+        <tbody *ngIf="noReportsData">
+          <tr>
+            <td>No Datas Found</td>
+          </tr>
+        </tbody>
+
+    </table>
+    </div>
+    <!--Pagination-->
+    <mat-paginator class="pagination-class"
+    [length]="getContracts.length"
+    [pageSize]="itemsPerPage"
+    [pageIndex]="p - 1"
+    (page)="handlePageChange($event)"
+  ></mat-paginator>   </div>
+   <!--Loader-->
+   <div *ngIf="matspinner" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+    </div>
+    </div>
+
+
+ <!--This Alert box will be displayed if contract was rejected by user..-->   
+  <!-- <div [ngStyle]="overAllAlertBox()">  
+  <div class="alert show" *ngIf="showCancelContract">
+    <div fxLayout="row" fxLayoutAlign="space-around">
+   <span> 
+      <mat-icon>priority_high</mat-icon>
+  </span>
+  <span style="line-height: 23px">
+    {{message}}
+  </span>
+  <span class="close"> 
+    <button class="close-btn" (click)="close()">
+      <mat-icon>close</mat-icon> 
+    </button>
+  </span>
+  </div>
+</div>  
+</div> -->
+
+<!--This Alert box will be displayed if contract was booked by user..--> 
+<!-- <div [ngStyle]="overAllAlertBox()">  
+  <div class="success-alert show" *ngIf="showSuccessContract">
+    <div fxLayout="row" fxLayoutAlign="space-around">
+   <span> 
+      <mat-icon></mat-icon>
+  </span>
+  <span style="line-height: 23px">
+    {{message}}
+  </span>
+  <span class="close"> 
+    <button class="close-btn" (click)="close()">
+      <mat-icon>close</mat-icon> 
+    </button>
+  </span>
+  </div>
+</div>  
+</div> -->
+
+
+             
+              

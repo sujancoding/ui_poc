@@ -1,0 +1,33 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="header-container" style="margin-top: -21px;">
+    
+    <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+
+      <span class="head-label-1"> Oops! </span>
+
+    </div>
+    <div>
+      <span class="close-icon">
+        <mat-icon [mat-dialog-close]="true">close</mat-icon>
+      </span>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+
+  <div class="container">
+    <p class="p"> Below records have insufficient Actual stock : </p>
+    <ol class="ordered-list">
+        <li *ngFor="let item of notificationMessageArray">
+          Currency Code: {{ item.ccyCode }}, Currency Number: {{ item.ccyNo }}
+        </li>
+      </ol>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="button">
+    <button mat-stroked-button class="addButton" [mat-dialog-close]="true" type="button">
+       Ok
+      </button>
+</div>

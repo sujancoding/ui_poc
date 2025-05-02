@@ -1,0 +1,24 @@
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+  const cltyScript = document.createElement('script');
+  cltyScript.innerHTML = environment.clartityScript;
+  document.head.appendChild(cltyScript);
+}
+
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch((err) => console.error(err));
+
+
+// let onDeviceReady = () => {
+//   platformBrowserDynamic()
+//     .bootstrapModule(AppModule)
+//     .catch((err) => console.error(err));
+// };
+// document.addEventListener('deviceready', onDeviceReady, false);

@@ -1,0 +1,164 @@
+
+<!--MODAL DIALOG WINDOW : CONSUMER ONBOARDING-->
+<div *ngIf="showConsumerContent">
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <div class="mat-header-content">
+          <span class="title-label">{{customerType}} Application Onboarding </span>
+        </div>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+          <mat-icon>close</mat-icon>
+          </span>
+    </mat-toolbar>
+  </h4>
+
+  <div class="stepper-container">
+    <mat-stepper  [linear]="true" #stepper (selectionChange)="onSelectionChange($event)">
+      <div>
+
+      
+
+        <mat-step [stepControl]="appRegister.form" >
+          <ng-template matStepLabel>
+             <div class="steper-content-container">
+            <!-- <span class="content-1">Step Name </span> -->
+            <span class="content-2">Application </span>
+            <div class="small-tag">
+              <span class="small-status-tag" [ngStyle]="{'color': getColor(registrationStatus),'background-color': getBackgroundColor(registrationStatus)}">{{registrationStatus}}</span>
+             </div>
+          </div>
+         </ng-template>
+        <app-registration #appRegister [stepper]="stepper" > </app-registration>
+      </mat-step>
+
+
+      <mat-step [stepControl]="indProfile.form" >
+        <ng-template matStepLabel>
+           <div class="steper-content-container">
+          <!-- <span class="content-1">Step Name </span> -->
+          <span class="content-2">Basic Information </span>
+          <div class="small-tag">
+            <span class="small-status-tag" [ngStyle]="{'color': getColor(profileStatus),'background-color': getBackgroundColor(profileStatus)}">{{profileStatus}}</span>
+           </div>
+        </div>
+       </ng-template>
+      <app-basic-info #indProfile  [stepper]="stepper"  > </app-basic-info>
+    </mat-step>
+
+    </div>
+        <mat-step [stepControl]="sourceOfWealth.form">
+            <ng-template matStepLabel>
+              <div class="steper-content-container">
+                <!-- <span class="content-1">Step Name </span> -->
+                <span class="content-2">Source Of Wealth </span>
+                <div class="small-tag">
+                  <span class="small-status-tag" [ngStyle]="{'color': getColor(sourceOfWealthStatus),'background-color': getBackgroundColor(sourceOfWealthStatus)}">{{sourceOfWealthStatus}}</span>
+                 </div>
+              </div>
+            </ng-template>
+         <app-sourceofwealth #sourceOfWealth  [stepper]="stepper" > </app-sourceofwealth>
+        </mat-step>
+
+        <mat-step [stepControl]="documents.form">
+          <ng-template matStepLabel> 
+            <div class="steper-content-container">
+            <!-- <span class="content-1">Step Name </span> -->
+            <span class="content-2"> Documents </span>
+            <div class="small-tag">
+              <span class="small-status-tag" [ngStyle]="{'color': getColor(documentStatus),'background-color': getBackgroundColor(documentStatus)}">{{documentStatus}}</span>
+             </div>
+          </div></ng-template>
+       <app-documents-individual-mc #documents > </app-documents-individual-mc>
+      </mat-step>
+       
+
+      </mat-stepper>
+    </div>
+
+  </div>
+
+
+
+<!--MODAL DIALOG WINDOW : CORPORATE ONBOARDING-->
+  <div *ngIf="showCorporateContent">
+    <h4 mat-dialog-title>
+        <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+            <div class="mat-header-content">
+              <span class="title-label">Corporate Application Onboarding </span>
+            </div>
+            <span [mat-dialog-close]="true" style="cursor: pointer;">
+              <mat-icon>close</mat-icon>
+              </span>
+        </mat-toolbar>
+      </h4>
+    
+      <div class="stepper-container">
+        <mat-stepper  [linear]="true" #corpStepper (selectionChange)="onCorporateSelectionChange($event)">
+          <div>
+
+           
+    
+            <mat-step [stepControl]="appCorpRegister.form" >
+              <ng-template matStepLabel>
+                 <div class="steper-content-container">
+                <!-- <span class="content-1">Step Name </span> -->
+                <span class="content-2">Application </span>
+                <div class="small-tag">
+                  <span class="small-status-tag" [ngStyle]="{'color': getColor(corpRegistrationStatus),'background-color': getBackgroundColor(corpRegistrationStatus)}">{{corpRegistrationStatus}}</span>
+                 </div>
+              </div>
+             </ng-template>
+            <app-corporate-registration #appCorpRegister [corpStepper]="corpStepper"> </app-corporate-registration>
+          </mat-step>
+
+          <mat-step [stepControl]="companyProfile.form" >
+            <ng-template matStepLabel>
+               <div class="steper-content-container">
+              <!-- <span class="content-1">Step Name </span> -->
+              <span class="content-2">Company Profile </span>
+              <div class="small-tag">
+                <span class="small-status-tag" [ngStyle]="{'color': getColor(companyProfileStatus),'background-color': getBackgroundColor(companyProfileStatus)}">{{companyProfileStatus}}</span>
+               </div>
+            </div>
+           </ng-template>
+          <app-company-profile #companyProfile [corpStepper]="corpStepper"> </app-company-profile>
+        </mat-step>
+    
+         
+    
+        </div>
+        <!-- <mat-step [stepControl]="companyAssociates.form"> previous code -->
+            <mat-step> <!--new code , stepControl removed because associates any one of group is mandatory-->
+                <ng-template matStepLabel>
+                  <div class="steper-content-container">
+                    <!-- <span class="content-1">Step Name </span> -->
+                    <span class="content-2">Company Associates </span>
+                    <div class="small-tag">
+                      <span class="small-status-tag" [ngStyle]="{'color': getColor(companyAssociatesStatus),'background-color': getBackgroundColor(companyAssociatesStatus)}">{{companyAssociatesStatus}}</span>
+                     </div>
+                  </div>
+                </ng-template>
+             <app-company-associate #companyAssociates [corpStepper]="corpStepper"> </app-company-associate>
+            </mat-step>
+
+            <mat-step [stepControl]="companyDocuments.form">
+              <ng-template matStepLabel> 
+                <div class="steper-content-container">
+                <!-- <span class="content-1">Step Name </span> -->
+                <span class="content-2"> Company Documents </span>
+                <div class="small-tag">
+                  <span class="small-status-tag" [ngStyle]="{'color': getColor(companyDocumentsStatus),'background-color': getBackgroundColor(companyDocumentsStatus)}">{{companyDocumentsStatus}}</span>
+                 </div>
+              </div></ng-template>
+           <app-company-documents #companyDocuments> </app-company-documents>
+          </mat-step>
+    
+         
+    
+          </mat-stepper>
+        </div>
+    
+      </div>
+        
+    
+    

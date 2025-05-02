@@ -1,0 +1,406 @@
+.header{
+    margin: 0px;
+    height: 83px;
+    color: rgb(142, 138, 138);
+    margin-left: 9px;
+    margin-top: -23px;
+   
+}
+
+.welcome-text{
+    font-size: 20px;
+    color: #123969;
+}
+  
+// ng-scrollbar{
+//     --scrollbar-size: 5px;
+//     --scrollbar-thumb-color: rgb(166, 166, 166);
+//     --scrollbar-hover-size: 10px;
+//     --scrollbar-track-color: rgba(0, 0, 0, 0.05);
+//     --scrollbar-border-radius: 10px;
+//     width: 100%;
+//     height: 460px;
+//   }
+.row{
+    justify-content: space-between;
+    display: flex;
+    margin: 20px;
+}
+
+
+ 
+.flex{
+    display: flex;
+    margin: 0 10px 10px 10px;
+}
+.flexbox-item1{
+    
+    margin: 10px;
+    height: 310px;
+    padding-right: 10px;
+    background: #FFFFFF;
+    box-shadow:1px 3px 3px 4px rgba(171, 171, 171, 0.25);
+}
+
+
+.container{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+.pt-1{
+    padding-top: 0.3cm;
+    /* color: gray; */
+    /* font-size: 11px; */
+    white-space: nowrap;
+    color: gray;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: none;
+}
+
+.flexbox-item2{
+    
+    margin: 10px;
+    height: 310px;
+    background: #FFFFFF;
+    box-shadow:1px 3px 3px 4px rgba(171, 171, 171, 0.25);
+
+}
+.flexbox-item3{
+    border: 1.5px  black;
+    
+    margin: 10px;
+    background: #FFFFFF;
+    box-shadow:1px 3px 3px 4px rgba(171, 171, 171, 0.25);
+    height: 310px;
+}
+
+.application{
+    padding-left: 0.6cm;
+    font-size: 17px;
+    position: relative;
+    top: -6px;
+    font-family: 'Roboto';
+}
+
+.font{
+    color: #2c2c2c;
+    font-size: 12px;
+    /* font-weight: lighter; */
+    position: relative;
+    top: 35px;
+    font-family: 'Roboto-Regular';
+}
+.status{
+    color: #3a3a3a;
+    font-size: 13px;
+    /* font-weight: lighter; */
+    position: relative;
+    top: 23px;
+    font-family: 'Roboto-Regular';
+}
+
+.text{
+    font-size: 14px;
+    color: #000000c9;
+    position: relative;
+    top: -8px;
+    font-family: 'Roboto';
+    margin-top: 25px;
+}
+
+.number{
+    padding-top: 0.6cm;
+    margin: 25px;
+    width: 74.65px;
+    height: 76px;
+    border: 4px solid #56CCF2;
+    text-align: center;
+    border-radius: 2cm;
+    cursor: pointer;
+}
+
+.circle{
+    border: 1.5px solid;
+    padding-top: 0.3cm;
+    margin: 18px;
+    width: 52px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+
+.p-l{
+    padding-left: 4cm;
+    height: 0px;
+    color: gray;
+}
+
+a{
+    font-size: 20px;
+    font-weight: 200;
+    
+}
+
+
+
+.height{
+    height: 23px;
+}
+
+
+.m-l{
+    display: flex;
+    margin-left: 160px;
+}
+
+
+
+.remittance1{
+    color: #161717;
+    padding-left: 0.6cm;
+    font-size: 17px;
+    position: relative;
+    top: -6px;
+    font-family: 'Roboto';
+   
+}
+
+.total-remit{
+
+padding-left: 2.5cm;
+padding-bottom: 1.4cm;
+}
+
+.circle2{
+   
+    padding-top: 0.5cm;
+    width: 63px;
+    height: 63px;
+    border: 2px solid #56CCF2;
+    box-sizing: border-box;
+    border-radius: 2cm;
+    text-align: center;
+}
+
+.pending-for-approval{
+padding-top: 0.5cm;
+text-align: center;
+width: 76px;
+height: 74px;
+background: #FFFFFF;
+color: #ffa500;
+border-radius: 2cm;
+border: 1.5px solid;
+cursor: pointer;
+}
+
+.Rejected1{
+    padding-left: 2cm;
+}
+
+button{
+    border-radius: 4cm;
+    width: 10%;
+    padding-bottom: 0.8cm;
+   font-size: 11px;
+   height: 20px;
+   
+}
+
+p{
+    font-size: 10px;
+    color: gray;
+}
+.padding-left{
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   display: flex;
+    padding-bottom: 1.5cm;
+    margin: 71px;
+    }
+.spacing{
+   padding-top: 2px;
+    padding-bottom: 0.3cm; 
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+ .remmitance{
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+     display: flex;
+     height: 4.1cm;
+ } 
+
+
+
+  .divider{
+      width: 58%;
+  }
+
+  div.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: rgb(125, 125, 125);
+ }
+
+ .scroll{
+    height: 20px;
+    margin-bottom: 25px;
+    margin-left: 72px;
+    margin-right: 118px;
+ }
+
+.marginalign{
+    margin: 0px 80px;
+    margin-top: 10px;
+}
+.leftalign{
+    text-align: left;
+    display: table-cell;
+}
+.rightalign{
+    text-align: right;
+    margin-top: -17px; 
+    font-size: 20px;
+}
+
+
+.display-line {
+    display: flex;
+    margin-left: 135px;
+    height: 103px;
+    overflow-x: hidden; /* Hide horizontal scrollbar by default */
+    overflow-y: hidden;
+    margin-bottom: -22px;
+  }
+  
+  .display-line:hover {
+    overflow-x: auto; /* Show horizontal scrollbar when hovering */
+  }
+  
+  .display-line::-webkit-scrollbar {
+    width: 7px;
+    height: 4px;
+    background-color: transparent;
+  }
+  
+  .display-line::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background-color: rgba(156, 204, 234, 0.5);
+    box-shadow: 0 0 1px rgba(87, 86, 86, 0.5);
+  }
+  
+
+  .scroll-rates{
+    overflow-y: hidden;
+     height: 159px;
+  }
+
+ 
+  .scroll-rates:hover {
+    overflow-y: auto; /* Show horizontal scrollbar when hovering */
+  }
+  
+  .scroll-rates::-webkit-scrollbar {
+    width: 7px;
+    height: 4px;
+    background-color: transparent;
+  }
+  
+  .scroll-rates::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background-color: rgba(156, 204, 234, 0.5);
+    box-shadow: 0 0 1px rgba(87, 86, 86, 0.5);
+  }
+
+  .spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Make sure the overlay is on top of other elements */
+  }
+  
+  .spinner-overlay mat-spinner {
+    color: white; /* Adjust the spinner color as needed */
+  }
+
+  .no-rates-container {
+    background-color: #fdfdfd;
+    width: 100% !important;
+    font-family: 'Roboto';
+    line-height: -0.5;
+    text-align: center;
+    width: 200px;
+  }
+  .link {
+    color: #828282;
+    text-align: center;
+    white-space: nowrap;
+    display: inline-flex;
+    line-height: 2;
+  }
+
+  .payee-status{
+    color: #2e2e2e;
+    font-size: 13px;
+    /* font-weight: lighter; */
+    position: relative;
+    top: 39px;
+    left: 1px;
+    font-family: 'Roboto-Regular';
+  }
+
+ 
+  .widget-divider{
+    width: 50%;
+    margin-left: 4cm;
+    height: 2px;
+    position: relative;
+    top: 3px
+  }
+
+  .customer-widget-circle {
+    border: 1.5px solid;
+    padding-top: 0.3cm;
+    margin: 18px;
+    width: 52px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+  }
+  .rate-spinner {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 231px;
+    height: 308px;
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+  
+
+
+  
+ 
+  
+  
+
+  
+
+  
+  

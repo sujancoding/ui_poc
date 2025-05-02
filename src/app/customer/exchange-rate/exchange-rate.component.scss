@@ -1,0 +1,70 @@
+.table {
+    width: 100%;
+    border-spacing: 0;
+   // border: 1px solid #ddd;
+    background-color: white;
+  }
+
+  td {
+    text-align: left;
+    padding: 11px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    //border: solid 0.5px #ebe8e8;
+    color: #737479;
+  }
+  
+  th {
+    padding: 11px;
+    color: gray;
+    font-size: 15px;
+    font-style: normal;
+    border: solid 0.5px #ebe8e8;
+  }
+  
+  tr:nth-child(even) {
+    background-color: white;
+  }
+
+  .row{
+    justify-content: space-between;
+    display: flex;
+    margin: 20px;
+}
+h5{
+    color: #123969;
+}
+
+.icon {
+  color: #123969;
+  /* margin-top: 0.6cm; */
+  position: relative;
+  top: -3px;
+  font-size: 20px;
+  }
+  
+  mat-form-field {
+    padding: 0.1cm;
+  }
+
+
+  .font{
+  height: 1cm;
+  width: 1cm;
+  }
+.refresh_icon{
+  font-size: 30px;
+  color: #123969;
+}
+.loader-wrapper{
+  position: absolute;
+  top: 183px;
+  left: 76px;
+  width: 60%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+::ng-deep.loader-wrapper circle,.loader-wrapper circle {stroke: #123969 !important;}

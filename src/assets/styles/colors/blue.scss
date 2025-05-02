@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+
+//linear-gradient(45deg,#0f254a,#123969)
+$blue-app-primary: mat.define-palette(mat.$blue-palette, 600);
+$blue-app-accent: mat.define-palette(mat.$blue-palette, A200, A100, A400);
+$blue-app-warn: mat.define-palette(mat.$pink-palette);
+// Create the theme object (a Sass map containing all of the palettes).
+@mixin apply-blue-theme {
+  $blue-app-theme: mat.define-light-theme((
+    color: (
+      primary: $blue-app-primary,
+      accent: $blue-app-accent,
+      warn: $blue-app-warn,
+    ),
+  ));
+
+  // @include mat.all-component-themes($blue-app-theme);
+}
+$themecolor: #007aff;
+$themecolor-alt: #428fd3;
+$white: #fff;
+#snav {
+  .mat-nav-list .mat-mdc-list-item {
+    /*TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
+    .mat-list-item-content {
+      &:hover {
+        > a {
+          color: $themecolor;
+        }
+      }
+    }
+    /*TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
+    &.selected > .mat-list-item-content > a {
+      background: $themecolor-alt;
+      color: $white;
+    }
+  }
+}
+

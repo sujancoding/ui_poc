@@ -1,0 +1,57 @@
+.title-margin {
+    margin: 14px;
+}
+
+.task-header {
+font-size: 18px;
+    background-color: #123969;
+    color: white;
+    height: 50px;
+}
+
+.close-icon {
+    font-size: 28px;
+    position: relative;
+    top: 19px;
+    line-height: 0;
+}
+
+.title-message {
+    font-size: 20px;
+    font-weight: 600;
+    font-family: Roboto;
+    line-height: 0;
+
+}
+
+.reason-content {
+    background-color: #fff9db;
+    height: 70px;
+    overflow-y: scroll;
+    margin: 12px;
+    position: relative;
+    top: 13px;
+
+}
+
+.reason-content p {
+    font-size: 18px;
+    font-family: Roboto;
+    margin: 10px;
+
+}
+
+.margin-button {
+    text-align: right;
+    position: relative;
+    top: 50px;
+    right: 12.5px;
+}
+
+.close-mat-button {
+    height: 40px;
+    width: 95px;
+    font-size: 18px;
+    background-color: #e8f4ff;
+    color: #123969;
+}

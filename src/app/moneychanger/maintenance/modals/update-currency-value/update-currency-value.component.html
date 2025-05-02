@@ -1,0 +1,81 @@
+ <!--Update denomination Toolbar-->
+ <div fxLayout="row"  fxLayoutAlign="space-between center" class="header-container">
+    
+    <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+
+      <span class="head-label-1">List of currency values </span>
+
+    </div>
+    <div>
+      <span [mat-dialog-close]="true" class="close-icon">
+        <mat-icon>close</mat-icon>
+      </span>
+    </div>
+  </div>
+
+
+<div fxLayout="row" fxLayoutGap="15px" style="margin: 12px;">  
+<div fxLayout="row">
+    <span class="label">Currency Number :</span>
+    <span class="value"> {{currencyNo}} </span>
+</div>
+|
+<div fxLayout="row">
+    <span class="label">Currency Code :</span>
+    <span class="value"> {{currencyCode}} </span>
+</div>
+|
+<div fxLayout="row">
+    <span class="label">Currency Name :</span>
+    <span class="value"> {{currencyName}} </span>
+</div>
+</div>
+
+<form [formGroup]="form">
+    <div class="table-scroll" >
+    <table>
+      <thead>
+        <tr>
+          
+         
+          <th>Value </th>
+          <th>Status </th>
+        </tr>
+      </thead>
+      <tbody formArrayName="rows">
+        <tr *ngFor="let row of rows.controls; let i = index" [formGroupName]="i">
+          
+          <td>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Enter Value" formControlName="currencyValue" [formControl]="row.controls['currencyValue']">
+            </mat-form-field>
+            <div  class="message-block">
+              <span class="error-message" *ngIf="row.controls['currencyValue'].errors?.onlyAlphabets">
+                {{ 'onlyNumbers' | label }}
+              </span>
+              <span class="error-message" *ngIf="row.controls['currencyValue'].errors?.invalidDecimal">
+                {{ 'invalidDecimal' | label }}
+              </span>
+            </div>
+          </td>
+          <td>
+            <mat-checkbox class="check-box" formControlName="status"></mat-checkbox>
+            </td>
+          <!-- <td>
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="status" placeholder="--Select--">
+              <mat-option *ngFor="let options of statusArray" [value]="options.internalValue"> {{options.displayValue}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+    <button class="add-btn" #tooltip="matTooltip" matTooltip="Add new row" matTooltipPosition="above"
+    matTooltipClass="accounts-custom-tooltip" mat-button type="button" (click)="addRow()">+ Add new</button>
+
+    <button class="save-btn" mat-button type="button" (click)="onSave()" [disabled]="!form.valid"> Save </button>
+    </div>
+  </form>

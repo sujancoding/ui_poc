@@ -1,0 +1,132 @@
+
+p{
+  margin: 0.6cm;
+  height: 3px;
+}
+.sorting{
+  margin: 0.4cm;
+  height: 2px;
+}
+
+.filter-button{
+  height: 48px;
+  margin-top: 0.2cm;
+  font-weight: 12px;
+  padding-right: 0.7cm;
+}
+
+
+
+  
+ .icon{
+  color: rgb(15, 132, 228);
+}
+
+mat-form-field{
+  padding: 0.1cm;
+}
+
+.link{
+  color: #123969;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.selected{
+  background-color: #e3f2ff;
+}
+
+.height{
+  line-height: 4px;
+  margin-bottom: 19px;
+}
+
+.highlight{
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 23px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: -46px;
+}
+
+
+.p {
+  font-family: 'Roboto';
+  font-size: 16px;
+  margin-left: 8px;
+  margin-bottom: 16px;
+}
+
+//for Apply Filter button
+.buttonApplyfilter {
+  background-color: #123969;
+  color: white;
+  height: 48px;
+  margin-top: 8px;
+  width: 110px;
+  font-size: 14px;
+}
+
+.filtericon {
+  color: rgb(255, 255, 255);
+}
+.more-icon {
+ 
+  color: #123969;
+}
+
+
+
+
+.error-message{
+  font-size: 13px;
+  white-space: nowrap;
+  position: relative;
+  left: 4px;
+  color: red;
+  font-family: 'Roboto';
+}
+.small-container{
+  border: 1px solid #e6e6e6;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 12px;
+  left: 5px;
+  border-radius: 5px;
+
+}
+.status-tag
+{
+  line-height: 20px;
+  padding: 5px 10px;
+  margin: 3px 0;
+  display: inline-block;
+  font-family: 'Roboto';
+  white-space: nowrap;
+}
+.tags
+{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.search-filter-1{
+padding-top: 10px;
+  background-color: white;
+  /* margin-left: 12px; */
+  /* margin-right: 12px; */
+  border-radius: 10px;
+  height: 90px;
+
+
+}
+
+.table-wrapper{
+  position: relative;
+    top: -3px !important;
+}

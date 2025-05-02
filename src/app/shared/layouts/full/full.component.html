@@ -1,0 +1,318 @@
+<session-expiration-alert [alertAt]="15" [startTimer]="true"></session-expiration-alert>
+
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div class="main-container" [dir]="dir" [ngClass]="{
+    minisidebar: minisidebar,
+    boxed: boxed,
+    danger: danger,
+    blue: blue,
+    green: green,
+    horizontal: horizontal
+  }">
+  <!-- ============================================================== -->
+  <!-- Topbar - style you can find in header.scss -->
+  <!-- ============================================================== -->
+  <mat-toolbar color="primary" class="topbar relative">
+    <div class="w-100 fix-width-for-horizontal">
+      <!-- ============================================================== -->
+      <!-- Logo - style you can find in header.scss -->
+      <!-- ============================================================== -->
+
+      <!-- ============================================================== -->
+      <!-- sidebar toggle -->
+      <!-- ============================================================== -->
+
+      <div  *ngIf="title != 'Basic Profile' && title != 'Documents' && title != 'Source Of Wealth'" style="display: flex;
+      justify-content: center;
+      align-items: center;">
+      <button mat-icon-button (click)="snav.toggle()" class="sidebar-toggle"
+      value="sidebarclosed">
+        <mat-icon style="font-size: 31px;">menu</mat-icon> 
+      </button>
+      </div>
+
+      <div  *ngIf="title == 'Basic Profile' || title == 'Documents' || title == 'Source Of Wealth'">
+      <button mat-icon-button (click)="navigateCustomerDashboard()">
+        <mat-icon  style="position: relative;
+        left: -7px;">arrow_back</mat-icon>
+      </button>
+      </div>
+
+
+      <h4 *ngIf="staticMessage" style="margin-left: 12px;"> 
+       
+          <!-- <img (click)="goToHomePage()" [src]="logo" style="width: 72px;
+          height: 42px;
+          position: relative;
+          top: 4px;
+          border-radius: 7px;
+          cursor: pointer;"
+          [@imageState]="imageAnimationState" > -->
+          <mat-icon (click)="goToHomePage()"  style="
+         position: relative;
+         top: 4px;
+         left: 6px;
+         cursor: pointer;
+         font-size: 31px;"
+          [@imageState]="imageAnimationState">home</mat-icon>
+        
+      </h4>
+      <!-- ============================================================== -->
+      <!-- Search - style you can find in header.scss -->
+      <!-- ============================================================== -->
+      <!-- <button mat-icon-button class="srh-btn" (click)="showSearch = !showSearch">
+        <mat-icon>search</mat-icon>
+      </button> -->
+      <!-- 
+
+      <form class="app-search" [ngClass]="{ 'show-search': showSearch }">
+        <input type="text" class="form-control" placeholder="Search &amp; enter" />
+        <a class="cl-srh-btn" (click)="showSearch = !showSearch">
+          <i class="ti-close"></i>
+        </a>
+      </form> -->
+      <span fxFlex [ngStyle]="{'text-align': controlPosition()}" style="
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      position: relative;
+      top: 2px;
+      left: 33px;
+      font-size: 19px;"> {{title}} </span>
+
+<!--MoneyChanger Shortcut links (Menu approach)-->
+<div *ngIf="showShortCutMenu && businessType == 'MC' " style="display: flex;
+justify-content: center;
+align-items: end;
+margin-right: 30px;">
+<button  style="border: 1px solid #9c9c9c;
+border-radius: 8px;
+font-size: 16px;" mat-button [matMenuTriggerFor]="menu">Shortcut Links</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item *ngFor="let records of moneyChangerShortCutLinksArray" (click)="openShortCutLink(records.displayLink)">
+    <mat-icon> {{records.icon}} </mat-icon>
+    <span> {{records.displayLink}} </span>
+  </button>
+</mat-menu>
+</div>
+
+<!--MoneyChanger links appeared in mat toolbar in row series-->
+<div *ngIf="showMoneyChangerLinks  && businessType == 'MC' " style="display: flex;
+position: relative;
+right: 26px;
+    justify-content: space-between;
+    width: 863px;" >
+
+<div style="display: flex;
+justify-content: left;
+align-items: center;
+cursor: pointer;"
+
+*ngFor="let records of moneyChangerShortCutLinksArray"
+ #tooltip="matTooltip"
+ matTooltip="{{records.toolTipMessage}}"
+ matTooltipPosition="above"
+ matTooltipClass="accounts-custom-tooltip"
+(click)="openShortCutLink(records.displayLink)">
+  <mat-icon style="position: relative;
+  top: -2px;
+  font-size: 26px;left: 5px;"> {{records.icon}} </mat-icon>
+  <span style="font-size: 17px;margin-left: 8px;text-decoration: underline;"> {{records.displayLink}} </span>
+
+
+</div>
+
+
+</div>
+
+
+<!--Remittance Shortcut links (Menu approach)-->
+<div *ngIf="showRemittanceShortCutMenu && businessType == 'RT' " style="display: flex;
+justify-content: center;
+align-items: end;
+margin-right: 30px;">
+<button  style="border: 1px solid #9c9c9c;
+border-radius: 8px;
+font-size: 16px;" mat-button [matMenuTriggerFor]="menu">Shortcut Links</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item *ngFor="let records of remittanceShortCutLinksArray" (click)="openRemittanceShortCutLink(records.displayLink)">
+    <mat-icon> {{records.icon}} </mat-icon>
+    <span> {{records.displayLink}} </span>
+  </button>
+</mat-menu>
+</div>
+
+<!--Remittance links appeared in mat toolbar in row series-->
+<div *ngIf="showRemittanceLinks  && businessType == 'RT' " fxLayout="row" fxLayoutGap="20px"  >
+
+<div style="display: flex;
+justify-content: left;
+align-items: center;
+cursor: pointer;"
+
+*ngFor="let records of remittanceShortCutLinksArray"
+(click)="openRemittanceShortCutLink(records.displayLink)">
+  <mat-icon style="position: relative;
+  top: -2px;
+  font-size: 26px;"> {{records.icon}} </mat-icon>
+  <span style="font-size: 17px;margin-left: 8px;text-decoration: underline;"> {{records.displayLink}} </span>
+</div>
+
+
+</div>
+
+ <!-- ============================================================== -->
+      <!-- toolbar component - To open inventory right sidenav-->
+      <!-- ============================================================== -->
+
+<div class="inventory-sidenav-button-container"  *ngIf="businessType == 'MC'">
+  <button 
+  #tooltip="matTooltip" 
+        [matTooltip]="rightsnav?.opened ? 'Close Inventory' : 'Open Inventory'"
+        matTooltipPosition="above"
+        matTooltipClass="accounts-custom-tooltip"
+  class="inventory-button" (click)="toggleRightSNav()" mat-fab >
+    <mat-icon>{{ rightsnav?.opened ? 'keyboard_arrow_right' : 'keyboard_arrow_left' }}</mat-icon>
+  </button>
+</div>
+
+
+      <!-- ============================================================== -->
+      <!-- app header component - style you can find in header.scss / header.component.ts-->
+      <!-- ============================================================== -->
+      <div *ngIf="!horizontal; else horizontalheader">
+        <app-vertical-header style="display: flex;
+        justify-content: center;
+        align-items: center;"></app-vertical-header>
+      </div>
+
+      <ng-template #horizontalheader>
+        <app-horizontal-header></app-horizontal-header>
+      </ng-template>
+
+      <!-- ============================================================== -->
+      <!-- Right sidebar toggle - style you can find in rightsidebar.component.scss -->
+      <!-- ============================================================== -->
+      <!-- <button *ngIf="showSettings" (click)="end.toggle()" mat-icon-button class="ml-xs overflow-visible">
+        <mat-icon>settings</mat-icon>
+      </button> -->
+<div style="text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;">
+      <button *ngIf="showLogoutButton" mat-icon-button class="ml-xs overflow-visible" title="Sign Out" alt="Sign Out" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+      </div>
+
+    </div>
+  </mat-toolbar>
+  <!-- ============================================================== -->
+  <!-- End Topbar - style you can find in pages.scss -->
+  <!-- ============================================================== -->
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 0 : 0"
+    [ngClass]="{ minisidebar: minisidebar }">
+    <!-- ============================================================== -->
+    <!-- Sidebar - style you can find in sidebar.scss -->
+    <!-- ============================================================== -->
+    <mat-sidenav #snav id="snav" class="pl-xs" [mode]="mobileQuery.matches ? 'side' : 'over'" fixedTopGap="0"
+      [opened]="mobileQuery.matches" [disableClose]="mobileQuery.matches" (open)="sidebarOpened = true"
+      (close)="sidebarOpened = false">
+      <perfect-scrollbar *ngIf="!horizontal; else horizontalsidebar" class="scbar" [config]="config">
+        <app-vertical-sidebar class="app-sidebar" [showClass]="status" (notify)="snav.toggle()">
+        </app-vertical-sidebar>
+      </perfect-scrollbar>
+
+      <ng-template #horizontalsidebar>
+        <app-horizontal-sidebar></app-horizontal-sidebar>
+      </ng-template>
+    </mat-sidenav>
+
+    <!-- ============================================================== -->
+    <!-- Sidebar - style you can find in sidebar.scss -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right Sidebar - style you can find in rightsidebar.component.scss -->
+    <!-- ============================================================== -->
+    <mat-sidenav #end position="end" class="chat-panel" mode="over" opened="false">
+      <div class="scroll">
+        <mat-nav-list>
+          <h3 mat-subheader class="text-uppercase font-weight-bold">Settings</h3>
+
+          <!-- <mat-list-item *ngIf="!horizontal">
+            <mat-slide-toggle [(ngModel)]="minisidebar">Mini Sidebar</mat-slide-toggle>
+          </mat-list-item> -->
+          
+          <mat-divider></mat-divider>
+
+          <mat-list-item>
+            <div fxLayout="row">
+              <mat-icon class="delete-account-icon">delete</mat-icon>
+             <h4 class="delete-account-text"> Delete Account </h4>
+             </div>
+          </mat-list-item>
+
+      
+
+          <!-- <h3 mat-subheader class="text-uppercase font-weight-bold">Delete Account</h3> -->
+
+          <!-- <mat-list-item>
+            <mat-checkbox color="warn" [(ngModel)]="danger" (change)="green = blue = false" class="text-danger">Red
+            </mat-checkbox>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-checkbox color="warn" [(ngModel)]="green" (change)="danger = blue = false" class="text-megna">Teal
+              Green</mat-checkbox>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-checkbox color="warn" [(ngModel)]="blue" (change)="green = danger = false" class="text-info">Blue
+            </mat-checkbox>
+          </mat-list-item>
+
+          <mat-list-item>
+            <mat-checkbox color="warn" [(ngModel)]="dark" (change)="darkClick()">Dark
+            </mat-checkbox>
+
+            <mat-checkbox color="warn" [(ngModel)]="dark" (change)="green = blue = danger = false">Dark</mat-checkbox> 
+          </mat-list-item> -->
+        </mat-nav-list>
+      </div>
+    </mat-sidenav>
+
+    <!-- ============================================================== -->
+    <!-- Page container - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <mat-sidenav-content class="page-wrapper" [ngClass]="status ? 'minitoggle' : ''">
+      <!-- <app-breadcrumb></app-breadcrumb> -->
+      <div class="page-content">
+        <router-outlet>
+          <app-spinner></app-spinner>
+        </router-outlet>
+      </div>
+    </mat-sidenav-content>
+
+    <!-- ============================================================== -->
+    <!-- Right side Inventory container - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <mat-sidenav  #rightsnav class="inventory-rightsidenav" id="rightsnav"
+    [opened]=" businessType == 'MC' && mobileQuery.matches" [disableClose]="mobileQuery.matches"
+       [hidden]="businessType !== 'MC'"
+      position="end"  mode="side"
+    >
+
+    <app-inventory-vertical-sidebar class="app-sidebar" [productType]="businessType" [showClass]="invStatus" (notify)="toggleRightSNav()"> 
+
+    </app-inventory-vertical-sidebar>
+
+  </mat-sidenav>
+  
+
+    <!-- ============================================================== -->
+    <!-- Page container - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+  </mat-sidenav-container>
+</div>

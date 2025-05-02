@@ -1,0 +1,56 @@
+<!--Bottom Sheet in Corporate onboarding-->
+<div class="pre-dashboard">
+    <div class="pre-dashboard-box">
+        <div class="text-center">
+        <mat-icon class="icon">priority_high</mat-icon>
+        </div>
+
+        <p class="p">Complete Profile</p>
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-between">
+            <p class="one-percent"> {{showPercentage}} </p>
+
+            <p class="completed">completed</p>
+        </div>
+
+        <div class="progress-bar">
+            <mat-progress-bar mode="determinate" [value]="progressBar"></mat-progress-bar>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="22px" class="person-icon">
+            <mat-icon class="mat-person">person</mat-icon>
+            <p class="submit">Submit your particulars...</p>
+        </div>
+
+        <div class="alink">Please provide your company profile information</div>
+        <div fxLayout="row">
+            <a class="link" (click)="routeCompanyProfile()" >Company Profile</a>
+            <mat-icon *ngIf="showArrowIcon">keyboard_arrow_right</mat-icon>
+            <mat-icon *ngIf="profileSuccessIcon" class="done-icon">check_circle</mat-icon>
+        </div>
+
+        <div class="alink">Please provide your company associates information</div>
+        <div fxLayout="row">
+            <a class="link" (click)="routeCompanyAssociate()">Company Associates</a>
+            <mat-icon>keyboard_arrow_right</mat-icon>
+             <mat-icon *ngIf="associatesSuccessIcon" class="done-icon">check_circle</mat-icon> 
+        </div>
+
+        <div  fxLayout="column" fxLayoutAlign="start start" >
+        <div class="alink">Please provide your documents to verify</div>
+        <div fxLayout="row">
+            <a class="link" (click)="routeDocuments()">Documents</a>
+            <mat-icon>keyboard_arrow_right</mat-icon>
+             <mat-icon *ngIf="documentsSuccessIcon" class="done-icon">check_circle</mat-icon> 
+        </div>
+</div>
+<div class="btn" *ngIf="showSaveButton">
+    <button  [disabled]="disableButton" class="SubmitApprovalButton" mat-raised-button (click)="submitForApproval()" type="submit">Submit for Approval</button>
+    </div>
+    <mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loader"></mat-spinner>
+
+<!-- <mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loader"></mat-spinner> -->
+
+
+    </div>
+</div>

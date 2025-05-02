@@ -1,0 +1,246 @@
+<!-- <div style="display: flex;" fxLayoutGap="10px"> -->
+ <!-- <div style="width: 63%;"> -->
+<form [formGroup]="form">
+
+<div class="bolder"> Before Approval </div>
+
+<div fxLayout="row" fxLayoutAlign="space-between">
+<div fxFlex="20">
+    <mat-form-field>
+      <mat-label class="custom-label">Agent Outstanding Balance</mat-label>
+      <input matInput formControlName="agentAmountBalance">
+    </mat-form-field>
+</div>
+</div>
+
+<div class="bolder"> Enter Amount </div>
+
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Deal 1 Balance</mat-label>
+        <input matInput formControlName="deal1">
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Deal 1 Exchange Rate</mat-label>
+        <input matInput formControlName="dealRate1" >
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Amount Entered by Agent</mat-label>
+        <input matInput formControlName="dealamount1">
+        </mat-form-field>
+    </div>
+
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Deal 2 Balance</mat-label>
+        <input matInput formControlName="deal2">
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Deal 2 Exchange Rate</mat-label>
+        <input matInput formControlName="dealRate2">
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Amount Entered by Agent</mat-label>
+        <input matInput formControlName="dealamount2" (blur)="feedvalue()">
+        </mat-form-field>
+    </div>
+
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Amount Sent by Agent (LCY)</mat-label>
+        <input class="disabledField" matInput formControlName="agentSends">
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Amount Received by Payee (FCY)</mat-label>
+        <input class="disabledField" matInput formControlName="payeeRecive" >
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20" style="opacity: 0;">
+        <mat-form-field>
+        <mat-label class="custom-label"></mat-label>
+        <input class="disabledField" matInput  >
+        </mat-form-field>
+    </div>
+
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">DBS Exchange Rate</mat-label>
+        <input matInput formControlName="dbsRate" (blur)="value()">
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">APT sends to DBS (LCY)</mat-label>
+        <input class="disabledField" matInput formControlName="aptSends" >
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20" style="opacity: 0;">
+        <mat-form-field>
+        <mat-label class="custom-label"></mat-label>
+        <input class="disabledField" matInput  >
+        </mat-form-field>
+    </div>
+
+</div>
+
+
+
+<div class="bolder"> Post Approval </div>
+
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Organization Profit/Loss</mat-label>
+        <input class="disabledField" matInput formControlName="profitLoss" >
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Agent Outstanding Balance</mat-label>
+        <input class="disabledField" matInput formControlName="agentAmount" >
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20" style="opacity: 0;">
+        <mat-form-field>
+        <mat-label class="custom-label"></mat-label>
+        <input class="disabledField" matInput  >
+        </mat-form-field>
+    </div>
+</div>
+
+
+
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Deal 1 Balance</mat-label>
+        <input class="disabledField" matInput formControlName="dealBalance1" >
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20">
+        <mat-form-field>
+        <mat-label class="custom-label">Deal 2 Balance</mat-label>
+        <input class="disabledField" matInput formControlName="dealBalance2" >
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="20" style="opacity: 0;">
+        <mat-form-field>
+        <mat-label class="custom-label"></mat-label>
+        <input class="disabledField" matInput  >
+        </mat-form-field>
+    </div>
+</div>
+
+</form>
+
+<div class="btn">
+    <button style="width: 150px;" mat-raised-button color="primary" (click)="resetData()">Reset</button>
+</div>
+<!-- </div> -->
+
+<!-- <div>
+    <mat-card class="card">
+        <mat-card-content style="margin: 0;">
+            <div style="background-color: rgb(241, 231, 150);border-radius: 0.2cm;height: 1cm;padding-bottom: 1cm;">
+            <p style="text-align: center;font-weight: bold;padding-top: 0.2cm;">FORMULAS</p>
+            </div>
+            <mat-divider style="margin-top: 0.4cm;"></mat-divider>
+
+            <div style="line-height: 0.1cm;height: 1cm;margin-top: 1cm;">
+                <p class="color">
+                    Amount send by Agent(LCY)=
+                </p>
+                <p class="font">
+                 Deal 1 Amount + Deal 2 Amount
+                </p>
+                </div>
+
+                <div style="line-height: 0.1cm;height: 1cm;">
+                    <p class="color">
+                       Amount Recieved by Payee=
+                    </p>
+                    <p class="font">
+                (Deal 1 Amount * Deal 1 ExchRate)+(Deal 2 Amount * Deal 2 ExchRate)
+                    </p>
+                    </div>
+
+                    <div style="line-height: 0.1cm;height: 1cm;">
+                        <p class="color">
+                           APT Sends to DBS(LCY)=
+                        </p>
+                        <p class="font">
+                    Money that Payee Recieves/DBS ExchRate
+                        </p>
+                        </div>
+
+            <div style="line-height: 0.1cm;height: 1cm;">
+             <p class="color">
+               Organization Profit/Loss=
+            </p>
+            <p class="font">
+               Money Entered by Agent - Actual Amount APT sends to Agent
+               </p>
+</div>
+
+<div style="line-height: 0.1cm;height: 1cm;">
+    <p class="color">
+        Agent Outstanding Balance=
+    </p>
+    <p class="font">
+    Agent Outstanding Balance - Money Entered by Agent
+    </p>
+    </div>
+
+    <div style="line-height: 0.1cm;height: 1cm;">
+        <p class="color">
+           Deal 1 Balance=
+        </p>
+        <p class="font">
+         Initial Deal 1 Balance - Amount Entered by Agent
+        </p>
+        </div>
+
+        <div style="line-height: 0.1cm;height: 1cm;">
+            <p class="color">
+                Deal 2 Balance=
+            </p>
+            <p class="font">
+           Initial Deal 2 Balance - Amount Entered by Agent
+            </p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div> -->
+<!-- </div> -->

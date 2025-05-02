@@ -1,0 +1,107 @@
+.div-height {
+  height: 0.4cm;
+  font-size: 13px;
+}
+
+p {
+  margin: 0.6cm;
+  height: 3px;
+}
+
+.sorting {
+  margin: 0.4cm;
+  height: 2px;
+}
+
+.filter-button {
+  height: 48px;
+  margin-top: 0.2cm;
+  font-weight: 12px;
+  padding-right: 0.7cm;
+}
+
+.icon {
+  color: rgb(15, 132, 228);
+}
+
+mat-form-field {
+  padding: 0.1cm;
+}
+
+.loader-wrapper{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 78%;
+  background-color: rgba(0,0,0,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+::ng-deep.loader-wrapper circle,.loader-wrapper circle {stroke: #123969!important;}
+
+
+
+
+h4 {
+  font-weight: bold;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+small {
+  margin: 2px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 11px;
+  color: black;
+  width: 130px;
+  word-wrap: break-word;
+}
+
+.green {
+  color: #27AE60;
+}
+
+.example-button-container {
+  width: 60px;
+  height: 41px;
+}
+
+.icon_button {
+  color: #000000;
+}
+
+.tags {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.status-tag {
+  line-height: 20px;
+  padding: 5px 10px;
+  margin: 3px 0;
+  display: inline-block;
+  font-family: Roboto;
+  white-space: nowrap;
+}
+
+.small-container {
+  border: 1px solid #e6e6e6;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 12px;
+  left: 5px;
+  border-radius: 5px;
+  margin-inline: 2px;
+
+}

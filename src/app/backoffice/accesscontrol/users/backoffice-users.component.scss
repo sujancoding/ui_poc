@@ -1,0 +1,90 @@
+
+p {
+  margin: 0.6cm;
+  height: 3px;
+}
+
+
+.icon {
+  color: rgb(255, 255, 255);
+}
+
+mat-form-field {
+  padding: 0.1cm;
+}
+
+.buttonApplyfilter {
+  background-color: #123969;
+  color: white;
+  height: 48px;
+  width: 123px;
+}
+
+.buttonAddUser {
+  background-color: #123969;
+  color: white;
+  height: 48px;
+  margin-right: 10px;
+  width: 123px;
+  margin-top: 10px;
+}
+
+.p {
+  font-family: 'Roboto';
+  font-size: 16px;
+  margin-left: 8px;
+  margin-bottom: 16px;
+}
+
+.launch-icon {
+  color: #123969;
+  background-color: white;
+}
+
+.tags
+{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.status-tag
+{
+  line-height: 20px;
+  padding: 5px 10px;
+  margin: 3px 0;
+  display: inline-block;
+  font-family: 'Roboto';
+  white-space: nowrap;
+}
+
+
+
+.small-container{
+  border: 1px solid #e6e6e6;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 12px;
+  left: 5px;
+  border-radius: 5px;
+
+}
+
+
+.error-message{
+  font-size: 14px;
+  white-space: nowrap;
+  position: relative;
+  left: 4px;
+  top: 35px;
+  color: red;
+}
+.search-filter-1{
+  background-color: white;
+  border-radius: 10px;
+  height: 90px;
+  margin-bottom: 22px;
+}

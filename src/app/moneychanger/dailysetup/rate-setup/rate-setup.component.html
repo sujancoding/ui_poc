@@ -1,0 +1,189 @@
+
+    
+     
+      <!--Search filter Section-->
+<div>
+  <form [formGroup]="filterForm">
+    <div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1">
+      <div  fxLayout="row"  fxLayoutAlign="space-between">
+
+        <div fxLayout="row wrap"  fxLayoutGap="15px" style="align-items: center;margin-left: 15px;">
+
+        
+
+          <div fxLayout="column" style="margin-left: 10px;">
+              
+              <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Ccy Code</mat-label>
+                <input matInput formControlName="currencyCode" [formControl]="filterForm.controls['currencyCode']">
+              </mat-form-field>
+            </div>
+
+            <!-- <div fxLayout="column" style="margin-left: 10px;">
+              <p class="p"> Units </p>
+              <mat-form-field  appearance="{{'formFieldAppearance' | label}}" style="font-size: 15px;">
+                  <input matInput formControlName="units" [formControl]="filterForm.controls['units']">
+                </mat-form-field>
+            </div> -->
+
+         
+            <button mat-raised-button [disabled]="!filterForm.valid" class="buttonApplyfilter" type="button" (click)="searchFilter()">
+              Apply Filter
+            </button>
+         
+
+        </div>
+
+       <div class="add-note-div">
+        <button mat-raised-button class="add-note-btn" (click)="openNoteDialog()">
+          <mat-icon>add</mat-icon>
+          Add a note
+          
+       </button>
+       </div>
+
+      </div>
+
+    </div>
+  </form>
+
+
+</div>
+
+   
+ 
+  
+  
+  <!--Table-->
+  <form [formGroup]="tableForm">
+    <div class="table-wrapper">
+      <div class="mat-elevation-z8">
+        <div [ngStyle]="changeTableHeight()" class="customer-scrollbar">
+          <table class="table">
+  
+            <thead>
+  
+              <th>CCY NO</th>
+              <th>CCY CODE</th>
+              <th>BUY RATE</th>
+              <th>SELL RATE</th>
+              <th>SYS BUY RATE</th>
+              <th>SYS SELL RATE</th>
+              <th>ORDER</th>
+              <th>LAST UPDATED BY</th>
+              <th>ACTIONS</th>
+  
+  
+            </thead>
+  
+            <tbody formArrayName="exchRates">
+              <tr *ngFor="let rateGroup of currencyRatesFormArray.controls; let i = index" [formGroupName]="i">
+                <td class="rate-table-td">{{ currencyArrayList[i].CCYNO }}</td>
+                <td class="rate-table-td">
+                  <div fxLayout="row" fxLayoutGap="30px">
+                    <span style="font-size: x-large;" class="{{ currencyArrayList[i].FLAG }}"></span>
+                    <label class="label-text">{{ currencyArrayList[i].CCYCODE }}</label>
+                  </div>
+                </td>
+                <td class="input-field" >
+                  <div fxLayout="column" class="rate-error">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                      <mat-label class="custom-label" class="label-formfield">{{ currencyArrayList[i].CCYCODE }}</mat-label>
+                      <input matInput formControlName="buyRate" 
+                      appendZero (blur)="onBlurBuyRate($event.target.value, i, currencyArrayList[i].CCYNO)" #buyRate>
+                    </mat-form-field>
+                    <small class="error-message" 
+                           *ngIf="rateGroup.get('buyRate')?.hasError('pattern')">Enter a valid rate</small>
+                  </div>
+                </td>
+                <td class="input-field">
+                  <div fxLayout="column" class="rate-error">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                      <mat-label class="custom-label" class="label-formfield">{{ currencyArrayList[i].CCYCODE }}</mat-label>
+                      <input matInput formControlName="sellRate" 
+                      appendZero (blur)="onBlurSellRate($event.target.value, i, currencyArrayList[i].CCYNO)" #sellRate>
+                    </mat-form-field>
+                    <small class="error-message"
+                           *ngIf="rateGroup.get('sellRate')?.hasError('pattern')">Enter a valid rate</small>
+                  </div>
+                </td>
+                <td class="input-field">
+                  <div fxLayout="column" class="rate-error">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                      <mat-label class="custom-label" class="label-formfield">{{ currencyArrayList[i].CCYCODE }}</mat-label>
+                      <input matInput formControlName="systemBuyRate" 
+                      appendZero #systemBuyRate>
+                    </mat-form-field>
+                    <small class="error-message"
+                           *ngIf="rateGroup.get('systemBuyRate')?.hasError('pattern')">Enter a valid rate</small>
+                  </div>
+                </td>
+                <td class="input-field">
+                  <div fxLayout="column" class="rate-error">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                      <mat-label class="custom-label" class="label-formfield">{{ currencyArrayList[i].CCYCODE }}</mat-label>
+                      <input matInput formControlName="systemSellRate" 
+                      appendZero #systemSellRate>
+                    </mat-form-field>
+                    <small class="error-message"
+                           *ngIf="rateGroup.get('systemSellRate')?.hasError('pattern')">Enter a valid rate</small>
+                  </div>
+                </td>
+                <td class="input-field">
+                  <div fxLayout="column" class="rate-error">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                      <mat-label class="custom-label" class="label-formfield">Order</mat-label>
+                      <input matInput formControlName="displayOrder" #displayOrder>
+                    </mat-form-field>
+                    <small class="error-message"
+                           *ngIf="rateGroup.get('displayOrder')?.hasError('pattern')">Enter only numbers</small>
+                  </div>
+                </td>
+                <td class="rate-table-td">{{ currencyArrayList[i].UPDATEDBY }}</td>
+                <td class="rate-table-td">
+                  <div fxLayout="row" fxLayoutAlign="space-around">
+                    <div class="status-switch">
+                      <section class="example-section">
+                        <mat-slide-toggle [color]="color" matTooltip="Special Rate"
+                                          matTooltipPosition="above" matTooltipClass="custom-tooltip"
+                                          (change)="onToggleChange($event, i)"
+                                          [checked]="currencyArrayList[i].TODAYSOFFER">
+                        </mat-slide-toggle>
+                      </section>
+                    </div>
+                    <div>
+                      <!--Below save button is UNUSED-->
+                      <button mat-icon-button class="icon" type="button"
+                              (click)="onSave(currencyArrayList[i].CCYNO, 
+                                             currencyArrayList[i].CCYCODE,
+                                             rateGroup.get('buyRate')?.value,
+                                             rateGroup.get('sellRate')?.value,
+                                             rateGroup.get('displayOrder')?.value,
+                                             i,
+                                             rateGroup.get('systemBuyRate')?.value,
+                                             rateGroup.get('systemSellRate')?.value)">
+                        <mat-icon class="icon" matTooltip="Save"
+                                 matTooltipPosition="above" matTooltipClass="custom-tooltip">save</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+  
+            </tbody>
+  
+          </table>
+        </div>
+        <div class="footer-container">
+          <button mat-raised-button class="save-button" 
+          type="button"  
+          (click)="overAllSave()" >Save</button> 
+        </div>
+      </div>
+      <!--Loader-->
+      <div *ngIf="loader" class="loader-wrapper">
+        <mat-spinner> </mat-spinner>
+      </div>
+    </div>
+  
+  </form>

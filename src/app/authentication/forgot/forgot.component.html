@@ -1,0 +1,69 @@
+<!-- <div class="login-register" style="background-image: url(assets/images/background/login-register.jpg)"> -->
+<div class="login-register">
+
+  <div class="login-register-box">
+    <mat-card appearance="outlined" class="card">
+      <mat-card-content>
+
+        <div id="forgot_initate_view" *ngIf="displayView == 'initiate'">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+             <h3 class="font">Forgot Password</h3>
+            <alert></alert>
+
+            <p class="text-center font-14">
+              Enter your email and we'll send you the password reset link.
+            </p>
+
+            <div fxLayout="column" fxLayoutAlign="space-around">
+              <div class="pb-1">
+                <mat-form-field style="width: 100%" appearance="outline">
+                  <input matInput placeholder="Email address" type="email" [formControl]="form.controls['email']" />
+                </mat-form-field>
+                <small *ngIf="
+                  form.controls['email'].hasError('required') && form.controls['email'].touched
+                " class="text-danger support-text">You must include an email address.</small>
+                <small *ngIf="form.controls['email'].errors?.email && form.controls['email'].touched"
+                  class="text-danger support-text">You must include an email address.</small>
+              </div>
+              <button mat-raised-button color="primary" type="submit" class="btn-block btn-lg m-t-20"
+                [disabled]="!form.valid">
+                Submit
+              </button>
+
+              <div class="text-center" style="margin-top: 13px;">
+                <span>
+                  <a (click)="goToLogin()" style="cursor: pointer;" class="link text-info">Cancel</a>
+                </span>
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+        <div id="forgot_complete_view" *ngIf="displayView == 'complete'">
+
+          <div class="text-center">
+            <h4 class="m-t-0" style="line-height: 25px; font-size: 22px;">Forgot Password</h4>
+          </div>
+
+          <p class="text-center" style="margin-bottom: 35px;font-size: 15px;">
+            Email Sent!. Check your email and open the link we sent to continue.
+          </p>
+
+          <div class="text-center">
+            <span>
+              <a (click)="goToLogin()" style="cursor: pointer;" class="link text-info">Try Login</a>
+            </span>
+          </div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+    <div class="logo">
+      <img [src]="logo" type="file">
+      </div>
+  </div>
+
+
+
+</div>

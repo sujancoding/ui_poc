@@ -1,0 +1,133 @@
+// .div-height{
+//     height: 0.4cm;
+//     font-size: 13px;
+// }
+p{
+    margin: 0.6cm;
+    height: 3px;
+}
+
+
+.filter-button{
+    height: 48px;
+    margin-top: 0.2cm;
+    font-weight: 12px;
+    padding-right: 0.7cm;
+}
+  
+.search-filter-1{
+padding-top: 10px;
+  background-color: white;
+  /* margin-left: 12px; */
+  /* margin-right: 12px; */
+  border-radius: 10px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 17px;
+}
+  .p {
+    font-family: "Roboto";
+    font-size: 15px;
+    margin-left: 8px;
+    margin-bottom: 13px;
+  }
+
+  .buttonApplyfilter {
+    background-color: #123969;
+    color: white;
+    height: 48px;
+   // margin-top: 48px;
+    width: 125px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+
+  .tags
+{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.status-tag
+{
+  line-height: 20px;
+  padding: 5px 10px;
+  margin: 3px 0;
+  display: inline-block;
+  font-family: Roboto;
+  white-space: nowrap;
+}
+
+.small-container{
+  border: 1px solid #e6e6e6;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 12px;
+  left: 5px;
+  border-radius: 5px;
+  margin-inline: 2px;
+
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+.picture-as-pdf-icon{
+  color: black;
+}
+
+.negative-amount{
+  color: red;
+}
+
+.positive-amount{
+  color: rgb(0, 0, 0);
+}
+
+/* General styling for the mat-icon */
+.arrow-icon {
+  cursor: pointer;
+  color: rgb(160, 160, 160);
+  transition: color 0.3s ease;
+}
+
+/* Hover effect */
+.arrow-icon:hover {
+  color: rgb(52, 52, 52); /* Change to your desired hover color */
+}
+
+.detail-box { 
+  background-color: #123969;
+  color: #fff;
+  padding: 15px;
+  margin-top: 4px;
+  text-align: center;
+  width: 105px;
+  height: 50px;
+  font-size: 16px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px
+}
+.value-box { 
+  width: 165px; 
+  font-size: 18px;
+  padding-top: -10px;
+}
+
+
+
+
+
+

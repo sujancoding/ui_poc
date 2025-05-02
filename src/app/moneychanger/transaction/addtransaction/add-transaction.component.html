@@ -1,0 +1,813 @@
+
+
+<mat-drawer-container class="example-container" hasBackdrop="false">
+    <mat-drawer style="width: 30%;" #drawer position="end" mode="side">
+      <!--Currency stock inventory component's selector tag-->
+    <app-currency-stock (closeDrawerEvent)="closeDrawer()" > </app-currency-stock>
+    </mat-drawer>
+    <mat-drawer-content>
+
+<div fxLayout="row" fxLayoutAlign="space-between" >
+
+
+  <mat-card appearance="outlined" [ngStyle]="responsiveCard()">
+    <!-- <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+      </div> -->
+    <mat-card-content>
+  
+   
+    <div class="customer-form">
+      <form [formGroup]="customerForm">
+<div fxLayout="row">
+
+<div fxLayout="row" fxLayoutGap="0px" >
+  
+  <mat-hint class="function-hint"> <mat-icon style="position: relative;
+    top: 0px;
+    font-size: 17px;"
+    #tooltip="matTooltip" 
+    matTooltip="F1 for search customer"
+    matTooltipPosition="above"
+    matTooltipClass="accounts-custom-tooltip">error_outline</mat-icon></mat-hint>
+
+  <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 220px;">
+    <mat-label class="custom-label" class="label-formfield">Customer Name / Code</mat-label>
+    <input matInput formControlName="customerNameControl" [formControl]="customerForm.controls['customerNameControl']" [matAutocomplete]="auto" (keyup.enter)="onEnterKey($event, '',customerForm.get('customerNameControl')?.value || '','')">
+    <mat-error *ngIf="customerForm.controls['customerNameControl'].hasError('minlength')">
+      Enter atleast 3 characters.
+    </mat-error>
+  
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onOptionSelectedCustomer($event)">
+        <mat-option *ngFor="let option of filteredOptions | async"  [value]="option">{{option.NAME}} : {{option.CUSTOMERID}} : {{option.ALIASNAME}}</mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <!-- <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+      <mat-label class="custom-label" class="label-formfield">Customer Name</mat-label>
+      <input matInput [readonly]="true" [(ngModel)]="retrievedCustomerCode">
+      <mat-hint class="function-hint">(F1 for search customer)</mat-hint>
+  </mat-form-field> -->
+  <div>
+      <button [disabled]="isDisableButtons" mat-flat-button class="fetchCustomerButton" *ngIf="launchButton"
+          (click)="openCustomerSearch()" type="button">
+          <mat-icon>zoom_out_map</mat-icon>
+      </button>
+      <mat-spinner style="position: relative;top: 15px;left: 6px;" diameter="40" *ngIf="openCustomerSearchloader"></mat-spinner>
+  </div>
+  </div>
+
+<div fxLayout="row" class="custname-row">
+  
+
+  <mat-form-field  appearance="{{'formFieldAppearance' | label}}" style="position: relative;left: 6px;font-size: 9px !important;width: 220px;">
+    <mat-label class="custom-label" class="label-formfield">Runner</mat-label>
+    <mat-select  #runnerNameInputRef [(value)]="selectedRunnerAssociateId" (selectionChange)="selectRunnerId(selectedRunnerAssociateId)" (keyup.enter)="onEnterKey($event, 'enterAssociateDropdown','','')">
+      <mat-option *ngFor="let option of runnerArray" [value]="option.associateId"> {{option.name}}-{{option.jobTitle}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  </div>
+</div>
+
+<div class="flex-row-5" fxLayout="row" fxLayoutGap="10px" >
+  <!-- <small class="key">Customer Name:  </small> -->
+  <small class="customer-name-value"> {{customerName}} </small>
+
+  <!-- added for aligning balance and us balance in same row -->
+
+  <div fxLayout="row" fxLayoutGap="5px" >
+    <div class="key"> Balance:  </div>
+    <div class="outstanding-balance-values"
+    [ngClass]="{'negative-amount': customerOutstandingBalance < 0, 'positive-amount': customerOutstandingBalance >= 0}"
+    > {{customerOutstandingBalance | number}} </div>
+    </div>
+    <!-- added for showing us balance -->
+     
+    <div fxLayout="row" fxLayoutGap="5px" *ngIf="isShowUsBalance"  >
+    <div class="us-key">US Balance:  </div>
+    <div class="outstanding-balance-values"
+    [ngClass]="{'negative-amount': customerUsOutstandingBalance < 0, 'positive-amount': customerUsOutstandingBalance >= 0}"
+    > {{customerUsOutstandingBalance | number}} </div>
+  </div>
+  
+
+
+ </div>
+      
+</form>
+   
+  
+  
+  </div>
+  </mat-card-content>
+  </mat-card>
+
+
+
+
+ 
+  <div fxLayout="column" fxLayoutGap="5px" style="position: relative;right: 6px;">
+ 
+  <div fxLayout="row" fxLayoutGap="5px" >
+
+      
+        <button class="btn-save" mat-raised-button color="primary" [disabled]="isDisableSaveTransaction()"  (click)="onSaveTransaction()" type="button"> 
+          <mat-icon>save</mat-icon>  (F4)
+            <!-- <mat-icon>keyboard_arrow_right</mat-icon> -->
+        </button>
+
+        <button class="btn-save" mat-raised-button color="primary" [disabled]="isDisableSaveTransaction()"  (click)="saveAndPrint()" type="button">   
+          <mat-icon>print</mat-icon> (F3)
+        </button>
+                      <!-- Disable tally button for USD inward customer-->
+        <!--Tally-->
+      <button class="btn-tally" mat-raised-button [disabled]="isDisableButton() || isShowUsBalance"  (click)="tallyDeal()" type="button"> T (F5)
+        <!-- <mat-icon>keyboard_arrow_right</mat-icon> -->
+    </button>
+       
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="5px">
+    <!--Save/print disabled button always (UNUSED)-->
+    <button class="hidden-print-button" mat-raised-button color="primary"
+       
+    id="printButton" (click)="printTransaction()" type="button"> Save/Print  </button>
+
+    <!--Hold customer button which i have used queue icon-->
+    <button  class="btnCapture" [class.disabled]="isDisableCapture()"  (click)="addHistorySeries()" mat-raised-button color="primary" mat-button >
+      <mat-icon>queue</mat-icon>
+    </button>
+
+<!--Reset-->
+  <button class="btn-reset" mat-raised-button  [disabled]="isDisableButton()" (click)="resetDeals()" type="button">  <mat-icon>refresh</mat-icon> (F7)
+    <!-- <mat-icon>keyboard_arrow_right</mat-icon> -->
+</button>
+
+   <!--Capture history button-->
+   <div *ngFor="let sequenceItem  of sequenceNumberArray ; let i = index" style="margin-right: -13px !important">   
+    <button
+    #tooltip="matTooltip"
+    [matTooltip]="sequenceItem.customerName"
+    matTooltipPosition="above"
+    matTooltipClass="accounts-custom-tooltip"
+    class="btnAdd" (click)="restoreData(i)"   mat-mini-fab> {{sequenceItem.sequenceCustomerName}} </button>
+    <mat-icon class="kill-history-icon" (click)="killHistory(i)">cancel</mat-icon>
+    </div>
+
+  </div>
+
+  </div>
+
+ 
+
+
+
+</div>
+
+
+<!--This div covers entire table , card and panel-->
+<div style="margin-top: -12px;">
+
+<div>      
+     
+    
+
+<div class="table-wrapper" >
+  <div class="mat-elevation-z8" >
+    <div [ngStyle]="isOpenedInWindow ? ChangeTableHeightInWindow() :changeTableHeight()" #tableContainer>
+      <table  class= "table" >
+       
+        <thead>
+          <tr>
+            <th class="txn-item-th"
+             #tooltip="matTooltip"
+            matTooltip="Suspicious"
+            matTooltipPosition="above"
+            matTooltipClass="accounts-custom-tooltip">
+              <mat-checkbox
+                (change)="$event ? toggleAllRows() : null"
+                [checked]="selection.hasValue() && isAllSelected()">
+              </mat-checkbox>
+            </th>
+                <th class="txn-item-th">Type</th>
+                <th class="txn-item-th">Ccy No</th>
+                <th class="txn-item-th" style="display: none;">Ccy Code</th>
+                <th class="txn-item-th">Ccy Name</th>
+                <th class="txn-item-th">F.Amount</th>
+                <th class="txn-item-th">Rate</th>
+                <th class="txn-item-th">L.Amount</th>
+                 <th class="txn-item-th">Value Date</th> 
+                 <th class="txn-item-th">Remarks</th>  
+                <th class="txn-item-th"> Actions</th>
+                </tr>
+        </thead>
+       
+        <tbody>
+          <tr *ngFor="let search of dealListings | slice: (p - 1) * itemsPerPage : p * itemsPerPage ;index as i;"
+          [ngClass]="{'highlight-row': search.tallyFlag,
+          'bg-sell': search.buySellInd === 'S' && !search.tallyFlag,
+          'bg-buy': search.buySellInd === 'B' && !search.tallyFlag }">
+          <td class="txn-item-td">
+            <mat-checkbox
+              [checked]="selection.isSelected(search)"
+              style="cursor: default;
+    pointer-events: none;">
+            </mat-checkbox>
+          </td>
+                <td class="txn-item-td">{{search.buySellInd}}</td>
+                <td class="txn-item-td">{{search.ccyNo}}</td>
+                <td style="display: none;">{{search.ccyCode}}</td>
+                <td class="txn-item-td">{{search.ccyName}}</td>
+
+                <td *ngIf="!search.editMode" class="txn-item-td">{{search.amountF | number}}</td>
+                <td *ngIf="search.editMode " class="txn-item-td"> 
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 107px;position: relative;
+                  ">
+                    <mat-label class="custom-label" class="label-formfield">F.Amount</mat-label>
+                    <input matInput #fAmountInput (input)="onFAmountChange(fAmountInput.value,'templateRef',i,'fAmountChanged')" appCommaSeparatedInput [(ngModel)]="search.amountF">
+                  </mat-form-field>
+                </td>
+
+                <td class="txn-item-td">{{search.exchRate}}</td>
+                
+                <td class="txn-item-td" *ngIf="!search.editMode">{{search.amountL | number}}</td>
+
+                <td class="txn-item-td" *ngIf="search.editMode "> 
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 107px;position: relative;
+                  ">
+                    <mat-label class="custom-label" class="label-formfield">L.Amount</mat-label>
+                    <input matInput [readonly]="isReadOnly" [(ngModel)]="search.amountL">
+                  </mat-form-field>
+                </td>
+
+                 <td class="txn-item-td">{{search.valueDate ? (search.valueDate | date : 'mediumDate') : ""}}</td> 
+                 <td  class="txn-item-td" style="color: red;" [matTooltip]="search.remarks" matTooltipPosition="above"
+                 matTooltipClass="custom-tooltip">{{search.remarks ? (search.remarks | truncateText:25)  : ""}}</td> 
+                
+               
+               
+                <td class="txn-item-td"> 
+                  <button mat-button class="delete-icon" 
+                  #tooltip="matTooltip"
+                  matTooltip="Remove"
+                  matTooltipPosition="above"
+                  matTooltipClass="accounts-custom-tooltip"
+                  [disabled]="isDisableRemoveIcon" (click)="removeRecord(i)" >
+                  <mat-icon>delete_outline</mat-icon> 
+                </button>    
+
+                <button mat-button class="edit-icon" 
+                #tooltip="matTooltip"
+                matTooltip="Edit"
+                matTooltipPosition="above"
+                matTooltipClass="accounts-custom-tooltip"
+                *ngIf="!search.editMode" (click)="onEditAccessDeal(i)"  >
+                  <mat-icon>create</mat-icon> 
+                </button> 
+                
+                <button mat-button class="save-icon" 
+                #tooltip="matTooltip"
+                matTooltip="Save Changes"
+                matTooltipPosition="above"
+                matTooltipClass="accounts-custom-tooltip"
+                *ngIf="search.editMode " (click)="onSaveDealItems(i,search)"  >
+                  <mat-icon>save</mat-icon> 
+                </button>  
+
+                <button mat-button class="reset-icon" 
+                #tooltip="matTooltip"
+                matTooltip="Reset"
+                matTooltipPosition="above"
+                matTooltipClass="accounts-custom-tooltip"
+                 (click)="onResetDealRecord(i, search.dealItemId)" [disabled]="search.tallyFlag || search.manualTransactionFlag" >
+                  <mat-icon>refresh</mat-icon> 
+                </button> 
+
+              </td>  
+          </tr>
+        </tbody>
+       
+    </table>
+    </div>
+    <!-- <mat-paginator class="pagination-class"
+    [length]="dealListings.length"
+    [pageSize]="itemsPerPage"
+    [pageIndex]="p - 1"
+    (page)="handlePageChange($event)"
+  ></mat-paginator> -->
+  </div> 
+  <!--Loader-->
+  <div *ngIf="tableLoader" class="loader-wrapper">
+    <mat-spinner > </mat-spinner>
+    </div>
+   </div>
+
+
+</div>    
+
+
+
+
+</div>
+
+
+<div fxLayout="row" fxLayoutGap="5px" style="position: relative;top:5px;">
+  <div>
+     <button [disabled]="true" mat-button  class="expansion-button">
+         <mat-icon class="xpand-icon">{{ xpandStatus ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+     </button>
+ </div> 
+ 
+     <div  [ngStyle]="responsiveAverageCostContainer()" style="margin-left: 10px;">
+          <div fxLayout="row" class="panel-row">
+             <div class="flex-row">
+              <small class="key">Average Cost : </small>
+              <small class="values"> {{avgCost}} </small>
+             </div>
+   
+             <div class="flex-row">
+               <small class="key">Actual Stock : </small>
+               <small class="values"> {{stockValue}} </small>
+              </div>
+
+              <div >
+                <button mat-button type="button" class="refresh-btn" (click)="retriveStocks()">
+                  <mat-icon>refresh</mat-icon>
+                </button>
+              </div>
+
+              <div class="flex-row-1">
+              <div class="key">Total (Tally) : </div>
+                <div class="values">{{totalTally | number}} SGD</div>
+              </div>
+
+                </div> 
+
+     </div> 
+ 
+</div>
+
+
+  <!-- style="width: fit-content;background-color: #ffffff;z-index: 999;" -->
+  <mat-card appearance="outlined" class="card-panel">
+
+<form [formGroup]="dealForm">     
+   <div  fxLayout="row wrap" fxLayoutGap="25px" style="position: relative;top: 3px;"> 
+  <div fxFlex="10" fxFlex.xs="100" >   
+    <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+      <mat-label class="custom-label" class="label-formfield" >Type</mat-label>
+      <input matInput #typeInputRef (keyup)="onSpecialCharacterKey($event,currencyNoInputRef)" (keyup.arrowleft)="onLeftNavigation($event,typeInputRef,'type')" (keyup.enter)="onEnterKey($event, currencyNoInputRef,'','currencyNo')"  formControlName="type" [formControl]="dealForm.controls['type']" maxlength="1" [ngStyle]="{ color: inputColor }">
+  </mat-form-field>
+  <div class="message-block">
+      <span class="error-message" *ngIf="dealForm.controls['type'].hasError('required') &&
+      dealForm.controls['type'].touched"> Type Required </span>
+      <span class="error-message" *ngIf="dealForm.controls['type'].hasError('pattern') "> Enter either B or S  </span>
+    </div>
+  </div>
+
+  <div fxFlex="10" fxFlex.xs="100" >   
+  <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+      <mat-label class="custom-label" class="label-formfield">Currency Number</mat-label>
+      <input  matInput #currencyNoInputRef (keyup.arrowleft)="onLeftNavigation($event,typeInputRef,'type')" (keyup.enter)="onEnterKey($event, fAmountInputRef,'','fAmount')" (input)="onCurrencyNumberChange('','','')" formControlName="currencyNo" [formControl]="dealForm.controls['currencyNo']">
+      <mat-icon (click)="openCurrencySearchModal()" class="currencyno-shortcut-icon"
+      #tooltip="matTooltip"
+                matTooltip="Open Currency Listings"
+                matTooltipPosition="above"
+                matTooltipClass="custom-tooltip"
+      matSuffix>zoom_out_map</mat-icon>
+  </mat-form-field>
+  <div class="message-block">
+      <span class="error-message" *ngIf="dealForm.controls['currencyNo'].hasError('required') &&
+      dealForm.controls['currencyNo'].touched"> Currency Number Required </span>
+      <span class="error-message" *ngIf="dealForm.controls['currencyNo'].hasError('pattern')">{{'onlyAlphanumeric' | label}}</span> 
+      <!-- added for maxlength 4 -->
+      <span class="error-message" *ngIf="dealForm.controls['currencyNo'].hasError('maxlength')">{{'currencyNoMaxlength' | label}}</span> 
+    </div>
+  </div>
+  
+  <div fxFlex="20" fxFlex.xs="100" style="display: none;" >   
+  <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+      <mat-label class="custom-label" class="label-formfield">Currency Code</mat-label>
+      <input  [readonly]="isReadOnly" #currencyCodeInputRef (keyup.enter)="onEnterKey($event, fAmountInputRef,'','fAmount')" matInput formControlName="currencyCode" [formControl]="dealForm.controls['currencyCode']">
+  </mat-form-field>
+  <div class="message-block">
+      <span class="error-message" *ngIf="dealForm.controls['currencyCode'].hasError('required') &&
+      dealForm.controls['currencyCode'].touched"> Currency Code Required </span>
+    </div>
+  </div>
+
+  <div fxFlex="20" fxFlex.xs="100">   
+    <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+        <mat-label class="custom-label" class="label-formfield">Currency Name</mat-label>
+        <input  [readonly]="isReadOnly" #currencyNameInputRef (keyup.enter)="onEnterKey($event, fAmountInputRef,'','fAmount')" matInput formControlName="currencyName" [formControl]="dealForm.controls['currencyName']">
+    </mat-form-field>
+    <div class="message-block">
+        <span class="error-message" *ngIf="dealForm.controls['currencyName'].hasError('required') &&
+        dealForm.controls['currencyName'].touched"> Currency Name Required </span>
+      </div>
+    </div>
+
+  <div fxFlex="15" fxFlex.xs="100" >   
+  <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+      <mat-label class="custom-label" class="label-formfield">F.Amount</mat-label>
+      <input matInput #fAmountInputRef (keyup.arrowleft)="onLeftNavigation($event,currencyNoInputRef,'currencyNo')" (keyup.enter)="onEnterKey($event, rateInputRef,'','rate')" (input)="onFAmountChange('','','','')" formControlName="fAmount"  appCommaSeparatedInput [formControl]="dealForm.controls['fAmount']">
+  </mat-form-field>
+  <div class="message-block">
+      <span class="error-message" *ngIf="dealForm.controls['fAmount'].hasError('required') &&
+      dealForm.controls['fAmount'].touched"> F.Amount Required </span>
+    </div>
+  </div>
+
+  <div fxFlex="15" fxFlex.xs="100" >   
+  <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+      <mat-label class="custom-label" class="label-formfield">Rate</mat-label>
+      <input [readonly]="isRateFieldReadOnly()" appendZero matInput #rateInputRef (keyup.arrowleft)="onLeftNavigation($event,fAmountInputRef,'fAmount')" (keyup.enter)="onEnterKey($event, validTillInputRef,'','valueDate')" (input)="onFAmountChange('','','','')" formControlName="rate" [formControl]="dealForm.controls['rate']" style="color:red">
+  </mat-form-field>
+  <div class="message-block">
+      <span class="error-message" *ngIf="dealForm.controls['rate'].hasError('required') &&
+      dealForm.controls['rate'].touched"> Rate Required </span>
+      <span class="error-message" *ngIf="dealForm.controls['rate'].hasError('pattern')"> Enter Valid Rate  </span>
+      <span class="error-message" *ngIf="dealForm.controls['rate'].hasError('min') && dealForm.controls['rate'].touched">{{ minErrorMessage }}, it can be from {{startRate | number: '1.0-6'}} to {{endRate | number: '1.0-6'}}</span>
+        <span class="error-message" *ngIf="dealForm.controls['rate'].hasError('max') && dealForm.controls['rate'].touched">{{ maxErrorMessage }}, it can be from {{startRate | number: '1.0-6'}} to {{endRate | number: '1.0-6'}}</span>
+    </div>
+  </div>
+
+  <div fxFlex="15" fxFlex.xs="100" >   
+  <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+      <mat-label class="custom-label" class="label-formfield">L.Amount</mat-label>
+      <input matInput [readonly]="isReadOnly" formControlName="lAmount" [formControl]="dealForm.controls['lAmount']">
+  </mat-form-field>
+  <div class="message-block">
+      <span class="error-message" *ngIf="dealForm.controls['lAmount'].hasError('required') &&
+      dealForm.controls['lAmount'].touched"> L.Amount Required </span>
+    </div>
+  </div>
+
+  </div>
+
+  <div  fxLayout="row" fxLayoutGap="25px"> 
+      <div fxFlex="22" fxFlex.xs="100" >   
+        <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+          <mat-label class="custom-label" class="label-formfield">Value Date</mat-label>
+          <input (click)="datepick.open()" #validTillInputRef (keyup.arrowleft)="onLeftNavigation($event,rateInputRef,'rate')" (keyup.enter)="onEnterKey($event, remarksInputRef,'','remarks')" [matDatepicker]="datepick" matInput formControlName="valueDate" [formControl]="dealForm.controls['valueDate']" 
+          [matDatepickerFilter]="dateFilter">
+          <mat-datepicker-toggle matSuffix [for]="datepick" ></mat-datepicker-toggle>
+          <mat-datepicker #datepick>
+            <!-- <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            </mat-datepicker-actions> -->
+          </mat-datepicker>
+      </mat-form-field>
+      <div class="message-block">
+          <span class="error-message" *ngIf="dealForm.controls['valueDate'].hasError('required') &&
+          dealForm.controls['valueDate'].touched"> Value Date Required </span>
+          <span class="error-message" *ngIf="dateError"> Previous dates are not supported </span>
+        </div>
+      </div>
+  
+      <div fxFlex="20" fxFlex.xs="100" >   
+      <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+          <mat-label class="custom-label" class="label-formfield">Remarks</mat-label>
+          <input matInput #remarksInputRef maxlength="50" (keyup.arrowleft)="onLeftNavigation($event,validTillInputRef,'validTill')" (keyup.enter)="onEnterKey($event,'addDealItems','','')" (input)="dealForm.controls.remarks.setValue(dealForm.controls.remarks.value.toUpperCase())" formControlName="remarks" [formControl]="dealForm.controls['remarks']">
+      </mat-form-field>
+      <div class="message-block">
+        <span class="error-message" *ngIf="dealForm.controls['remarks'].hasError('maxlength')">{{'remarksMaxLength'|label}}</span>
+        <span class="error-message" *ngIf="dealForm.controls['remarks'].hasError('pattern')">{{'onlyAlphaNumericAndSpecificSpecialCharacter' | label}}</span> 
+        </div>
+      </div>
+
+     <div class="panel-btn-pairs"> 
+      <div>
+      <button mat-raised-button type="button" class="panel-clear-btn" (click)="clearFields()">Clear (F2)</button>
+      </div>
+
+      <div>
+      <button mat-raised-button class="panel-add-btn" [disabled]="!dealForm.valid" type="button" (click)="addTxnItem()">Add </button>
+      </div>
+
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutGap="25px" *ngIf="showDailySetupRates">  
+        <h2 class="rate-description"> {{rateType}}: {{retailersExchangeRate}} </h2> 
+      </div>
+
+      </div>
+
+</form>
+
+     </mat-card>
+     
+
+
+</mat-drawer-content>
+</mat-drawer-container>
+
+
+<!-- <div style="display: none;" >
+  <div id="">
+    <div class="print-receipt">
+    
+      <div style="padding-bottom: 40px;
+      border-bottom: 2px dashed #383838;
+      text-align: center;">
+      <h1 style=" font-size: 28px;
+      margin-bottom: 5px;">ARCADE PLAZA TRADERS PTE LTD</h1>
+      <div style=" font-size: 20px;
+      color: #727070;
+      font-weight: 300;" fxLayout="column">
+      <span>11, COLLYER QUAY  </span>
+      <span>#02-03 THE ARCADE</span>
+      <span>SINGAPORE 049317</span>
+      <span>Phone: +65 62277660  Fax: +65 62202519</span>
+      <span>Comp Reg No: 198300044D</span>
+    </div>
+      </div>
+      
+      <div style="margin-top: 25px;">
+  
+        <div style="padding-bottom: 40px;
+        border-bottom: 2px dashed #383838;
+        text-align: center;">
+
+          <div fxLayout="row" fxLayoutGap="10px">
+              <div class="date">Date: </div>
+               <div class="date"> {{receiptCurrentDate | date:'mediumDate'}} </div>
+              </div>
+
+              <div fxLayout="row" fxLayoutGap="10px">
+              <div class="transNo">Trans No: </div>
+               <div class="transNo"> {{transNo ? transNo : "223929190203023"}} </div>
+              </div>
+
+              <div fxLayout="row" fxLayoutGap="10px">
+                <div class="transNo">Served By</div>
+                 <div class="transNo"> {{staffName}} </div>
+                </div>
+               <div> 
+                <p class="transNo"> {{customerName ? customerName : "SUJAN"}} </p>
+                <p class="transNo"> {{corporateAddress ? corporateAddress : "88 HHSSJ AKSJAJSJ ASN"}} </p>
+                <p class="transNo"> {{corporateCountry}} </p>
+                <p class="transNo"> {{corporatePostalCode}} </p>
+                <p class="transNo"> +{{corporatePhoneCountryCode}} {{corporatePhoneNo}} </p>
+
+                <p class="transNo"> {{associateName}} </p>
+                <p class="transNo"> {{ getMaskedAssociateProof() }} </p> show last 4 chars, initial chars to masked (*)
+                <p class="transNo"> {{associateNationality}} </p>
+                </div>
+
+               
+
+
+        </div>
+          <div style="margin-top: 35px;">
+              <table style="border: 1px solid grey;">
+          
+                <thead class="receipt-header">
+                  <tr>
+                  <th style=" font-size: 20px;text-align: left;font-weight: lighter;">B/S</th>
+                  <th style=" font-size: 20px;text-align: left;font-weight: lighter;" >Exch Rate and F.Amount</th>
+                  <th style=" font-size: 20px;text-align: left;font-weight: lighter;">L.Amount</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let items of dealListings">
+                    <td style=" font-size: 22px;text-align: left;"> <div fxLayout="column" fxLayoutGap="10px">  <div>{{items.ccyCode}}</div> <div>{{items.buySellInd}}</div> </div> </td>
+                    <td style=" font-size: 22px;text-align: left;"> <div fxLayout="column" fxLayoutGap="10px">  <div>{{items.exchRate}}</div> <div>{{items.amountF}}</div> </div> </td>
+                    <td style=" font-size: 22px;text-align: left;"> {{items.amountL}} </td>
+                  </tr>
+
+                 Total Row 
+                  <tr>
+                    <td style="font-size: 22px; text-align: left; font-weight: bold;">Total</td>
+                    <td></td>
+                    <td style="font-size: 22px; text-align: left; font-weight: bold;">
+                      {{ getConsolidatedAmount() }}
+                    </td>
+                  </tr>
+
+              </tbody>
+  
+              </table>
+
+
+              
+          </div>
+  
+      </div>
+  
+      <h3>B ==> Buy   S ==> Sell</h3>
+      <h3>Please check your amount before leaving Counter. We shall not entertain any complaints thereafter.</h3>
+      <p>Thank You!</p>
+  
+  </div>
+  
+  </div>
+</div> -->
+
+<div style="display: none;">
+  <!-- <div class="receipt" id="printarea">
+    <h1 class="company-name"> {{organisationName}} </h1>
+    <p class="company-details">
+      11, COLLYER QUAY<br>
+      #02-03 THE ARCADE<br>
+      SINGAPORE 049317<br>
+      Phone: +65 62277660 Fax: +65 62202519<br>
+      Comp Reg No: 198300044D
+    </p>
+  
+    <hr class="horizontal-divider">
+
+    <mat-divider></mat-divider>
+  
+    <div class="transaction-info">
+      <p>Date: {{receiptCurrentDate | date:'mediumDate'}}</p>
+      <p>Tran No: {{transNo}}</p>
+      <p>Served By: {{staffName}} </p>
+    </div>
+  
+    <hr class="horizontal-divider">
+  
+    <div class="customer-info" *ngIf="corporateDetail">
+                <p> {{customerNameInReceipt}} </p>
+                <p> {{corporateAddress}} </p>
+                <p> {{corporateCountry}} </p>
+                <p> {{corporatePostalCode}} </p>
+                <p> +{{corporatePhoneCountryCode}} {{corporatePhoneNo}} </p>
+                <p> {{associateName}} </p>
+                <p> {{ getMaskedAssociateProof() }} </p> 
+                <p> {{associateNationality}} </p>
+
+    </div>
+
+    <div class="customer-info" *ngIf="consumerDetails">
+      <p> {{customerNameInReceipt}} </p>
+</div>
+  
+    <hr class="horizontal-divider">
+  
+    <table class="transaction-table">
+      <thead>
+          <th>B/S</th>
+          <th>FAmount</th>
+          <th>LAmount</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let items of dealListForReceipt">
+          <td>
+            <span fxLayout="column">
+              <div fxLayout="row"> 
+                <span>{{items.ccyCode}}</span> 
+                <span>{{items.ccyNo}}</span>  
+              </div>
+              <div> {{items.buySellInd}} </div>
+            </span>
+          </td>
+          <td>
+            <span fxLayout="column">
+                <span>{{items.exchRate}}</span> 
+                <span>{{items.amountF}}</span>  
+            </span>  
+          </td>
+          <td>{{items.amountL}}</td>
+        </tr>
+        <tr>
+          <td colspan="2">Total</td>
+          <td>{{ getConsolidatedAmount() }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <hr class="horizontal-divider">
+  
+    <p class="footer-text">
+      B ==> Buy &nbsp;&nbsp; S ==> Sell<br>
+      Please check your amount before leaving the counter.<br>
+      We shall not entertain any complaints thereafter.<br>
+      Thank you.
+    </p>
+  </div> -->
+  <div id="printarea">
+  <div style="font-family: 'Courier New', Courier, monospace; font-size: 10px; width: 7.8cm;margin: 0;
+  padding: 0;">
+    <div style="text-align: center;line-height: 12px;">
+        <strong> {{organisationName}} </strong><br>
+        <strong>11, COLLYER QUAY </strong><br>
+        <strong>#02-03 THE ARCADE</strong><br>
+        <strong>SINGAPORE 049317 </strong> <br>
+        <strong>Phone: +65 62277660 Fax:+65 62202519 </strong> <br>
+        <strong>Comp Reg No: 198300044D </strong> <br>
+    </div>
+    <hr class="horizontal-divider">
+    <table class="info-table">
+        <tr>
+            <td class="receipt-td" style="font-size: 13px !important;"> <strong>  Date: </strong> </td>
+            <td class="receipt-td" style="font-size: 13px !important;"> <strong> {{receiptCurrentDate | date:'medium'}} </strong>  </td>
+        </tr>
+        <tr>
+            <td class="receipt-td" style="font-size: 13px !important;"> <strong> Tran No: </strong> </td>
+            <td class="receipt-td" style="font-size: 13px !important;"> <strong> {{transNo}} </strong> </td>
+        </tr>
+        <tr>
+            <td class="receipt-td" style="font-size: 13px !important;"> <strong> Served By: </strong> </td>
+            <td class="receipt-td" style="font-size: 13px !important;"> <strong> {{staffName}} </strong> </td>
+        </tr>
+    </table>
+    <hr class="horizontal-divider">
+
+    <div class="customer-info" *ngIf="corporateDetail">
+      <strong> {{customerNameInReceipt}} </strong>
+      <strong> {{corporateAddress}} </strong>
+      <strong> {{corporateCountry}} </strong>
+      <strong> {{corporatePostalCode}} </strong>
+      <strong> {{corporatePhoneCountryCode}} {{corporatePhoneNo}} </strong>
+      <strong> {{associateName}} </strong>
+      <strong> {{ getMaskedAssociateProof() }} </strong> 
+      <strong> {{associateNationality}} </strong>
+
+</div>
+
+<div class="customer-info" *ngIf="consumerDetails">
+<strong> {{customerNameInReceipt}} </strong>
+<strong> {{consumerAddress}} </strong>
+<strong> {{consumerCountry}} </strong>
+<strong> {{consumerPostalCode}} </strong>
+<strong> {{consumerPhoneCountryCode}} {{consumerPhoneNo}} </strong>
+<strong> {{ getMaskedConsumerNricProof() }} </strong>
+</div>
+
+<!-- <hr class="horizontal-divider"> -->
+    <table class="receipt-table">
+        <thead>
+          <tr>
+            <td colspan="3"><hr class="horizontal-divider"></td>
+        </tr>
+            <tr>
+                <th class="receipt-th" style="font-size: 13px !important;">B/S</th>
+                <th class="receipt-th" style="font-size: 13px !important;">FAmount</th>
+                <th class="receipt-th" style="font-size: 13px !important;">LAmount</th>
+            </tr>
+            <tr>
+              <td colspan="3"><hr class="horizontal-divider"></td>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let items of dealListForReceipt">
+
+                <td class="receipt-td" style="font-size: 13px !important;"> 
+                  <span fxLayout="column">
+                    <div fxLayout="row"> 
+                      <strong>{{items.ccyName}}</strong> 
+                    </div>
+                    <strong> {{items.buySellInd}} </strong>
+                  </span>  
+                </td>
+
+                <td class="receipt-td" style="font-size: 13px !important;">
+                  <span fxLayout="column">
+                      <strong [ngClass]="items.exchRate?.length > 15 ? 'wrap-text' : ''">{{ isWeakCurrency(items.ccyCode) ?
+                        (items.exchRate / 1000) : items.exchRate }}</strong> 
+                      <strong [ngClass]="items.amountF?.length > 15 ? 'wrap-text' : ''">{{ isWeakCurrency(items.ccyCode) ?
+                         (items.amountF * 1000 | number) : (items.amountF | number) }}
+                      </strong>  
+                  </span>  
+                </td>
+
+                <td class="receipt-td" style="font-size: 13px !important;"> <strong [ngClass]="items.amountL?.length > 15 ? 'wrap-text' : ''">{{ isWeakCurrency(items.ccyCode) ?
+                  ((items.exchRate / 1000)  * (items.amountF * 1000) | number) : items.amountL | number }} </strong> </td>
+
+            </tr>
+
+            <tr>
+              <td colspan="3"><hr class="horizontal-divider"></td>
+          </tr>
+
+            <tr class="total-tr">
+              <td colspan="2" style="font-size: 13px !important;" class="receipt-td" > <strong> Total </strong> </td>
+              <td class="receipt-td" style="font-size: 13px !important;" > <strong> {{ getConsolidatedAmount() }} </strong> </td>
+            </tr>
+
+            <tr>
+              <td colspan="3"><hr class="horizontal-divider"></td>
+          </tr>
+
+        </tbody>
+    </table>
+
+    <!-- <hr class="horizontal-divider"> -->
+
+    <div>
+        <strong>B ==> Buy S ==> Sell</strong><br>
+         <strong> Please check your amount before leaving the counter. </strong> <br>
+         <strong> We shall not entertain any complaints </strong> <br> <strong> thereafter. </strong> <br>
+         <strong> Thank you. </strong> <br>
+    </div>
+</div>
+</div>
+
+</div>
+
+
+
+
+  

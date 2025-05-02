@@ -1,0 +1,84 @@
+<!--EXPENSES TXN HISTORY-->  
+
+
+<!-- Filter Section -->
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1">
+
+    <form [formGroup]="filterForm">
+        <div fxLayout="row wrap" fxLayoutGap="10px" style="margin-left: 15px; align-items: center;">
+
+            <mat-icon (click)="goToOrganizationAccounts()" class="arrow-back-icon">keyboard_arrow_left</mat-icon>
+
+            <div fxLayout="column" style="margin-right: 10px;">
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                        <mat-label class="custom-label">Start Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="startDate"
+                            [formControl]="filterForm.controls['startDate']" (dateChange)="onStartDateChange($event)" [min]="minStartDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="column">
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                        <mat-label class="custom-label">End Date</mat-label>
+                        <input matInput formControlName="endDate" [formControl]="filterForm.controls['endDate']"
+                            [matDatepicker]="picker2" (dateChange)="onEndDateChange($event)" [min]="minEndDate" [max]="maxEndDate" >
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                        <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <button [disabled]="!filterForm.valid" mat-raised-button type="button" (click)="searchFilter()"
+                class="buttonApplyfilter">Fetch</button>
+        </div>
+    </form>
+
+</div>
+
+
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+    
+    <div [ngStyle]="changeTableHeight()">
+    <table class="table">
+    <thead>
+        <th>ACCOUNT NUMBER</th>
+        <th>ACCOUNT NAME</th>
+        <th>RESET ON</th>
+        <th>RESET BY</th>
+        <th>LAST AMOUNT</th>
+</thead>
+    
+<tbody>
+   
+      <tr *ngFor="let history of resetAccountHistory | slice: (p - 1) * itemsPerPage : p * itemsPerPage ">
+         <td>{{history.ACCOUNTNO}} </td>
+         <td>{{history.ENTITYNAME}}  </td>
+        <td>{{history.RESETDATE | date:'medium'}} </td>
+        <td>{{history.RESETBY}} </td>
+         <td>{{history.OUTSTANDINGBALANCE }}   </td>
+      </tr>
+</tbody>
+</table>
+</div>
+<mat-paginator class="pagination-class"
+[length]="resetAccountHistory.length"
+[pageSize]="itemsPerPage"
+[pageIndex]="p - 1"
+(page)="handlePageChange($event)"
+
+></mat-paginator>
+</div>
+ <!--Loader-->
+<div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+</div>
+</div>
+

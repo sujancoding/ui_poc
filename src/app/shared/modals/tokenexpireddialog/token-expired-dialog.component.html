@@ -1,0 +1,15 @@
+<div class="dialog-box">
+    <mat-toolbar color="primary" class="custom-toolbar">
+        <span style="font-size: 18px;font-family:'Roboto';">Token expired</span>
+      </mat-toolbar>
+      <div style="margin: 18px;margin-bottom: 28px;">
+    <div fxLayout="row" fxLayoutAlign="start" style="margin-top: -18px;">
+        <mat-icon class="alert-icon">warning</mat-icon>
+        <h5 class="alert-label">Your login token has expired. <br>  Please log in again to continue. </h5>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end" style="margin-right: 20px;">
+       
+        <button class="yes-button" (click)="logout()" mat-raised-button color="warn">Ok</button>
+    </div>
+    </div>
+    </div>

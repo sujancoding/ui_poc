@@ -1,0 +1,17 @@
+<div class="Position">
+    <mat-icon 
+    [ngClass]="{'warning-icon': icon == 'warning', 'error-icon': icon != 'warning'}"> {{icon}} </mat-icon>
+<h3 class="text-message">{{errorTitleMessage}}</h3>
+<div  style="display: flex;justify-content: center;"> 
+
+    <div  [ngClass]="{'warning-message-container': icon == 'warning', 'error-message-container': icon != 'warning'}"> 
+       <span class="text-message-bold" > {{message ? message : "An error has occured during something"}} </span>  
+    </div>
+</div>
+<p class="text-message" *ngIf="showTryAgainMssg">Please Try Again Later</p>
+</div>
+
+<div style="text-align:right;margin-right:10px;">
+<button  [mat-dialog-close]="true"  *ngIf="okButton" (click)="closeDialog()" mat-raised-button class="close-btn">Ok</button>
+<button  [mat-dialog-close]="true" *ngIf="failedContract" (click)="closeDialogAgent()" mat-raised-button class="close-btn">Ok</button>
+</div>

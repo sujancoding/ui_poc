@@ -1,0 +1,13 @@
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <div class="title-label">Confirm this action</div>
+        <mat-icon style="cursor: pointer;" [mat-dialog-close]="true">close</mat-icon>
+    </div>
+    <div>
+        <h5 class="label">Do you want to cancel this transaction ?</h5>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end" style="height: 47px;" >
+        <button class="no-button" [mat-dialog-close]="true" mat-flat-button>No</button>
+        <button class="yes-button" (click)="cancelRemittance()" mat-raised-button 
+        style="background-color: #123969;color: white;">Yes</button>
+    </div>

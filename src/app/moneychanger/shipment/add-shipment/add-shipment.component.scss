@@ -1,0 +1,270 @@
+.btn-save {
+    background-color: #123969;
+    height: 45px;
+  
+  }
+
+  
+.fetchCustomerButton {
+    background-color: #123969;
+    color: white;
+    height: 48px;
+    margin-top: 5px;
+  }
+
+  .p{
+    font-weight: bold;
+    margin-top: 11px;
+  }
+
+  .buttonApplyfilter {
+    background-color: #123969;
+    color: rgba(255, 255, 255, 0.903);
+    font-size: 16px;
+    height: 48px;
+    margin-top: 4px;
+    }
+
+    .add-filter-icon{
+      position: relative;
+      top: -1px;
+      color: rgba(255, 255, 255, 0.903);
+      }
+
+      .message-block .error-message{
+        display: none;
+      }
+      .message-block .error-message:first-child{
+        display: block;
+        color: #e8316f;
+        margin-top: -16px;
+        margin-left: 6px;
+        font-size: 14px;
+        margin-bottom: 0px;
+        white-space: break-spaces;
+      }
+
+      .message-block .table-rate-error-message:first-child{
+        display: block;
+    position: relative;
+    top: -6px;
+    color: #e8316f;
+    /* margin-top: 2px; */
+    /* margin-left: 6px; */
+    font-size: 14px;
+    white-space: break-spaces;
+      }
+
+      .p1{
+       font-family: 'Roboto';
+        margin-top: 1px;
+      }
+
+
+      .group{
+       font-size: 14px;
+       color: gray;
+      }
+
+    .subGroup{
+      font-size: 14px;
+      color: rgb(62, 62, 62);
+    }  
+
+    .cancelButton{
+      // border: 0;
+      margin-left: 8px; /* Add space between content and button */
+      padding: 0; /* Remove default padding */
+      background: transparent; /* Ensure background is transparent */
+      border: none; /* Remove default border */
+      display: flex; /* Make sure button aligns with the row */
+      align-items: center; /* Vertically align button */
+    }
+
+    .airplaneIcon{
+      transform: rotate(90deg)
+    }
+
+    .chip {
+      display: inline-block;
+    padding: 0 20px 0px;
+    line-height: 33px;
+    border-radius: 25px;
+    background-color: #d6d2d2;
+    /* margin-right: 2px; */
+    /* margin-bottom: 38px; */
+    cursor: pointer;
+    height: 31px;
+    margin-right: 5px;
+    }
+    
+    .closebtn {
+      padding-left: 10px;
+      font-weight: bold;
+      float: right;
+      font-size: 19px;
+      cursor: pointer;
+      margin-top: 7px;
+    }
+    
+    .closebtn:hover {
+      color: #000;
+    }
+
+
+    .previous-btn{
+      font-size: 17px;
+      background: #ffffff;
+    }
+    
+    .arrow-back-icon{
+      margin-top: -2px;
+      position: relative;
+      left: -7px;
+      font-weight: bold;
+    }
+
+    .title{
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 13px;
+    font-family: 'Roboto';
+    }
+
+    .baggageLists{
+      margin-top: -4px;
+      font-family: 'Roboto';
+    }
+
+    .header-container {
+      background-color: #123969;
+      padding: 18px;
+     }
+  
+     .head-label-1 {
+      font-size: 22px;
+      display: flex;
+      font-family: 'Roboto';
+      color: white;
+    }
+  
+    .close-icon{
+      cursor: pointer;
+      color: white;   
+      position: relative;
+      top: 3px;
+    }
+  
+    .scrollable-content{
+      height: 734px;
+      overflow-y: scroll;
+    }
+
+    .updateShipmentButton{
+      margin: 14px;
+      height: 45px;
+      background-color: #123969;
+      color: white;
+      width: 100px;
+    }
+    
+    .btn{
+      width: 98%;
+      justify-content: right;
+      bottom: 2px;
+      left: 12px;
+      background-color: #f2f2f2;
+      position: sticky;
+      z-index: 100;
+    }
+    
+    td {
+      text-align: left;
+      padding: 0px !important;
+      padding-left: 10px !important;
+      font-family: Roboto;
+      font-weight: 540;
+      font-size: 16px !important;
+      border: .1px solid #b6b6b6;
+  }
+
+  .chip-container {
+    
+    white-space: nowrap;
+    position: relative;
+    top: -11px;
+    width: 100%;
+    overflow-x: scroll;
+  }
+
+  .chip-container::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    background-color: transparent;
+  }
+  
+  .chip-container::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background-color: rgba(156, 204, 234, 0.5);
+    box-shadow: 0 0 1px rgba(87, 86, 86, 0.5);
+  }
+
+  .responsiveCard{
+    background-color: whitesmoke;
+    position: relative;
+    height: 268px;
+    border: 1px solid #d1d1d1 ;
+    width : 100%;
+    overflow: hidden;
+    margin: 5px;
+  }
+
+  .downloadButton{
+    background-color: white;
+    position: relative;
+    top: 17px;
+    height: 35px;
+  }
+
+  .td-amount-row{
+    justify-content: center; 
+    display: flex; 
+    align-items: center;
+  }
+
+  .td-icon-row{
+    position: relative;
+    right: 9px;
+  }
+
+  .highlight-red {
+    color: red;
+  }
+  
+  .highlight-black {
+    color: black;
+  }
+
+  .status-dropdown{
+    position: relative;
+    top: 10px;
+    font-size: 13px;
+  }
+
+  .disable-chip{
+    background-color: grey;
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+.Shipment-type-radio-button{
+  margin-left: 20px;
+}
+
+  
+
+
+
+    
+
+  

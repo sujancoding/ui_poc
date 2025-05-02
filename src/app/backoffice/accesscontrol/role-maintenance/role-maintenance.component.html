@@ -1,0 +1,62 @@
+<div class="btn-div">  
+  <button mat-raised-button  (click)="openAddRole()"
+  class="buttonAddRole">
+  <mat-icon class="add-icon" matPrefix="Filter">add</mat-icon>
+  Role
+</button>
+ </div>
+
+  <div class="table-wrapper">
+    <div class="mat-elevation-z8" >
+      <div [ngStyle]="changeTableHeight()">
+        <table  class= "table" >
+         
+          <thead>
+            <tr>
+                  <th>ROLE ID</th>
+                  <th>ROLE CODE</th>
+                  <th>ROLE NAME</th>
+                  <th>STATUS</th>
+                  <th>ACTIONS</th>
+                  </tr>
+          </thead>
+         
+          <tbody>
+            <tr *ngFor="let data of searchRole | slice: (p - 1) * itemsPerPage : p * itemsPerPage">
+              
+            <td> {{data.roleId}} </td>
+            <td style="color: #0176d3;;"> {{data.roleName}}  </td>
+            <td> {{data.roleDescription | uppercase}}  </td>
+            <td>
+              <div class="tags" [ngStyle]="{'color': getColor(data.status),'background-color': getBackgroundColor(data.status)}">
+                <div  [ngStyle]="{'background-color': getColor(data.status)}" class="small-container"></div>
+              <span class="status-tag"   #tooltip="matTooltip"
+              [matTooltip]="getTooltipText(data.status)"
+              matTooltipPosition="above"
+              matTooltipClass="custom-tooltip"> 
+              {{data.status | uppercase}} </span>
+              </div>
+            </td>
+            <td> 
+                <button mat-button class="launch-icon"  (click)="editDialog(data.roleId)" aria-label="Example icon button with a menu icon">
+                <mat-icon>create</mat-icon> 
+              </button>    
+            </td>  
+            
+            </tr>
+          </tbody>
+         
+      </table>
+      </div>
+      <mat-paginator class="pagination-class"
+  [length]="searchRole.length"
+  [pageSize]="itemsPerPage"
+  [pageIndex]="p - 1"
+  (page)="handlePageChange($event)"
+></mat-paginator>
+    </div> 
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+      </div>
+     </div> 

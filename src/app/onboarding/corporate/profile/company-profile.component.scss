@@ -1,0 +1,188 @@
+@import "src/assets/styles/buttons/button.scss";
+
+form {
+    margin: 5px;
+}
+.scrollable-content{
+    height: 446px;
+  overflow-y: scroll; 
+  margin: 17px;
+}
+
+mat-labeL {
+    font-size: 13px;
+}
+
+mat-error {
+    font-size: 10px;
+}
+
+.task-header {
+font-size: 18px;
+    background-color: #123969;
+    color: white;
+    height: 50px;
+}
+
+.fx-spacer {
+    flex: 1 1 auto;
+}
+
+.red {
+    background-color: #EB5757;
+    width: 128px;
+    color:white;
+}
+
+.green {
+    background-color: #198754;
+    width: 128px;
+    color:white;
+}
+
+.deactivate {
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+
+
+
+.mat-raised-1{
+   width: 120px;
+   margin-top: 18px;
+   margin-left: 20px;
+}
+
+.mat-raised-2{
+    margin-top: 18px;
+    margin-right: 20px;
+    width: 120px;
+}
+
+
+.mat-mdc-button{
+      width: 13%;
+}
+  
+  
+.dialogButton{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 39px;
+}
+
+
+.blue{
+    background-color: #123969 ;
+    width: 3cm;
+}
+
+//Triggers on modalpopup > Application Search > on click launch icon
+// @media screen and (min-width:500px) {
+//     form{
+//       margin: 17px;
+//       height: 452px;
+//     overflow-y: scroll;
+//     }  
+// }
+small{
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    font-size: 14px;
+    // white-space: nowrap;
+}
+.wrapMargin{
+    display: block;
+    color: #e8316f;
+    margin-top: -20px;
+}
+.error-small-tag{
+    position: relative;
+    top: -13px;
+    left: 2px;
+    color: #f30b0b;
+}
+.message-block .error-message{
+  display: none;
+}
+.message-block .error-message:first-child{
+    display: block;
+    color: #e8316f;
+    margin-top: -10px;
+    margin-left: 5px;
+    font-family: Roboto;
+    font-size: 14px;
+}
+.save-profile{
+    width: 14%;
+    height: 52px;
+    font-size: 20px;
+    position: relative;
+    top: 62px;
+}
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar-thumb {
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.mc-form-scrollable{
+    height: 352px;
+    overflow-y: scroll;
+    margin: 17px;
+}
+
+.submit-mat-btn{
+    height: 47px;
+  }
+  .close-mat-btn{
+    width: 118px;
+    height: 47px;
+  }
+ 
+
+  .btn-row-mc{
+    margin-top: 39px;
+    margin-left: 14px;
+      margin-right: 14px 
+  }
+
+  .appsearch-mc-form-scrollable{
+    height: 446px;
+    overflow-y: scroll;
+    margin: 17px;
+  }
+
+
+  .savechanges{
+    background-color: #198754;
+    color: white;
+    width: 128px;
+  }
+
+  .blue{
+    background-color: #123969 ;
+    width: 128px;
+    color: white;
+  }
+  .address-styles{
+    margin-top: 8px;
+    margin-bottom: 10px;
+    font-family: "Roboto";
+    font-size: 16px;
+  }

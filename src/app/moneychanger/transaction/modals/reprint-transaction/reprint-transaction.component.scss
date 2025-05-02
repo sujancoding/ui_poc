@@ -1,0 +1,43 @@
+.task-header {
+font-size: 18px;
+    background-color: #123969;
+    color: white;
+    font-size: 19px
+}
+.content{
+    margin:15px;
+}
+.btn{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 15px 0 15px;
+}
+.print-btn{
+    height: 46px;
+    width: 130px;
+    font-size: 18px;
+    border-radius: 0.2cm;
+    background-color: #edf5ff;
+    color: #1d75e0;
+    border: none; 
+    cursor: pointer;
+  }
+  .close-btn{
+    width: 130px;
+    height: 45px;
+    border-radius: 0.2cm;
+    background-color: white;
+    cursor: pointer;
+    color:black;
+    font-size: 16px;
+    border: none;
+  }
+  .error-message{
+    display: block;
+    color: #e8316f;
+    margin-bottom: 5px;
+    margin-top: -20px;
+    margin-left: 10px;
+    font-size: 15px;
+    font-family: "Roboto";
+  }

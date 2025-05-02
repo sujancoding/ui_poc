@@ -1,0 +1,316 @@
+.sub-title{
+    position: relative;
+    left: 16px;
+    top: 24px;
+}
+
+.btn-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 52px;
+}
+
+.btn-adddeal{
+  height: 46px;
+}
+
+.title{
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.dealLink{
+  color: #123969;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.buttonApplyfilter {
+  background-color: #123969;
+  color: white;
+  height: 52px;
+  width: 130px;
+  position: relative;
+  top: 13px;
+  margin-left: 16px;
+}
+
+
+
+.message-block .error-message {
+  // Hidden by default
+  display: none;
+}
+
+.message-block .error-message:first-child {
+  display: block;
+  color: #e8316f;
+  margin-bottom: 5px;
+  margin-top: -20px;
+  margin-left: 6px;
+  font-size: 14px;
+  font-family: "Roboto";
+  white-space: break-spaces;
+}
+
+.filter-container {
+  display: flex;
+  place-content: flex-start;
+}
+
+.div-height {
+  font-size: 13px;
+  height: 65px;
+  margin: 10px;
+}
+
+.register-btn {
+  background-color: #123969; 
+  margin-right: 35px;
+  background-color: #123969;
+  color: white;
+  height: 48px;
+  position: relative;
+  top: 15px;
+  margin-left: 16px;
+}
+
+.fliter-btn{
+  display: flex;
+  place-content: initial;
+  margin-left: 20px;
+}
+
+
+.sub-value{
+
+    color: grey;
+    margin-top: 5px;
+}
+
+
+
+  .date-filters-col{
+   margin-top: -35px;
+   margin-left: 10px;
+   font-size: 13px;
+  }
+
+  .m-l{
+  margin-left: -36px;
+  }
+
+  
+.reset-button{
+  width: 105px;
+  height: 53px;
+    border-radius: 0.2cm;
+    margin: 0.4cm;
+    background-color: #ffffff;
+    cursor: pointer;
+    color: #5E5ADB;
+    font-size: 15px;
+    font-family: 'Roboto';
+
+}
+.close-button{
+  width: 111px;
+    height: 40px;
+    border-radius: 20px;
+    margin: 15px;
+    position: relative;
+    left: 22px;
+    top: 6px;
+    color: white;
+    background-color: #504e4e;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Roboto";
+    /* border: 1px solid #b6b4b4;*/
+}
+
+.submit-button{
+  width: 140px;
+  height: 50px;
+  border-radius: 0.2cm;
+  margin: 0.4cm;
+  background-color: #123969;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+  font-family: 'Roboto';
+}
+
+
+
+
+
+.text-search-filters{
+  font-family: 'Roboto';
+    font-weight: 600;
+    color: #1D62A2;
+    font-size: 18px;
+    position: relative;
+    top: 19px;
+    left: 15px;
+}
+
+.add-filter-icon{
+  position: relative;
+  top: -1px;
+}
+
+.formfield-icon{
+  position: relative;
+    top: 2px;
+    font-size: 23px;
+}
+
+.row-items{
+  margin-top: -20px;
+}
+
+.subGroups{
+  font-family: 'Roboto' ;
+  font-style: normal;
+  white-space: nowrap;
+ // padding-left: 16px;
+ color: #8f8f8f;
+ position: relative;
+    top: 7px;
+    margin-left: 0.6cm;
+}
+
+
+.margin-space{
+  position: relative;
+    top: -12px;
+}
+
+
+.show-results{
+  margin-right: -14px;
+  color: grey;
+  font-size: 18px;
+  font-family: 'Roboto' ;
+}
+
+.filter-title{
+  
+  color: #100f0f;
+  font-family: 'Roboto' ;
+  margin-bottom: 6px;
+  margin-top: 20px;
+  position: relative;
+  left: 5px;
+  font-size: 22px;
+
+}
+
+
+.tooltip-warning-icon{
+  position: relative;
+  top: 26px;
+}
+
+.payeeName{
+  font-family: 'Roboto' ;
+  font-style: normal;
+ color: #000000;
+ position: relative;
+    top: -5px;
+    margin-left: 0.6cm;
+}
+
+.tags
+{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.status-tag
+{
+  line-height: 20px;
+  padding: 5px 10px;
+  margin: 3px 0;
+  display: inline-block;
+  font-family: Roboto;
+  white-space: nowrap;
+}
+
+.small-container{
+  border: 1px solid #e6e6e6;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 12px;
+  left: 5px;
+  border-radius: 5px;
+  margin-inline: 2px;
+
+}
+
+
+
+//biz asked to show border for td and th
+// td{
+//   text-align: left;
+//     padding: 7px;
+//     font-style: normal;
+//     font-family: 'Roboto';
+//     font-weight: 540;
+//     font-size: medium;
+//     border: 0.1px solid #d3d3d3 !important;
+// }
+
+// th{
+//   padding: 10px;
+//   color: #252525d6;
+//   font-weight: 600;
+//   opacity: 20;
+//   font-size: 14px;
+//   font-family: 'Roboto';
+//   background-color: #f0f0f0;
+//   border: 0.1px solid #d3d3d3;
+// }
+
+.tooltip {
+  position: relative;
+  
+}
+
+p {
+  margin: 0.6cm;
+  height: 3px;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: #454545;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 3;
+  margin-left: -60px;
+  bottom: 60%;
+  left: 31%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.warning-icon{
+  color: #f97d0b;
+  position: relative;
+  top: -9px;
+  left: 10px;
+  font-size: 38px;
+}
+

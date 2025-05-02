@@ -1,0 +1,58 @@
+<form [formGroup]="form">
+<div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%;">
+<div style="font-size: 12px;width: 70%;" class="search-field">
+    <mat-form-field class="reduce-width" appearance="outline">
+        <mat-icon style="color: rgb(7, 130, 230);" matPrefix="search">search</mat-icon>
+        <mat-label class="custom-label" style="font-family: 'Roboto';">Search...</mat-label>
+        <input matInput type="text" [formControl]="form.controls['payeeName']">
+    </mat-form-field>
+    <div  class="message-block">
+      <span class="error-message" *ngIf="form.controls['payeeName'].hasError('pattern')">{{'splCharsValidation' | label}}</span>
+      <span class="error-message" *ngIf="form.controls['payeeName'].hasError('maxlength')">Search Field should not exceeds 35 characters</span>
+
+  </div>
+</div>
+<div style="width: 30%;">
+  <button mat-flat-button class="search-btn" type="button" [disabled]="!form.valid" (click)="getPayeeName(form.controls['payeeName'].value)"> Search </button>
+</div>
+</div>
+</form>
+<div>
+<div *ngFor="let searchPayee of searchPayee">
+<div (click)="navigateViewPayee(searchPayee.CUSTOMERID,searchPayee.PAYEEID)"  class="clickableRecord">
+<div  fxLayout="row" fxLayoutAlign="space-between">
+    <div fxLayout="row" fxLayoutGap="18px" style="width: 70%;">
+      <div class="payeePersonIcon">
+      <mat-icon>person</mat-icon>
+      </div>
+    <p class="payee-label">{{searchPayee.NAME}}</p>
+</div>
+
+    <div class="circle" [ngStyle]="{'background-color': getColor(searchPayee.STATUS),'color':getTextcolor(searchPayee.STATUS)}">
+        <p class="p">{{searchPayee.STATUS}}</p>
+       </div>
+       </div>
+
+<mat-divider class="mat-divider"></mat-divider>
+</div>
+</div>
+</div>
+<div *ngIf="loader" class="loader-wrapper">
+  <mat-spinner diameter="40"> </mat-spinner>
+  </div>
+<ng-container *ngIf="showNoTransactionMessage">
+  <div style="display: flex;justify-content: center;">
+   <div fxLayout="column" fxLayoutGap="5px" style="justify-content: center;"> 
+  <div class="hourglass-empty-circle">
+    <mat-icon class="hourglass-empty-icon">description</mat-icon> 
+  </div>  
+  <h5 class="no-transaction-message">No Payee Records</h5> 
+  </div>
+  </div>
+</ng-container>
+
+        <div class="addApplicant">
+            <button class="circular-btn" [disabled]="isDisable" mat-mini-fab aria-label="Example icon button with a plus icon" (click)="onClick()">
+              <mat-icon> add </mat-icon>
+            </button>
+          </div>

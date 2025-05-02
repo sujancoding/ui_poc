@@ -1,0 +1,79 @@
+<div class="login-register">
+    <div class="login-register-box">
+        <mat-card appearance="outlined" class="card">
+            <mat-card-content>
+                <div id="chgpwd_complete_view" *ngIf="displayView == 'initiate'">
+
+                    <form [formGroup]="changePasswordForm" (ngSubmit)="onSubmit()">
+                        <h3 class="font">Change Password</h3>
+                        <alert></alert>
+
+                        <div fxLayout="row wrap">
+
+                            <!-- col full-->
+                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput type="password" placeholder="New Password"
+                                        [formControl]="changePasswordForm.controls['password']" />
+                                </mat-form-field>
+                                <small *ngIf="
+                            changePasswordForm.controls['password'].hasError('required') &&
+                            changePasswordForm.controls['password'].touched
+                  " class="text-danger support-text">You must include password.</small>
+                  <small class="text-danger support-text" *ngIf="changePasswordForm.controls['password'].hasError('maxlength')">Password should have max 16 characters.</small>
+                  <small class="text-danger support-text" *ngIf="changePasswordForm.controls['password'].hasError('minlength')">Password have atleast 8 characters</small>   
+                  <small class="text-danger support-text" *ngIf="changePasswordForm.controls['password'].hasError('pattern')" >Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, special characters (-, _ , !, @, and $) and be no more than 16 characters long
+                  </small>
+                            </div>
+
+                            <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                <mat-form-field style="width: 100%">
+                                    <input matInput type="password" placeholder="Confirm New Password"
+                                        [formControl]="changePasswordForm.controls['confirmPassword']" />
+                                </mat-form-field>
+                                <small *ngIf="
+                            changePasswordForm.controls['confirmPassword'].hasError('required') &&
+                            changePasswordForm.controls['confirmPassword'].touched
+                  " class="text-danger support-text">You must include password.</small>
+                            </div>
+
+
+                            <button mat-raised-button color="primary" class="btn-block btn-lg m-t-20 m-b-20"
+                                type="submit" [disabled]="!changePasswordForm.valid">
+                                Change Password
+                            </button>
+
+                            <div class="text-center" fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+                                <span>
+                                    <a (click)="navigateToLogin()" class="link text-info">Try Login</a>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="chgpwd_complete_view" *ngIf="displayView == 'complete'">
+
+                    <div class="text-center">
+                        <h4 class="m-t-0"> <b>Change Password</b></h4>
+                    </div>
+
+                    <p class="text-center font-14">
+                        Password changed succesfully!. {{userMessage}}.
+                    </p>
+
+                    <div class="text-center">
+                        <span>
+                            <a (click)="navigateScreen()" class="link text-info">{{buttonMessage}}</a>
+                        </span>
+                    </div>
+                </div>
+
+
+            </mat-card-content>
+        </mat-card>
+        <div class="logo">
+            <img [src]="logo" type="file">
+            </div>
+    </div>
+</div>

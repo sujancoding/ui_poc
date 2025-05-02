@@ -1,0 +1,254 @@
+<!--Add payee Agent-->
+<div *ngIf="flag">
+    <h4 mat-dialog-title>
+        <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+            <span> Add Payee </span>
+            <span [mat-dialog-close]="true" style="cursor: pointer;">
+              <mat-icon>close</mat-icon>
+              </span>
+        </mat-toolbar>
+    </h4>
+    </div>
+
+    <!--Add payee Admin (backoffice)-->
+ <div *ngIf="adminAddPayeeflag">
+        <h4 mat-dialog-title>
+            <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+                <span> Add Payee </span>
+                <span [mat-dialog-close]="true" style="cursor: pointer;">
+                  <mat-icon>close</mat-icon>
+                  </span>
+            </mat-toolbar>
+        </h4>
+        </div>
+
+<div *ngIf="viewPayeeFlag">
+        <h4 mat-dialog-title>
+            <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+                <span> View Payee </span>
+                <span [mat-dialog-close]="true" style="cursor: pointer;">
+                  <mat-icon>close</mat-icon>
+                  </span>
+            </mat-toolbar>
+        </h4>
+        </div>  
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" [ngClass]="{'scrollable-form':adminAddPayeeflag == true || viewPayeeFlag == true || flag == true}">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+
+
+   <div fxFlex="49" fxFlex.xs="100">
+    <h5 class="info">Payee Details</h5>
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Payee Account Number/IBAN Number</mat-label>
+    <input matInput maxlength="34" formControlName="AccountNumber" [formControl]="form.controls['AccountNumber']" [readonly]="isReadOnly">
+    <mat-hint align="end">{{form.controls['AccountNumber'].value?.length || 0}}/34</mat-hint>
+    <mat-error> 
+        <small *ngIf="form.controls['AccountNumber'].hasError('pattern')">Not a valid Account Number</small>
+        <small *ngIf="form.controls['AccountNumber'].hasError('required')
+                  && form.controls['AccountNumber'].touched"> {{'accountNumberRequired'|label}} </small>
+                  </mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Payee Name</mat-label>
+    <input matInput maxlength="35" (input)="form.controls.payeeName.setValue(form.controls.payeeName.value.toUpperCase())" formControlName="payeeName" [formControl]="form.controls['payeeName']" [readonly]="isReadOnly" >
+    <mat-hint align="end">{{form.controls['payeeName'].value?.length || 0}}/35</mat-hint>
+    <mat-error> 
+        <small *ngIf="form.controls['payeeName'].hasError('required')
+                  && form.controls['payeeName'].touched"> {{'payeeNameRequired'|label}} </small>
+                  <small *ngIf="form.controls['payeeName'].hasError('pattern')">{{'splCharsValidation' | label}} </small> 
+                  </mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Relationship </mat-label>
+    <mat-select  [formControl]="form.controls['relation']">
+            <mat-option  *ngFor="let relation of filteredRelation" [value]="relation.CODE" [disabled]="isReadOnly">{{relation.RELATION}}</mat-option>
+          </mat-select>
+    <mat-error> 
+        <small *ngIf="form.controls['relation'].hasError('required')
+                  && form.controls['relation'].touched"> {{'RealationRequired'|label}} </small>
+                  </mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Phone Number </mat-label>
+    <input matInput  maxlength="15" formControlName="phonenumber"
+      [formControl]="form.controls['phonenumber']" [readonly]="isReadOnly"> 
+    <mat-hint align="end">{{form.controls['phonenumber'].value?.length || 0}}/15</mat-hint>
+    <mat-error>
+      <small *ngIf="form.controls['phonenumber'].hasError('pattern')">{{'onlyNumbers'|label}}</small>
+      <small *ngIf="form.controls['phonenumber'].hasError('required')
+                  && form.controls['phonenumber'].touched"> {{'phonenumberRequired'|label}} </small>
+                </mat-error>
+    </mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Email Id</mat-label>
+    <input matInput  formControlName="EmailId" [formControl]="form.controls['EmailId']" [readonly]="isReadOnly" maxlength="128">
+    <mat-hint align="end">{{form.controls['EmailId'].value?.length || 0}}/128</mat-hint>
+    <mat-error> 
+        <small *ngIf="form.controls['EmailId'].hasError('required')
+                  && form.controls['EmailId'].touched"> {{'emailIdRequired'|label}} </small>
+                  <small *ngIf="form.controls['EmailId'].hasError('email')"> {{'validEmailId'|label}} </small>
+                  </mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Address</mat-label>
+    <input matInput maxlength="35" formControlName="payeeAddress" (input)="form.controls.payeeAddress.setValue(form.controls.payeeAddress.value.toUpperCase())" [formControl]="form.controls['payeeAddress']" [readonly]="isReadOnly">
+    <mat-hint align="end">{{form.controls['payeeAddress'].value?.length || 0}}/35</mat-hint>
+    <mat-error> 
+        <small *ngIf="form.controls['payeeAddress'].hasError('required')
+                  && form.controls['payeeAddress'].touched"> {{'addressRequired'|label}} </small>
+                  <small *ngIf="form.controls['payeeAddress'].hasError('pattern')">{{'splCharsValidation' | label}}</small>
+                  </mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">State</mat-label>
+    <input matInput (input)="form.controls.payeeState.setValue(form.controls.payeeState.value.toUpperCase())" formControlName="payeeState" [formControl]="form.controls['payeeState']" [readonly]="isReadOnly">
+    <mat-error> 
+        <small *ngIf="form.controls['payeeState'].hasError('maxlength')"> {{'payeeStateMaxLengthValidation' | label}} </small>
+        <small *ngIf="form.controls['payeeState'].hasError('required')
+                  && form.controls['payeeState'].touched"> {{'stateRequired'|label}} </small>
+                  <small *ngIf="form.controls['payeeState'].hasError('pattern')"> {{'onlyAlphabets' | label}} </small>
+                  </mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Payee Country</mat-label>
+    <mat-select  [formControl]="form.controls['payeeCountry']"  (selectionChange)="onClickPayeeCountry()">
+        <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+           <mat-label class="custom-label">Search Payee Country</mat-label>
+            <input matInput (input)="filterPayeeCountry(payeeCountry)"  [readonly]="isReadOnly" formControlName="beneficiaryCountry" [formControl]="form.controls['beneficiaryCountry']" #payeeCountry>
+            <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+            <mat-error> 
+                          <small *ngIf="form.controls['beneficiaryCountry'].hasError('pattern')"> {{'onlyAlphabets' | label}} </small>
+                          </mat-error>
+        </mat-form-field>
+            <mat-option  *ngFor="let country of filteredCountries" [value]="country.COUNTRY" [disabled]="isReadOnly">{{country.COUNTRY}}</mat-option>
+          </mat-select>
+    <mat-error> 
+        <small *ngIf="form.controls['payeeCountry'].hasError('required')
+                  && form.controls['payeeCountry'].touched"> {{'payeeCountryRequired'|label}} </small>
+                  <small *ngIf="form.controls['payeeCountry'].hasError('pattern')"> {{'onlyAlphabets' | label}} </small> 
+                  </mat-error>
+</mat-form-field>
+</div>
+
+
+
+<div fxFlex="49" fxFlex.xs="100">
+    <h5 class="info">Bank Details</h5>
+
+<mat-form-field appearance="outline"> 
+    <mat-label class="custom-label">Bank name</mat-label>
+    <input matInput maxlength="35" formControlName="bankName" (input)="form.controls.bankName.setValue(form.controls.bankName.value.toUpperCase())" [formControl]="form.controls['bankName']" [readonly]="isReadOnly">
+    <mat-hint align="end">{{form.controls['bankName'].value?.length || 0}}/35</mat-hint>
+    <mat-error> 
+        <small *ngIf="form.controls['bankName'].hasError('required')
+                  && form.controls['bankName'].touched"> {{'bankNameRequired'|label}} </small>
+                  <small *ngIf="form.controls['bankName'].hasError('pattern')">{{'splCharsValidation' | label}}</small>
+                  </mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Swift Code</mat-label>
+    <input matInput maxlength="11" formControlName="swiftcode" (input)="form.controls.swiftcode.setValue(form.controls.swiftcode.value.toUpperCase())" [formControl]="form.controls['swiftcode']" [readonly]="isReadOnly" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+        <mat-option *ngFor="let option of filteredOptions | async"  [value]="option.value">{{option.value}} </mat-option>
+    </mat-autocomplete>
+    <mat-hint align="end">{{form.controls['swiftcode'].value?.length || 0}}/11</mat-hint>
+    <mat-error> 
+        <!-- <small *ngIf="form.controls['swiftcode'].hasError('required')
+                  && form.controls['swiftcode'].touched"> {{'swiftCodeRequired'|label}} </small> -->
+                  <small *ngIf="form.controls['swiftcode'].hasError('pattern')">No Special Characters and whitespace are allowed</small>
+                  </mat-error>
+</mat-form-field>
+
+<div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="30">
+        <mat-label class="custom-label">Code Type</mat-label>
+        <mat-select [formControl]="form.controls['codeType']" [disabled]="isReadOnly" (selectionChange)="onChangeCodeType()">
+            <mat-option  *ngFor="let type of bankCodeType" [value]="type.VALUE" [disabled]="isReadOnly">{{type.DESCRIPTION}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" fxFlex="70">
+        <mat-label class="custom-label"> {{codeLabel | titlecase }} </mat-label>
+        <input matInput maxlength="31" formControlName="routingCode"  [formControl]="form.controls['routingCode']" [readonly]="isReadOnly" >
+        <mat-hint align="end">{{form.controls['routingCode'].value?.length || 0}}/31</mat-hint>
+        <mat-error> 
+                      <small *ngIf="form.controls['routingCode'].hasError('pattern')"> {{'onlyNumbersAndDecimalPoint' | label}} </small>
+                      </mat-error>
+    </mat-form-field>
+    </div>
+
+
+<mat-form-field appearance="outline">
+    <mat-label class="custom-label">Branch Address</mat-label>
+    <input matInput maxlength="50" formControlName="bankAddress" (input)="form.controls.bankAddress.setValue(form.controls.bankAddress.value.toUpperCase())" [formControl]="form.controls['bankAddress']" [readonly]="isReadOnly">
+    <mat-hint align="end">{{form.controls['bankAddress'].value?.length || 0}}/50</mat-hint>
+    <mat-error> 
+        <small *ngIf="form.controls['bankAddress'].hasError('required')
+                  && form.controls['bankAddress'].touched"> {{'branchAddressRequired'|label}} </small>
+                  <small *ngIf="form.controls['bankAddress'].hasError('pattern')">{{'splCharsValidation' | label}}</small>
+                  </mat-error>
+</mat-form-field>
+
+
+
+<mat-form-field appearance="outline" *ngIf="showBankCountry">
+    <mat-label class="custom-label">Bank Country</mat-label>
+    <mat-select  [formControl]="form.controls['bankCountry']" >
+        <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+            <mat-label class="custom-label">Search Bank Country</mat-label>
+            <input matInput (input)="filterPayeeBankCountry(payeeBankCountry)" formControlName="beneficiaryBankCountry" [formControl]="form.controls['beneficiaryBankCountry']" #payeeBankCountry>
+            <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+            <mat-error> 
+                          <small *ngIf="form.controls['beneficiaryBankCountry'].hasError('pattern')"> {{'onlyAlphabets' | label}} </small>
+                          </mat-error>
+        </mat-form-field>
+            <mat-option  *ngFor="let country of filteredPayeeBankCountries" [value]="country.COUNTRY" [disabled]="isReadOnly">{{country.COUNTRY}}</mat-option>
+          </mat-select>
+          <mat-error> 
+            <small *ngIf="form.controls['bankCountry'].hasError('required')
+                      && form.controls['bankCountry'].touched"> {{'countryRequired'|label}} </small>
+                      </mat-error>
+</mat-form-field>
+
+</div>
+</div>
+
+<div style="text-align: center;" *ngIf="SavebyCustomer">
+<button class="oval-btn" mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Submit</button>
+</div>
+<mat-spinner style="margin:0 auto;" diameter="40" *ngIf="custLoader"></mat-spinner>
+
+
+
+</form>
+
+<div style="text-align: center;" *ngIf="viewPayeeButton">
+    <button class="oval-btn" mat-raised-button color="primary" [disabled]="isDisabled" (click)="navigateSendMoney()" type="button">Send Money</button>
+    </div>
+<mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loader"></mat-spinner>
+
+<!--close and submit button for agent user interface(desktop) while adding payee-->
+<div *ngIf="flag" class="dialogButton" fxLayout="row wrap" fxLayoutAlign="space-around">
+    <button mat-raised-button color="primary" class="mat-button" [mat-dialog-close]="true"  type="button">Close</button>
+     <button mat-raised-button color="primary" class="submit-button" [mat-dialog-close]="true" [disabled]="!form.valid" (click)="addBeneficiary()" type="submit">Submit</button>
+     </div>
+
+     <!--close and submit button for branch user interface(desktop) while adding payee-->
+     <div *ngIf="adminAddPayeeflag" class="dialogButton" fxLayout="row wrap" fxLayoutAlign="space-around">
+        <button mat-raised-button color="primary" class="mat-button" [mat-dialog-close]="true"  type="button">Close</button>
+         <button mat-raised-button color="primary" class="submit-button" [mat-dialog-close]="true" [disabled]="!form.valid" (click)="addPayeeBackoffice()" type="submit">Submit</button>
+         </div>
+
+<div *ngIf="viewPayeeFlag" class="dialogButton" fxLayout="row wrap" fxLayoutAlign="space-around">
+        <button mat-raised-button color="primary" class="mat-button" [mat-dialog-close]="true"  type="button">Close</button>
+         <button mat-raised-button color="primary" class="submit-button" [mat-dialog-close]="true" [disabled]="!form.valid" (click)="updateBeneficiary()" type="submit">Update</button>
+    </div>     

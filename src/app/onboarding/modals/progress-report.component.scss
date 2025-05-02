@@ -1,0 +1,97 @@
+.pre-dashboard{
+    height: 75vh;
+    display: flex;
+    background-size: cover;
+}
+
+.pre-dashboard-box{
+    max-width: 400px;
+    min-width: 296px;
+    margin: 0 auto;
+    vertical-align: middle;
+    padding-top: 0.5cm;
+   
+}
+
+h6{
+    height: 0.5px;
+}
+mat-icon{
+    font-size: 20px;
+}
+.done-icon{
+    font-size: 20px;
+    color: rgb(118, 184, 20);
+}
+
+.link{
+    color: #123969;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: 'Roboto';
+}
+.success{
+    color: rgb(15, 204, 34);
+    background-color: white;
+    border: 0px white;
+    height: 1px;   
+}
+
+.alink{
+font-size:12px;
+height: 45px;
+padding-top: 0.5cm;
+}
+
+
+.icon{
+    font-size: 40px;
+ 
+}
+
+.p{
+    font-size: 24px;
+    text-align: center;
+    margin-top: 0px;
+    position: relative;
+    top: 10px;
+
+}
+
+.one-percent{
+    font-weight: bold;
+}
+
+.completed{
+    text-align: end;
+    font-size: 15px;
+}
+
+.progress-bar{
+    height: 15px;
+}
+
+.person-icon{
+    height: 20px;
+}
+
+.mat-person{
+    color: rgb(40, 105, 226);
+    padding-top: 0.3cm;
+}
+
+.submit{
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.SubmitApprovalButton{
+    height: 1cm;
+    border-radius: 0.7cm;
+    background-color:#123969 ;
+    color: white;
+}
+.btn{
+    text-align: center;
+    margin-top: 0.5cm;
+}

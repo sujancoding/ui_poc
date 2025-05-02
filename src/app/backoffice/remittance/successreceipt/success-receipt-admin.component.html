@@ -1,0 +1,376 @@
+<!--Success receipt -->
+<!--This component used in: 
+1. Backoffice > Send Money > Onbehalf consumer , corporate > Review > Receipt 
+2. Agent > Remittance > Send Money > Review > Receipt
+3. Corporate > Remittance > Send Money (Contract) > Review > Receipt -->
+
+<div class="header mat-elevation-z1">
+    <div class="row">
+        <h5 class="welcome-text"> Hi {{branchUserName}}, Transaction is successfully initiated !
+            <br> <a class="pdflink" (click)="SavePDF()">Export Receipt as PDF</a>
+        </h5>
+        <h5> {{myDate | date}}</h5>
+    </div>
+</div>
+
+<div class="whole-container">
+    <div class="container" id="content1" #content1>
+        <div class="inner-container">
+
+            <div fxLayout="row" fxLayoutAlign="space-between none">
+
+                <div fxLayout="column">
+                    <div>
+                        <img [src]="orgLogo" class="org-logo-style">
+                    </div>
+
+                    <div>
+                        <p class="headers" style="margin-top: -5px;"> Arcade Plaza Traders PTE LTD </p>
+                        <span class="headers-values">
+                            11, COLLYER QUAY <br> #02-03 THE ARCADE, SINGAPORE 049317 <br>
+                            Phone: +65 6227 7660 Fax : +65 6220 259 <br>
+                            remittance@aptonline.com.sg , www.aptonline.com.sg
+                        </span>
+                    </div>
+
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="end" style="margin-right: 46px;">
+                    <h5 class="receipt-label">TRANSFER RECEIPT</h5>
+                    <h5 class="title-label">Logged In user :</h5>
+                    <span class="title-value">{{loggedInUser}}</span>
+                    <h5 class="title-label">Reciept Number :</h5>
+                    <span class="title-value">  {{referenceIdNumber}}</span>
+                    <h5 class="title-label">Receipt Date:</h5>
+                    <span class="title-value"> {{formattedDate}}</span>
+                </div>
+            </div>
+
+
+            <div fxLayout="row" fxLayoutAlign="space-around" style="margin-top: 15px;">
+
+                <div class="body">
+
+                    <div>
+                        <div class="title-headers"> CUSTOMER DETAILS</div>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+
+                        <div class="body-content" style="margin-top: 0px;">
+                            <p class="label">Customer Name</p>
+                            <p class="value">{{customerName}}</p>
+                        </div>
+
+                        <div class="body-content" style="margin-top: 0px;" *ngIf="showAgentRelatedFields">
+                            <p class="label">Agent Name</p>
+                            <p class="value">{{agentName}}</p>
+
+                        </div>
+
+                        <div  class="body-content">
+                            <p class="label">Address</p>
+                            <p class="value">{{address}}</p>
+
+                        </div>
+                        <div  class="body-content">
+                            <p class="label">Postal Code</p>
+                            <p class="value">{{postalCode}}</p>
+                        </div>
+
+                        <div  class="body-content" *ngIf="!hideDatasForAgent">
+                            <p class="label">Nationality</p>
+                            <p class="value">{{nationality}}</p>
+
+                        </div>
+
+                        <div class="body-content" *ngIf="!hideDatasForAgent"> <!--For consumer alone-->
+                            <p class="label">Nric Id</p>
+                            <p class="value">{{nricId}}</p>
+                        </div>
+
+                        <div class="body-content" *ngIf="!hideDatasForAgent"> <!--For consumer alone-->
+                            <p class="label">Place Of Birth</p>
+                            <p class="value">{{placeOfBirth}}</p>
+                        </div>
+
+                        <div class="body-content" *ngIf="!hideDatasForAgent"> <!--For consumer alone-->
+                            <p class="label">Date Of Birth</p>
+                            <p class="value">{{ dateOfBirth | date: 'dd-MM-yyyy' }}</p>
+                        </div>
+
+                        <div class="body-content" *ngIf="registrationNumber" >
+                            <p class="label">Reg No (ROC)</p>
+                            <p class="value">{{registrationNumber}}</p>
+                        </div>
+
+                        <div class="body-content" *ngIf="incorporationPlace" >
+                            <p class="label">Incorporation Place</p>
+                            <p class="value">{{incorporationPlace}}</p>
+                        </div>
+
+                        <div class="body-content" *ngIf="incorporationDate" >
+                            <p class="label">Incorporation Date</p>
+                            <p class="value">{{ incorporationDate | date: 'dd-MM-yyyy' }}</p>
+                        </div>
+
+                        <!-- <div  class="body-content">
+                            <p class="label">Phone Number</p>
+                            <p class="value">{{phoneNumber}}</p>
+                        </div>
+
+                        <div class="body-content">
+                            <p class="label">Email id</p>
+                            <p class="value">{{emailId}}</p>
+                        </div> -->
+                        <!-- <span>{{nationality}}</span>
+                        <span>{{nricId}}</span>
+                        <span>{{phoneNumber}} </span>
+                        <span>{{emailId}}</span> -->
+                    </div>
+                </div>
+
+                <div class="body">
+
+                    <div>
+                        <div class="title-headers">PAYEE DETAILS</div>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                    <div class="body-content" style="margin-top: 0px;">
+                        <p class="label">Beneficiary Name</p>
+                        <p class="value">{{beneficiaryName}}</p>
+
+                    </div>
+                    <div class="body-content" style="margin-top: 0px;">
+                        <p class="label">Relationship</p>
+                        <p class="value">{{relationShip}}</p>
+
+                    </div>
+                    <div class="body-content">
+                        <p class="label">Beneficiary Address</p>
+                        <p class="value">{{beneficiaryAddress}}</p>
+
+                    </div>
+                    <div class="body-content">
+                        <p class="label">Remarks</p>
+                        <p class="value">{{purpose}}</p>
+                    </div>
+
+                    <div class="body-content"  *ngIf="showAgentRelatedFields">
+                        <p class="label">Purpose Of Remittance</p>
+                        <p class="value">{{purposeOfRemittance ? purposeOfRemittance : "Purpose Of Remittance Not Provided"}}</p>
+                    </div>
+
+                    <div class="body-content">
+                        <p class="label">BankName</p>
+                        <p class="value">{{bankName}}</p>
+
+                    </div>
+                    <div class="body-content">
+                        <p class="label">BranchName</p>
+                        <p class="value">{{branchName}}</p>
+
+                    </div>
+                  
+                    <div class="body-content">
+                        <p class="label">Account Number</p>
+                        <p class="value">{{accountNumber}}</p>
+                    </div>
+
+                    <div class="body-content">
+                        <p class="label">Swift code</p>
+                        <p class="value">{{swiftCode ? swiftCode : "N/A"}}</p>
+                    </div>
+
+                    <div class="body-content">
+                        <p class="label">Routing code / Sort Code</p>
+                        <p class="value">{{routingCode ? routingCode : "N/A"}}</p>
+                    </div>
+
+                    <!-- <div class="sub-value">
+                        <span style="width: 110%;">{{beneficiaryName}}</span>
+                        <span style="width: 110%;">{{beneficiaryAddress}}</span>
+                        <span>{{purpose != "null" ? purpose : "Nil"}}</span>
+                    </div>
+
+                    <div class="sub-value">
+                        <span style="width: 110%;">{{bankName}}</span>
+                        <span style="width: 110%;">{{branchName}} </span>
+                        <span>{{accountNumber}}</span>
+                        <span>{{swiftCode}}</span>
+                    </div> -->
+                </div>
+                </div>
+
+            </div>
+
+            <!-- <div fxLayout="row" fxLayoutAlign="space-between">
+
+                <div class="reciept-container">
+                    <span>Reciept Number :</span>
+                    <span class="reciept-value">{{referenceIdNumber}}</span>
+                </div>
+
+                <div class="reciept-container" style="margin-right: 98px;">
+                    <span>Reciept Date :</span>
+                    <span class="reciept-value">{{formattedDate}}</span>
+                </div>
+
+            </div> -->
+
+            <h5 class="headers" style="margin-top: 30px;">Remittance Summary</h5>
+
+            <div fxLayout="row" class="status-container">
+                <h4 class="initiated">Transaction Status : </h4>
+                <h4 class="txn-status"> Initiated</h4>
+            </div>
+ <!--Backoffice Transaction Summary View-->
+            <div *ngIf="summaryTable" class="table-container">
+                <table>
+                    <tr>
+                        <th>Currency and Amount</th>
+                        <td> {{fcyCurrency}} {{totalFcyAmount | number : '1.0-2'}} </td>
+                      </tr>
+
+                      <tr>
+                        <th>Exchange Rate</th>
+                        <td>{{exchangeRate}}</td>
+                      </tr>
+
+                      <tr>
+                        <th>Charges</th>
+                        <td>{{adminFee}}</td>
+                      </tr>
+                    
+                    <tr>
+                        <th>Total SGD Amount</th>
+                        <td>{{totalCustomerSends | number : '1.0-2'}}</td>
+                      </tr>
+
+                </table>
+            </div>
+
+            <!--Agent Transaction Summary View-->
+            <div *ngIf="contractTable" class="table-container">
+                <div fxLayout="row" fxLayoutGap="15px">
+                    <table style="width:100%">
+                    
+                        <tr>
+                            <th>Contract ID</th>
+                            <td  *ngFor="let array of contractsArray"> {{array.bookingId}} </td>
+                        </tr>
+
+                        <tr>
+                            <th>Exchange Rate</th>
+                            <td  *ngFor="let array of contractsArray">{{array.exchangeRate | number : '1.0-6'}}</td>
+                        </tr>
+           
+                  </table>
+
+                  <table style="width:100%">
+                    
+
+                    <tr>
+                        <th>Currency & Amount</th>
+                        <td>{{fcyCurrency}} {{totalFcyAmount | number :'1.0-2'}}</td>
+                    </tr>
+
+                    <!-- </tr>
+                    <th>Amount SGD</th>
+                    <td>{{array.amount | number}} </td>
+                    </tr> -->
+                    <tr>
+                        <th>Charges</th>
+                        <td>{{adminFee}} </td>
+                    </tr>
+
+                    <tr>
+                        <th>Total SGD Amount</th>
+                        <td>{{totalCustomerSends | number : '1.0-2'}}</td>
+                    </tr>
+                
+                
+               
+              </table>
+                </div>
+                  
+
+                <!-- <div fxLayout="row" fxLayoutAlign="start center" style="height: 65px;margin-top: 24px;">
+                    <h5 class="total-label" style="font-weight: 900;color: #000000;">Admin Fee </h5>
+                    <h5 class="total-label" style="font-weight: inherit;margin-left: 28px;">{{adminFee}} SGD</h5>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center" style="height: 65px;margin-top: -16px;">
+                    <h5 class="total-label" style="font-weight: 900;color: #000000;">Total Amount in SGD </h5>
+                    <h5 class="total-label" style="font-weight: inherit;margin-left: 28px;">{{totalCustomerSends | number : '1.0-2'}} SGD</h5>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center" style="height: 65px;margin-top: -16px;">
+                    <h5 class="total-label" style="font-weight: 900;color: #000000;">Total Amount in {{fcyCurrency}}
+                    </h5>
+                    <h5 class="total-label" style="font-weight: inherit;margin-left: 28px;">{{totalFcyAmount | number :
+                        '1.0-2'}} {{fcyCurrency}}</h5>
+                </div> -->
+
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="8px" style="margin-left: 20px;">
+            <h5 class="note"> Payment mode for charges : </h5>
+            <h5 class="sharing-type-value"> {{displaySharingType}} </h5>
+            </div> 
+
+            <div class="payment-radio-btn" *ngIf="!hideDatasForAgent">
+                <label id="example-radio-group-label">Mode Of Payment</label>
+                <div style="padding-left: 10px;margin-top: -2px; font-weight: 500;">
+                    <label *ngFor="let payment of paymentMode">
+                        <input type="radio" name="paymentOption" [value]="payment"
+                            style="width: 30px;height: 20px;position: relative;top: 3px;left: 7px;">
+                        {{ payment }}
+                    </label>
+                </div>
+            </div>
+
+            <div class="payment-radio-btn" *ngIf="showModeOfPaymentForBackoffice">
+                <label id="example-radio-group-label">Mode Of Payment</label>
+                <div style="padding-left: 10px;margin-top: -2px; font-weight: 500;">
+                    <label *ngFor="let payment of paymentMode">
+                        <input type="radio" name="paymentOption" [value]="payment"
+                            style="width: 30px;height: 20px;position: relative;top: 3px;left: 7px;">
+                        {{ payment }}
+                    </label>
+                </div>
+            </div>
+
+            <div style="width: 95%;margin: auto;">
+                <h5 class="note">Note : </h5>
+                <h5 class="note-message"> Processing time is up to 2 working days. Please double-check all details, <br>
+                    as we are not responsible for any mistakes or omissions on the part of the applicant hereafter.
+                </h5>
+            </div>
+<!--To show this DBS message only for Agent >>> SG REmittance flow-->
+            <div *ngIf="showSGRemittanceMessage" fxLayout="column" fxLayoutGap="8px" style="    margin-top: -40px;
+            margin-left: 21px;">
+                <h2 class="dbs-main-label">DBS Ideal</h2>
+                   <span class="dbs-sub-label"> Your Telegraphic Transfer has been submitted.</span>
+            </div>
+
+            <h2 style="margin-left: 20px;">Thank You !</h2>
+
+            <mat-divider> </mat-divider>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+
+                <h5 class="headers"> Applicant Signature </h5>
+
+                <h5 class="headers"> for Arcade Plaza Traders PTE LTD </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div *ngIf="loader" class="loader-wrapper">
+        <mat-spinner> </mat-spinner>
+    </div>
+</div>

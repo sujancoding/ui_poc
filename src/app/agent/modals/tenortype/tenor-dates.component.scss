@@ -1,0 +1,96 @@
+
+.divider {
+   border-bottom: 1px solid #dadada;
+   margin-top: 25px;
+}
+
+.header {
+   font-size: 18px;
+   /* text-align: center; */
+   font-family: "Roboto";
+   background-color: #123969;
+   color: white;
+   height: 50px;
+}
+
+.h-label {
+     /* margin-top: 2px; */
+     white-space: nowrap;
+     color: #626262;
+     font-size: 14px;
+     margin-left: 27px;
+     font-family: "Roboto";
+     display: flex;
+     justify-content: left;
+     align-items: start;
+     margin-bottom: -17px;
+}
+.mat-mdc-radio-group{
+   margin-left: 37px;
+   margin-top: -21px;
+   margin-bottom: 5px;
+}
+.mat-mdc-radio-button{
+   margin-right: 12px;
+   font-family: serif;
+   font-size: 21px;
+}
+
+.class-icon{
+   position: relative;
+   left: 804px;
+   bottom: 53px;
+   cursor: pointer;
+   color: white;
+}
+
+.label {
+   color: darkgray;
+   font-size: 16px;
+   margin: 5px;
+   margin-left: -7px;
+   margin-top: 22px;
+   font-family: 'Roboto';
+}
+
+
+
+
+.demo-inline-calendar-card {
+   width: 300px;
+}
+
+.button1{
+   margin-top: 14px;
+   margin-left: 256px;
+   margin-bottom: 14px;
+}
+
+.button2{
+   margin-top: 14px;
+   margin-right: 232px;
+   margin-bottom: 14px;
+    
+}
+.date-picker-field {
+   width: 301px !important
+}
+
+.shared-button{
+   width: 115px;
+   height: 40px;
+}
+
+.name-field{
+   margin-bottom: 1px;
+   margin-top: -32px;
+   font-size: 14px;
+   color: #929292;
+   font-weight: 700;
+   font-family: 'Roboto';
+}
+
+.divder-below{
+   border-bottom: 1px solid #dadada;
+    margin-top: 0px;
+}

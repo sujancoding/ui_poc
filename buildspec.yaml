@@ -1,0 +1,39 @@
+version: 0.2
+env:
+  variables:
+    S3_PUBLISH_FOLDERNAME: "zysicodeartifacts/UI_PACKAGES/"
+    APP_NAME: "mbank_ui"
+    ZIP_NAME : "mbank_ui"
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18.x
+    commands:
+      - echo install node modules
+      - npm install --force 
+  build:
+    commands:
+      - echo Build the project
+      - export NODE_OPTIONS=--openssl-legacy-provider 
+      - npm run buildprod
+      - echo Finished the build project
+  post_build:
+    commands:
+      - echo build process finished, uploading to S3 now
+      - cd dist/$APP_NAME
+      - ls -la
+      - echo zip the backup folder
+      - zip -r $ZIP_NAME.zip .
+      - ls -la
+      - mkdir pubartifacts
+      - mv $ZIP_NAME.zip pubartifacts/
+      - cd pubartifacts
+      - echo list s3 bucket for debugging
+      - aws s3 ls s3://$S3_PUBLISH_FOLDERNAME
+      - echo copy the zip file to code artifact s3 bucket
+      - aws s3 cp $ZIP_NAME.zip s3://$S3_PUBLISH_FOLDERNAME
+      - echo Finished uploading to S3 bucket.
+      - cd ..
+      - cd ..
+      - rm -rf $APP_NAME
+      - echo clean up finished

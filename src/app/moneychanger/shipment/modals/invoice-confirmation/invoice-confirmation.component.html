@@ -1,0 +1,29 @@
+<!--TODO :-->
+<!--1. Mat tool bar with header title 'Invoice Confirmation' and close icon-->
+<!--2. Onclick close icon : simply close the window using [mat-dialog-close]="true" -->
+<!--3. Confirmation label "Do you want to download invoice for this shipment ?"-->
+<!--4. Yes or No button : If yes call 'Receipt Service' (BE need to expose this API) , else no 'navigate back to shipment search screen'-->
+<!--5. For Yes and No button : common function to use 'onSaveConfirmation('downloadreceipt')' , 'onSaveConfirmation('noreceipt')'-->
+
+<div fxLayout="row" class="header-container">
+    
+    <div>
+      <span class="head-label-1">Invoice Confirmation </span>
+    </div>
+    
+  </div>
+
+  <div class="modal-content" fxLayoutGap="10px">
+
+  <p class="p">Do you want to download invoice for this shipment ?</p>
+
+  <div fxLayout="row" fxLayoutGap="10px">
+<div>
+    <button class="btn-no" mat-raised-button color="primary" type="button" (click)="onSaveConfirmation('noreceipt')"> No </button>
+</div>
+<div>
+    <button class="btn-yes" mat-raised-button color="primary" type="button" (click)="onSaveConfirmation('downloadreceipt')"> Yes </button>
+</div>
+  </div>
+
+  </div>

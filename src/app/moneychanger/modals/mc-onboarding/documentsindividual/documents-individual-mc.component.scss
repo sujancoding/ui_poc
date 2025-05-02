@@ -1,0 +1,279 @@
+form{
+    margin: 5px;
+  } 
+
+  .scrollable-form-mc{
+    height: 454px;
+    overflow-y: auto;
+  }
+  .scrollable-form{
+    height: 446px;
+    overflow-y: scroll;
+  }
+  .zero-content{
+    height: 0px;
+    overflow-y: scroll; 
+  }
+  .container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .container img {
+    width: 98%;
+    height: 216px;
+  }
+  .box-position{
+    margin-top: 1.5cm;
+    height: 9.5cm;
+  
+  }
+  .box{
+    height: 383px;
+    text-align: center;
+    
+  }
+  
+  .report_icon{
+    color: #123969;
+    font-size: 68px;
+    margin-top: 28px;
+  }
+  .container .btn {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    color: #123969;
+    border: 1px solid black;
+    font-size: 36px;
+    height: 217px;
+    width: 99%;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    text-align: center;
+  }
+  
+  // .container .btn:hover {
+  //   background-color: black;
+  // }
+  button{
+      background: white;
+      //border-radius: 1cm;
+      }
+      
+      /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
+      mat-card{
+      border: solid rgb(0, 0, 0) 2px;
+      }
+     
+     
+      
+      .dropzone{
+          width: 400px;
+          height: 316px;
+          padding: 1rem;
+          text-align: center;
+          border: dashed 1px #2c2929;
+          position: relative;
+          margin: 0 auto;
+          margin-bottom: 30px;
+      }
+      
+      input{
+        opacity: 0;
+        position: absolute;
+        width: 103%;
+        height: 100%;
+        top: -2px;
+        left: -8px;
+        cursor: pointer;
+      }
+     
+    .green{
+        background-color: #27AE60;
+        width: 3cm;
+        border-radius: 1cm;
+        color: white;
+    }
+  
+    .red{
+      background-color:#EB5757;
+      width: 3cm;
+      border-radius: 1cm;
+    }
+  
+  .mat-mdc-button{
+    width: 13%;
+    border-radius: 1cm;
+  }
+  
+  
+  .task-header {
+font-size: 18px;
+    background-color:#123969;
+   color: white;
+   height: 50px;
+  }
+  
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  .dialogButton{
+    margin: 12px;
+    margin-top: 43px;
+    padding-left: 0.3cm;
+  }
+  
+  
+  
+  .btn{
+    margin-top: 0.2cm;
+   
+  }
+  
+  .icon{
+    color: #123969;
+    font-size: 96px;
+    margin-right: 81px;
+  }
+  
+  .subTitle{
+    margin: 0;
+    margin-bottom: 10px;
+    margin-top: -4px;
+    font-family: 'Roboto';
+    font-weight: 500;
+  }
+  
+  .reupload-input{
+    position: absolute;
+      width: 31%;
+      height: 15%;
+      top: 260px;
+      left: 134px;
+      cursor: pointer;
+  }
+  .content {
+    width: 100%;
+    pointer-events: none;
+    height: 268px;
+  
+    padding-top: 49px;
+    margin-top: -43px;
+    margin-right: 0px;
+  }
+  .scroll{
+    overflow-y: scroll;
+    height: 220px;
+    overflow:hidden;
+    border:white;
+    filter: blur(2px);
+      cursor: pointer;
+  }
+  
+  .uploaded-icon{
+    position: relative;
+      top: 4px;
+      color: #1baf3b;
+  }
+  
+  .uploaded-text{
+    font-size: 19px;
+    font-family: 'Roboto';
+  }
+  
+  .saveDocButton{
+    width: 100%;
+      font-weight: 100;
+      font-size: 17px;
+      margin-bottom: 12px;
+      height: 43px;
+      font-family: 'Roboto';
+      background-color: #123969;
+      color: white;
+      border-radius: 6px;
+      position: relative;
+      top: 10px;
+  }
+  
+  .saveDocButtonLayout{
+    text-align: center;
+  }
+  
+  @media screen and (min-width:600px) {
+    .saveDocButton{
+      width: 30%;
+        font-weight: 100;
+        font-size: 17px;
+        margin-bottom: 12px;
+        height: 43px;
+        font-family: 'Roboto';
+        background-color: #123969;
+        color: white;
+        border-radius: 6px;
+        position: relative;
+        top: 15px;
+    }
+    .saveDocButtonLayout{
+      text-align: right;
+      position: relative;
+      right: 25px;
+    }
+    
+    
+   }
+   .outlined-icon {
+    outline: 1px solid currentColor;
+    border-radius: 50%;
+    padding: 0.25rem;
+  }
+  
+  .submit-mat-btn{
+    height: 47px;
+    border-radius: 5px;
+  }
+  .close-mat-btn{
+    width: 118px;
+    height: 47px;
+    border-radius: 5px;
+  }
+  
+  .scrollable-form-mc{
+    height: 454px;
+    overflow-y: auto;
+  }
+
+  .btn-row-mc{
+    margin: -15px 12px 12px;
+    padding-left: 0.3cm;
+  }
+
+  .appsearch-scrollable-form-mc{
+    height: 454px;
+    overflow-y: auto;
+
+  }
+
+  .green-approve-btn{
+    background-color: #27AE60;
+    width: 3cm;
+    border-radius: 1cm;
+    color: white;
+}
+
+.red-reject-btn{
+  background-color:#EB5757;
+  width: 3cm;
+  border-radius: 1cm;
+}
+
+
+

@@ -1,0 +1,94 @@
+.header-container {
+    background-color: #123969;
+    padding: 18px;
+    height: 50px;
+}
+
+.close-icon{
+    cursor: pointer;
+    color: white;   
+    position: relative;
+    top: 3px;
+}
+
+.head-label-2 {
+    font-size: 15px;
+    margin-top: 5px;
+    font-family: 'Roboto';
+    font-weight: 600;
+  }
+  
+.head-label-1 {
+    font-size: 18px;
+    display: flex;
+    font-family: 'Roboto';
+    color: white;
+}
+
+
+  
+mat-form-field {
+    width: 100%;
+}
+  
+mat-icon-button {
+    color: red;
+}
+
+form{
+    margin: 12px;
+}
+
+.add-btn{
+    font-family: 'Roboto';
+    font-size: 16px;
+}
+
+.label{
+  font-size: 16px;
+  font-family: 'Roboto';
+  color: rgb(78, 78, 78);
+}
+
+.value{
+    font-size: 16px;
+    font-family: 'Roboto';
+    color: rgb(0, 0, 0);
+}
+
+.save-btn{
+    position: relative;
+    top: 3px;
+    /* bottom: 71px; */
+    font-size: 16px;
+    background-color: #123969;
+    color: white;
+    width: 20%;
+}
+
+.table-scroll{
+    height: 445px;
+    overflow-y: scroll;
+}
+
+.check-box{
+    transform: scale(1.7);
+    position: relative;
+    top: -10px;
+    left: 15px;
+}
+
+.message-block .error-message {
+    display: none;
+  }
+  
+  .message-block .error-message:first-child {
+    display: block;
+    color: #e8316f;
+    margin-bottom: 5px;
+    margin-top: -10px;
+    margin-left: 6px;
+    font-size: 14px;
+    font-family: "Roboto";
+    white-space: break-spaces;
+  }

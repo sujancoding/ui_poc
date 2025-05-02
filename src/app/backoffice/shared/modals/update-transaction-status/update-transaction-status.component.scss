@@ -1,0 +1,92 @@
+.toolbar-header{
+    display: flex;
+        justify-content: space-between;
+        background-color: #012f66;
+        color: #fff;
+        padding-left: 10px;
+        padding-top: 6px;
+        height: 50px;
+}
+h3{
+    font-size: 18px;
+    line-height: 0;
+}
+
+.txn-details-row{
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+
+.label{
+    font-family: "Roboto";
+    font-size: 16px;
+    color: grey;
+}
+
+.value{
+    font-family: "Roboto";
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+}
+
+.selection
+{
+    margin: 5px;
+    width: 100%;
+
+}
+.section-divider {
+    border-top-color: #dddddd;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 11px;
+}
+.close-btn{
+    background-color: white;
+    color: black;
+    font-size: 17px;
+    border-radius: 6px;
+    border: solid 1px gray;
+    height: 41px;
+    width: 83px;
+    cursor:pointer;
+    font-family: "Roboto";
+
+}
+.save-btn{
+    font-size: 16px;
+    border-radius: 6px;
+    height: 41px;
+    width: 139px;	
+    font-family: "Roboto";
+}
+.button-row{
+    display: flex;
+    justify-content: right;
+    margin: 14px;
+    padding-right: 3px;
+}
+.activate-button {
+    background-color:  #123969;
+    color: white;
+    cursor: pointer;
+    border:none;
+}
+.disabled-button {
+    background-color: gray;
+    color: white;
+    border: none;
+}
+.customer-row{
+    font-family: "Roboto";
+    position: relative;
+    top: 5px;
+    left: 10px;
+}
+.amount-row{
+    font-family: "Roboto";
+    position: relative;
+    top: -2px;
+    left: 10px;
+}

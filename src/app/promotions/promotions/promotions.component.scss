@@ -1,0 +1,65 @@
+.table{
+    width: 100%;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+    background-color: white;
+   }
+   table{
+    margin-top: 0.4cm;
+   } 
+
+   td {
+    text-align: left;
+    padding: 4px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    border: solid 0.5px #ebe8e8;
+}
+  
+th{
+    text-align: left;
+    padding: 6px;
+    color: gray;
+    font-size: 13px;
+    font-style: normal;
+    border: solid 0.5px #ebe8e8;
+}
+  
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}   
+
+
+.example-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   }  
+  
+   pagination-controls{
+    text-align: center;
+    position: static;
+    justify-content: center;
+    width: 100%;
+    border: solid 0.2px rgb(160, 158, 158);
+  } 
+
+  .addPromotion{
+    text-align: right;
+    margin: 10px;
+   } 
+   
+   .btnAdd{
+   background-color: #123969;
+   width: 60px;
+   height: 58px;
+   }
+
+   .icon{
+    color: rgb(15, 132, 228);
+  }
+  
+  mat-form-field{
+    padding: 0.1cm;
+  }

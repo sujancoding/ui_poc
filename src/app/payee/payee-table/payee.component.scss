@@ -1,0 +1,129 @@
+
+  .scrollable-content{
+    height: 626px;
+    overflow-y: scroll;
+  }
+  .btnAdd{
+    background-color: #123969;
+    color: white;
+    height: 45px;
+    width: 120px;
+    position: relative;
+    top: 20px;
+    font-size: 15px;
+    right: 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+  }
+
+
+.btn{
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: right;
+  bottom: 0px;
+  background-color: #f2f2f2;
+  position: sticky;
+  z-index: 100;
+  
+}
+.fetchPayeeButton{
+  margin: 20px;
+  height: 45px;
+  background-color: #123969;
+  color: white;
+}    
+.task-header {
+font-size: 18px;
+  background-color: #123969;
+  color: white;
+}
+
+
+
+.example-button-container {
+  width: 60px;
+  height: 41px;
+}
+.icon_button {
+  background-color: #d6d6d6;
+  color: #123969;
+}
+.icon_button:hover {
+  background-color: #a2e6f7
+}
+
+
+.p {
+  font-family: 'Roboto';
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 25px;
+    margin-bottom: 3px;
+}
+
+//for Apply Filter button
+.buttonApplyfilter {
+  background-color: #123969;
+  color: white;
+  height: 45px;
+  margin-top: 5px;
+  margin-left: 30px;
+}
+
+.filtericon {
+  color: rgb(255, 255, 255);
+}
+
+.error-message{
+  color: red;
+  position: relative;
+  top: 28px;
+  left: 3px;
+  font-size: 14px;
+  font-family: 'Roboto';
+}
+.tags
+{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.status-tag
+{
+  line-height: 20px;
+  padding: 5px 10px;
+  margin: 3px 0;
+  display: inline-block;
+  font-family: Roboto;
+  white-space: nowrap;
+}
+
+.small-container{
+  border: 1px solid #e6e6e6;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 12px;
+  left: 5px;
+  border-radius: 5px;
+
+}
+.search-filter-1{
+  background-color: white;
+  /* margin-left: 12px; */
+  /* margin-right: 12px; */
+  border-radius: 10px;
+  height: 90px;
+}
+
+.div-height{
+  height: 75px !important;
+}
+.table{
+  margin-top: 5px !important; 
+}

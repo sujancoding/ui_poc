@@ -1,0 +1,58 @@
+<!-- <h4 mat-dialog-title class="whole-task-header">
+    <div class="task-header" fxLayoutAlign="space-between center">
+
+        <h4 class="title-label">Currency Stock ({{counterTypeDescription}})</h4>
+
+    </div>
+</h4> -->
+
+
+
+
+<div class="table-wrapper" style="margin-top: 1px;" >
+    <div class="mat-elevation-z8">
+      <div [ngStyle]="changeTableHeight()">
+        <table  class= "table" >
+         
+          <thead>
+            <tr>
+                  <th>Ccy</th>
+                  <th>Valid Deal</th>
+                  <th>Forward Stock</th> 
+                  <th>Avg Cost</th>
+                  </tr>
+          </thead>
+         
+          <tbody>
+            <tr *ngFor="let search of stockListing">
+                <td>
+                  <div fxLayout="row" fxLayoutGap="5px">
+                    <div>  {{search.ccyNo}} </div>
+                    <div class="sub-value">  {{search.ccyName}} </div>
+                  </div>
+                </td>
+
+                  <td [ngClass]="{'negative-amount': search.dealStock < 0, 'positive-amount': search.dealStock >= 0}">{{search.dealStock | number}}</td> 
+
+                  <td [ngClass]="{
+                    'negative-amount': (search?.futureStock + search?.dealStock) < 0, 
+                    'positive-amount': (search?.futureStock + search?.dealStock) >= 0
+                  }">
+                {{ (search?.futureStock + search?.dealStock) | number }}
+              </td>
+
+                  <td>{{search.avgCost}}</td>
+              
+            </tr>
+          </tbody>
+         
+      </table>
+      </div>
+    </div> 
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner  diameter="50" > </mat-spinner>
+      </div>
+     </div>
+
+

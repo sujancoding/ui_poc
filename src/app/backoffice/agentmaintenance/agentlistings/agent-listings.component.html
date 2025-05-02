@@ -1,0 +1,131 @@
+<!--Search filter Section-->
+<div>
+  <form [formGroup]="filterForm">
+    <div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1">
+      <div fxLayout="row" fxLayoutAlign="space-between" style="position: relative;
+      place-content: stretch space-between;top: 10px;">
+
+        <div fxLayout="row" fxLayoutGap="15px" style="margin-left: 15px; display: flex; align-items: center;">
+
+          <div fxLayout="column" style="margin-left: 10px; position: relative; top :5px;">
+            <mat-form-field style="width: 350px;font-size: 15px;" appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Agent Name</mat-label>
+              <input matInput formControlName="agentName" [formControl]="filterForm.controls['agentName']">
+            </mat-form-field>
+          </div>
+
+          <!-- <div fxLayout="column" style="margin-left: 20px;">
+            <p class="p"> Phone Number </p>
+            <mat-form-field fxFlex="20" appearance="{{'formFieldAppearance' | label}}">
+              <input matInput formControlName="PhoneNumber" [formControl]="filterForm.controls['PhoneNumber']">
+            </mat-form-field>
+            <div class="message-block">
+              <span class="error-message"
+                *ngIf=" filterForm.controls['PhoneNumber'].hasError('pattern')">{{'onlyNumbers'| label}}</span>
+            </div>
+          </div> -->
+
+          <button mat-raised-button [disabled]="!filterForm.valid" class="buttonApplyfilter"
+            (click)="searchFilter(filterForm.controls['agentName'].value)">
+            Apply Filter
+          </button>
+
+        </div>
+
+<div>
+        <button mat-raised-button class="register-btn" (click)="openAgentRegister()"><mat-icon>add</mat-icon>
+          Agent </button>
+</div>
+
+      </div>
+
+    </div>
+  </form>
+
+
+</div>
+
+<!--Table-->
+<div class="table-wrapper">
+  <div class="mat-elevation-z8">
+    <div [style.height.px]="changeTableHeight()" [style.overflow-y]="getOverFlow()">
+      <table class="table">
+
+        <thead>
+          <th>AGENT CODE</th>
+          <th>NAME</th>
+          <th>STATUS</th>
+          <th>CREATED DATE</th>
+          <th>PAYEE</th>
+          <th>ACTIONS</th>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let agentDetails of getAgentDetails | slice: (p - 1) * itemsPerPage : p * itemsPerPage">
+            <td>
+              {{agentDetails.ENTITYID}}
+            </td>
+            <td style="color: #123969;"> {{agentDetails.ENTITYNAME}}</td>
+            <td>
+              <div class="tags"
+                [ngStyle]="{'color': getColor(agentDetails.STATUS),'background-color': getBackgroundColor(agentDetails.STATUS)}">
+                <div [ngStyle]="{'background-color': getColor(agentDetails.STATUS)}" class="small-container"></div>
+                <span class="status-tag" #tooltip="matTooltip" [matTooltip]="getTooltipText(agentDetails.STATUS)"
+                  matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                  {{agentDetails.STATUS | uppercase}} </span>
+              </div>
+            </td>
+            <td> {{agentDetails.CREATEDDATE | date:'medium'}} </td>
+
+
+            <td>
+              <button mat-icon-button type="button"
+                (click)="agentViewPayee(agentDetails.ENTITYID,agentDetails.ENTITYNAME)">
+                <mat-icon style="color: #1265d2b8;;"> visibility </mat-icon>
+              </button>
+            </td>
+
+
+            <td>
+              <div fxLayout="row" fxLayoutGap="15px">
+              <div class="example-button-container">
+                <button class="launch-icon" #tooltip="matTooltip" matTooltip="Open Agent Details"
+                matTooltipPosition="above" matTooltipClass="custom-tooltip"
+                  (click)="openAgentDialog(agentDetails.ENTITYNAME,agentDetails.STATUS,agentDetails.ENTITYID)"
+                  mat-icon-button type="button" aria-label="Example icon button with a menu icon">
+                  <mat-icon> zoom_out_map </mat-icon>
+                </button>
+              </div>
+
+              <div class="example-button-container">
+                <button class="launch-icon" #tooltip="matTooltip" matTooltip="Update Margin Tier"
+                  matTooltipPosition="above" matTooltipClass="custom-tooltip"
+                  (click)="openMarginTierUpdate(agentDetails.ENTITYNAME,agentDetails.STATUS,agentDetails.ACCOUNTNO, agentDetails.ENTITYID)"
+                  mat-icon-button type="button" aria-label="Example icon button with a menu icon">
+                  <mat-icon> list_alt </mat-icon>
+                </button>
+              </div>
+
+            </div>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+
+
+    <!--Pagination-->
+    <mat-paginator class="pagination-class" [length]="getAgentDetails.length" [pageSize]="itemsPerPage"
+      [pageIndex]="p - 1" (page)="handlePageChange($event)"></mat-paginator>
+  </div>
+
+
+  <!--Loader-->
+  <div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+  </div>
+
+</div>

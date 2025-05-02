@@ -1,0 +1,124 @@
+<!-- MAT POPUP DIALOG -->
+<h4 mat-dialog-title>
+  <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+    <span> New Deal </span>
+    <span [mat-dialog-close]="true" style="cursor: pointer;">
+      <mat-icon>close</mat-icon>
+      </span>
+</mat-toolbar>
+  </h4>
+  
+<form [formGroup]="form" (ngSubmit)="onSubmit()" style="padding: 0.2cm;">
+
+<div fxLayout="row wrap" fxLayoutAlign="space-between">
+  <div fxFlex="33.5"  fxFlex.xs="100">
+    <mat-form-field appearance="outline">
+      <mat-label class="custom-label">Initiated By</mat-label>
+      <mat-select [formControl]="form.controls['InitiatedBy']"  placeholder="APT/Agent">
+        <mat-option *ngFor="let initiatedBy of initiatedByValues" (click)="updateFieldNames(initiatedBy)" [value]="initiatedBy"> {{initiatedBy}} </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['InitiatedBy'].hasError('required') &&
+    form.controls['InitiatedBy'].touched"> {{'InitiatedByRequired'|label}} </mat-error>
+    </mat-form-field>
+  </div>
+
+    <div fxFlex="30" fxFlex.xs="100">
+      <mat-form-field appearance="outline">
+        <mat-label class="custom-label">Agent Name </mat-label>
+        <mat-select [formControl]="form.controls['agentname']">
+          <mat-option *ngFor="let iterateAgentName of iterateAgentName" (click)="populateAgentAccNumber(iterateAgentName.ACCOUNTNO,iterateAgentName.ENTITYID)" [value]="iterateAgentName"> {{iterateAgentName.ENTITYNAME}} </mat-option>
+        </mat-select>
+        <mat-error *ngIf=" form.controls['agentname'].hasError('required') &&
+        form.controls['agentname'].touched">  {{'agentnameRequired'|label}} </mat-error>
+      </mat-form-field>
+    </div>
+    
+    <div fxFlex="30"  fxFlex.xs="100">
+      <mat-form-field appearance="outline">
+        <mat-label class="custom-label">Account No</mat-label>
+        <input matInput formControlName="AccountNumber" [formControl]="form.controls['AccountNumber']" readonly>
+        <mat-error *ngIf=" form.controls['AccountNumber'].hasError('required') &&
+        form.controls['AccountNumber'].touched"> {{'agentaccountRequired'|label}} </mat-error>
+        <mat-error *ngIf="form.controls['AccountNumber'].hasError('pattern')"> only Numbers </mat-error>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+    
+    <div fxFlex="12" fxFlex.xs="100">
+      <mat-form-field appearance="outline">
+        <mat-label class="custom-label"> {{labelName}} Buys</mat-label>
+        <mat-select [formControl]="form.controls['Buy']">
+          <mat-option *ngFor="let buyCountryCode of buyCountryCode" [value]="buyCountryCode" >{{buyCountryCode}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['Buy'].hasError('required') &&
+          form.controls['Buy'].touched"> Buy Field required </mat-error>
+      </mat-form-field>
+    </div>
+  
+    <div fxFlex="15" fxFlex.xs="100">
+      <mat-form-field appearance="outline">
+        <mat-label class="custom-label"> Amount </mat-label>
+        <input matInput formControlName="buyingAmount" appCommaSeparatedInput [formControl]="form.controls['buyingAmount']" (blur)="calculateBuyAmount()">
+        <mat-error *ngIf="form.controls['buyingAmount'].hasError('required') &&
+          form.controls['buyingAmount'].touched"> {{'AmountRequired'|label}} </mat-error>
+          <mat-error *ngIf="form.controls['buyingAmount'].hasError('pattern')"> only Numbers </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="30"  fxFlex.xs="100">
+      <mat-form-field appearance="outline">
+        <mat-label class="custom-label">Buy Exchange Rate (FCY to SGD) </mat-label>
+        <input matInput [formControl]="form.controls['ExchangeRate']" formControlName="ExchangeRate" (blur)="calculateBuyAmount()">
+        <mat-error *ngIf="form.controls['ExchangeRate'].hasError('required') &&
+        form.controls['ExchangeRate'].touched"> {{'ExchangeRateRequired'|label}} </mat-error>
+        <mat-error *ngIf="form.controls['ExchangeRate'].hasError('pattern')"> {{'validDealsBuyExchRate' | label}}  </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="12" fxFlex.xs="100">
+      <mat-form-field appearance="outline">
+        <mat-label class="custom-label"> {{labelName}} Sells</mat-label>
+        <mat-select [formControl]="form.controls['Sell']">
+          <mat-option value="SGD" >SGD</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['Sell'].hasError('required') &&
+        form.controls['Sell'].touched"> Sell Field required </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="15" fxFlex.xs="100">
+      <mat-form-field appearance="outline">
+        <mat-label class="custom-label"> Amount </mat-label>
+        <input matInput formControlName="SellAmount"  [formControl]="form.controls['SellAmount']" readonly >
+        <mat-error *ngIf="form.controls['SellAmount'].hasError('required') &&
+        form.controls['SellAmount'].touched"> {{'AmountRequired'|label}} </mat-error>
+        <mat-error *ngIf="form.controls['SellAmount'].hasError('pattern')"> only Numbers </mat-error>
+      </mat-form-field>
+    </div>
+
+
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutAlign="space-between">
+  <div fxFlex="30"  fxFlex.xs="100">
+    <mat-form-field appearance="outline">
+      <mat-label class="custom-label"> Handled By </mat-label>
+      <mat-select [formControl]="form.controls['handledBy']">
+        <mat-option *ngFor="let handlerName of handlerName" [value]="handlerName">{{handlerName}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['handledBy'].hasError('required') &&
+        form.controls['handledBy'].touched"> Handled By Field required </mat-error>
+    </mat-form-field>
+  </div>
+  </div>
+  
+
+  <div class="add-deal" fxLayout="row wrap" fxLayoutGap="30px">
+    <button mat-raised-button class="blue" [mat-dialog-close]="true" type="button">Close</button>
+    <button mat-raised-button  class="green" [mat-dialog-close]="true"  type="submit" [disabled]="!form.valid">Submit</button>
+   </div>
+</form>
+   

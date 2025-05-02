@@ -1,0 +1,163 @@
+// form{
+//   margin: 5px;
+// } 
+
+.mat-mdc-button{
+    width: 13%;
+  }
+
+  .address-styles{
+    margin-top: 4px;
+  
+  //font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  
+  
+  color: #000000;
+  }
+  
+.task-header {
+font-size: 18px;
+  background-color:#123969;
+ color: white;
+ height: 50px;
+
+}
+.fx-spacer {
+  flex: 1 1 auto;
+}
+
+.dialogButton{
+  //margin: 148px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px
+  
+}
+
+small{
+  clear: both;
+  display: inline-block;
+  overflow: hidden;
+  // white-space: nowrap;
+ }
+ .wrapMargin{
+  margin-top: -2px;
+ }
+//Added by shafi @ 08/11/2022
+//Triggers on modalpopup > Application Search > on click launch icon
+// @media screen and (min-width:500px) {
+//   form{
+//     margin: 17px;
+//     height: 442px;
+//     overflow-y: scroll;
+//   }  
+// }
+
+.saveSowButton{
+  width: 100%;
+    font-weight: 100;
+    font-size: 17px;
+    margin-bottom: 12px;
+    height: 43px;
+    font-family: 'Roboto';
+    background-color: #123969;
+    color: white;
+    position: relative;
+    top: 10px;
+}
+.saveSowButtonLayout{
+  text-align: center;
+}
+
+@media screen and (min-width:600px) {
+  .saveSowButton{
+    width: 30%;
+      font-weight: 100;
+      font-size: 17px;
+      margin-bottom: 12px;
+      height: 43px;
+      font-family: 'Roboto';
+      background-color: #123969;
+      color: white;
+      position: relative;
+      top: 100px;
+  }
+  .saveSowButtonLayout{
+    text-align: end;
+  }
+  
+  
+ }
+
+ ::ng-deep .mat-mdc-select-panel::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar-thumb {
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.submit-mat-btn{
+  height: 47px;
+}
+.close-mat-btn{
+  width: 118px;
+  height: 47px;
+}
+.scrollable-form{
+  height: 446px;
+  overflow-y: scroll; 
+  margin: 17px;
+}
+.stepper-btn{
+  margin-top: 16px;
+}
+
+.btn-row{
+  position: relative;
+  margin-left: 14px;
+  margin-right: 14px;
+}
+
+.red-highlight-btn{
+  background-color: orange;
+  width: 128px;
+  color: white;
+}
+
+.blue{
+  background-color: #123969;
+  width: 128px;
+  color: white;
+}
+
+.update-btn{
+  height: 40px;
+  margin-left: 20px;
+  background-color: #198754;
+  color: white;
+  width: 128px;
+}
+
+.scrollable-form-mc{
+  height: 338px;
+  overflow-y: scroll;
+  //margin: 17px;
+}
+mat-error{
+  font-size: 16px;
+  margin-top: 11px;
+  font-family: 'Roboto';
+}

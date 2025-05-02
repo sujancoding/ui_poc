@@ -1,0 +1,137 @@
+.sub-value{
+    font-size: 13px;
+      color: grey;
+      margin-top: 5px;
+}
+
+.header{
+  margin: 0px;
+  height: 110px;
+  color: #8e8a8a;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: -5px;
+   
+}
+
+.row{
+    justify-content: space-between;
+    display: flex;
+    margin: 20px;
+}
+
+.welcome-msg{
+    font-size: 24px;
+    position: relative;
+    top: 26px;
+    font-family: 'Roboto';
+}
+
+.title-welcome-msg{
+  font-size: 25px;
+  position: relative;
+  top: 15px;
+  color: black;
+  font-family: 'Roboto';
+}
+
+//biz asked to show border for td and th
+// td{
+//     text-align: left;
+//       padding: 7px;
+//       font-style: normal;
+//       font-family: 'Roboto';
+//       font-weight: 540;
+//       font-size: medium;
+//       border: 0.1px solid #d3d3d3 !important;
+//   }
+  
+//   th{
+//     padding: 10px;
+//     color: #252525d6;
+//     font-weight: 600;
+//     opacity: 20;
+//     font-size: 14px;
+//     font-family: 'Roboto';
+//     background-color: #f0f0f0;
+//     border: 0.1px solid #d3d3d3;
+//   }
+
+.negative-amount{
+    color: red;
+  }
+  
+  .positive-amount{
+    color: rgb(0, 0, 0);
+  }
+
+  .money-any-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.2;
+  }
+
+  .branch-mssg-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .branch-open-label{
+    color: #4ec66a;
+    text-align: center;
+    position: relative;
+    top: 8px;
+    padding: 30px;
+  }
+
+  .branch-close-label{
+    color: #e3254a;
+    text-align: center;
+    position: relative;
+    top: 8px;
+    padding: 30px;
+  }
+
+  .branch-hint-text{
+    color: gray;
+    position: relative;
+    bottom: 10px;
+    text-align: center;
+    padding: 0px 30px 30px 30px;
+
+  }
+
+
+  .card-outline{
+    border: solid 0.5px #d9d9d9;
+    border-radius: 5px;
+    width: 35%;
+  }
+
+  .card-title{
+    font-size: 23px;
+    font-weight: 600;
+  }
+
+  .card-content-text{
+    font-size: 17px;
+  }
+
+
+.loader-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  zoom: 0.5;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}

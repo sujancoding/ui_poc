@@ -1,0 +1,160 @@
+.whole-layout{
+  background-color: #ffffff;
+ padding: 23px;
+}
+.logo{
+  text-align: center;
+}
+.review-image{
+  font-size: 10px;
+  height: 103px;
+}
+.icon{
+    font-size: 75px;
+    color: #18c6ee;
+}
+
+.sub-heads{
+  font-size: 22px;
+  /* font-weight: 600; */
+  font-family: 'Roboto';
+  color: black;
+}
+.sub-values{
+    font-size: 18px;
+    color: #626262;
+    position: relative;
+    left: 45px;
+    top: -24px;
+    font-family: 'Roboto';
+    line-height: 27px;
+}
+
+.values {
+  position: relative;
+    bottom: 19px;
+    font-size: 18px;
+    color: #000000;
+    font-family: 'Roboto';
+}
+
+.contract-table{
+  width: 85%;
+  position: relative;
+  left: 45px;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+
+ th {
+ 
+    font-family: 'Roboto';
+    margin-left: 42px;
+
+    padding: 14px;
+    color: #000000d6;
+    /* font-weight: 600; */
+    opacity: 1;
+    font-size: 16px;
+    background-color: #123969 !important;
+    color: white !important;
+    border: 1px solid #b6b6b6;
+    text-align: left;
+
+  }
+  .contracts-td{
+    padding-top: 19px;
+    padding-bottom: 20px;
+    text-align: left;
+    font-size: 18px;
+    color: #000000;
+  }
+
+  .total-table{
+    background: #c1c1c1;
+    position: relative;
+  }
+
+  .total-label{
+    color: #595959;
+    font-family: 'Roboto';
+    font-size: 18px;
+  }
+  .highlight-total-label{
+    color: #000000;
+    font-family: 'Roboto';
+    font-size: 21px;
+  }
+  .total-amount-label{
+    color: #000000;
+    font-family: 'Roboto';
+    text-align: center;
+    font-size: 18px;
+  }
+  .highlight-total-amount-label{
+    color: #000000;
+    font-family: 'Roboto';
+    text-align: center;
+    padding-left: 20px;
+    font-size: 20px;
+  }
+
+.dialogButton{
+    margin: 8px;
+}
+
+.mat-mdc-button{
+ width: 20%;
+ height: 59px;
+ border-radius: 0.2cm;
+ margin: 0.4cm;
+ border: 1px solid #1d1d1d;
+}
+
+.large-checkbox{
+    font-family: helvetica, arial, 'Roboto' !important;
+    font-size: 22px;
+    color: #626262;
+    margin-top: 22px;
+}
+// ::ng-deep .large-checkbox .mat-checkbox-frame {
+  
+// }
+.sub-label{
+    font-family: 'Roboto';
+    margin-left: 16px;
+    font-size: 19px;
+    margin-top: 7px;
+}
+.checkbox-label {
+  font-family: 'Roboto';
+  margin-left: 16px;
+  font-size: 19px;
+  line-height: 14px;
+}
+
+:host {
+  ::ng-deep {
+    /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+    .mat-checkbox-inner-container {
+      margin: 0px !important;
+      top: 4px;
+      transform: scale(1.4);
+    }
+  }
+}
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+}
+
+.transfer-summary-layout{
+   background-color: #efefef;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: -5px;
+    padding-bottom: 37px;
+}

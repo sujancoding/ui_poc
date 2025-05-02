@@ -1,0 +1,15 @@
+<div class="dialog-box">
+    <mat-toolbar color="primary" class="custom-toolbar">
+        <span style="font-size: 18px;">Authentication Limit Reached</span>
+                <mat-icon style="cursor: pointer;font-size: 22px; margin-top: -17px;" [mat-dialog-close]="true">close</mat-icon>
+      </mat-toolbar>
+      <div style="margin: 18px; margin-top: -10px;">
+    <div fxLayout="row" fxLayoutAlign="start">
+        <mat-icon class="alert-icon">warning</mat-icon>
+        <h5 class="alert-label" style="margin-top: 50px;">Too many attempts. Logout and Try Again</h5>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end" style="margin-right: 20px;">
+        <button class="yes-button" type="button" (click)="logout()" mat-raised-button color="warn">Logout</button>
+    </div>
+    </div>
+    </div>

@@ -1,0 +1,122 @@
+<div>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="header-container">
+
+    <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+
+      <span class="head-label-1">Register a new agent </span>
+
+    </div>
+    <div>
+      <span (click)="onClose()" class="close-icon">
+        <mat-icon>close</mat-icon>
+      </span>
+    </div>
+  </div>
+
+  <div class="formfield-container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div fxLayout="column" class="formfield-section">
+        <!-- Email Address-->
+        <div>
+          <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+            <mat-label class="custom-label">Email Address</mat-label>
+            <input matInput [placeholder]="'email'|label" formControlName="username"
+              [formControl]="form.controls['username']" />
+          </mat-form-field>
+          <div class="message-block">
+            <span class="error-message" *ngIf=" form.controls['username'].hasError('required')&& 
+        form.controls['username'].touched">{{'emailIdRequired'| label}}</span>
+            <span class="error-message" *ngIf=" form.controls['username'].hasError('email')">Enter Valid Email Address</span>
+          </div>
+        </div>
+        <!-- Password-->
+        <div>
+          <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+            <mat-label class="custom-label">Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" [placeholder]="'password'|label"
+              formControlName="password" [formControl]="form.controls['password']" />
+            <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <div class="message-block">
+            <span class="error-message"
+              *ngIf="form.controls['password'].hasError('required') && (form.controls['password'].touched)">{{'passwordRequired'|label}}</span>
+            <span class="error-message" *ngIf="form.controls['password'].hasError('maxlength')">Password can have a maximum of 16 characters.</span>
+            <span class="error-message" *ngIf="form.controls['password'].hasError('minlength')">Password should be at least 8 characters long.</span>
+            <span class="error-message" *ngIf="form.controls['password'].hasError('pattern')">Password must be 8 characters long and include at least one uppercase letter, one special character, and one number.</span>
+          </div>
+        </div>
+        <!-- PhoneNumber-->
+
+ <div fxLayout="row" fxLayoutGap="8px">      
+        <div fxFlex="25">
+          <mat-form-field appearance="{{ 'formFieldAppearance' | label }}">
+            <!-- <mat-label class="custom-label"> Code</mat-label> -->
+            <!-- <span matPrefix style="position: relative; top: -4px; right: 4px;" class="{{ selectedCountryCode }}"></span> -->
+            <mat-select  #select [formControl]="form.controls['phoneCountryCode']" (selectionChange)="onSelectPhoneCode(select.value)">
+             <mat-select-trigger > 
+            <span class="{{ select.value }}"></span>  
+            <span> {{countryCode}} </span>  
+            </mat-select-trigger>
+              <mat-option *ngFor="let code of phoneNumberCodes" [value]="code.FLAG">
+                <span class="{{ code.FLAG }}"></span>
+                {{ code.country }} {{ code.code }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="100">
+          <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+            <mat-label class="custom-label">Phone Number</mat-label>
+            <input matInput placeholder="Phone Number" formControlName="phonenumber"
+              [formControl]="form.controls['phonenumber']" maxlength="15"/>
+              <mat-hint align="end">{{form.controls['phonenumber'].value?.length || 0}}/15</mat-hint>
+          </mat-form-field>
+          <div class="message-block">
+            <span class="error-message" *ngIf=" form.controls['phonenumber'].hasError('required')&& 
+        form.controls['phonenumber'].touched">{{'phonenumberRequired'| label}}</span>
+            <span class="error-message" *ngIf=" form.controls['phonenumber'].hasError('pattern')">Phone number should contain only numbers.</span>
+            <span class="error-message" *ngIf=" form.controls['phonenumber'].hasError('maxlength')">Phone number can have a maximum of 15 digits.</span>
+          </div>
+
+          </div>
+
+        </div>
+
+        <!-- AgentName-->
+        <div>
+          <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+            <mat-label class="custom-label">Agent Name</mat-label>
+            <input matInput placeholder="AgentName" formControlName="agentname" (input)="form.controls.agentname.setValue(form.controls.agentname.value.toUpperCase())"
+              [formControl]="form.controls['agentname']" />
+          </mat-form-field>
+          <div class="message-block">
+            <span class="error-message" *ngIf=" form.controls['agentname'].hasError('required')&& 
+        form.controls['agentname'].touched">Agent Name is required.</span>
+          </div>
+        </div>
+
+
+        <div class="check-box">
+          <mat-checkbox formControlName="Confirmation">
+            <span style="font-family: 'Roboto';">Yes, The above Information are Correct</span>
+          </mat-checkbox>
+        </div>
+
+      </div>
+
+      <div class="register-btn">
+        <button *ngIf="showRegister" style="font-size: 17px;" mat-raised-button color="primary" [disabled]="!form.valid"
+          class="btn-block btn-lg m-t-20 m-b-20" type="submit">Register </button>
+      </div>
+
+      <mat-spinner style="margin:33px auto;" diameter="40" *ngIf="loader"></mat-spinner>
+
+    </form>
+  </div>
+
+ 
+</div>

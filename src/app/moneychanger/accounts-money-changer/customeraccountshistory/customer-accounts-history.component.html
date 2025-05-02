@@ -1,0 +1,106 @@
+<!--CUSTOMER AC HISTORY-->  
+
+<!-- Filter Section -->
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1" style="margin-top: 10px ">
+
+    <form [formGroup]="filterForm">
+        <div  fxLayout="row" fxLayoutGap="10px" style="margin-left: 15px;align-items: center;">
+            <mat-icon (click)="goToCustomerAccounts()" class="arrow-back-icon">keyboard_arrow_left</mat-icon>
+            <div fxLayout="column">
+               
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Customer Name</mat-label>
+                        <input formControlName="customerName" [formControl]="filterForm.controls['customerName']" matInput
+                            class="form-control" readonly="true">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="column" style="margin-right: 10px;">
+             
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Start Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="startDate"
+                            [formControl]="filterForm.controls['startDate']" (dateChange)="onStartDateChange($event)" [min]="minStartDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="column">
+              
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">End Date</mat-label>
+                        <input matInput formControlName="endDate" [formControl]="filterForm.controls['endDate']"
+                            [matDatepicker]="picker2" (dateChange)="onEndDateChange($event)" [min]="minEndDate" [max]="maxEndDate" >
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                        <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+            <button [disabled]="!filterForm.valid" mat-raised-button fxFlex="10" (click)="searchFilter()"
+                class="buttonApplyfilter">Fetch</button>
+        </div>
+    </form>
+
+</div>
+
+
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+    
+    <div [ngStyle]="changeTableHeight()">
+    <table class="table">
+    <thead>
+        <th>CUSTOMER NAME</th>
+        <th>CUSTOMER ACCOUNT NUMBER</th>
+        <th>OUTSTANDING BALANCE</th>
+        <th>OPENING BALANCE</th>
+        <th>DATE</th>
+        <th>ACTIONS</th>
+</thead>
+    
+<tbody>
+   
+    <tr *ngFor="let records of customerAccountsRecords | slice: (p - 1) * itemsPerPage : p * itemsPerPage;" (dblclick)="downloadLedgerFile(records.accountNo,records.recordDate, records.entityName)">
+       <td style="color: #123969;">{{records.entityName}}</td>
+       <td>{{records.accountNo}}</td>
+       <td [ngClass]="{'negative-amount': records.outstandingBalance < 0, 'positive-amount': records.outstandingBalance >= 0}"> {{records.outstandingBalance | number}} </td>
+       <td [ngClass]="{'negative-amount': records.openingBalance < 0, 'positive-amount': records.openingBalance >= 0}"> {{records.openingBalance | number}}  </td>
+       <td> {{records.recordDate | date : 'medium'}} </td>
+       <td>
+        <div class="center-content">
+            <button
+            #tooltip="matTooltip"
+            matTooltip="Download Transaction Summary"
+            matTooltipPosition="above"
+            matTooltipClass="accounts-custom-tooltip"
+           class="icon_button" mat-icon-button type="button"
+           (click)="downloadLedgerFile(records.accountNo,records.recordDate, records.entityName)"> 
+            <mat-icon class="picture-as-pdf-icon">picture_as_pdf</mat-icon>    
+            </button>
+         </div>
+       </td>
+    </tr>
+</tbody>
+</table>
+</div>
+<mat-paginator class="pagination-class"
+[length]="customerAccountsRecords.length"
+[pageSize]="itemsPerPage"
+[pageIndex]="p - 1"
+(page)="handlePageChange($event)"
+></mat-paginator>
+</div>
+ <!--Loader-->
+<div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+</div>
+</div>
+

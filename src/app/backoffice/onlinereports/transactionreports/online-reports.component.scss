@@ -1,0 +1,344 @@
+
+
+.div-height {
+  font-size: 13px;
+}
+
+p {
+  margin: 0.45cm;
+  height: 8px;
+}
+
+.reset-button {
+  width: 105px;
+  height: 53px;
+  border-radius: 0.2cm;
+  margin: 0.4cm;
+  background-color: #ffffff;
+  cursor: pointer;
+  color: #5E5ADB;
+  font-family: 'Roboto';
+  font-size: 15px;
+}
+.close-button{
+  width: 111px;
+    height: 40px;
+    border-radius: 20px;
+    margin: 15px;
+    position: relative;
+    left: 22px;
+    top: 6px;
+    color: white;
+    background-color: #504e4e;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Roboto";
+    /* border: 1px solid #b6b4b4;*/
+}
+
+
+.add-filter-icon {
+  position: relative;
+  top: -2px;
+}
+
+.formfield-icon {
+  position: relative;
+  top: 2px;
+  font-size: 23px;
+}
+
+.row-items {
+  margin-top: -20px;
+}
+
+.subGroups {
+  font-family: 'Roboto';
+  font-style: normal;
+  // font-size: small;
+  white-space: nowrap;
+  color: #8f8f8f;
+  // position: relative;
+  // top: 7px;
+}
+
+.payeeName {
+  font-family: 'Roboto';
+  font-style: normal;
+  // font-size: small;
+  color: #000000;
+  // position: relative;
+  // top: 5px;
+}
+
+// .margin-space {
+//   position: relative;
+//   top: -12px;
+// }
+
+.show-results {
+  margin-right: -14px;
+  color: grey;
+  font-size: 18px;
+  font-family: 'Roboto';
+}
+
+.filter-title {
+ 
+  color: #100f0f;
+  font-family: 'Roboto';
+  margin-bottom: 15px;
+  margin-top: 14px;
+  position: relative;
+  left: 5px;
+  font-size: 22px;
+
+}
+
+// .custom-filter-values {
+//   margin-top: 22px;
+//   flex-direction: row;
+//   box-sizing: border-box;
+//   display: flex;
+//   background-color: #b0b0b04d;
+//   height: 79px;
+//   border-bottom-left-radius: 11px;
+//   border-bottom-right-radius: 11px;
+//   overflow-x: scroll;
+//     width: 100%;
+// /* Customize the scrollbar */
+// scrollbar-width: thin; /* For Firefox */
+// scrollbar-color: #575757 #b0b0b04d; /* Track and Thumb colors */
+// }
+
+.custom-filter-values::-webkit-scrollbar {
+width: 4px; /* Width of the scrollbar */
+}
+
+.custom-filter-values::-webkit-scrollbar-thumb {
+background-color: #d2d2d2; /* Thumb color */
+}
+
+
+mat-error {
+  font-size: 15px;
+  margin-top: 5px;
+  color: red;
+}
+.idNbr-error-message {
+  font-size: 13px;
+  white-space: nowrap;
+  position: relative;
+  left: 6px;
+  color: red;
+  top: -15px;
+}
+.submit-button {
+  width: 140px;
+  height: 50px;
+  border-radius: 0.2cm;
+  margin: 0.4cm;
+  background-color: #123969;
+  font-family: 'Roboto';
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+}
+.filter-header {
+  font-weight: 100;
+  font-family: 'Roboto-Regular';
+  margin-bottom: 1px;
+  margin-top: 18px;
+  position: relative;
+  left: 4px;
+  font-size: 16px;
+  /* text-decoration: underline; */
+  width: 18%;
+  background: #e8e8e8;
+  border-radius: 9px;
+  padding-left: 6px;
+}
+.tags {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+}
+.status-tag {
+  line-height: 20px;
+  padding: 5px 10px;
+  margin: 3px 0;
+  display: inline-block;
+  font-family: 'Roboto';
+  white-space: nowrap;
+  font-size: 14px;
+}
+.small-container {
+  border: 1px solid #e6e6e6;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 12px;
+  left: 5px;
+  border-radius: 5px;
+}
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+.detail-info {
+  font-weight: normal;
+  font-size: 16px;
+  font-family: 'Roboto';
+  color: #4e4e4e;
+}
+.exportButton{
+    color: white;
+    height: 51px;
+    width: 220px;
+    position: relative;
+    top: 13px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.group-btn-div{
+  justify-content: space-evenly;
+  display: flex;
+}
+.table thead tr {
+  position: relative;
+}
+.table thead th {
+  position: sticky;
+  top: 0; 
+  resize: horizontal;
+  overflow: auto;
+  text-align: left;
+  max-width: 300px;
+}
+pagination-controls {
+  text-align: center;
+  position: sticky;
+  justify-content: center;
+  width: 100%;
+  border: solid 0.1px #ffffff;
+}
+.table tr{
+  line-height: 20px;
+}
+.table {
+  width: 100%;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+
+table {
+  //margin-top: 0.5cm;
+  border-collapse: collapse; width: 100%;
+}
+
+thead {
+  position: sticky;
+  top: -1px;
+ z-index: 2;
+}
+
+td {
+  text-align: left;
+  padding: 7px;
+  font-style: normal;
+  font-family: 'Roboto';
+  font-weight: 540;
+  font-size: medium;
+  border-bottom: solid rgb(235, 231, 231);
+  border-bottom-width: 0.1px;
+  line-height: 20px;
+ 
+}
+tr:hover td {
+  -moz-box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+  -webkit-box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+  box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+}
+tr:hover td:first-child {
+  -moz-box-shadow: 4px 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+  -webkit-box-shadow: 4px 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+  box-shadow: 4px 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+}
+tr:hover td:last-child {
+  -moz-box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+  -webkit-box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+  box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+}
+
+th {
+  padding: 10px;
+  color: #252525d6;
+  font-weight: 600;
+  opacity: 20;
+  font-size: 14px;
+  font-family: 'Roboto';
+  background-color: #f0f0f0;
+
+}
+
+
+.loader-wrapper{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+::ng-deep.loader-wrapper circle,.loader-wrapper circle {stroke: rgb(40, 97, 194) !important;} 
+
+.buttonApplyFilter {
+  background-color: #123969;
+  color: white;
+  height: 48px;
+  margin-top: 47px;
+  margin-left: -83px;
+}
+
+
+.form-field-size{
+  font-size : 13px;
+}
+
+.pagination-class{
+  font-size: initial;
+  font-family: 'Roboto';
+  display: flex;
+  justify-content: end;
+  font-weight: 600;
+  border-top: 1px solid #d5d5d5;
+}
+
+.remitter-detail{
+  color: #aaaaaa;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: 'Roboto';
+}
+
+.content{
+  height: 445px;
+    overflow-y: scroll;
+    position: relative;
+    top: -7px;
+}
+
+
+
+.custom-tooltip {
+  font-size: 14px;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+}

@@ -1,0 +1,94 @@
+
+<form  [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+  <alert></alert> 
+<div fxLayout="row wrap" fxLayoutAlign="space-between">
+
+  <!-- col full-->
+  <div fxFlex="34">
+    <mat-form-field class="form-field" appearance="{{'formFieldAppearance' | label}}">
+      <mat-label class="custom-label">Email Address</mat-label>
+      <input matInput placeholder="Email address" type="email"
+        [formControl]="registerForm.controls['email']" autocomplete="off"/>
+    </mat-form-field>
+    <div  class="message-block">
+      <span class="error-message" *ngIf="registerForm.controls['email'].hasError('maxlength')">Email cannot exceed 128 characters.</span>
+      <span class="error-message" *ngIf="registerForm.controls['email'].hasError('email')"> {{'validEmailId'|label}} </span>
+        <span class="error-message" *ngIf="registerForm.controls['email'].hasError('required') && 
+                  registerForm.controls['email'].touched "> {{'emailIdRequired'|label}} </span>
+      </div>
+
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="8px" fxFlex="33">
+
+  <div fxFlex="29">
+    <mat-form-field class="form-field" appearance="{{ 'formFieldAppearance' | label }}">
+      <!-- <mat-label class="custom-label"> Code</mat-label> -->
+      <!-- <span matPrefix style="position: relative; top: -4px; right: 4px;" class="{{ selectedCountryCode }}"></span> -->
+      <mat-select  #select [formControl]="registerForm.controls['phoneCountryCode']" (selectionChange)="onSelectPhoneCode(select.value)">
+       <mat-select-trigger > 
+      <span class="{{ select.value }}"></span>  
+      <span> {{countryCode}} </span>  
+      </mat-select-trigger>
+        <mat-option *ngFor="let code of phoneNumberCodes" [value]="code.FLAG">
+          <span class="{{ code.FLAG }}"></span>
+          {{ code.country }} {{ code.code }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div fxFlex="67">
+    <mat-form-field style="width: 100%" class="form-field" appearance="{{'formFieldAppearance' | label}}">
+      <mat-label class="custom-label">Mobile Number</mat-label>
+      <input matInput placeholder="Mobile Number" type="text"  maxlength="8" 
+        [formControl]="registerForm.controls['phoneNumber']" style="position: relative;
+        top: -3px;" autocomplete="off" />
+        <mat-hint align="end">{{registerForm.controls['phoneNumber'].value?.length || 0}}/8</mat-hint>
+    </mat-form-field> 
+    <div  class="message-block">
+      <span class="error-message" *ngIf="registerForm.controls['phoneNumber'].hasError('pattern')">{{'onlyNumbers'| label}} </span>
+      <span class="error-message" *ngIf="registerForm.controls['phoneNumber'].hasError('isStartzero')">Phone Number should not starts with zero</span>
+      <span class="error-message" *ngIf="registerForm.controls['phoneNumber'].hasError('whitespace')">Phone Number should not contain whitespaces</span> 
+      <span class="error-message" *ngIf="registerForm.controls['phoneNumber'].hasError('required')
+      && registerForm.controls['phoneNumber'].touched"> {{'phonenumberRequired'|label}} </span>
+      <span class="error-message" *ngIf="registerForm.controls['phoneNumber'].hasError('minlength')">Phone Number contain atleast 8 numbers</span>
+    </div>
+
+  </div>
+
+  </div>
+
+  <!-- col full-->
+  <div fxFlex="30">
+    <mat-form-field style="width: 100%;" class="form-field" appearance="{{'formFieldAppearance' | label}}">
+      <mat-label class="custom-label">Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" [placeholder]="'password'|label"  maxlength="16"
+        formControlName="password" [formControl]="registerForm.controls['password']" autocomplete="off"/>
+        <mat-hint align="end" *ngIf="hideMatHint">{{registerForm.controls['password'].value?.length ||0}}/16</mat-hint>
+      <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>  
+    <div class="message-block">
+      <span class="error-message"
+        *ngIf="registerForm.controls['password'].hasError('required') && (registerForm.controls['password'].touched)">{{'passwordRequired'|label}}</span>
+      <span class="error-message" *ngIf="registerForm.controls['password'].hasError('maxlength')">Password can have a maximum of 16 characters.</span>
+      <span class="error-message" *ngIf="registerForm.controls['password'].hasError('minlength')">Password should be at least 8 characters long.</span>
+      <span class="error-message" *ngIf="registerForm.controls['password'].hasError('pattern')">Password must be 8 characters long and include at least one uppercase, one lowercase, one special character, and one number.</span>
+    </div>
+    
+  </div>
+
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between" class="button-row">
+   <div>
+     <button class="close-mat-btn"  [mat-dialog-close]="true"  type="button" mat-raised-button>Close</button>
+   </div>
+   <div>
+    <button class="submit-mat-btn" type="submit" [disabled]="!registerForm.valid"  mat-raised-button color="primary">Save and Continue</button>
+   </div>
+  </div>
+
+
+  </form>

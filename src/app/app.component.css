@@ -1,0 +1,53 @@
+.red-snackbar {
+    background: #F44336;
+    color: white;
+}
+
+.red-snackbar button {
+    background: #F44336;
+    color: white;
+}
+
+.update-container {
+    position: fixed;
+    left: 0;
+    bottom: 155px;
+    width: 100%;
+    text-align: justify;
+    background: #fff;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.update-container p {
+    margin: 12px 0;
+    font-size: 15px;
+    color: #333;
+    font-family: 'Roboto';
+    font-weight: 400;
+}
+
+.update-container .img1 {
+    margin-top: 10px;
+    max-width: 100px;
+}
+
+.orglogo {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img1 {
+    height: 62px;
+    position: relative;
+    top: 20px;
+    width: 83px;
+}

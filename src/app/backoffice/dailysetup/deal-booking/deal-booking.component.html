@@ -1,0 +1,61 @@
+<!--SHOULD NOT USE-->
+ <div class="div-height" fxLayout="row wrap" fxLayoutGap="10px">
+        <button class="filter-button"  mat-stroked-button color="primary"  [matMenuTriggerFor]="menu">
+            <mat-icon class="icon" matPrefix="Filter">filter_alt</mat-icon>
+            Filter</button>
+      
+            <mat-menu #menu="matMenu">
+              <h6 class="sorting">SORT BY:</h6>
+             <p> <mat-radio-button >Name</mat-radio-button> </p>
+             <p> <mat-radio-button >Status</mat-radio-button> </p>
+             <p> <mat-radio-button >Nationality</mat-radio-button> </p>
+             <br>
+              <h6 class="sorting">STATUS:</h6>
+              <p><mat-radio-button>All</mat-radio-button></p>
+              <p><mat-radio-button>Active</mat-radio-button></p>
+              <p><mat-radio-button>Inactive</mat-radio-button></p>
+         </mat-menu>
+<mat-form-field fxFlex="50" appearance="outline" style="padding: 0.1cm;">
+            <mat-icon class="icon" matPrefix="search">search</mat-icon>
+            <mat-label class="custom-label">Search Agents by Name</mat-label>
+            <input matInput class="form-control" type="text">
+</mat-form-field>
+    
+</div>
+
+
+<div class="HistoryButton">
+<button mat-flat-button class="history" (click)="dealHistory()" color="primary">Deal History</button>
+</div>
+
+
+<div class="example-table">
+    <table  class="table" >
+        <thead>
+                  <th>Agent ID</th>
+                  <th>NAME</th>
+                  <th>ACCOUNT NO</th>
+                  <th>Currency Code</th>
+                  <th>Deal Balance Amount(SGD)</th> 
+                  <th>Actions</th>   
+         </thead>
+       
+        <tbody>
+            
+    <tr *ngFor = "let dealBooking of dealBooking | paginate:{itemsPerPage:10,currentPage:p};">
+                  <td> {{dealBooking.agentId}} </td>
+                  <td> {{dealBooking.name}} </td>
+                  <td>{{dealBooking.accountNo}}</td>
+                  <td>{{dealBooking.currencyCode}}</td>
+                  <td>{{dealBooking.dealBalanceAmount}}</td>
+                  <td>
+                    <button (click)="openDialog()" mat-icon-button type="button">
+                        <mat-icon>thumb_up</mat-icon> 
+                        </button> 
+                  </td>
+              </tr> 
+     </tbody>
+</table>
+ <pagination-controls (pageChange)="p = $event"></pagination-controls> 
+
+ </div>

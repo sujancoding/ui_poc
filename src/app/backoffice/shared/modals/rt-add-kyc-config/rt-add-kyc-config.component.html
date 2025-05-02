@@ -1,0 +1,136 @@
+<div>
+
+    <!--Add Counter Toolbar-->
+      <div fxLayout="row" *ngIf="showAddContent" fxLayoutAlign="space-between center" class="header-container">
+    
+        <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+    
+          <span class="head-label-1">Add Category </span>
+    
+        </div>
+        <div>
+          <span (click)="onClose()" class="close-icon">
+            <mat-icon>close</mat-icon>
+          </span>
+        </div>
+      </div>
+  
+   <!--Edit Counter Toolbar-->
+      <div fxLayout="row" *ngIf="showUpdateContent" fxLayoutAlign="space-between center" class="header-container">
+    
+        <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+    
+          <span class="head-label-1">Update Category </span>
+    
+        </div>
+        <div>
+          <span (click)="onClose()" class="close-icon">
+            <mat-icon>close</mat-icon>
+          </span>
+        </div>
+      </div>
+    
+      <div>
+        <form [formGroup]="form" >
+          <div fxLayout="column" class="formfield-section">
+          
+            <div fxFlex="100">
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Label</mat-label>
+                <input matInput formControlName="label" (input)="form.controls.label.setValue(form.controls.label.value.toUpperCase())"
+                  [formControl]="form.controls['label']" [readonly]="isReadOnly" />
+              </mat-form-field>
+              <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['label'].hasError('required') && form.controls['label'].touched">{{'labelRequired' | label}}</span> 
+                <span class="error-message" *ngIf="form.controls['label'].hasError('pattern')">{{'labelOnlySpecificSplChars' | label}}</span>
+                <span class="error-message" *ngIf="form.controls['label'].hasError('maxlength')">{{'labelMaxLengthValidation' | label}}</span>
+            </div>
+             
+            </div>
+
+            
+       <div fxLayout="row" fxLayoutAlign="space-between"> 
+
+            <div fxFlex="48">
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Volume From</mat-label>
+                <input matInput
+                  formControlName="minVolume" #minVolume [formControl]="form.controls['minVolume']" (input)="formatAmount(minVolume.value, 'minVolume')" />
+              </mat-form-field>
+              <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['minVolume'].hasError('required') && form.controls['minVolume'].touched">{{'minVolumeRequired' | label}}</span>
+                <span class="error-message" *ngIf="form.controls['minVolume'].hasError('pattern')"> {{'onlyNumbers' | label}} </span> 
+                <span class="error-message"  *ngIf="form.controls['minVolume'].hasError('maxlength')"> {{'minVolumeMaxLengthValidation' | label}} </span> 
+            </div>
+           
+            </div>
+
+         
+          
+            <div fxFlex="48">
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Volume To</mat-label>
+                <input matInput 
+                  formControlName="maxVolume" [formControl]="form.controls['maxVolume']" #maxVolume  (input)="formatAmount(maxVolume.value, 'maxVolume')"/>
+              </mat-form-field>
+              <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['maxVolume'].hasError('required') && form.controls['maxVolume'].touched">{{'maxVolumeRequired' | label}}</span>  
+                <span class="error-message"  *ngIf="form.controls['maxVolume'].hasError('pattern')"> {{'onlyNumbers' | label}} </span> 
+                <span class="error-message"  *ngIf="form.controls['maxVolume'].hasError('maxlength')"> {{'maxVolumeMaxLengthValidation' | label}} </span> 
+            </div>
+            </div>
+          
+          </div>     
+
+      <div fxLayout="row" fxLayoutAlign="space-between"> 
+            <div fxFlex="48">
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Frequency From</mat-label>
+                <input matInput 
+                  formControlName="minFrequency" [formControl]="form.controls['minFrequency']"  #minFrequency (input)="formatAmount(minFrequency.value, 'minFrequency')" />
+              </mat-form-field>
+              <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['minFrequency'].hasError('required') && form.controls['minFrequency'].touched">{{'minFrequencyRequired' | label}}</span> 
+                <span class="error-message"  *ngIf="form.controls['minFrequency'].hasError('maxlength')"> {{'minFrequencyMaxLengthValidation' | label}} </span> 
+                <span class="error-message"  *ngIf="form.controls['minFrequency'].hasError('pattern')"> {{'onlyNumbers' | label}} </span> 
+            </div>
+            </div>
+
+            <div fxFlex="48">
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Frequency To</mat-label>
+                  <input matInput 
+                    formControlName="maxFrequency" [formControl]="form.controls['maxFrequency']" #maxFrequency (input)="formatAmount(maxFrequency.value, 'maxFrequency')" />
+                </mat-form-field>
+                <div  class="message-block">
+                  <span class="error-message" *ngIf="form.controls['maxFrequency'].hasError('required') && form.controls['maxFrequency'].touched">{{'maxFrequencyRequired' | label}}</span> 
+                  <span class="error-message"  *ngIf="form.controls['maxFrequency'].hasError('maxlength')"> {{'maxFrequencyMaxLengthValidation' | label}} </span> 
+                  <span class="error-message"  *ngIf="form.controls['maxFrequency'].hasError('pattern')"> {{'onlyNumbers' | label}} </span> 
+              </div>
+              </div>
+
+    </div>
+    
+          </div>
+    
+          <!--Add Currency Button-->
+          <div class="register-btn" *ngIf="showAddContent">
+            <button *ngIf="showSubmit" class="addCurrencyBtn" mat-raised-button color="primary" [disabled]="!form.valid"
+               type="button" (click)="onSave('ADD')" >Submit </button>
+          </div>
+  
+            <!--Update Currency Button-->
+          <div class="register-btn" *ngIf="showUpdateContent">
+            <button *ngIf="showSubmit" class="addCurrencyBtn" mat-raised-button color="primary" [disabled]="!form.valid"
+               type="button" (click)="onSave('UPD')">Update </button>
+          </div>
+          
+    
+          <mat-spinner style="margin:33px auto;" diameter="40" *ngIf="loader"></mat-spinner>
+    
+        </form>
+      </div>
+    
+     
+    </div>
+  

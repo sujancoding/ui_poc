@@ -1,0 +1,848 @@
+
+<div class="scrollable-content"> 
+   <div class="spinner-overlay" *ngIf="isScreenLoader">
+            <mat-spinner diameter="60"></mat-spinner>
+          </div>
+ <div fxLayout="row" fxLayoutGap="30px">
+    <h5 class="subTitle-1">Company Owner 1</h5>
+    <button mat-raised-button class="addAssociatesButton" (click)="addOwner('single_owner')">
+      <mat-icon>add</mat-icon>
+      Add Owner</button>
+    </div>
+    <div [formGroup]="ownerMainGroup">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Full Name </mat-label>
+          <input matInput (input)="ownerMainGroup.controls.fullName.setValue(ownerMainGroup.controls.fullName.value.toUpperCase())"
+            formControlName="fullName" [formControl]="ownerMainGroup.controls['fullName']" >
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf="ownerMainGroup.controls['fullName'].hasError('pattern')">{{'onlyAlphabets'|
+            label}}</span>
+          <span class="error-message" *ngIf="ownerMainGroup.controls['fullName'].hasError('isWhitespace')">This field should not
+            starts with whitespaces or fullstop</span>
+          <span class="error-message"
+            *ngIf="ownerMainGroup.controls['fullName'].hasError('required') && ownerMainGroup.controls['fullName'].touched">Full Name field
+            Required </span>
+          <span class="error-message" *ngIf=" ownerMainGroup.controls['fullName'].hasError('maxlength')">The Full Name should not
+            exceed more than 50 characters</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label"> NRIC </mat-label>
+          <input matInput (input)="ownerMainGroup.controls.nric.setValue(ownerMainGroup.controls.nric.value.toUpperCase())"
+            formControlName="nric"  maxlength="20" [formControl]="ownerMainGroup.controls['nric']">
+            <mat-hint align="end">{{ownerMainGroup.controls['nric'].value?.length || 0}}/20</mat-hint>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message"
+            *ngIf=" ownerMainGroup.controls['nric'].hasError('validNRIC') && (ownerMainGroup.controls['nric'].dirty)">{{'NRIC_Validation' |
+            label}}</span>
+          <span class="error-message"
+            *ngIf="ownerMainGroup.controls['nric'].hasError('required') && ownerMainGroup.controls['nric'].touched">NRIC field
+            Required</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="13">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Date of Birth </mat-label>
+          <input matInput [matDatepicker]="datepicker" placeholder="DD/MM/YYYY" formControlName="dob" [max]="maxDate"
+          [formControl]="ownerMainGroup.controls['dob']" >
+          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf="ownerMainGroup.controls['dob'].invalid && ownerMainGroup.controls['dob'].dirty
+          && ownerMainGroup.controls['dob'].touched">Maximum 18 age </span>
+          <span class="error-message" *ngIf="ownerMainGroup.controls['dob'].hasError('required') && 
+          ownerMainGroup.controls['dob'].touched">DOB field Required</span>
+        </div>
+      </div>
+
+      <div fxFlex="13">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Gender</mat-label>
+          <mat-select   [formControl]="ownerMainGroup.controls['gender']" >
+            <mat-option value="MALE">MALE</mat-option>
+            <mat-option value="FEMALE">FEMALE</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf="ownerMainGroup.controls['gender'].hasError('required') && 
+          ownerMainGroup.controls['gender'].touched ">Gender field Required</span>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Email Id </mat-label>
+          <input matInput placeholder="name@example.com" formControlName="email"  [formControl]="ownerMainGroup.controls['email']"  >
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" ownerMainGroup.controls['email'].hasError('required') &&
+          ownerMainGroup.controls['email'].touched"> Email ID field Required</span>
+          <span class="error-message" *ngIf="ownerMainGroup.controls['email'].hasError('email')"> Enter Valid Email ID </span>
+        </div>
+
+      </div>
+
+
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Mobile Number</mat-label>
+          <input matInput placeholder="Enter number only" maxlength="15" formControlName="phoneNumber" [formControl]="ownerMainGroup.controls['phoneNumber']"  >
+            <mat-hint align="end">{{ownerMainGroup.controls['phoneNumber'].value?.length || 0}}/15</mat-hint>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message"
+            *ngIf="ownerMainGroup.controls['phoneNumber'].hasError('pattern') && ownerMainGroup.controls['phoneNumber'].dirty ">{{'onlyNumbers'|
+            label}}</span>
+          <span class="error-message"
+            *ngIf="ownerMainGroup.controls['phoneNumber'].hasError('required') && ownerMainGroup.controls['phoneNumber'].touched">Mobile
+            Number field Required </span>
+          <span class="error-message" *ngIf="ownerMainGroup.controls['phoneNumber'].hasError('whitespace')">Mobile Number should
+            not contain <br> whitespaces</span>
+        </div>
+      </div>
+
+      <div fxFlex="28.5">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Nationality </mat-label>
+          <mat-select [formControl]="ownerMainGroup.controls['nationality']">
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+              <mat-label class="custom-label">Search Nationality</mat-label>
+               <input matInput (input)="filterMainOwnerNationality(searchMainOwnerNationality)"  #searchMainOwnerNationality>
+               <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+           </mat-form-field>
+            <mat-option *ngFor="let nationality of filteredMainOwnerNationalities" [value]="nationality.NATIONALITY"> {{nationality.NATIONALITY}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" ownerMainGroup.controls['nationality'].hasError('required') &&
+          ownerMainGroup.controls['nationality'].touched"> Nationality field Required</span>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div *ngFor="let ownerGroup of ownerGroups.controls; let i = index">
+      <h5 class="subTitle-1" style="margin-top: 4px;">Company Owner {{ i + 2 }}</h5>
+      <div [formGroup]="ownerGroup">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label">Full Name </mat-label>
+              <input matInput (input)="ownerGroup.controls.fullName.setValue(ownerGroup.controls.fullName.value.toUpperCase())"
+                formControlName="fullName" [formControl]="ownerGroup.controls['fullName']" >
+            </mat-form-field>
+            <div class="message-block">
+              <span class="error-message" *ngIf="ownerGroup.controls['fullName'].hasError('pattern')">{{'onlyAlphabets'|
+                label}}</span>
+              <span class="error-message" *ngIf="ownerGroup.controls['fullName'].hasError('isWhitespace')">This field should not
+                starts with whitespaces or fullstop</span>
+              <span class="error-message"
+                *ngIf="ownerGroup.controls['fullName'].hasError('required') && ownerGroup.controls['fullName'].touched">Full Name field
+                Required </span>
+              <span class="error-message" *ngIf=" ownerGroup.controls['fullName'].hasError('maxlength')">The Full Name should not
+                exceed more than 50 characters</span>
+            </div>
+          </div>
+    
+    
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label"> NRIC </mat-label>
+              <input matInput (input)="ownerGroup.controls.nric.setValue(ownerGroup.controls.nric.value.toUpperCase())"
+                formControlName="nric"  maxlength="20" [formControl]="ownerGroup.controls['nric']">
+                <mat-hint align="end">{{ownerGroup.controls['nric'].value?.length || 0}}/20</mat-hint>
+            </mat-form-field>
+            <div class="message-block">
+              <span class="error-message"
+                *ngIf=" ownerGroup.controls['nric'].hasError('validNRIC') && (ownerGroup.controls['nric'].dirty)">{{'NRIC_Validation' |
+                label}}</span>
+              <span class="error-message"
+                *ngIf="ownerGroup.controls['nric'].hasError('required') && ownerGroup.controls['nric'].touched">NRIC field
+                Required</span>
+            </div>
+          </div>
+    
+    
+          <div fxFlex="13">
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label">Date of Birth </mat-label>
+              <input matInput [matDatepicker]="datepicker" placeholder="DD/MM/YYYY" formControlName="dob" [max]="maxDate"
+              [formControl]="ownerGroup.controls['dob']" >
+              <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+              <mat-datepicker #datepicker>
+                <mat-datepicker-actions>
+                  <button mat-button matDatepickerCancel>Cancel</button>
+                  <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                </mat-datepicker-actions>
+              </mat-datepicker>
+            </mat-form-field>
+            <div class="message-block">
+              <span class="error-message" *ngIf="ownerGroup.controls['dob'].invalid && ownerGroup.controls['dob'].dirty
+              && ownerGroup.controls['dob'].touched">Maximum 18 age </span>
+              <span class="error-message" *ngIf="ownerGroup.controls['dob'].hasError('required') && 
+              ownerGroup.controls['dob'].touched">DOB field Required</span>
+            </div>
+          </div>
+    
+          <div fxFlex="13">
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label">Gender</mat-label>
+              <mat-select   [formControl]="ownerGroup.controls['gender']" >
+                <mat-option value="MALE">MALE</mat-option>
+                <mat-option value="FEMALE">FEMALE</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="message-block">
+              <span class="error-message" *ngIf="ownerGroup.controls['gender'].hasError('required') && 
+              ownerGroup.controls['gender'].touched ">Gender field Required</span>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+    
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label">Email Id </mat-label>
+              <input matInput placeholder="name@example.com" formControlName="email"  [formControl]="ownerGroup.controls['email']"  >
+            </mat-form-field>
+            <div class="message-block">
+              <span class="error-message" *ngIf=" ownerGroup.controls['email'].hasError('required') &&
+              ownerGroup.controls['email'].touched"> Email ID field Required</span>
+              <span class="error-message" *ngIf="ownerGroup.controls['email'].hasError('email')"> Enter Valid Email ID </span>
+            </div>
+    
+          </div>
+    
+    
+    
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label">Mobile Number</mat-label>
+              <input matInput placeholder="Enter number only" maxlength="15" formControlName="phoneNumber" [formControl]="ownerGroup.controls['phoneNumber']"  >
+                <mat-hint align="end">{{ownerGroup.controls['phoneNumber'].value?.length || 0}}/15</mat-hint>
+            </mat-form-field>
+            <div class="message-block">
+              <span class="error-message"
+                *ngIf="ownerGroup.controls['phoneNumber'].hasError('pattern') && ownerGroup.controls['phoneNumber'].dirty ">{{'onlyNumbers'|
+                label}}</span>
+              <span class="error-message"
+                *ngIf="ownerGroup.controls['phoneNumber'].hasError('required') && ownerGroup.controls['phoneNumber'].touched">Mobile
+                Number field Required </span>
+              <span class="error-message" *ngIf="ownerGroup.controls['phoneNumber'].hasError('whitespace')">Mobile Number should
+                not contain <br> whitespaces</span>
+            </div>
+          </div>
+    
+          <div fxFlex="28.5">
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label">Nationality </mat-label>
+              <mat-select [formControl]="ownerGroup.controls['nationality']">
+                <mat-option *ngFor="let nationality of nationalityArray" [value]="nationality.NATIONALITY"> {{nationality.NATIONALITY}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="message-block">
+              <span class="error-message" *ngIf=" ownerGroup.controls['nationality'].hasError('required') &&
+              ownerGroup.controls['nationality'].touched"> Nationality field Required</span>
+            </div>
+          </div>
+        </div>
+      <!-- <div class="remove-field">
+        <button mat-flat-button class="remove-btn" (click)="removeOwner(i)">Remove </button>
+      </div> -->
+      </div>
+    </div>
+    
+   
+
+    <div fxLayout="row" fxLayoutGap="30px">
+      <h5 class="subTitle-2">Company Dealer 1</h5>
+      <button mat-raised-button class="addAssociatesButton" style="margin-top: 7px;" (click)="addDealer('single_dealer')">
+        <mat-icon>add</mat-icon>
+        Add Dealer</button>
+      </div>
+      <div [formGroup]="dealerMainGroup">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Full Name </mat-label>
+          <input matInput
+            (input)="dealerMainGroup.controls.dealerFullname.setValue(dealerMainGroup.controls.dealerFullname.value.toUpperCase())"
+            formControlName="dealerFullname" [formControl]="dealerMainGroup.controls['dealerFullname']">
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" dealerMainGroup.controls['dealerFullname'].hasError('pattern')">{{'onlyAlphabets'|
+            label}}</span>
+          <span class="error-message" *ngIf=" dealerMainGroup.controls['dealerFullname'].hasError('isWhitespace')">This field
+            should not starts with whitespaces or fullstop</span>
+          <span class="error-message"
+            *ngIf="dealerMainGroup.controls['dealerFullname'].hasError('required') && dealerMainGroup.controls['dealerFullname'].touched">Full
+            Name field Required </span>
+          <span class="error-message" *ngIf=" dealerMainGroup.controls['dealerFullname'].hasError('maxlength')">The Full Name
+            should not exceed more than 50 characters</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label"> NRIC </mat-label>
+          <input matInput (input)="dealerMainGroup.controls.dealerNric.setValue(dealerMainGroup.controls.dealerNric.value.toUpperCase())"
+            formControlName="dealerNric" [formControl]="dealerMainGroup.controls['dealerNric']" maxlength="20">
+          <mat-hint align="end">{{dealerMainGroup.controls['dealerNric'].value?.length || 0}}/20</mat-hint>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message"
+            *ngIf=" dealerMainGroup.controls['dealerNric'].hasError('validNRIC') && (dealerMainGroup.controls['dealerNric'].dirty)">{{'NRIC_Validation'
+            | label}}</span>
+          <span class="error-message"
+            *ngIf="dealerMainGroup.controls['dealerNric'].hasError('required') && dealerMainGroup.controls['dealerNric'].touched">NRIC field
+            Required</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="13">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Date of Birth </mat-label>
+          <input matInput [matDatepicker]="datepicker1" placeholder="DD/MM/YYYY" formControlName="dealerDob"
+            [max]="maxDate" [formControl]="dealerMainGroup.controls['dealerDob']">
+          <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker1>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf="dealerMainGroup.controls['dealerDob'].invalid && dealerMainGroup.controls['dealerDob'].dirty
+          && dealerMainGroup.controls['dealerDob'].touched">Maximum 18 age</span>
+          <span class="error-message" *ngIf="dealerMainGroup.controls['dealerDob'].hasError('required') && 
+          dealerMainGroup.controls['dealerDob'].touched">DOB field Required</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="13">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Gender</mat-label>
+          <mat-select [formControl]="dealerMainGroup.controls['dealerGender']">
+            <mat-option value="MALE">MALE</mat-option>
+            <mat-option value="FEMALE">FEMALE</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf="dealerMainGroup.controls['dealerGender'].hasError('required') && 
+          dealerMainGroup.controls['dealerGender'].touched ">Gender field Required</span>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row " fxLayoutAlign="space-between">
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Email Id </mat-label>
+          <input matInput placeholder="name@example.com" formControlName="dealerEmail"
+            [formControl]="dealerMainGroup.controls['dealerEmail']">
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" dealerMainGroup.controls['dealerEmail'].hasError('required') &&
+          dealerMainGroup.controls['dealerEmail'].touched">Email ID field Required </span>
+          <span class="error-message" *ngIf="dealerMainGroup.controls['dealerEmail'].hasError('email')">Enter Valid Email ID
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Mobile Number</mat-label>
+          <input matInput placeholder="Enter number only" maxlength="15" formControlName="dealerPhoneNumber"
+            [formControl]="dealerMainGroup.controls['dealerPhoneNumber']">
+            <mat-hint align="end">{{dealerMainGroup.controls['dealerPhoneNumber'].value?.length || 0}}/15</mat-hint>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message"
+            *ngIf="dealerMainGroup.controls['dealerPhoneNumber'].hasError('pattern') && dealerMainGroup.controls['dealerPhoneNumber'].dirty ">{{'onlyNumbers'|
+            label}}</span>
+          <span class="error-message"
+            *ngIf="dealerMainGroup.controls['dealerPhoneNumber'].hasError('required') && dealerMainGroup.controls['dealerPhoneNumber'].touched">Mobile
+            Number field Required </span>
+          <span class="error-message" *ngIf="dealerMainGroup.controls['dealerPhoneNumber'].hasError('whitespace')">Mobile Number
+            should not contain <br> whitespaces</span>
+        </div>
+      </div>
+
+      <div fxFlex="28.5">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Nationality </mat-label>
+          <mat-select [formControl]="dealerMainGroup.controls['dealerNationality']">
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+              <mat-label class="custom-label">Search Nationality</mat-label>
+               <input matInput (input)="filterMainDealerNationality(searchMainDealerNationality)"  #searchMainDealerNationality>
+               <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+           </mat-form-field>
+            <mat-option *ngFor="let nationality of filteredMainDealerNationalities" [value]="nationality.NATIONALITY"> {{nationality.NATIONALITY}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" dealerMainGroup.controls['dealerNationality'].hasError('required') &&
+          dealerMainGroup.controls['dealerNationality'].touched"> Nationality field Required </span>
+        </div>
+      </div>
+    </div>
+      </div>
+  <div *ngFor="let dealerGroup of dealerGroups.controls; let i = index">
+      <h5 class="subTitle-2" style="margin-top: 4px;">Company Dealer {{i + 2}}</h5>
+      <div [formGroup]="dealerGroup">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Full Name </mat-label>
+          <input matInput
+            (input)="dealerGroup.controls.dealerFullname.setValue(dealerGroup.controls.dealerFullname.value.toUpperCase())"
+            formControlName="dealerFullname" [formControl]="dealerGroup.controls['dealerFullname']">
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" dealerGroup.controls['dealerFullname'].hasError('pattern')">{{'onlyAlphabets'|
+            label}}</span>
+          <span class="error-message" *ngIf=" dealerGroup.controls['dealerFullname'].hasError('isWhitespace')">This field
+            should not starts with whitespaces or fullstop</span>
+          <span class="error-message"
+            *ngIf="dealerGroup.controls['dealerFullname'].hasError('required') && dealerGroup.controls['dealerFullname'].touched">Full
+            Name field Required </span>
+          <span class="error-message" *ngIf=" dealerGroup.controls['dealerFullname'].hasError('maxlength')">The Full Name
+            should not exceed more than 50 characters</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label"> NRIC </mat-label>
+          <input matInput (input)="dealerGroup.controls.dealerNric.setValue(dealerGroup.controls.dealerNric.value.toUpperCase())"
+            formControlName="dealerNric" [formControl]="dealerGroup.controls['dealerNric']" maxlength="20">
+          <mat-hint align="end">{{dealerGroup.controls['dealerNric'].value?.length || 0}}/20</mat-hint>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message"
+            *ngIf=" dealerGroup.controls['dealerNric'].hasError('validNRIC') && (dealerGroup.controls['dealerNric'].dirty)">{{'NRIC_Validation'
+            | label}}</span>
+          <span class="error-message"
+            *ngIf="dealerGroup.controls['dealerNric'].hasError('required') && dealerGroup.controls['dealerNric'].touched">NRIC field
+            Required</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="13">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Date of Birth </mat-label>
+          <input matInput [matDatepicker]="datepicker1" placeholder="DD/MM/YYYY" formControlName="dealerDob"
+            [max]="maxDate" [formControl]="dealerGroup.controls['dealerDob']">
+          <mat-datepicker-toggle matSuffix [for]="datepicker1"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker1>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf="dealerGroup.controls['dealerDob'].invalid && dealerGroup.controls['dealerDob'].dirty
+          && dealerGroup.controls['dealerDob'].touched">Maximum 18 age</span>
+          <span class="error-message" *ngIf="dealerGroup.controls['dealerDob'].hasError('required') && 
+          dealerGroup.controls['dealerDob'].touched">DOB field Required</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="13">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Gender</mat-label>
+          <mat-select [formControl]="dealerGroup.controls['dealerGender']">
+            <mat-option value="MALE">MALE</mat-option>
+            <mat-option value="FEMALE">FEMALE</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf="dealerGroup.controls['dealerGender'].hasError('required') && 
+          dealerGroup.controls['dealerGender'].touched ">Gender field Required</span>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row " fxLayoutAlign="space-between">
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Email Id </mat-label>
+          <input matInput placeholder="name@example.com" formControlName="dealerEmail"
+            [formControl]="dealerGroup.controls['dealerEmail']">
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" dealerGroup.controls['dealerEmail'].hasError('required') &&
+          dealerGroup.controls['dealerEmail'].touched">Email ID field Required </span>
+          <span class="error-message" *ngIf="dealerGroup.controls['dealerEmail'].hasError('email')">Enter Valid Email ID
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Mobile Number</mat-label>
+          <input matInput placeholder="Enter number only" maxlength="15" formControlName="dealerPhoneNumber"
+            [formControl]="dealerGroup.controls['dealerPhoneNumber']">
+            <mat-hint align="end">{{dealerGroup.controls['dealerPhoneNumber'].value?.length || 0}}/15</mat-hint>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message"
+            *ngIf="dealerGroup.controls['dealerPhoneNumber'].hasError('pattern') && dealerGroup.controls['dealerPhoneNumber'].dirty ">{{'onlyNumbers'|
+            label}}</span>
+          <span class="error-message"
+            *ngIf="dealerGroup.controls['dealerPhoneNumber'].hasError('required') && dealerGroup.controls['dealerPhoneNumber'].touched">Mobile
+            Number field Required </span>
+          <span class="error-message" *ngIf="dealerGroup.controls['dealerPhoneNumber'].hasError('whitespace')">Mobile Number
+            should not contain <br> whitespaces</span>
+        </div>
+      </div>
+
+      <div fxFlex="28.5">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Nationality </mat-label>
+          <mat-select [formControl]="dealerGroup.controls['dealerNationality']">
+            <mat-option *ngFor="let nationality of nationalityArray" [value]="nationality.NATIONALITY"> {{nationality.NATIONALITY}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" dealerGroup.controls['dealerNationality'].hasError('required') &&
+          dealerGroup.controls['dealerNationality'].touched"> Nationality field Required </span>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="remove-field">
+      <button  mat-flat-button  class="remove-btn"  (click)="removeDealer(i)">Remove</button>
+  </div> -->
+ 
+  </div>
+  </div>
+
+  
+  <div fxLayout="row" fxLayoutGap="30px">
+    <h5 class="subTitle-2">Company Runner 1</h5>
+    <button mat-raised-button class="addAssociatesButton" style="margin-top: 7px;"  (click)="addRunner('single_runner')">
+      <mat-icon>add</mat-icon>
+      Add Runner</button>
+    </div>
+<div [formGroup]="runnerMainGroup">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Full Name </mat-label>
+          <input matInput
+            (input)="runnerMainGroup.controls.runnerFullname.setValue(runnerMainGroup.controls.runnerFullname.value.toUpperCase())"
+            formControlName="runnerFullname" [formControl]="runnerMainGroup.controls['runnerFullname']">
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" runnerMainGroup.controls['runnerFullname'].hasError('pattern')">{{'onlyAlphabets'|
+            label}}</span>
+          <span class="error-message" *ngIf=" runnerMainGroup.controls['runnerFullname'].hasError('isWhitespace')">This field
+            should not starts with whitespaces or fullstop</span>
+          <span class="error-message"
+            *ngIf="runnerMainGroup.controls['runnerFullname'].hasError('required') && runnerMainGroup.controls['runnerFullname'].touched">Full
+            Name field Required </span>
+          <span class="error-message" *ngIf=" runnerMainGroup.controls['runnerFullname'].hasError('maxlength')">The Full Name
+            should not exceed more than 50 characters</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label"> NRIC </mat-label>
+          <input matInput (input)="runnerMainGroup.controls.runnerNric.setValue(runnerMainGroup.controls.runnerNric.value.toUpperCase())"
+            formControlName="runnerNric" [formControl]="runnerMainGroup.controls['runnerNric']" maxlength="20">
+          <mat-hint align="end">{{runnerMainGroup.controls['runnerNric'].value?.length || 0}}/20</mat-hint>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message"
+            *ngIf="runnerMainGroup.controls['runnerNric'].hasError('validNRIC') && (runnerMainGroup.controls['runnerNric'].dirty)">{{'NRIC_Validation'
+            | label}}</span>
+          <span class="error-message"
+            *ngIf="runnerMainGroup.controls['runnerNric'].hasError('required') && runnerMainGroup.controls['runnerNric'].touched">NRIC field
+            Required</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="13">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Date of Birth </mat-label>
+          <input matInput [matDatepicker]="datepicker2" placeholder="DD/MM/YYYY" formControlName="runnerDob"
+            [max]="maxDate" [formControl]="runnerMainGroup.controls['runnerDob']">
+          <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker2>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf="runnerMainGroup.controls['runnerDob'].invalid && runnerMainGroup.controls['runnerDob'].dirty
+          && runnerMainGroup.controls['runnerDob'].touched">Maximum 18 age</span>
+          <span class="error-message" *ngIf="runnerMainGroup.controls['runnerDob'].hasError('required') && 
+          runnerMainGroup.controls['runnerDob'].touched">DOB field Required </span>
+        </div>
+      </div>
+
+
+      <div fxFlex="13">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Gender</mat-label>
+          <mat-select [formControl]="runnerMainGroup.controls['runnerGender']">
+            <mat-option value="MALE">MALE</mat-option>
+            <mat-option value="FEMALE">FEMALE</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf="runnerMainGroup.controls['runnerGender'].hasError('required') && 
+          runnerMainGroup.controls['runnerGender'].touched ">Gender field Required </span>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Email Id </mat-label>
+          <input matInput placeholder="name@example.com" formControlName="runnerEmail"
+            [formControl]="runnerMainGroup.controls['runnerEmail']">
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" runnerMainGroup.controls['runnerEmail'].hasError('required') &&
+          runnerMainGroup.controls['runnerEmail'].touched">Email ID field Required</span>
+          <span class="error-message" *ngIf="runnerMainGroup.controls['runnerEmail'].hasError('email')"> Enter Valid Email ID
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Mobile Number</mat-label>
+          <input matInput placeholder="Enter number only" formControlName="runnerPhoneNumber"
+            [formControl]="runnerMainGroup.controls['runnerPhoneNumber']" maxlength="15">
+            <mat-hint align="end">{{runnerMainGroup.controls['runnerPhoneNumber'].value?.length || 0}}/15</mat-hint>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message"
+            *ngIf="runnerMainGroup.controls['runnerPhoneNumber'].hasError('pattern') && runnerMainGroup.controls['runnerPhoneNumber'].dirty ">{{'onlyNumbers'|
+            label}}</span>
+          <span class="error-message"
+            *ngIf="runnerMainGroup.controls['runnerPhoneNumber'].hasError('required') && runnerMainGroup.controls['runnerPhoneNumber'].touched">Mobile
+            Number field Required </span>
+          <span class="error-message" *ngIf="runnerMainGroup.controls['runnerPhoneNumber'].hasError('whitespace')">Mobile Number
+            should not contain <br> whitespaces</span>
+        </div>
+      </div>
+
+      <div fxFlex="28.5">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Nationality </mat-label>
+          <mat-select [formControl]="runnerMainGroup.controls['runnerNationality']">
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="padding-left: 10px;padding-right: 10px;padding-top: 10px;">
+              <mat-label class="custom-label">Search Nationality</mat-label>
+               <input matInput (input)="filterMainRunnerNationality(searchMainRunnerNationality)"  #searchMainRunnerNationality>
+               <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+           </mat-form-field>
+            <mat-option *ngFor="let nationality of filteredMainRunnerNationalities" [value]="nationality.NATIONALITY"> {{nationality.NATIONALITY}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" runnerMainGroup.controls['runnerNationality'].hasError('required') &&
+          runnerMainGroup.controls['runnerNationality'].touched">Nationality field Required </span>
+        </div>
+      </div>
+    </div> 
+  </div>
+
+  <div *ngFor="let runnerGroup of runnerGroups.controls; let i = index">
+      <h5 class="subTitle-3" style="margin-top: 4px;">Company Runner {{i + 2}}</h5>
+  <div [formGroup]="runnerGroup">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Full Name </mat-label>
+          <input matInput
+            (input)="runnerGroup.controls.runnerFullname.setValue(runnerGroup.controls.runnerFullname.value.toUpperCase())"
+            formControlName="runnerFullname" [formControl]="runnerGroup.controls['runnerFullname']">
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" runnerGroup.controls['runnerFullname'].hasError('pattern')">{{'onlyAlphabets'|
+            label}}</span>
+          <span class="error-message" *ngIf=" runnerGroup.controls['runnerFullname'].hasError('isWhitespace')">This field
+            should not starts with whitespaces or fullstop</span>
+          <span class="error-message"
+            *ngIf="runnerGroup.controls['runnerFullname'].hasError('required') && runnerGroup.controls['runnerFullname'].touched">Full
+            Name field Required </span>
+          <span class="error-message" *ngIf=" runnerGroup.controls['runnerFullname'].hasError('maxlength')">The Full Name
+            should not exceed more than 50 characters</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label"> NRIC </mat-label>
+          <input matInput (input)="runnerGroup.controls.runnerNric.setValue(runnerGroup.controls.runnerNric.value.toUpperCase())"
+            formControlName="runnerNric" [formControl]="runnerGroup.controls['runnerNric']" maxlength="20">
+          <mat-hint align="end">{{runnerGroup.controls['runnerNric'].value?.length || 0}}/20</mat-hint>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message"
+            *ngIf="runnerGroup.controls['runnerNric'].hasError('validNRIC') && (runnerGroup.controls['runnerNric'].dirty)">{{'NRIC_Validation'
+            | label}}</span>
+          <span class="error-message"
+            *ngIf="runnerGroup.controls['runnerNric'].hasError('required') && runnerGroup.controls['runnerNric'].touched">NRIC field
+            Required</span>
+        </div>
+      </div>
+
+
+      <div fxFlex="13">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Date of Birth </mat-label>
+          <input matInput [matDatepicker]="datepicker2" placeholder="DD/MM/YYYY" formControlName="runnerDob"
+            [max]="maxDate" [formControl]="runnerGroup.controls['runnerDob']">
+          <mat-datepicker-toggle matSuffix [for]="datepicker2"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker2>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf="runnerGroup.controls['runnerDob'].invalid && runnerGroup.controls['runnerDob'].dirty
+          && runnerGroup.controls['runnerDob'].touched">Maximum 18 age</span>
+          <span class="error-message" *ngIf="runnerGroup.controls['runnerDob'].hasError('required') && 
+          runnerGroup.controls['runnerDob'].touched">DOB field Required </span>
+        </div>
+      </div>
+
+
+      <div fxFlex="13">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Gender</mat-label>
+          <mat-select [formControl]="runnerGroup.controls['runnerGender']">
+            <mat-option value="MALE">MALE</mat-option>
+            <mat-option value="FEMALE">FEMALE</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf="runnerGroup.controls['runnerGender'].hasError('required') && 
+          runnerGroup.controls['runnerGender'].touched ">Gender field Required </span>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Email Id </mat-label>
+          <input matInput placeholder="name@example.com" formControlName="runnerEmail"
+            [formControl]="runnerGroup.controls['runnerEmail']">
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" runnerGroup.controls['runnerEmail'].hasError('required') &&
+          runnerGroup.controls['runnerEmail'].touched">Email ID field Required</span>
+          <span class="error-message" *ngIf="runnerGroup.controls['runnerEmail'].hasError('email')"> Enter Valid Email ID
+          </span>
+        </div>
+
+      </div>
+
+
+
+      <div fxFlex="33">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Mobile Number</mat-label>
+          <input matInput placeholder="Enter number only" formControlName="runnerPhoneNumber"
+            [formControl]="runnerGroup.controls['runnerPhoneNumber']" maxlength="15">
+            <mat-hint align="end">{{runnerGroup.controls['runnerPhoneNumber'].value?.length || 0}}/15</mat-hint>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message"
+            *ngIf="runnerGroup.controls['runnerPhoneNumber'].hasError('pattern') && runnerGroup.controls['runnerPhoneNumber'].dirty ">{{'onlyNumbers'|
+            label}}</span>
+          <span class="error-message"
+            *ngIf="runnerGroup.controls['runnerPhoneNumber'].hasError('required') && runnerGroup.controls['runnerPhoneNumber'].touched">Mobile
+            Number field Required </span>
+          <span class="error-message" *ngIf="runnerGroup.controls['runnerPhoneNumber'].hasError('whitespace')">Mobile Number
+            should not contain <br> whitespaces</span>
+        </div>
+      </div>
+
+      <div fxFlex="28.5">
+        <mat-form-field appearance="outline">
+          <mat-label class="custom-label">Nationality </mat-label>
+          <mat-select [formControl]="runnerGroup.controls['runnerNationality']">
+            <mat-option *ngFor="let nationality of nationalityArray" [value]="nationality.NATIONALITY"> {{nationality.NATIONALITY}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="message-block">
+          <span class="error-message" *ngIf=" runnerGroup.controls['runnerNationality'].hasError('required') &&
+          runnerGroup.controls['runnerNationality'].touched">Nationality field Required </span>
+        </div>
+      </div>
+    </div> 
+      <!-- <div class="remove-field">
+        <button  mat-flat-button  class="remove-btn" (click)="removeRunner(i)">Remove</button>
+    </div> -->
+    </div>
+  </div>
+
+
+</div> 
+
+
+<div *ngIf="saveAssociates" style="margin-top: 28px;" fxLayout="row wrap" fxLayoutAlign="space-between">
+  <button mat-raised-button class="stepper-back-btn" matStepperPrevious type="button">Previous</button>
+  <button mat-raised-button color="primary" class="save-associates" matStepperNext [disabled]="!ownerMainGroup.valid && !dealerMainGroup.valid && !runnerMainGroup.valid"
+    (click)="onSave()" type="submit">Save and Continue</button>
+</div>

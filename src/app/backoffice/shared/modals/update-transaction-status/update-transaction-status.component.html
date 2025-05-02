@@ -1,0 +1,62 @@
+<div class="toolbar-header">
+    <h3>Edit status</h3>
+    <button type="button" mat-icon-button (click)="closeDialog()">
+      <mat-icon style="padding-bottom: 27px;">close</mat-icon>
+    </button>
+</div>
+
+<div class="txn-details-row" fxLayout="row" fxLayoutGap="10px" >
+    <p class="label" >Transaction Id:</p>
+    <p class="value" >{{ transactionId }}</p>
+</div>
+<div class="customer-row" fxLayout="row" fxLayoutGap="10px" >
+    <p class="label">Transaction Initiated by:</p>
+    <p class="value">{{customerName}} </p>
+</div>
+<div class="amount-row" fxLayout="row" fxLayoutGap="33px" >
+   <div fxLayout="row" fxLayoutGap="10px">
+    <p class="label">Amount (SGD):</p>
+    <p class="value">{{amountSGD}} </p>
+</div>
+<div fxLayout="row" fxLayoutGap="10px">
+    <p class="label">Amount ({{sendCcy}}):</p>
+    <p class="value"> {{amountF}}</p>
+</div>
+</div>
+<div class="selection" fxLayout="row" fxLayoutAlign="space-around">
+<div>
+    <mat-form-field appearance="outline" style="width: 95%;">
+        <mat-label class="custom-label"> Status </mat-label>
+        <mat-select [(ngModel)]="transactionStatus" > 
+            <mat-option value="INITIATED">Initiated</mat-option>
+            <mat-option value="AMOUNT RECEIVED">Amount Received</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div>
+    <mat-form-field appearance="outline" style="width: 95%;">
+        <mat-label class="custom-label"> Payment Type </mat-label>
+        <mat-select [(ngModel)]="paymentMode" >
+            <mat-option value="PN">PayNow</mat-option>
+            <mat-option value="CH">Cash</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+</div>
+
+<mat-divider class="section-divider"></mat-divider>
+
+<div class="button-row" fxLayoutGap="10px">
+    <button class="close-btn" type="button" (click)="closeDialog()">
+        Close
+    </button>
+    <button class="save-btn" type="button" (click)="saveChanges()" [disabled]="transactionStatus === 'INITIATED' || paymentMode === ''"
+    [ngClass]="{'disabled-button': transactionStatus === 'INITIATED' || paymentMode === '', 'activate-button': transactionStatus === 'AMOUNT RECEIVED' && (paymentMode === 'PN' || paymentMode === 'CH')}">
+    <ng-container *ngIf="isLoading; else buttonContent">
+        <mat-spinner diameter="20" color="primary" [style.margin-left.px]="50" [style.vertical-align]="'middle'"></mat-spinner>
+    </ng-container> 
+    <ng-template #buttonContent>
+        Save Changes
+    </ng-template>
+    </button>
+</div>

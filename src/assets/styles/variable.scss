@@ -1,0 +1,141 @@
+// Variables
+//Interstate_Light,sans-serif,Arial
+$bodyfont: 'Interstate_Light', sans-serif , Arial;
+$headingfont: 'Interstate_Regular', sans-serif , Arial;
+
+//Interstate_Regular,sans-serif
+
+@use '@angular/material' as mat;
+@use '@angular/material/theming' as mat-core;
+
+$md-mcgpalette0: (
+    50 : #e3e7ed,
+    100 : #b8c4d2,
+    200 : #899cb4,
+    300 : #597496,
+    400 : #365780,
+    500 : #123969,
+    600 : #103361,
+    700 : #0d2c56,
+    800 : #0a244c,
+    900 : #05173b,
+    A100 : #7297ff,
+    A200 : #3f71ff,
+    A400 : #0c4bff,
+    A700 : #003ff2,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+
+/*Material Theme Colors*/
+
+$primary: mat.define-palette($md-mcgpalette0, 500);
+$accent: mat.define-palette(mat.$indigo-palette, 500);
+$warn: mat.define-palette(mat.$pink-palette, 500);
+$theme: mat.define-light-theme((
+    color: (
+        primary: $primary,
+        accent: $accent,
+        warn: $warn
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+));
+@mixin my-theme{
+ $my-theme : $theme;
+}
+@include my-theme;
+$background: map-get($theme, background);
+$foreground: map-get($theme, foreground);
+
+// Apply Material Core Styles
+
+
+// Apply the Material theme to components
+
+
+/*Theme Colors*/
+
+$topbar: rgb(0, 45, 114);
+$sidebar: #fff;
+$sidebar-white: #e5edef;
+$sidebar-alt: #f2f6f8;
+$bodycolor: #eef5f9;
+$headingtext: #455a64;
+$bodytext: #67757c;
+$sidebar-text: #607d8b;
+$sidebar-icons: #99abb4;
+
+$font-16: 16px;
+
+$light-text: #a6b7bf;
+$themecolor: #1e88e5;
+$themecolor-alt: #26c6da;
+$themecolor-dark: #028ee1;
+
+/*bootstrap Color*/
+$danger: #fc4b6c;
+$success: #26c6da;
+$warning: #ffb22b;
+$primary: #7460ee;
+$info: #1e88e5;
+$inverse: #2f3d4a;
+$muted: #99abb4;
+$dark: #263238;
+$light: #f2f4f8;
+$extra-light: #ebf3f5;
+$secondary: #727b84;
+
+/*Light colors*/
+$light-danger: #f9e7eb;
+$light-success: #e8fdf8;
+$light-warning: #fff8ec;
+$light-primary: #f1effd;
+$light-info: #e3f3fd;
+$light-inverse: #f6f6f6;
+$light-megna: #e0f2f4;
+
+$danger-dark: #e6294b;
+$success-dark: #1eacbe;
+$warning-dark: #e9ab2e;
+$primary-dark: #6352ce;
+$info-dark: #028ee1;
+$red-dark: #d61f1f;
+$inverse-dark: #232a37;
+$dark-transparent: rgba(0, 0, 0, 0.05);
+
+/*Normal Color*/
+$white: #ffffff;
+$red: #fb3a3a;
+$yellow: #a0aec4;
+$purple: #7460ee;
+$blue: #02bec9;
+$megna: #00897b;
+
+/*Extra Variable*/
+$rgt: right;
+$lft: left;
+$border: rgba(120, 130, 140, 0.13);
+$table-border: #f3f1f1;
+$card-brd: #d7dfe3;
+$dark-text: #848a96;
+$radius: 4px;
+$form-brd: #d9d9d9;
+
+
+

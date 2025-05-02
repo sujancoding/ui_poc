@@ -1,0 +1,66 @@
+<!--MODAL POPUP DIALOG-->
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <span> Fund Transfer </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+            <mat-icon>close</mat-icon>
+        </span>
+    </mat-toolbar>
+</h4>
+
+<form [formGroup]="form" (ngSubmit)="onSave()">
+    <div fxLayout="row" fxLayoutAlign="space-around">
+        <div fxFlex="44">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label">From Account </mat-label>
+                <input matInput [formControl]="form.controls['fromAccountName']" formControlName="fromAccountName" readonly>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="44">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label">To Account </mat-label>
+                <input matInput [formControl]="form.controls['toAccountName']" formControlName="toAccountName" readonly>
+            </mat-form-field>
+        </div>
+
+
+
+    </div>
+
+
+    <div fxLayout="row" fxLayoutAlign="space-around">
+
+        <div fxFlex="44">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label">Outstanding Balance</mat-label>
+                <input matInput [formControl]="form.controls['outstandingBalance']" readonly formControlName="outstandingBalance" >
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="44">
+            <mat-form-field  appearance="outline">
+                <mat-label class="custom-label"> Transfer Amount </mat-label>
+                <input  matInput  [formControl]="form.controls['transferFund']" formControlName="transferFund">
+                <mat-error>
+                <small class="error-message" *ngIf="form.controls['transferFund'].hasError('required')
+                  && form.controls['transferFund'].touched && form.controls['transferFund'].dirty"> Amount Required </small>
+                    <small class="error-message" *ngIf="form.controls['transferFund'].hasError('pattern')">
+                        {{'onlyNumbers' | label}} </small>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+
+    </div>
+
+    <div class="deactivate" fxLayout="row wrap" fxLayoutGap="30px">
+        <button mat-raised-button class="blue" [mat-dialog-close]="true" type="button">Close</button>
+        <button mat-raised-button class="green" *ngIf="showSubmitButton"
+            [disabled]="!form.valid" type="submit">Submit</button>
+
+        <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="submitButtonLoader"></mat-spinner>
+
+    </div>
+
+</form>

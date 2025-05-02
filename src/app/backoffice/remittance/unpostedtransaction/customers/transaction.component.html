@@ -1,0 +1,400 @@
+<!--UNPOSTED TRANSACTIONS-->
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter">
+  <form [formGroup]="filterForm" >
+  <div class="inner-container">
+
+    
+        <!--Removed *ngIf="showAction" because we are going to show filter button in both Posted and UnPosted Transaction Screen in BackOffice-->
+        <button mat-raised-button (click)='xpandStatus = !xpandStatus' class="applyFilter-btn">
+          <mat-icon class="add-filter-icon">add</mat-icon>
+          Filter
+        </button>
+
+
+    <mat-form-field style="width: 40%;
+    font-size: 14px;
+    margin: 6px;" appearance="{{'formFieldAppearance' | label}}">
+    <mat-label class="custom-label">Search Customer</mat-label>
+      <input matInput 
+      (input)="onCustomerNameChange()"
+        formControlName="customerName" [formControl]="filterForm.controls['customerName']" class="form-control"
+        type="text" [(ngModel)]="searchCustomerName">
+      <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+    </mat-form-field>
+
+    <mat-icon  matTooltipPosition="above"
+    matTooltipClass="custom-tooltip" class="tooltip-warning-icon" matTooltip="3 Characters Minimum">error_outline</mat-icon> 
+
+   
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div  class="custom-filter-values">
+    <div *ngFor="let filterValues of filterValues" fxLayout="column" class="margin-space" fxLayoutGap="2px">
+      <p class="filter-key"> {{filterValues.fieldName ? filterValues.fieldName : ""}} </p>
+      <p [ngStyle]="getFilterValueStyle(filterValues)" class="filter-value"> {{filterValues.value ? filterValues.value : ""}} </p>
+    </div>
+
+   
+  </div>
+
+  
+
+    <div fxLayout="column" fxLayoutGap="1px">
+
+      <div class="div-height" fxLayout="row" fxLayoutGap="10px">
+
+
+
+      </div>
+      <mat-accordion #accordion="matAccordion">
+        <mat-expansion-panel style="width: fit-content;background-color: #ffffff;z-index: 999;
+        "
+          #mapanel="matExpansionPanel" [(expanded)]="xpandStatus">
+
+           <h4 class="filter-title"> Filters </h4>
+        <!-- <mat-divider> </mat-divider> -->
+      <div fxLayout="column" fxLayoutGap="26px" style="margin-top: 32px;">  
+
+        <div fxLayout="row" class="row-items">
+          <div fxLayout="column" fxFlex="50">
+            <!-- <p class="p"> Customer Name </p> -->
+            <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Customer Name</mat-label>
+              <input matInput
+                (input)="filterForm.controls.customerName.setValue(filterForm.controls.customerName.value.toUpperCase())"
+                formControlName="customerName" [formControl]="filterForm.controls['customerName']" class="form-control"
+                type="text" [(ngModel)]="searchCustomerName">
+              <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+            </mat-form-field>
+            <small class="custName-error-message" *ngIf="filterForm.controls['customerName'].hasError('pattern')"> {{ 'alphabetsWithSpecificSplChars'| label }} </small>
+          </div>
+
+          <div fxLayout="column" fxFlex="50">
+            <!-- <p class="p"> Transaction Id </p> -->
+            <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Transaction Id</mat-label>
+              <input matInput  maxlength="12"
+                (input)="filterForm.controls.transactionId.setValue(filterForm.controls.transactionId.value.toUpperCase())"
+                formControlName="transactionId" [formControl]="filterForm.controls['transactionId']" class="form-control"
+                >
+              <mat-hint align="end">{{filterForm.controls['transactionId'].value?.length || 0}}/12</mat-hint>
+            </mat-form-field>
+              <small class="custName-error-message" *ngIf="filterForm.controls['transactionId'].hasError('minlength')
+              || filterForm.controls['transactionId'].hasError('pattern') "> Only Numbers and should be atleast 12 chars . </small>
+          </div>
+
+          </div>
+
+          <div fxLayout="row" class="row-items">
+
+            <div fxLayout="column" fxFlex="50">
+              <!-- <p class="p"> NRIC </p> -->
+              <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">NRIC</mat-label>
+                <input matInput  formControlName="idNbr"
+                  [formControl]="filterForm.controls['idNbr']"
+                  (input)="filterForm.controls.idNbr.setValue(filterForm.controls.idNbr.value.toUpperCase())"
+                  maxlength="9" [(ngModel)]="idNumber" type="text">
+                <mat-icon matPrefix class="formfield-icon">note</mat-icon>
+                <mat-hint align="end">{{filterForm.controls['idNbr'].value?.length || 0}}/9</mat-hint>
+              </mat-form-field>
+              <small class="idNbr-error-message" *ngIf="filterForm.controls['idNbr'].hasError('pattern')">
+                {{'NRIC_Validation' | label}} </small>
+            </div>
+
+            <div fxLayout="column" fxFlex="50">
+              <!-- <p class="p"> Phone </p> -->
+              <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Phone</mat-label>
+                <input formControlName="phoneNo" [formControl]="filterForm.controls['phoneNo']" matInput
+                  [(ngModel)]="phoneNumber" type="text">
+                <mat-icon matPrefix class="formfield-icon">phone</mat-icon>
+              </mat-form-field>
+              <small class="phoneNo-error-message" *ngIf="filterForm.controls['phoneNo'].hasError('pattern')"> Only
+                Numbers are Allowed </small>
+            </div>
+
+          </div>
+
+          <div fxLayout="row" class="row-items">
+
+
+            <div *ngIf="showAction" fxLayout="column" fxFlex="50">
+              <!-- <p class="p"> Transaction Status </p> -->
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Transaction Status</mat-label>
+                <mat-select [formControl]="selectedTransactionStatus" placeholder="--Select--" multiple>
+                  <mat-option *ngFor="let status of getTransactionStatus" [value]="status.NO"> {{status.TXNSTATUS}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="showUnpostedStatus" fxLayout="column" fxFlex="50">
+              <!-- <p class="p"> Transaction Status </p> -->
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Transaction Status</mat-label>
+                <mat-select [formControl]="selectedTransactionStatus" placeholder="--Select--" multiple>
+                  <mat-option *ngFor="let status of getUnpostedStatus" [value]="status.NO"> {{status.TXNSTATUS}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="column" fxFlex="50">
+              <!-- <p class="p"> Foreign Currency </p> -->
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Foreign Currency</mat-label>
+                <span matPrefix class="{{selectedCountryCode}}"
+                  style="position: relative;top: -4px; left: -4px;"></span>
+                <mat-select [(value)]="selectedCountryCode" (selectionChange)="selectCurrencyCode(selectedCountryCode)"
+                  placeholder="--Select--" [formControl]="selectedForeginCurrency">
+                  <mat-option *ngFor="let country of currencyCodeArray" [value]="country.FLAG">
+                    <span class="{{country.FLAG}}"></span>
+                    {{country.CURRENCYCODE}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+          <div fxLayout="row" class="row-items">
+
+            <div fxLayout="column" fxFlex="50">
+              <!-- <p class="p">Start Date</p> -->
+              <div>
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Start Date</mat-label>
+                  <input matInput [matDatepicker]="picker"  formControlName="startDate" [formControl]="filterForm.controls['startDate']" 
+                  (dateChange)="onStartDateChange($event)"  [min]="minStartDate" >
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div fxLayout="column" fxFlex="50">
+              <!-- <p class="p">End Date</p> -->
+              <div>
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">End Date</mat-label>
+                  <input matInput formControlName="endDate" [formControl]="filterForm.controls['endDate']" 
+                   [matDatepicker]="picker2" (dateChange)="onEndDateChange($event)"   [min]="minEndDate" [max]="maxEndDate" >
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                  <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+
+          </div>
+
+
+          <mat-action-row style="padding: 0px !important;">
+            <div fxLayout="row" fxLayoutAlign="space-between" style="width: 100%;">
+            <div>
+              <button  mat-flat-button class="close-button" (click)="xpandStatus = !xpandStatus" type="button">Close</button>
+            </div>
+            <div>
+              <button mat-flat-button class="reset-button" (click)="resetFilter()" type="button">Reset</button>
+              <button mat-flat-button class="submit-button" [disabled]="!filterForm.valid"
+                (click)="applyFilter(searchCustomerName,idNumber,phoneNumber)">
+                Apply Filter</button>
+            </div>
+          </div>
+          </mat-action-row>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
+
+    </div>
+
+  </form>
+
+
+
+
+</div>
+
+<span fxLayout="row" style="margin-top: -24px;margin-left: -16px;">
+   <p class="show-results">Showing</p> <p class="show-results" style="color: black;font-weight: 700;"> {{recordsCount ? recordsCount : "0"}} </p> <p class="show-results">results</p> 
+  </span>
+
+<div fxLayout="row" fxLayoutGap="8px" > 
+  <div class="table-wrapper" style="width:72%;">
+  <div class="mat-elevation-z8">
+    <div [ngStyle]="responsiveTableHeight()">
+    <table class="table">
+      <thead>
+<tr>
+        <th *ngIf="showCheckBox">
+          <mat-icon>crop_square</mat-icon>
+        </th>
+        <th>TRANSACTION ID</th>
+        <th>CUSTOMER</th>
+        <th>PAYEE</th>
+        <th>PAYEE GETS</th>
+        <th>TRANSACTION DATE</th>
+        <th *ngIf="showProcessedDate">PROCESSED BY & DATE</th>
+        <th>STATUS</th>
+        <th>ACTION</th>
+</tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr
+          *ngFor="let search of searchTransaction | slice: (p - 1) * itemsPerPage : p * itemsPerPage;index as i;"
+          [class.selected]="search.TRANSACTIONID == this.n && this.color">
+
+          <td>
+            <div class="checkbox">
+              <mat-checkbox [disabled]="disable" [checked]="accepted"
+                [ngClass]="{'disable-check-box': search.TXNSTATUS != 'AMOUNT RECEIVED'}"
+                (change)="enableCheckBox($event,search.TRANSACTIONID,search.AMOUNTSENT,search.SENDCCY,search.SENDCCY,i,search.ORGEXCHRATE,search.CUSTOMERTYPE,search.ORGCOMMISSION,search.AMOUNTCONSUMED,search.CONTRACTRATE, search.AMOUNTSENTF)"
+                (click)="unselect(search.SENDCCY,search.CUSTOMERTYPE,search.TRANSACTIONID,search.SENDCCY,search.FOREXBOOKINGTYPE)"> </mat-checkbox>
+            </div>
+          </td>
+          <td> {{search.TRANSACTIONID}} </td>
+          <td>
+            <div fxLayout="row" fxLayoutGap="25px" style="align-items: center;">
+              <div style="width:1%;">
+                <mat-icon style=" color: #123969; font-size: 25px;" *ngIf="search.CUSTOMERTYPE == 'I'">person</mat-icon>
+                <mat-icon style=" color: #123969; font-size: 25px;" *ngIf="search.CUSTOMERTYPE == 'A'">supervised_user_circle</mat-icon>  
+                <mat-icon style=" color: #123969; font-size: 25px;" *ngIf="search.CUSTOMERTYPE == 'C'">domain</mat-icon>  
+              </div>
+              <div class="test" style="margin-top: 10px;">
+               {{search.ACCOUNTTITLE}} 
+              </div>
+              <div>
+                <mat-icon 
+                matTooltip="View Suspicious Remarks"
+                matTooltipPosition="above"
+                matTooltipClass="custom-tooltip"
+                (click)="openSusremarks(search)"  *ngIf="search.SUSPICIOUS=='Y'" class="warning-icon">warning</mat-icon>
+              </div>
+            </div> 
+          </td>
+          <td>{{search.NAME}}</td>
+          <td style="font-family: 'Roboto';"> {{search.SENDCCY}}
+            <div *ngIf="search.CUSTOMERTYPE == 'I' "> {{search.AMOUNTSENTF ? (search.AMOUNTSENTF | number) : (search.AMOUNTSENT * search.ORGEXCHRATE | number )}} </div>
+            <div *ngIf="search.CUSTOMERTYPE == 'C' ">  {{ search.AMOUNTSENTF ? ( search.AMOUNTSENTF | number ) : (calculatePayeeGets(search.AMOUNTCONSUMED, search.CONTRACTRATE) | number) }} </div>
+           <div *ngIf="search.CUSTOMERTYPE == 'A' "> {{ search.AMOUNTSENTF ? ( search.AMOUNTSENTF | number ): (calculatePayeeGets(search.AMOUNTCONSUMED, search.CONTRACTRATE) | number)  }} </div>
+            </td>
+          <td>{{search.CREATEDDATE | date : 'medium'}}</td>
+
+          <td *ngIf="showProcessedDate"> 
+            <div class="flex-col">
+              <small style="font-weight:600;font-size:medium"> {{search.AUTHORIZEDBY}} </small>
+              <small style="font-family: 'Roboto';font-size: 16px;">  {{search.AUTHORIZEDDATE | date : 'medium'}} </small>
+            </div>
+            </td>
+
+          <td>
+            <button class="tags" (click)="onClickTransactionStatus(search.TRANSACTIONID,search.CUSTOMERTYPE,search.TXNSTATUS)" [ngStyle]="{'color': getColor(search.TXNSTATUS),'background-color': getBackgroundColor(search.TXNSTATUS)}">
+              <div  [ngStyle]="{'background-color': getColor(search.TXNSTATUS)}" class="small-container"></div>
+            <span class="status-tag"   #tooltip="matTooltip"
+            [matTooltip]="getTooltipText(search.TXNSTATUS)"
+            matTooltipPosition="above"
+            matTooltipClass="custom-tooltip"> 
+            {{search.TXNSTATUS}} </span>
+            </button>
+          </td>
+          <td>
+            <div fxLayout="row"  >
+            <!-- <div *ngIf="showAction" class="example-button-container">
+              <button mat-mini-fab class="launch-icon" [disabled]="true" (click)="openDialog(search.TRANSACTIONID, search.ACCOUNTTITLE, search.NAME,
+                search.ACCOUNTNBR, search.BANKNAME, search.SWIFTCODE, search.SENDCCY,search.TXNSTATUS)" aria-label="Example icon button with a menu icon">
+                <mat-icon>create</mat-icon> 
+              </button>
+             
+          </div> -->
+          <div class="example-button-container">
+            <button [disabled]="isDisable" [ngClass]="{'disabled-button': isDisable}"   (click)="openRecieptDialog(search.TRANSACTIONID,search.ACCOUNTTITLE,
+            search.NAME,search.ACCOUNTNBR,search.BANKNAME,
+            search.SWIFTCODE,search.COUNTRY,search.TXNSTATUS,search.AMOUNTSENT,search.ORGEXCHRATE,search.SENDCCY,
+            search.ORGCOMMISSION,search.BRANCHNAME,search.CUSTIDNBR,search.ADDRESS,search.STATE,search.COUNTRY,search.CUSTPHONENBR
+            ,search.CREATEDDATE,search.CUSTDOB,search.CUSTNATIONALITY,search.REMARKS,
+            search.CUSTOMERID,search.CUSTOMERTYPE,search.ORIGINATEDREMITTER,search.AMOUNTCONSUMED, search.CONTRACTRATE, search.AMOUNTSENTF,search.CONTRACTID, search.PURPOSEOFREMITTANCE, search.FOREXBOOKINGTYPE, search.SHARINGTYPE, search.ROUTINGCODE,search.RELATIONSHIP, search.AGENTNAME, search.DEALID, search.DEALRATE, search.AMOUNTRECEIVED )" class="launch-icon"  mat-icon-button type="button">
+                <mat-icon #tooltip="matTooltip" matTooltip="Receipt" matTooltipPosition="above" matTooltipClass="custom-tooltip">receipt_long</mat-icon>
+              </button>
+              </div>
+
+            <div class="example-button-container" *ngIf="showDeleteIcon">
+              <button [disabled]="!(search.TXNSTATUS == 'INITIATED' || search.TXNSTATUS == 'AMOUNT RECEIVED' || search.TXNSTATUS == 'APPROVED' || search.TXNSTATUS == 'FAILED AT BANK')" (click)="openDeleteTransactionDialog(search.TRANSACTIONID)" class="delete-icon"  mat-icon-button>
+                <mat-icon #tooltip="matTooltip" matTooltip="Cancel" matTooltipPosition="above"matTooltipClass="custom-tooltip">delete</mat-icon>
+              </button>
+            </div>
+            <!--Unposted Txn > Update Txn Status-->
+            <div class="example-button-container" *ngIf="iseditbutton">
+              <button [disabled]="!( search.TXNSTATUS == 'INITIATED') || isDisable"   class="launch-icon" (click)="openTransactionUpdate( $event, search.TXNSTATUS,search.TRANSACTIONID,search.ACCOUNTTITLE,search.AMOUNTSENT,search.AMOUNTSENTF,search.SENDCCY)" mat-icon-button>
+                <mat-icon #tooltip="matTooltip" matTooltip="Update Transaction" matTooltipPosition="above" matTooltipClass="custom-tooltip">edit</mat-icon>
+              </button>
+            </div>
+
+            <div *ngIf="search.TXNSTATUS !== 'INITIATED' && search.TXNSTATUS !== 'AMOUNT RECEIVED'" class="example-button-container">
+              <button  class="launch-icon"  mat-icon-button
+                (click)="viewDeposit(search.TRANSACTIONID, search.DOCUMENTS, search.DEALID)">
+                <mat-icon #tooltip="matTooltip" matTooltip="Transaction Docs" matTooltipPosition="above" matTooltipClass="custom-tooltip">description</mat-icon> </button>
+            </div>
+
+            <div class="example-button-container">
+              <button [disabled]="isDisable"  class="launch-icon" (click)="openTransactionDetails(search.TRANSACTIONID)" mat-icon-button>
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </div>
+
+            <!-- // Only enable for TXNSTATUS == "INIATITED" . Edit icon -- openTransactionUpdate(transactionStatus, transactionid)-->
+
+          
+
+          </div>
+          </td>
+        </tr>
+
+
+      </tbody>
+
+
+    </table>
+    </div>
+    <mat-paginator class="pagination-class"
+  [length]="searchTransaction.length"
+  [pageSize]="itemsPerPage"
+  [pageIndex]="p - 1"
+  (page)="handlePageChange($event)"
+></mat-paginator>
+  </div>
+  <div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+    </div>
+</div>
+
+
+
+
+  <div fxFlex="30" *ngIf="visible" style="margin-top: -54px;">
+    <app-payee-details [transactionDetails]="rowData"></app-payee-details>
+    <!-- <app-revise-exchange></app-revise-exchange> -->
+  </div>
+
+  <div fxFlex="29" style="margin-top: -54px;" *ngIf="showAgentSettlement">
+    <app-agent-card [transactionIdsLength]="arrLength" [payeeGets]="payeeGetsAmount" [transactionIds]="arr"
+      [totalAmount]="totalAmount" [fetchBuyCurrencyCode]="buyerCurrencyCode" [adminFee]="adminFee"
+      (TransactionEventEmitter)="latestTransactionData()" [entityType]="customerType" [transactionTypeIndicator]="forexBookingType"></app-agent-card>
+
+
+
+  </div>
+
+
+</div>

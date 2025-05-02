@@ -1,0 +1,16 @@
+<div class="dialog-box">
+    <mat-toolbar class="custom-toolbar">
+        <span style="font-size: 18px;">Confirmation Required</span>
+                <mat-icon style="cursor: pointer;font-size: 22px;" [mat-dialog-close]="true">close</mat-icon>
+      </mat-toolbar>
+      <div style="margin: 18px;margin-bottom: 28px;">
+    <div fxLayout="row" fxLayoutAlign="start" style="margin-top: -18px;">
+        <h5 class="alert-label">This application will undergo the approval process , Are you sure you want to proceed ?</h5>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end" style="margin-right: 20px;">
+        <button class="no-button" [mat-dialog-close]="true" mat-flat-button>Cancel</button>
+        <button class="yes-button" *ngIf="showIndBtn"  (click)="submitApplication()" mat-raised-button color="warn">Submit Application</button>
+        <button class="yes-button" *ngIf="showCorporateBtn" (click)="submitCorpApplication()" mat-raised-button color="warn">Submit Application</button>
+    </div>
+    </div>
+    </div>

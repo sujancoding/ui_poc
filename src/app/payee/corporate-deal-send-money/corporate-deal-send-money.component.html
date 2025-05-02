@@ -1,0 +1,237 @@
+
+<div class="whole-background">
+
+    <mat-card appearance="outlined" style="text-align: initial;">
+        <div fxLayout="row" fxLayoutAlign="start">
+            <div style="width:80%">
+                
+                <div>
+                    <form [formGroup]="secondFormGroup">
+
+
+                        <div class="block">
+                            <div class="sub-heads">
+                                <span>Step 1. Transfer to</span>
+                            </div>
+                            <div fxLayout="row"  fxLayoutGap="10px" style="margin-left: 22px;">
+                                <mat-form-field appearance="outline" class="payeename-field">
+                                    <mat-icon matSuffix="search">search</mat-icon>
+                                    <mat-label class="custom-label"> Payee Name </mat-label>
+                                    <input matInput type="text" [formControl]="secondFormGroup.controls['payeeName']" readonly>
+                                    <mat-error> 
+                                        <small *ngIf="secondFormGroup.controls['payeeName'].hasError('required')
+                              && secondFormGroup.controls['payeeName'].touched"> *Payee Name Required </small>
+                                    </mat-error>
+                                </mat-form-field>
+                            
+                                <!-- Launch button > open Payee Table Component -->
+                                <div>
+                                    <button mat-flat-button class="fetchPayeeButton" *ngIf="launchButton" (click)="openPayeeTable()"  type="button">
+                                        <mat-icon>zoom_out_map</mat-icon> 
+                                    </button>
+                                    <mat-spinner style="margin-top:15px;" diameter="40" *ngIf="loader"></mat-spinner>
+                                </div>
+                                </div>
+                            <!-- <div style="margin-left: 30px;place-content: baseline;" fxFlex="row" >
+                                <mat-form-field appearance="outline" class="payeename-field">
+                                    <mat-label class="custom-label">Payee Name</mat-label>
+                                    <mat-select [formControl]="secondFormGroup.controls['payeeName']">
+                                        <mat-option *ngFor="let payeeSearch of payeeSearch" ngDefaultControl
+                                            [ngModelOptions]="{standalone: true}"
+                                            (click)="selectPayee(payeeSearch.NAME,payeeSearch.ACCOUNTNBR,payeeSearch.BANKNAME,payeeSearch.COUNTRY,payeeSearch.PAYEEID,payeeSearch.PHONENBR)"
+                                            [(ngModel)]="value" [value]="payeeSearch.NAME"> {{payeeSearch.NAME}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        <small *ngIf="secondFormGroup.controls['payeeName'].hasError('required')
+                              && secondFormGroup.controls['payeeName'].touched"> *payee name required </small>
+                                    </mat-error>
+                                </mat-form-field>
+                              
+                            </div> -->
+                        </div>
+
+                         <!-- payee Details > will Show after Fetching the data from server -->
+    <div  *ngIf="showDetails" style="margin-left: 200px">
+    
+        <div fxLayout="row" class="payeeDetalis" fxLayoutGap="10px" style="margin-right: 50px;">
+            <div class="light">Payee Name</div>
+            <div class="Dark">{{payeeName}}</div>
+            <div class="light" style="margin-left: 20px;">Payee Country:</div>
+            <div class="Dark">{{payeeCountry}}</div>
+        </div> 
+
+        <div fxLayout="row" class="payeeDetalis" fxLayoutGap="10px" >
+            <div class="light">Account Number</div>
+            <div class="Dark">{{payeeAccNo}}</div>
+            <div class="light"style="margin-left: 20px;">Bank Name:</div>
+            <div class="Dark">{{payeeBankName}}</div>
+            <div class="light" style="margin-left: 20px;">Swift Code:</div>
+            <div class="Dark">{{swiftCode ? swiftCode : "N/A"}}</div>
+            <div class="light" style="margin-left: 20px;">Routing Code / Sort Code:</div>
+            <div class="Dark">{{routingCode ? routingCode : "N/A"}}</div>
+        </div>
+
+    </div>
+
+                    </form>
+                </div>
+                <form [formGroup]="thirdFormGroup">
+
+                    <div class="block">
+                        <div class="sub-heads">
+                            <span>Step 2. Enter Amounts</span>
+                        </div>
+
+                        <div>
+
+                            <div fxFlex="row" style="margin-left: 22px;display: flex;" >
+
+                                <mat-form-field class="currency-field"  appearance="{{'formFieldAppearance' | label}}" >
+                                    <mat-label class="custom-label">You Send</mat-label>
+                                    <span matPrefix  class="{{selectedBaseCurrency}}" style="position: relative;top: -4px; left: -4px;"></span>
+                                    <mat-select [(value)]="selectedBaseCurrency">
+                                      <mat-option *ngFor="let country of baseCurrencyCode" [value]="country.FLAG" >
+                                        <span class="{{country.FLAG}}"></span>
+                                        {{country.CURRENCYCODE}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+
+                                <mat-form-field class="common-form-field" style="margin-left: 10px;" appearance="outline">
+                                    <mat-label class="custom-label">Amount</mat-label>
+                                    <input matInput  #customerAmount formControlName="customerAmount"
+                                        [formControl]="thirdFormGroup.controls['customerAmount']" (keyup)="keyUpConsumerSends(customerAmount.value)"  appCommaSeparatedInput>
+                                        
+                                    </mat-form-field>
+                             
+                             
+
+                            </div>
+
+                        </div>
+
+                        <div class="rate-container">
+                            <div fxLayout="row" class="margin-space">
+                                <p class="title-label">Exchange Rate :  </p>
+                                <p class="label"> 1 SGD = {{ExchangeRate}} {{currencyCode}} </p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div fxFlex="row" style="margin-left: 22px;display: flex;" >
+
+                                <mat-form-field class="currency-field" appearance="{{'formFieldAppearance' | label}}" >
+                                    <mat-label class="custom-label">Payee Gets</mat-label>
+                                    <span matPrefix  class="{{selectedCountryCode}}" style="position: relative;top: -4px; left: -4px;"></span>
+                                    <mat-select  [(value)]="selectedCountryCode" (selectionChange)="selectCurrencyCode(selectedCountryCode)">
+                                      <mat-option *ngFor="let country of currencyCodeArray" [value]="country.FLAG" >
+                                        <span class="{{country.FLAG}}"></span>
+                                        {{country.CURRENCYCODE}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+
+                                <mat-form-field class="common-form-field" style="margin-left: 10px;" appearance="outline" >
+                                    <mat-label class="custom-label">Amount</mat-label>
+                                    <input matInput  #payeeAmount (keyup)="keyUpPayeeGets(payeeAmount.value)"
+                                        [formControl]="thirdFormGroup.controls['payeeAmount']" appCommaSeparatedInput >
+                                </mat-form-field>
+
+                              
+                               
+                            </div>
+                        </div>
+
+                    
+                    </div>
+                </form>
+
+                <form [formGroup]="fifthFormGroup">
+                <div class="block">
+                    <div class="sub-heads">
+                        <div fxLayout="row" fxLayoutGap="10px">
+                            <span>Step 3: Select Payment mode for charges</span>
+                        </div>
+                    </div>
+            
+            
+                    <div fxFlex="row" 
+                    style="margin-left: 30px;place-content: baseline;">
+                    
+                    <mat-radio-group [disabled]="isDisableSharingTypeRadioGroup"
+                      aria-labelledby="example-radio-group-label"
+                      class="example-radio-group"
+                      (change)="sharingTypeChange($event)"
+                      [formControl]="fifthFormGroup.controls['sharingType']" >
+                        <mat-radio-button class="example-radio-button" [value]="type.internalValue"
+                        *ngFor="let type of sharingTypeArray" >
+                        {{type.value}}
+                        ( {{type.subValue}} )
+                    </mat-radio-button>
+                    </mat-radio-group>
+                      
+                    </div>
+            
+            
+                </div>
+            </form>
+
+                <form [formGroup]="fourthFormGroup">
+
+                    <!--NOTE ROW-->
+                    <div class="block">
+                        <div class="sub-heads">
+                            <span>Step 4. Admin fee and Remarks</span>
+                        </div>
+               <div fxLayout="row" fxLayoutGap="30px" style="margin-left: 32px;margin-top: 10px;margin-bottom: 13px;">
+                        <h5 class="admin-fee-label">Admin Fee : </h5>
+                        <h4 class="admin-fee-amount"> {{adminFee}} SGD </h4>
+                </div>
+
+                        <div fxFlex="row" 
+                        style="margin-left: 30px;place-content: baseline;">
+                            <mat-form-field class="remarks-field" appearance="outline" >
+                                <mat-label class="custom-label">Purpose of Remittance</mat-label>
+                                <mat-select (selectionChange)="selectRemarks(fourthFormGroup.controls['Remarks'].value)" [formControl]="fourthFormGroup.controls['Remarks']"> 
+                                    <mat-option *ngFor="let options of remarksOptions" [value]="options.value">{{options.value}}</mat-option>
+                                  </mat-select>
+                                <mat-error>
+                                    <small *ngIf="fourthFormGroup.controls['Remarks'].hasError('required')
+                          && fourthFormGroup.controls['Remarks'].touched"> *purpose of remittance field required </small>
+                                </mat-error>
+                            </mat-form-field>
+                          
+                        </div>
+
+                        <div fxFlex="row" 
+                        style="margin-left: 30px;place-content: baseline;margin-bottom: 10px;">
+
+                        <mat-form-field  class="remarks-field" *ngIf="showOthersField" appearance="outline" >
+                            <mat-label class="custom-label">Others</mat-label>
+                            <input matInput (input)="fourthFormGroup.controls.Others.value.toUpperCase()"
+                              placeholder="Eg: HOUSE RENT" [formControl]="fourthFormGroup.controls['Others']">
+                             <mat-error>
+                                <small *ngIf="fourthFormGroup.controls['Others'].hasError('required')
+                      && fourthFormGroup.controls['Others'].touched"> *Others field required </small>
+                            </mat-error>
+                            </mat-form-field>
+
+                      </div>
+
+                    </div>
+                    <div class="stepper-button-area" class="dialogButton" fxLayout="row">
+                        <button mat-raised-button class="reset-button" type="button" (click)="clearForm()">Cancel</button>
+                        <button *ngIf="showSubmitButton" mat-raised-button class="submit-button" color="primary" (click)="onSubmit()" type="button"
+                            [disabled]="isDisableSubmit()">Submit</button>
+                            <div class="loader-container">
+                                <mat-spinner  style="margin:0 auto;" diameter="40" *ngIf="submitButtonLoader"></mat-spinner>
+                            </div>
+                    </div>
+                </form>
+            </div>
+        
+
+        </div>
+    </mat-card>
+</div>

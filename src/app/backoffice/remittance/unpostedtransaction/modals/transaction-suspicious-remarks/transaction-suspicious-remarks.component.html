@@ -1,0 +1,40 @@
+<!-- Mat Dialog - toolbar -->
+    <h4 mat-dialog-title>
+        <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+            <span> {{toolbarHeader}} </span>
+            <span [mat-dialog-close] style="cursor: pointer;">
+                <mat-icon>close</mat-icon>
+            </span>
+        </mat-toolbar>
+    </h4>
+
+    <div class="content">
+        <form [formGroup]="form">
+            <div style="overflow-y: scroll;">
+                <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+                    <mat-label class="custom-label">Remarks</mat-label>
+                    <input maxlength="40" matInput formControlName="susRemarks" [readonly]="readonly">
+                </mat-form-field>
+
+                <span class="error-message" *ngIf="form.controls['susRemarks'].hasError('required') &&
+    form.controls['susRemarks'].touched"> Remarks Required </span>
+                <span class="error-message" *ngIf="form.controls['susRemarks'].hasError('maxlength')">
+                    {{'transactionIdMaxlength'|label}} </span>
+            </div>
+
+
+            <div *ngIf="isUnposted" class="btn">
+                <button type="button" class="close-btn" mat-button mat-dialog-close>Close</button>
+                <button type="button" mat-button [ngClass]="{ 'disabled-btn': !form.valid }"
+                    (click)="onSave()" class="save-btn">Save</button>
+            </div>
+            <div *ngIf="!isUnposted">
+            <button type="button" class="close-button" mat-button mat-dialog-close>Close</button>
+        </div>
+        </form>
+
+
+
+        
+
+</div>

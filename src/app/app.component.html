@@ -1,0 +1,21 @@
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+
+<router-outlet>
+  <app-spinner></app-spinner>
+</router-outlet>
+
+<div *ngIf="showCheckingMessage">
+  <div class="update-container">
+    <p>Installing...</p>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
+  <div class="orglogo">
+    <img class="img1" [src]="logo">
+  </div>
+
+</div>
+
+

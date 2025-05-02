@@ -1,0 +1,68 @@
+<h4 mat-dialog-title>
+    <div class="task-header" fxLayoutAlign="space-between center">
+
+        <h4 class="title-label">Currency Stock ({{counterTypeDescription}})</h4>
+
+        <span
+        #tooltip="matTooltip"
+        matTooltip="Close"
+        matTooltipPosition="above"
+        matTooltipClass="accounts-custom-tooltip">
+            <mat-icon (click)="closeDrawer()" class="close-icon">close</mat-icon>
+        </span>
+
+    </div>
+</h4>
+
+
+
+<div class="table-wrapper" >
+    <div>
+      <div [ngStyle]="changeTableHeight()">
+        <table  class= "table" >
+         
+          <thead>
+            <tr>
+                  <th>CURRENCY</th>
+                  <th>STOCK (ALL)</th>
+                  <th>STOCK (CURRENT DATE)</th> 
+                  <th>AVERAGE COST</th>
+                  </tr>
+          </thead>
+         
+          <tbody>
+            <tr *ngFor="let search of stockListing | slice: (p - 1) * itemsPerPage : p * itemsPerPage ">
+                <td>
+                  <div>
+                    <div>  {{search.ccyNo}} </div>
+                    <div class="sub-value">  {{search.ccyCode}} </div>
+                  </div>
+                </td>
+                   <!--Future Stock = Current Stock + All Future Stocks-->
+                <td [ngClass]="{
+                  'negative-amount': (search?.futureStock + search?.dealStock) < 0, 
+                  'positive-amount': (search?.futureStock + search?.dealStock) >= 0
+                }">
+              {{ (search?.futureStock + search?.dealStock) | number }}
+            </td>
+                  <td [ngClass]="{'negative-amount': search.dealStock < 0, 'positive-amount': search.dealStock >= 0}">{{search.dealStock | number}}</td> 
+                  <td>{{search.avgCost}}</td>
+              
+            </tr>
+          </tbody>
+         
+      </table>
+      </div>
+      <mat-paginator class="pagination-class"
+      [length]="stockListing.length"
+      [pageSize]="itemsPerPage"
+      [pageIndex]="p - 1"
+      (page)="handlePageChange($event)"
+    ></mat-paginator>
+    </div> 
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner  diameter="50" > </mat-spinner>
+      </div>
+     </div>
+

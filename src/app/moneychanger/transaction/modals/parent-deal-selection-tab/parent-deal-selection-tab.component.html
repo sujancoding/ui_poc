@@ -1,0 +1,21 @@
+<div class="close-icon-placement" >
+    <mat-icon class="close-icon" [mat-dialog-close]="true" >close</mat-icon>
+</div>
+
+<mat-tab-group  mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="activeTabIndex" (selectedTabChange)="onTabChange($event)">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">attach_money</mat-icon>
+            <span class="tab-label"> Deals </span>
+          </ng-template>
+        <app-deals [modalMessage]="flag"  [retriveCustomerId]="getCustomerId" (updateDealEvent)="dealEventHandler($event)" [checkStatus]="check" (dealLoaded)="onLoaded($event,'DEAL')"> </app-deals>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">local_airport</mat-icon>
+            <span class="tab-label"> Shipment </span>
+          </ng-template>
+       <app-shipment-deals  [modalMessage]="flag"  [retriveCustomerId]="getCustomerId" (updateShipmentEvent)="shipmentEventHandler($event)" [checkStatus]="check" (shipmentLoaded)="onLoaded($event,'SHIPMENT')"> </app-shipment-deals>
+    </mat-tab>
+  </mat-tab-group>

@@ -1,0 +1,386 @@
+
+<!--This Component reused in (Modal Dialog):
+1. Backoffice > Unposted > View Receipt for I , C and A
+2. Backoffice > Fulfillment > View Receipt for I , C and A
+3. Agent > Fulfillment > APT initiated Tab > View Receipt for I , C
+4. Agent > Fulfillment > Agent initiated Tab > View Receipt for A 
+5. Agent > History > APT initiated Tab > View Receipt for I,C 
+6. Agent > History > Agent initiated Tab > View Receipt for A -->
+
+<div>
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <span> Transaction Receipt 
+            </span>
+            
+        <span>
+            <mat-icon class="receipt-icon" >receipt_long</mat-icon><a (click)="savePDF()" class="pdflink"> Export Receipt as PDF  </a> 
+              <mat-icon [mat-dialog-close]="true" style="position: relative;top: 6px;
+              cursor: pointer;">close</mat-icon>
+        </span>
+    </mat-toolbar>
+  </h4>
+</div>
+
+<div class="whole-container">
+    <div  id="content1" #content1 style="width: 900px;">
+        <div class="inner-container">
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+
+                <div fxLayout="column" style="width: 50%;">
+                    <div>
+                        <img [src]="orgLogo" class="org-logo-style">
+                    </div>
+
+                    <div>
+                        <p class="headers" style="margin-top: -5px;"> Arcade Plaza Traders PTE LTD </p>
+                        <span class="headers-values">
+                            11, COLLYER QUAY <br> #02-03 THE ARCADE, SINGAPORE 049317 <br>
+                            Phone: +65 6227 7660 Fax : +65 6220 259 <br>
+                            remittance@aptonline.com.sg , www.aptonline.com.sg
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div fxLayout="column" fxLayoutAlign="end" style="margin-right: 46px;">
+
+                    <h5 class="receipt-label">
+                       {{ remittanceDetails?.agentName ? 'ORDER FORM' : 'TRANSFER RECEIPT' }}
+                    </h5>
+        
+                    <h5 class="title-label">Reciept Number :</h5>
+                    <span class="title-value">{{remittanceDetails.transactionId}}</span>
+                    <h5 class="title-label">Receipt Date:</h5>
+                    <span class="title-value">{{remittanceDetails.updateDate}}</span>
+                </div>
+                <!-- <div class="receipt-div">
+                    <h5 class="headers" style="margin-top: 35px;">TRANSFER RECEIPT</h5>
+                </div> -->
+            </div>
+
+
+            <div fxLayout="row" fxLayoutAlign="space-around" style="margin-top: 15px;">
+
+                
+
+                
+
+
+
+                <div class="body">
+
+                    <div>
+                        <div class="title-headers"> CUSTOMER DETAILS</div>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+
+                        <div class="body-content" style="margin-top: 0px;">
+                            <p class="label">Customer Name</p>
+                            <p class="value">{{customerName}}</p>
+
+                        </div>
+                        <div  *ngIf="remittanceDetails.customerType == 'A'" class="body-content">
+                            <p class="label">Originated Remitter</p>
+                            <p class="value">{{originatedRemitter}}</p>
+
+                        </div>
+                        <div  *ngIf="remittanceDetails.customerType == 'A'" class="body-content">
+                            <p class="label">Purpose Of Remittance</p>
+                            <p class="value">{{purposeOfRemittance ? purposeOfRemittance : "Not Provided"}}</p>
+
+                        </div>
+                        <div  class="body-content">
+                            <p class="label">Address</p>
+                            <p class="value">{{address}}</p>
+
+                        </div>
+                        <div  class="body-content">
+                            <p class="label">Postal Code</p>
+                            <p class="value">{{postalCode}}</p>
+                        </div>
+
+                        <div  class="body-content" *ngIf="remittanceDetails.customerType != 'A'">
+                            <p class="label">Nationality</p>
+                            <p class="value">{{nationality}}</p>
+                        </div>
+
+                        <div class="body-content" *ngIf="remittanceDetails.customerType != 'A'">
+                            <p class="label">Nric Id</p>
+                            <p class="value">{{nricId}}</p>
+                        </div>
+
+                        <div class="body-content" *ngIf="remittanceDetails.customerType == 'I'">
+                            <p class="label">Place Of Birth</p>
+                            <p class="value"> {{placeOfBirth}} </p>
+                        </div>
+
+                        <div class="body-content" *ngIf="remittanceDetails.customerType == 'I'">
+                            <p class="label">Date Of Birth</p>
+                            <p class="value"> {{dateOfBirth | date: 'dd-MM-yyyy' }} </p>
+                        </div>
+
+                        <!--As per MAS Compliance: Need to remove phone number-->
+                        <!-- <div  class="body-content">
+                            <p class="label">Phone Number</p>
+                            <p class="value">{{phoneNumber}}</p>
+                        </div> -->
+
+                        <div  class="body-content" *ngIf="remittanceDetails.customerType == 'C' || remittanceDetails.customerType == 'A' ">
+                            <p class="label">Reg No (ROC)</p>
+                            <p class="value">{{registrationNumber}}</p>
+                        </div>
+
+                        <div  class="body-content" *ngIf="remittanceDetails.customerType == 'C' || remittanceDetails.customerType == 'A' ">
+                            <p class="label">Incorporation Place</p>
+                            <p class="value">{{incorporationPlace}}</p>
+                        </div>
+
+                        <div  class="body-content" *ngIf="remittanceDetails.customerType == 'C' || remittanceDetails.customerType == 'A' ">
+                            <p class="label">Incorporation Date</p>
+                            <p class="value">{{incorporationDate | date: 'dd-MM-yyyy' }}</p>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="body">
+
+                    <div>
+                        <div class="title-headers">PAYEE DETAILS</div>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                    <div class="body-content" style="margin-top: 0px;">
+                        <p class="label">Payee Name</p>
+                        <p class="value">{{payeeName}}</p>
+                    </div>
+                    <div class="body-content" style="margin-top: 0px;">
+                        <p class="label">Relationship</p>
+                        <p class="value">{{relationship}}</p>
+                    </div>
+                    <div class="body-content">
+                        <p class="label">Payee Address</p>
+                        <p class="value">{{beneficiaryAddress}}</p>
+
+                    </div>
+                    <div class="body-content">
+                        <p class="label">Remarks</p>
+                        <p class="value">{{remarks}}</p>
+                    </div>
+
+                    <div class="body-content">
+                        <p class="label">Bank Name</p>
+                        <p class="value">{{bankName}}</p>
+
+                    </div>
+                    <div class="body-content">
+                        <p class="label">Branch Name</p>
+                        <p class="value">{{branchName}}</p>
+
+                    </div>
+                  
+                    <div class="body-content">
+                        <p class="label">Account Number</p>
+                        <p class="value">{{accountNumber}}</p>
+                    </div>
+
+                    <div class="body-content">
+                        <p class="label">Swift code</p>
+                        <p class="value">{{swiftCode ? swiftCode : "N/A"}}</p>
+                    </div>
+
+                    <div class="body-content">
+                        <p class="code-label">Routing code / Sort Code / BSB Code</p>
+                        <p class="value">{{routingCode ? routingCode : "N/A"}}</p>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+
+          
+
+            <h5 class="headers" style="margin-top: 30px;">Remittance Summary</h5>
+
+            <div fxLayout="row" class="status-container" *ngIf="remittanceDetails.agentName">
+                <h4 class="initiated">Agent Name : </h4>
+                <h4 class="txn-status"> {{remittanceDetails.agentName}}</h4>
+            </div>
+
+            <div fxLayout="row" class="status-container">
+                <h4 class="initiated">Transaction Status : </h4>
+                <h4 class="txn-status"> {{remittanceDetails.transactionStatus}}</h4>
+            </div>
+
+             <!-- Table for Corporate and Agent, also for Consumer -->
+             <div class="table-container" *ngIf="(remittanceDetails.customerType == 'C' && remittanceDetails.contractId != null) || remittanceDetails.customerType == 'A' || 
+             (remittanceDetails.customerType == 'I' && remittanceDetails.contractId != null)">
+                <div fxLayout="row" fxLayoutGap="15px">
+
+                    <table> 
+                        <tr>
+                            <th>Contract ID</th>
+                            <td *ngFor="let array of contractsArray"> {{array.bookingId}} </td>
+                        </tr>
+
+                        <tr>
+                            <th>Exchange Rate</th>
+                            <td *ngFor="let array of contractsArray">{{array.exchangeRate}}</td>
+                        </tr>
+
+                        <tr *ngIf="(remittanceDetails.customerType == 'A' && remittanceDetails.agentName != null && remittanceDetails.initiatedBy == 'ORG') ||
+                        (remittanceDetails.customerType == 'C' && remittanceDetails.agentName != null && remittanceDetails.initiatedBy == 'ORG')">
+                            <th>Amount SGD Payable</th>
+                            <td *ngFor="let array of contractsArray">{{array.amount}}</td>
+                        </tr>
+                   
+                </table>
+
+                <table> 
+
+                        <tr>
+                            <th>Currency & Amount</th>
+                            <td>{{remittanceDetails.foreignCurrency}} {{ remittanceDetails.payeeGets  ? (remittanceDetails.payeeGets | number )  : "" }} </td>
+                        </tr>
+
+                        <tr>
+                            <th>Org Charges</th>
+                            <td>{{remittanceDetails.charges}} </td>
+                        </tr>
+
+                        <tr *ngIf="(remittanceDetails.customerType == 'A' && remittanceDetails.agentName == null) ||
+                        remittanceDetails.customerType == 'C' && remittanceDetails.agentName == null">
+                            <th>Total SGD Amount</th>
+                            <td>{{remittanceDetails.baseAmount + remittanceDetails.charges | number}}</td>
+                        </tr>
+    
+                    
+                   
+                </table>
+
+                </div>
+            </div>
+
+            <!-- Table for Backoffice consumer reciept -->
+            <div class="table-container" *ngIf="(remittanceDetails.customerType == 'I' && remittanceDetails.initiatedBy == 'ORG' && remittanceDetails.agentName == null) || (remittanceDetails.customerType == 'C' && remittanceDetails.forexBookingType == 'D' && remittanceDetails.initiatedBy == 'ORG' && remittanceDetails.agentName == null)">
+                <table>
+                    <tr>
+                        <th>Currency & Amount</th>
+                        <td>{{remittanceDetails.foreignCurrency}} {{remittanceDetails.payeeGets | number }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Exchange Rate</th>
+                        <td> {{remittanceDetails.exchangeRate > 1 ? remittanceDetails.exchangeRate : 1/remittanceDetails.exchangeRate | number : '1.0-10' }}</td> <!-- if rate greater than 1 we calculate forward rate , otherwise we calculate backward rate -->
+                    </tr>
+                  
+                    <tr>
+                        <th>Charges</th>
+                        <td>{{remittanceDetails.charges}} </td>
+                    </tr>
+
+                    <tr>
+                        <th>Total SGD Amount</th>
+                        <td>{{remittanceDetails.baseAmount + remittanceDetails.charges | number : '1.0-2'}}</td>
+                    </tr>
+                  </table>
+            </div>
+
+            <!-- Table for Agent Consumer Receipt -->
+            <div class="table-container" *ngIf="(remittanceDetails.customerType == 'I' && remittanceDetails.initiatedBy == 'ORG-AGENT') || (remittanceDetails.customerType == 'C' && remittanceDetails.forexBookingType == 'D' && remittanceDetails.initiatedBy == 'ORG-AGENT') ||
+            (remittanceDetails.customerType == 'I' && remittanceDetails.initiatedBy == 'ORG' && remittanceDetails.agentName !== null && remittanceDetails.dealId != null ) || (remittanceDetails.customerType == 'C' && remittanceDetails.forexBookingType == 'D' &&  remittanceDetails.initiatedBy == 'ORG' && remittanceDetails.agentName !== null && remittanceDetails.dealId != null)">
+                <div fxLayout="row" fxLayoutGap="15px">
+
+                    <table>
+                    
+                        <tr>
+                            <th>Deal ID</th>
+                            <td *ngFor="let array of dealsArray"> {{array.dealId}} </td>
+                        </tr>
+                        <tr>
+                            <th>Deal Rate</th>
+                            <td *ngFor="let array of dealsArray">{{array.dealRate}}</td>
+                        </tr>
+                   
+                </table>
+
+                <table>
+                    
+                
+                        <tr>
+                            <th>Currency & Amount</th>
+                            <td> {{remittanceDetails.foreignCurrency}} {{ remittanceDetails.payeeGets  ? (remittanceDetails.payeeGets | number )  : "" }}  </td>
+                        </tr>
+
+                        <tr>
+                            <th *ngIf="remittanceDetails.initiatedBy == 'ORG-AGENT'">Total SGD Amount Receivable</th>
+                            <th *ngIf="remittanceDetails.initiatedBy == 'ORG'">Total SGD Amount Payable</th>
+                            <td>{{remittanceDetails.baseAmount}}</td>
+                        </tr>
+                    
+                    
+                   
+                </table>
+
+                </div>
+
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="8px" style="margin-left: 20px;" *ngIf="showPaymentModeForCharges">
+                <h5 class="note"> Payment mode for charges : </h5>
+                <h5 class="sharing-type-value"> {{displaySharingType}} </h5>
+                </div> 
+
+           <!--Show this mode of payment only when there is no agent name (i.ie before posting)-->
+           <div *ngIf="!remittanceDetails.agentName" class="payment-radio-btn" [ngClass]="{'show-margin-top': !showPaymentModeForCharges}" >
+                <label id="example-radio-group-label">Mode Of Payment</label>
+                <div style="padding-left: 10px;margin-top: -6px; font-weight: 500;">
+                    <label *ngFor="let payment of paymentMode">
+                        <input type="radio" name="paymentOption" [value]="payment"
+                            style="width: 30px;height: 20px;position: relative;top: 3px;left: 7px;">
+                        {{ payment }}
+                    </label>
+                </div>
+            </div>
+
+            <div style="width: 95%;margin: auto;">
+                <h5 class="note">Note : </h5>
+                <h5 class="note-message"
+                [innerHTML]="remittanceDetails?.agentName 
+  ? 'Please execute the remittance transfer as per the instructions in this order form.' 
+  : 'Processing time is up to 2 working days. Please double-check all details,<br>as we are not responsible for any mistakes or omissions on the part of the applicant hereafter.'"
+                > </h5>
+            </div>
+
+            <!--To show this DBS message only for Agent >>> SG REmittance flow-->
+            <div *ngIf="showSGRemittanceMessage" fxLayout="column" fxLayoutGap="8px" style="margin-top: -40px;
+            margin-left: 21px;">
+                <h2 class="dbs-main-label">DBS Ideal</h2>
+                   <span class="dbs-sub-label"> Your Telegraphic Transfer has been submitted.</span>
+            </div>
+
+            <h2 style="margin-left: 20px;">Thank You !</h2>
+
+            <mat-divider> </mat-divider>
+
+            <!--Show this mode of payment only when there is no agent name (i.ie before posting)-->
+            <div fxLayout="row" *ngIf="!remittanceDetails.agentName"  fxLayoutAlign="space-between">
+
+                <h5 class="headers"> Applicant Signature </h5>
+
+                <h5 class="headers"> for Arcade Plaza Traders PTE LTD </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div *ngIf="loader" class="loader-wrapper">
+        <mat-spinner> </mat-spinner>
+    </div>
+</div>

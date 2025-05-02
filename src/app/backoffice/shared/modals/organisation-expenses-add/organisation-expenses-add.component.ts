@@ -1,0 +1,85 @@
+import { Component, Inject, OnInit} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AssetAccountSettlement } from 'src/app/core/model/orgsettlement/orgsettlement';
+import { OrganisationSettlementService } from 'src/app/core/services/orgsettlement.service';
+import { ErrorDialogAdminComponent } from '../errordialogadmin/error-dialog-admin.component';
+
+@Component({
+  selector: 'app-organisation-expenses-add',
+  templateUrl: './organisation-expenses-add.component.html',
+  styleUrls: ['./organisation-expenses-add.component.scss']
+})
+export class OrganisationExpensesAddComponent implements OnInit {
+
+  form: FormGroup = Object.create(null);
+  showSubmitButton : boolean = true;
+  submitButtonLoader : boolean = false;
+
+
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data:any,private fb: FormBuilder,public dialogRef: MatDialogRef<OrganisationExpensesAddComponent>,
+  private orgSettlementService : OrganisationSettlementService,private _snackBar: MatSnackBar,private dialog : MatDialog) { }
+
+
+  ngOnInit(): void {
+     this.form = this.fb.group({
+          fromAccountName: [null , [Validators.compose([Validators.required])]],
+          toAccountName: [null , [Validators.compose([Validators.required])]],
+          toAccountNumber : [null , [Validators.compose([Validators.required])]],
+          expenses: [null ,[Validators.compose([Validators.required]),Validators.pattern('[0-9 ./]*$')]],
+          remarks:[null , [Validators.compose([Validators.required]),Validators.pattern('[a-zA-Z0-9 ,.:;-]*$')]],
+        })
+        if(this.data.rowData){
+      
+          this.form.controls['fromAccountName'].setValue('APT Account in DBS');
+          this.form.controls['toAccountName'].setValue(this.data.rowData.ENTITYNAME);
+          this.form.controls['toAccountNumber'].setValue(this.data.rowData.ACCOUNTNO)
+        }
+        console.log(this.data);
+       
+        
+      }
+      get f() { return this.form.controls; }
+// on save calling Asset Account settlement for settle amount for expenses.
+      onSave(){
+        this.submitButtonLoader = true;
+        this.showSubmitButton = false;
+        let accountNo : string = this.form.controls['toAccountNumber'].value ? this.form.controls['toAccountNumber'].value : "" ;
+        this.orgSettlementService.assetAccountSettlement(accountNo , this.buildSettlement()).subscribe(data => {
+          console.log(data);
+          this.submitButtonLoader = false;
+          this.showSubmitButton = true;
+          this.dialogRef.close('SUCCESS');
+          if(data){
+            this._snackBar.open("Expenses of " + this.form.controls['expenses'].value +" SGD" + " to "+this.form.controls['toAccountName'].value +" was Successful !", "Ok", {
+              duration:3000,
+              panelClass: "green-notification-snackbar"
+            });
+          }
+        },
+      (error:any)=>{
+        this.submitButtonLoader = false;
+        this.showSubmitButton = true;
+        if(error.status != 401){
+          this.dialogRef.close('FAILURE')
+        this.dialog.open(ErrorDialogAdminComponent,{
+          data :{ errorMessage : error.error.errorMessage ? error.error.errorMessage : "" } 
+        }) 
+    }
+      }
+        )
+      }
+      buildSettlement() : AssetAccountSettlement{
+        return new AssetAccountSettlement({
+          "amount" : this.form.controls['expenses'].value ? this.form.controls['expenses'].value : "",
+          "remarks" : this.form.controls['remarks'].value ? this.form.controls['remarks'].value : "",
+          "mode" : "P" // Collection for expense
+        })
+      }
+    
+     
+  
+
+}

@@ -1,0 +1,95 @@
+#font-head,#font-content, #font-label, #font-value{
+    font-family: Helvetica !important;
+}
+
+//mobile
+@media (min-width: 240px) and (max-width: 480px) {
+
+    #font-head {
+      line-height: 1.5em;
+      font-size: 16px;
+      
+    }
+    #font-content{
+      font-size: 12px;
+      line-height: 1.50em; 
+    }
+    #font-label {
+        font-size: 14px;
+        line-height: 1.50em;
+      }
+    
+    #font-value {
+        font-size: 11px;
+        line-height: 1.25em;
+      }
+}
+
+//tablet
+@media screen and (min-width: 481px) and (max-width: 980px) {
+
+    #font-head {
+        line-height: 1.75em;
+        font-size: 22px;
+        
+      }
+  
+      #font-content{
+        font-size: 17px;
+        line-height: 1.75em; 
+      }
+      #font-value {
+        font-size: 16px;
+        line-height: 1.50em;
+      }
+    
+      #font-label {
+        font-size: 19px;
+        line-height: 1.75em;
+      }
+}
+
+//desktop
+@media screen and (min-width: 981px) {
+    #font-head {
+      font-size: 29px;
+      line-height: 2.00em;
+    }
+  
+    #font-content {
+      font-size: 24px;
+      line-height: 2.00em;
+    }
+
+    #font-value {
+        font-size: 21px;
+        line-height: 1.50em;
+      }
+    
+      #font-label {
+        font-size: 29px;
+        line-height: 2.00em;
+      }
+}
+//Smaller than mobile devices ie which width have less than 240 px 
+@media screen and (max-width: 240px) {
+    #font-head {
+      font-size: 10px;
+      line-height: 1.50em;
+    }
+  
+    #font-content {
+      font-size: 10px;
+      line-height: 1.50em;
+    }
+
+    #font-value {
+        font-size: 8px;
+        line-height: 1.00em;
+      }
+    
+      #font-label {
+        font-size: 10px;
+        line-height: 1.50em;
+      }
+}

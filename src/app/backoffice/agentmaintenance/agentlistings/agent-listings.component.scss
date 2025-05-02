@@ -1,0 +1,96 @@
+
+/* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version.*/
+mat-dialog-container {
+  padding: 0px;
+}
+
+.buttonApplyfilter {
+  background-color: #123969;
+  color: white;
+  height: 48px;
+  width: 123px;
+}
+
+.p {
+  font-family: 'Roboto';
+  font-size: 16px;
+  margin-left: 5px;
+  margin-top: 25px;
+  margin-bottom: 3px;
+}
+
+.tags {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.status-tag {
+  line-height: 20px;
+  padding: 5px 10px;
+  margin: 3px 0;
+  display: inline-block;
+  font-family: Roboto;
+  white-space: nowrap;
+}
+
+.small-container {
+  border: 1px solid #e6e6e6;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 12px;
+  left: 5px;
+  border-radius: 5px;
+  margin-inline: 2px;
+
+}
+.message-block .error-message {
+  // Hidden by default
+  display: none;
+}
+
+.message-block .error-message:first-child {
+  display: block;
+  color: #e8316f;
+  margin-top: 45px;
+  white-space: break-spaces;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.filter-container {
+  display: flex;
+  width: 85%;
+  place-content: flex-start;
+}
+
+.div-height {
+  font-size: 13px;
+  height: 65px;
+  margin: 10px;
+}
+
+.register-btn {
+  background-color: #123969;
+  color: white;
+  height: 48px;
+  margin-right: 10px;
+  width: 123px;
+  margin-top: 10px;
+}
+
+.fliter-btn {
+  display: flex;
+  place-content: initial;
+  margin-left: 20px;
+  width: 12%;
+}
+.search-filter-1{
+  background-color: white;
+  border-radius: 10px;
+  height: 90px;
+  margin-bottom: 22px;
+}

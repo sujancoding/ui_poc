@@ -1,0 +1,20 @@
+<!--Mainly interpolate the remarks reference variable and display it here-->
+<!--UI should align same as figma design-->
+
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+      <span> View Customer Status Reason </span>
+      <span [mat-dialog-close]="true" style="cursor: pointer;">
+        <mat-icon>close</mat-icon>
+        </span>
+  </mat-toolbar>
+</h4>
+
+<div class="reason-content">
+    <p>{{remarks}}</p>
+</div>
+
+
+<div class="margin-button">
+        <button type="button" [mat-dialog-close]="true" class="close-mat-button" mat-button>close</button>
+</div>

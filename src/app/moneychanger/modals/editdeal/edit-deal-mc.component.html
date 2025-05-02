@@ -1,0 +1,139 @@
+<h4 mat-dialog-title *ngIf="showEditableMode">
+    <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <span> Edit Deal </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+          <mat-icon>close</mat-icon>
+          </span>
+    </mat-toolbar>
+  </h4>
+
+  <h4 mat-dialog-title *ngIf="showCancelBtn">
+    <mat-toolbar role="toolbar" class="task-header-cancel" fxLayoutAlign="space-between center">
+        <span> Cancel Deal </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+          <mat-icon>close</mat-icon>
+          </span>
+    </mat-toolbar>
+  </h4>
+  <div class="alert-message">
+  <alert></alert>
+</div>
+  <form [formGroup]="dealForm">     
+    <div  fxLayout="row wrap" fxLayoutGap="25px" style="position: relative;top: 10px;"> 
+   <div fxFlex="10" fxFlex.xs="100" >   
+     <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+       <mat-label class="custom-label">Type</mat-label>
+       <input matInput [readonly]="isReadOnlyField"  (input)="dealForm.controls.type.setValue(dealForm.controls.type.value.toUpperCase())" formControlName="type" [formControl]="dealForm.controls['type']">
+   </mat-form-field>
+   <div class="message-block">
+       <span class="error-message" *ngIf="dealForm.controls['type'].hasError('required') &&
+       dealForm.controls['type'].touched"> Type Required </span>
+     </div>
+   </div>
+   <div fxFlex="10" fxFlex.xs="100" >   
+   <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+       <mat-label class="custom-label">Currency Number</mat-label>
+       
+       <input matInput [readonly]="isReadOnlyField"  (input)="onCurrencyNumberChange()" formControlName="currencyNo" [formControl]="dealForm.controls['currencyNo']">
+   </mat-form-field>
+   <div class="message-block">
+       <span class="error-message" *ngIf="dealForm.controls['currencyNo'].hasError('required') &&
+       dealForm.controls['currencyNo'].touched"> Currency Number Required </span>
+       <span class="error-message" *ngIf="dealForm.controls['currencyNo'].hasError('pattern')">{{'onlyAlphanumeric' | label}}</span> 
+       <!-- added for maxlength -->
+       <span class="error-message" *ngIf="dealForm.controls['currencyNo'].hasError('maxlength')">{{'currencyNoMaxlength' | label}}</span>
+
+     </div>
+   </div>
+
+   <div fxFlex="20" fxFlex.xs="100" >   
+   <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+       <mat-label class="custom-label">Currency Code</mat-label>
+       <input  matInput [readonly]="isReadOnly" formControlName="currencyCode" [formControl]="dealForm.controls['currencyCode']">
+   </mat-form-field>
+   <div class="message-block">
+       <span class="error-message" *ngIf="dealForm.controls['currencyCode'].hasError('required') &&
+       dealForm.controls['currencyCode'].touched"> Currency Code Required </span>
+     </div>
+   </div>
+
+   <div fxFlex="15" fxFlex.xs="100" >   
+   <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+       <mat-label class="custom-label">F.Amount</mat-label>
+       <input matInput [readonly]="isReadOnlyField"  (input)="onFAmountChange()" formControlName="fAmount"  appCommaSeparatedInput [formControl]="dealForm.controls['fAmount']">
+   </mat-form-field>
+   <div class="message-block">
+       <span class="error-message" *ngIf="dealForm.controls['fAmount'].hasError('required') &&
+       dealForm.controls['fAmount'].touched"> F.Amount Required </span>
+     </div>
+   </div>
+
+   <div fxFlex="15" fxFlex.xs="100" >   
+   <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+       <mat-label class="custom-label">Rate</mat-label>
+       <input matInput [readonly]="isReadOnlyField"  (input)="onFAmountChange()" formControlName="rate" [formControl]="dealForm.controls['rate']">
+   </mat-form-field>
+   <div class="message-block">
+       <span class="error-message" *ngIf="dealForm.controls['rate'].hasError('required') &&
+       dealForm.controls['rate'].touched"> Rate Required </span>
+     </div>
+   </div>
+
+   <div fxFlex="15" fxFlex.xs="100" >   
+   <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+       <mat-label class="custom-label">L.Amount</mat-label>
+       <input matInput [readonly]="isReadOnly"  [readonly]="isReadOnly" formControlName="lAmount" [formControl]="dealForm.controls['lAmount']">
+   </mat-form-field>
+   <div class="message-block">
+       <span class="error-message" *ngIf="dealForm.controls['lAmount'].hasError('required') &&
+       dealForm.controls['lAmount'].touched"> L.Amount Required </span>
+     </div>
+   </div>
+
+   </div>
+
+   <div  fxLayout="row wrap" fxLayoutGap="25px"> 
+       <div fxFlex="22" fxFlex.xs="100" >   
+         <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+           <mat-label class="custom-label">Valid Till</mat-label>
+           <input [readonly]="isReadOnlyField"  [matDatepicker]="datepick" matInput formControlName="valueDate" [formControl]="dealForm.controls['valueDate']" >
+           <mat-datepicker-toggle [disabled]="isReadOnlyField" matSuffix [for]="datepick" ></mat-datepicker-toggle>
+           <mat-datepicker #datepick>
+             <mat-datepicker-actions>
+               <button mat-button matDatepickerCancel>Cancel</button>
+               <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+             </mat-datepicker-actions>
+           </mat-datepicker>
+       </mat-form-field>
+       <div class="message-block">
+           <span class="error-message" *ngIf="dealForm.controls['valueDate'].hasError('required') &&
+           dealForm.controls['valueDate'].touched"> Valid Till Date Required </span>
+         </div>
+       </div>
+   
+       <div fxFlex="20" fxFlex.xs="100" >   
+       <mat-form-field  appearance="{{'formFieldAppearance' | label}}" >
+           <mat-label class="custom-label">Remarks</mat-label>
+           <input matInput [readonly]="isReadOnlyField"  (input)="dealForm.controls.remarks.setValue(dealForm.controls.remarks.value.toUpperCase())" formControlName="remarks" [formControl]="dealForm.controls['remarks']">
+       </mat-form-field>
+       <div class="message-block">
+        <span class="error-message" *ngIf="dealForm.controls['remarks'].hasError('maxlength')">{{'remarksMaxLength'|label}}</span>
+        <span class="error-message" *ngIf="dealForm.controls['remarks'].hasError('pattern')">{{'onlyAlphaNumericAndSpecificSpecialCharacter' | label}}</span> 
+         </div>
+       </div>
+
+   
+      
+       <div *ngIf="showEditableMode" class="panel-btn-pairs">
+       <button [mat-dialog-close]="true" mat-raised-button class="panel-close-btn" >Close</button>
+       <button  mat-raised-button (click)="updateDeal('')" class="panel-add-btn" [disabled]="!dealForm.valid" >Save Changes</button>
+       </div>
+
+       <div *ngIf="showCancelBtn" class="panel-btn-pairs">
+        <button [mat-dialog-close]="true" mat-raised-button class="panel-close-btn" >Close</button>
+        <button  (click)="updateDeal('CANCEL_DEAL')" mat-raised-button class="panel-cancel-btn" >Confirm</button>
+        </div>
+       
+
+       </div>
+</form>

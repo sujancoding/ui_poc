@@ -1,0 +1,708 @@
+@import "src/assets/styles/fontstyle/font-style.scss";
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.logo {
+    /* margin: 0 auto; */
+    // width: 5%;
+    position: relative;
+    left: -16px;
+    height: 231px;
+    filter: brightness(0.5);
+}
+
+
+.welcome-text-content {
+    color: black;
+    position: relative;
+    top: -25px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.welcome-text {
+    color: #bf0b25;;
+}
+
+.mat-btn {
+    font-size: 19px;
+    height: 45px;
+    width: 152px;
+    color: #208ec6;
+    position: relative;
+    right: 49px;
+}
+
+.mat-btn-2 {
+    font-size: 19px;
+    height: 45px;
+    width: 152px;
+    color: #208ec6;
+}
+
+.mat-btn:hover {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(17, 158, 214);
+}
+
+.location-icon {
+    color: white;
+    margin-top: 4px;
+}
+
+.text-country-location {
+    position: relative;
+    left: -33px;
+    color: white;
+    font-size: 21px;
+}
+
+.home-wallpaper {
+    width: -webkit-fill-available;
+    filter: blur(2px);
+    height: 697px;
+}
+
+.scroll-body {
+    height: 80vh !important;
+    overflow-y: scroll;
+    position: relative;
+    text-align: center;
+    color: white;
+    overflow-x: hidden;
+}
+
+// .centered {
+//     position: absolute;
+//     top: 30%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     font-size: 27px;
+//     line-height: 25px;
+//     // animation: zoom-in-zoom-out 1s ease infinite;
+// }
+
+.centered-2 {
+    /* position: absolute; */
+    /* top: 44%; */
+    /* left: 12%; */
+    /* transform: translate(-50%, -50%); */
+    white-space: nowrap;
+    margin-left: 11px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.play-store-logo {
+    //position: absolute;
+    opacity: 1;
+    cursor: pointer;
+    background-color: transparent;
+}
+.app-store-logo {
+    // position: absolute;
+    // bottom: 10px;
+    // left: 30px; 
+    // opacity: 1;
+    cursor: pointer;
+    background-color: transparent;
+}
+.section-divider {
+    border-top-color: #000000;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: -15px;
+}
+
+.section-divider-2 {
+    border-top-color: #ffffff;
+    margin-left: 9px;
+    margin-right: 9px;
+}
+
+.mySwiper {
+    width: 100%;
+    height: -webkit-fill-available;
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+}
+
+.sub-heads {
+    color: #1D6DBB;
+    font-weight: 500;
+}
+
+.divider {
+    width: 6%;
+    margin: 0 auto;
+    /* stroke: darkblue; */
+    border-top-color: #cecece;
+    /* height: 53px; */
+    margin-top: -22px;
+}
+
+.singapore-money-image {
+    display: block;
+    width: 46%;
+    margin: 30px;
+    border-radius: 20px;
+}
+
+.div-aboutus {
+    width: 45%;
+    margin-top: 27px;
+}
+
+.about-us {
+    color: black;
+    text-align: left;
+    font-size: 23px;
+}
+
+.what-we-offer-img {
+    width: 100%;
+    height: 662px;
+    border: 1px solid gainsboro;
+    border-radius: 20px;
+    margin-top: 26px;
+}
+
+.what-we-offer-layout {
+    position: relative;
+    margin: 20px;
+}
+
+.what-we-offer-content {
+    position: absolute;
+    top: 49px;
+    left: 22px;
+    width: 95%;
+    color: black;
+    text-align: justify;
+    font-size: 23px;
+    margin-left: 5px;
+}
+
+.sub-heads-label {
+    position: relative;
+    top: 14px;
+    left: 27px;
+    font-weight: unset;
+    color: #b87302;
+}
+.sub-heads-label-2 {
+    position: relative;
+    top: 165px;
+    left: 27px;
+    font-weight: unset;
+    color: #b87302;
+}
+
+.what-we-offer-content-2 {
+    position: absolute;
+    top: 119px;
+    left: 22px;
+    width: 90%;
+    color: black;
+    text-align: justify;
+    font-size: 23px;
+    margin-left: 5px;
+}
+
+.what-we-offer-content-2 {
+    position: absolute;
+    // top: 120px;
+    top: 199px;
+    left: 22px;
+}
+
+
+.example-action-buttons {
+    padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field+.mat-mdc-form-field {
+    margin-left: 8px;
+}
+
+mat-expansion-panel {
+    margin: 40px !important;
+    border-radius: 20px !important;
+}
+
+
+.panel-title {
+    font-size: 18px;
+    color: #0651A9;
+    position: relative;
+    text-align: left;
+}
+
+.panel-content {
+    color: #808080;
+    position: relative;
+    top: -27px;
+    /* left: -1px; */
+    text-align: justify;
+}
+
+.container {
+    margin: 20px;
+    background-color: #545454;
+}
+
+.contact-heading {
+    color: #ffffff;
+    font-weight: 500;
+    position: relative;
+    top: 27px;
+}
+
+.contact-divider {
+    width: 6%;
+    margin: 0 auto;
+    /* stroke: darkblue; */
+    border-top-color: #cecece;
+}
+
+.org-location-img {
+    display: block;
+    margin: 23px;
+    border-radius: 20px;
+}
+
+.label {
+    margin-bottom: 21px;
+    margin-top: 5px;
+    margin-left: 13px;
+}
+
+.value {
+    position: relative;
+    top: -24px;
+    left: 12px;
+    display: block;
+    width: 60%;
+    color: #dfdddb;
+    margin-left: 13px;
+}
+
+
+
+.example-full-width {
+    width: 244%;
+}
+
+.mat-btn-3 {
+    font-size: 18px;
+    height: 47px;
+    width: 170px;
+    position: relative;
+    color: #ffffff;
+    background-color: #072982;
+    top: 61px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #545454;
+    color: white;
+    text-align: center;
+}
+
+.vl {
+    border-left: 1px solid grey;
+    height: 25px;
+}
+
+.menu-icon {
+    font-size: 46px;
+    color: white;
+    margin-right: 25px;
+}
+
+
+.content{
+  color: black;
+  text-align: left;
+  font-size: 23px;
+  font-family: 'Arial', 'Helvetica', 'Roboto';
+  line-height: 2;  
+  letter-spacing: 0.5px;  
+}
+.side-heading{
+  font-weight: 700;
+  color: black;
+  text-align: left;
+  font-size: 23px;
+  font-family: 'Arial', 'Helvetica', 'Roboto';
+  line-height: 2;  
+  letter-spacing: 0.5px; 
+}
+.footer-note{
+  color: black;
+  text-align: left;
+  font-size: 21px;
+  font-family: 'Arial', 'Helvetica', 'Roboto';
+  line-height: 2;  
+  letter-spacing: 0.5px;  
+  color: white; 
+  margin: 10px;
+}
+footer p{
+  margin-top: -10px;
+}
+.our-services li {
+  text-align: left;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .text-links,
+    .location-row {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+
+
+@media (min-width: 1300px) {
+    .menu-button {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+//mobile device
+@media (max-width: 1200px) {
+
+
+    .home-wallpaper {
+        width: -webkit-fill-available;
+        filter: blur(2px);
+        height: 697px;
+    }
+
+    .logo {
+        position: relative;
+        left: -5px;
+        height: 121px;
+        filter: brightness(0.5);
+    }
+
+    .mat-btn {
+        font-size: 14px;
+        height: 33px;
+        width: 105px;
+        color: #208ec6;
+        position: relative;
+        right: 9px;
+        top: -11px;
+    }
+
+    // .centered {
+    //     position: relative;
+    //     top: -109%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     line-height: 22px;
+    // }
+
+    // .centered-2{
+    //     font-size: 19px
+    // position: absolute;
+    // top: 40%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    // font-weight: 700;
+    // white-space: inherit
+    // }
+    .singapore-money-image {
+        width: 90%;
+    }
+
+    .welcome-text {
+        font-size: 28px;
+    }
+
+    .div-aboutus {
+        width: 100%;
+        margin-top: 0px;
+    }
+
+    .mat-btn-2 {
+        position: relative;
+        left: 22px;
+        height: 33px;
+        width: 140px;
+        color: #208ec6;
+    }
+
+    // .sub-heads-label-2 {
+    //     position: relative;
+    //     top: 155px;
+    //     left: 15px;
+    // }
+
+    // .what-we-offer-content-2 {
+    //     position: absolute;
+    //     // top: 120px;
+    //     top: 175px;
+    //     left: 9px;
+    // }
+
+    .org-location-img {
+        width: 80%;
+    }
+
+    .sub-heads-label {
+        position: relative;
+        top: 11px;
+        left: 15px;
+
+    }
+
+    mat-expansion-panel {
+        margin: 17px !important;
+        border-radius: 20px !important;
+    }
+
+    .what-we-offer-layout {
+        position: relative;
+        margin: 12px;
+    }
+
+    .what-we-offer-content {
+        position: absolute;
+        top: 33px;
+        left: 9px;
+        width: 90%;
+        color: black;
+        text-align: justify;
+    }
+}
+
+
+@media (max-width:527px) {
+  .singapore-money-image {
+    width: 93%;
+  }
+}
+
+// mobile devices 
+
+@media (min-width: 100px) and (max-width: 480px) {
+
+  .welcome-text {
+    margin-bottom: 2px;
+  }
+
+  .about-us {
+    text-align: center;
+  }
+
+  .menu-icon {
+    font-size: 29px !important;
+  }
+
+  .play-store-logo {
+
+    position: relative;
+    width: 30%;
+    left: 11px;
+    bottom: 10px;
+  }
+
+  .app-store-logo {
+
+    position: relative;
+    width: 30%;
+    left: 21px !important;
+    bottom: 10px;
+  }
+  .content, .side-heading,.footer-note {
+    text-align: center;
+  }
+
+   li {
+    text-align: left;
+  }
+}
+
+// tablet 
+
+@media screen and (min-width: 481px) and (max-width: 980px) {
+
+  .welcome-text {
+    margin-bottom: -2px;
+  }
+
+
+  .about-us {
+    text-align: center;
+  }
+
+  .play-store-logo {
+
+    position: relative;
+    bottom: 10px;
+    left: 13px;
+    width: 37%;
+  }
+
+  .app-store-logo {
+    width: 37%;
+    position: relative;
+    left: 20px;
+    top: -9px;
+  }
+  .content , .footer-note, .side-heading{
+    text-align: center;
+  }
+
+  li {
+    text-align: left;
+  }
+}
+
+// desktop
+
+
+@media screen and (min-width: 981px) {
+
+
+  .welcome-text {
+    margin-bottom: -14px;
+  }
+
+  .about-us {
+    text-align: center;
+  }
+
+  .play-store-logo {
+    position: relative;
+    bottom: 10px;
+    left: 13px;
+    width: 50%;
+  }
+
+  .app-store-logo {
+    width: 50%;
+    position: relative;
+    top: -9px;
+    left: 28px;
+  }
+
+  .content, .footer-note , .side-heading{
+    text-align: center;
+  }
+  li {
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 240px) {
+
+  .what-we-offer-content-2 {
+    position: absolute;
+    top: 197px;
+    left: 9px;
+  }
+
+  .sub-heads-label-2 {
+    position: relative;
+    top: 175px;
+    left: 14px;
+  }
+}
+
+@media screen and (min-width: 240px) and (max-width: 386px) {
+
+  .what-we-offer-content-2 {
+    position: absolute;
+    top: 140px !important;
+    left: 9px;
+  }
+
+  .sub-heads-label-2 {
+    position: relative;
+    top: 120px !important;
+    left: 14px;
+  }
+}
+
+@media screen and (min-width: 386px) and (max-width: 480px) {
+
+  .what-we-offer-content-2 {
+    position: absolute;
+    top: 111px !important;
+    left: 9px;
+  }
+
+  .sub-heads-label-2 {
+    position: relative;
+    top: 86px !important;
+    left: 14px;
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 667px) {
+
+  .what-we-offer-content-2 {
+    position: absolute;
+    top: 170px !important;
+    left: 9px;
+  }
+
+  .sub-heads-label-2 {
+    position: relative;
+    top: 143px !important;
+    left: 14px;
+  }
+}
+
+@media screen and (min-width: 667px) and (max-width: 980px) {
+
+  .what-we-offer-content-2 {
+    position: absolute;
+    top: 140px !important;
+    left: 9px;
+  }
+
+  .sub-heads-label-2 {
+    position: relative;
+    top: 114px !important;
+    left: 15px;
+  }
+}
+
+@media screen and (min-width: 981px) and (max-width: 1200px) {
+  .what-we-offer-content-2 {
+    position: absolute;
+    top: 199px !important;
+    left: 9px;
+  }
+
+  .sub-heads-label-2 {
+    position: relative;
+    top: 170px !important;
+    left: 15px;
+  }
+}

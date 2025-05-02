@@ -1,0 +1,87 @@
+
+
+
+<div fxLayout="row"  fxLayoutAlign="space-between">
+
+<div  fxLayout="row" class="wrap-title" fxLayoutGap="15px"> 
+    <div>
+        <mat-icon class="customer-type-icon" *ngIf="customerType == 'I'">person</mat-icon>
+        <mat-icon class="customer-type-icon" *ngIf="customerType == 'A'">supervised_user_circle</mat-icon>  
+        <mat-icon class="customer-type-icon" *ngIf="customerType == 'C'">domain</mat-icon>  
+      </div>   
+<span class="label">Transaction Id : </span> <span class="value"> {{transactionId}} </span>
+
+<div>
+<button class="tags" [ngStyle]="{'color': getColor(transactionStatus),'background-color': getBackgroundColor(transactionStatus)}">
+    <div  [ngStyle]="{'background-color': getColor(transactionStatus)}" class="small-container"></div>
+  <span class="status-tag"   #tooltip="matTooltip"
+  [matTooltip]="getTooltipText(transactionStatus)"
+  matTooltipPosition="above"
+  matTooltipClass="custom-tooltip"> 
+  {{transactionStatus}} </span>
+  </button>
+  </div>
+
+</div>
+
+<div>
+    <mat-icon style="cursor: pointer;position: relative;
+    right: 14px;" [mat-dialog-close]="true">close</mat-icon>
+</div>
+
+</div>
+
+<div class="table-wrapper">
+    <div class="mat-elevation-z8" >
+      <div [ngStyle]="changeTableHeight()">
+        <table  class= "table" >
+         
+          <thead>
+            <tr>
+                  <th>DBS ACKNOWLEDGEMENT </th>
+                  <th>DBS STATUS</th>
+                  <th>DBS REMARKS</th>
+                  <th>DBS ACK TIME</th>
+                  <th>RECEIVED AT</th>
+                  </tr>
+          </thead>
+         
+          <tbody *ngIf="showFetchedData">
+            <tr *ngFor="let records of getTransactionAckRecords | slice: (p - 1) * itemsPerPage : p * itemsPerPage">
+            <td> {{records.ACKTYPE}} </td> 
+            <td> {{records.STATUS}} </td>
+            <td> {{records.DESCRIPTION}} </td>
+            <td> {{records.ACKTIME | date:'medium' }}  </td>  
+            <td> {{records.CREATEDDATE | date:'medium'}}  </td>  
+            
+            </tr>
+          </tbody>
+
+          <tbody *ngIf="noReportsData">
+            <tr>
+              <td>No Datas Found</td>
+            </tr>
+          </tbody>
+         
+      </table>
+      </div>
+      <mat-paginator class="pagination-class"
+      [length]="getTransactionAckRecords.length"
+      [pageSize]="itemsPerPage"
+      [pageIndex]="p - 1"
+      (page)="handlePageChange($event)"
+    ></mat-paginator>
+    </div> 
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner diameter="40"> </mat-spinner>
+      </div>
+     </div> 
+
+
+
+
+<div fxLayout="row" fxLayoutAlign="end" style="height: 43px;margin-top: 7px;" >
+    <button class="no-button" [mat-dialog-close]="true" mat-raised-button>Close</button>
+</div>
+

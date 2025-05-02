@@ -1,0 +1,37 @@
+
+<div class="title-container">
+
+    <p class="small-title-text"> {{orgName}} </p>
+
+    <div class="center-div">
+        <div fxLayout="column" fxLayoutGap="10px"  style="align-items: center;">
+            <h2 class="privacy-policy"> Privacy Policy </h2>
+            <h5 class="small-text"> Last updated on 27 Mar 2024 </h5>
+        </div>
+    </div>
+</div>
+
+<div>
+    <p class="red-content"> Please read this page carefully before using this web site. This page details the Privacy Policy
+         under which visitors (hereinafter “You” or “Visitors”) may use this site, and the content of which 
+         is owned and administered by aptonline.com.sg Web site. </p>
+</div>
+
+<div *ngFor="let details of policyContent" class="content-margin">
+  <div>  
+    <h3 class="sub-heads"> {{details.heading}} </h3>
+    <p class="values"> {{details.value}} </p>
+  </div>
+</div>
+
+<div>
+    <p class="values-1"> Alternatively, customers may refer their complaints to the BusinessTrust
+        Secretariat if they are not satisfied with the resolutions of the complaint. Complaints can be referred to: </p>
+    <p class="org-address">
+        11 Collyer Quay, #02-03 The Arcade, Singapore 049317, TEL: +65 62277660, FAX: +65 62209887
+    </p>    
+</div>
+
+<div class="btn-div">
+    <button class="top-button" mat-button type="button" (click)="scrollToTop()">Go to top</button>
+</div>

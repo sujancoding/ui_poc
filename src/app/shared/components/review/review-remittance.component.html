@@ -1,0 +1,141 @@
+<!-- <div class="whole-icon">
+<mat-icon class="icon"> monetization_on</mat-icon>
+</div> -->
+<div class="whole-layout">
+<div class="logo">
+    <img class="review-image" [src]="logo" type="file">
+    </div>
+<mat-divider> </mat-divider>
+
+<!--Display this From address for agent-->
+<div fxLayout="column" *ngIf="showAgentRelatedFields">
+
+    <h4 class="sub-heads">From </h4>
+   <div fxLayout="row" fxLayoutGap="53px">
+    <div class="sub-values"> Originated Remitter : </div>  <div class="values" 
+    [style.color]="originatedRemitter === 'No Originated Remitter' ? 'red' : 'black'"> {{originatedRemitter}} </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="53px">
+        <div class="sub-values">  Agent Name : </div>  <div class="values"> {{userName}} </div>
+        </div>
+
+    
+
+</div>
+
+<!--Display this From address for corporate-->
+<div fxLayout="column" *ngIf="showCorporateFromAddress">
+
+    <h4 class="sub-heads">From </h4>
+    <div class="sub-values"> {{userName}} </div>
+
+    
+
+</div>
+
+<div fxLayout="column">
+
+    <h4 class="sub-heads">To :</h4>
+    <div *ngFor="let data of payeeData">
+    <div class="sub-values"> {{data.NAME}} </div>
+    <div class="sub-values"> {{getRelationDescription(data.RELATIONSHIP)}}, </div>
+    <div class="sub-values"> {{data.EMAILID}}, {{data.ADDRESS}}, {{data.PHONENBR}}, {{data.COUNTRY}} </div>
+    <div class="sub-values">  {{data.BANKNAME}} , {{data.ACCOUNTNBR}}
+        swift code: {{data.SWIFTCODE ? data.SWIFTCODE : "N/A"}} , routing code / sort code: {{data.ROUTINGCODE ? data.ROUTINGCODE : "N/A"}} ,
+        address:{{data.BRANCHNAME}}, {{data.STATE}}, {{data.COUNTRY}}
+    </div>
+    </div>
+  
+</div>
+
+<div fxLayout="column" class="transfer-summary-layout">
+
+    <h4 class="sub-heads">Transfer Summary :</h4>
+    <div class="sub-values"> You have used {{arrayCount}} contracts for this transaction . </div>
+
+    <table class="contract-table">
+        <thead>
+            <th>Contract ID</th>
+            <th>Amount (SGD)</th>
+            <th>ExchangeRate</th>
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let array of remitArray">
+            <td class="contracts-td"> {{array.bookingId}} </td>
+            <td class="contracts-td"> {{array.amount}} </td>
+            <td class="contracts-td"> {{1 / array.exchangeRate}} </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+  
+
+     
+    <div fxLayout="row" fxLayoutGap="30px" style="margin-top: 12px;position: relative;left: 45px;">
+        <div class="total-label"> Payee Gets : </div>
+        <div class="total-amount-label">{{fcyTotalAmount | number: '1.0-2'}} {{payeeCountryCode}}</div>
+      </div>
+
+    <div fxLayout="row" fxLayoutGap="30px" style="margin-top: 12px;position: relative;left: 45px;">
+          <div class="total-label">Amount Sent : </div>
+          <div class="total-amount-label">{{totalAmount | number: '1.0-2'}} SGD</div>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="30px" style="margin-top: 12px;position: relative;left: 45px;">
+        <div class="total-label">Admin Fee : </div>
+        <div class="total-amount-label">{{adminFee}} SGD</div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="30px" style="margin-top: 12px;position: relative;left: 45px;">
+        <div class="total-label">Payment mode for charges : </div>
+        <div class="total-amount-label">{{displaySharingType}} </div>
+      </div>
+
+        <div fxLayout="row" fxLayoutGap="30px" style="margin-top: 12px;position: relative;left: 45px;">
+            <div class="highlight-total-label">Total Amount Sent : </div>
+            <div class="highlight-total-amount-label">{{finalTotalAmount | number: '1.0-2'}} SGD</div>
+          </div>
+
+          <!-- <div fxLayout="row" fxLayoutGap="30px" style="margin-top: 12px;position: relative;left: 45px;">
+            <div class="highlight-total-label">Total Amount Payee Gets : </div>
+            <div class="highlight-total-amount-label">{{fcyTotalAmount | number: '1.0-2'}} {{payeeCountryCode}}</div>
+          </div> -->
+    
+
+       
+
+  
+
+</div>
+
+<div fxLayout="column" style="margin-top: 22px;">
+    <h4 class="sub-heads">Remarks :</h4>
+    <div class="sub-values"> {{remarks}} </div>
+</div>
+
+<div fxLayout="column"  *ngIf="showAgentRelatedFields">
+    <h4 class="sub-heads">Purpose Of Remittance :</h4>
+    <div class="sub-values"> {{purposeOfRemittance ? purposeOfRemittance : "Purpose Of Remittance Not Provided"}} </div>
+</div>
+
+<div>
+    <mat-checkbox  class="large-checkbox"  (change)="onSelect($event)">
+        <span  class="checkbox-label">Processing time is up to 2 working days. Please double-check all details, <h4 class="sub-label"> as we are not responsible for any mistakes or omissions on the part of the applicant hereafter.</h4></span>
+    </mat-checkbox>
+  </div>
+
+<!-- Button -->
+
+<div  class="dialogButton" [ngStyle]="marginTopButton()"  fxLayout="row"  fxlayoutGap="20px">
+    <button mat-flat-button  class="mat-button" (click)="openAlertDialog()" type="button">Cancel</button>
+  
+    <button mat-flat-button color="primary" *ngIf="showSubmitButton" class="mat-button" [disabled]="isDisableSubmit" (click)="onSubmit()" type="button">Submit</button>
+    <div class="loader-container">
+    <mat-spinner  style="margin:0 auto;" diameter="40" *ngIf="submitButtonLoader"></mat-spinner>
+</div>
+</div>
+
+</div>

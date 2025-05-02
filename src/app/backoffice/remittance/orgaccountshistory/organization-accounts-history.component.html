@@ -1,0 +1,100 @@
+<!--AGENT SETTLEMENT HISTORY-->  
+
+<!-- Filter Section -->
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1" >
+
+    <form [formGroup]="filterForm">
+        <div fxLayout="row wrap" fxLayoutGap="10px" style="margin-left: 8px;align-items: center;">
+            <mat-icon class="arrow-back-icon" (click)="goToOrganizationAccounts()">keyboard_arrow_left</mat-icon>
+            <div fxLayout="column" style="margin-right: 10px;">
+               
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Start Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="startDate"
+                            [formControl]="filterForm.controls['startDate']" (dateChange)="onStartDateChange($event)" [min]="minStartDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="column">
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">End Date</mat-label>
+                        <input matInput formControlName="endDate" [formControl]="filterForm.controls['endDate']"
+                            [matDatepicker]="picker2" (dateChange)="onEndDateChange($event)" [min]="minEndDate" [max]="maxEndDate" >
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                        <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <button [disabled]="!filterForm.valid" mat-raised-button  (click)="searchFilter()"
+                class="buttonApplyfilter">Fetch</button>
+        </div>
+    </form>
+
+</div>
+
+
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+    
+    <div [ngStyle]="changeTableHeight()">
+    <table class="table">
+    <thead>
+        <th>ACCOUNT NUMBER</th>
+        <th>ACCOUNT NAME</th>
+        <th>DEBIT</th> 
+        <th>CREDIT</th>
+        <th>OPENING BALANCE</th> 
+        <th>OUTSTANDING BALANCE</th>
+        <th>DATE</th>
+        <th *ngIf="selectedAccountNumber == '20003' || selectedAccountNumber == '90013' || selectedAccountNumber == '90014' ">ACTION</th>
+</thead>
+    
+<tbody>
+   
+      <tr *ngFor="let orgsettlement of orgsettlement | slice: (p - 1) * itemsPerPage : p * itemsPerPage ">
+         <td> {{orgsettlement.ACCOUNTNO}} </td>
+         <td>  {{orgsettlement.ENTITYNAME}}  </td>
+         <td>  {{orgsettlement.DEBIT | number}}   </td>
+          <td>  {{orgsettlement.CREDIT | number}}   </td> 
+         <td [ngClass]="{'negative-amount': orgsettlement.OPENINGBALANCE < 0, 'positive-amount': orgsettlement.OPENINGBALANCE >= 0}">  {{orgsettlement.OPENINGBALANCE | number}}   </td>
+         <td [ngClass]="{'negative-amount': orgsettlement.OUTSTANDINGBALANCE < 0, 'positive-amount': orgsettlement.OUTSTANDINGBALANCE >= 0}">  {{orgsettlement.OUTSTANDINGBALANCE | number}}   </td>
+         <td>  {{orgsettlement.CREATEDDATE | date:'medium'}}   </td>
+         <td *ngIf="selectedAccountNumber == '20003' || selectedAccountNumber == '90013' || selectedAccountNumber == '90014' "> 
+            <div class="center-content" >
+                <button
+                #tooltip="matTooltip"
+                matTooltip="Download Transaction Summary"
+                matTooltipPosition="above"
+                matTooltipClass="accounts-custom-tooltip"
+               class="icon_button" mat-icon-button type="button"
+               (click)="downloadLedgerFile(orgsettlement.ACCOUNTNO,orgsettlement.CREATEDDATE,orgsettlement.ENTITYNAME)"> 
+                <mat-icon class="picture-as-pdf-icon">picture_as_pdf</mat-icon>    
+                </button>
+             </div>
+         </td>
+      </tr>
+</tbody>
+</table>
+</div>
+<mat-paginator class="pagination-class"
+[length]="orgsettlement.length"
+[pageSize]="itemsPerPage"
+[pageIndex]="p - 1"
+(page)="handlePageChange($event)"
+
+></mat-paginator>
+</div>
+ <!--Loader-->
+<div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+</div>
+</div>
+

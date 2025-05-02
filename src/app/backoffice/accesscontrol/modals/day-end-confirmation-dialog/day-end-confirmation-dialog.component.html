@@ -1,0 +1,22 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="header-container">
+    
+    <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+
+      <span class="head-label-1">Confirm Action </span>
+
+    </div>
+    <div>
+      <span [mat-dialog-close]="true" class="close-icon">
+        <mat-icon>close</mat-icon>
+      </span>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="5px"> 
+  <h4 class="label">Date: </h4>  <h4 class="value"> {{currentDate | date: 'medium'}} </h4>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="10px" class="btn-row">
+    <button mat-button type="button" class="no-btn" [mat-dialog-close]="true">No</button>
+    <button mat-button type="button" (click)="dayClose()" class="yes-btn">Yes</button>
+</div>

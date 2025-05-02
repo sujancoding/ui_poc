@@ -1,0 +1,12 @@
+
+    <h4 class="red">Are you Sure? Enter reason to reject the Application</h4>
+    <p>
+        <mat-form-field>
+            <input matInput aria-placeholder="Lorem ipsum dolor sit umlet , consectetur adipiscins clit">
+          </mat-form-field>
+    </p>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+    <button  class="white" [mat-dialog-close]="true">Close</button>
+    <button mat-raised-button class="color" (click)="closeAll()" >Confirm</button>
+    </div>
+

@@ -1,0 +1,215 @@
+<!--Search filter Section-->
+<div>
+    <form [formGroup]="filterForm">
+      <div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1">
+        <div  fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between">
+  
+          <div fxLayout="row wrap"  style="margin-left: 15px;position: relative;
+    top: 7px;">
+  
+            <div fxLayout="column" style="margin-left: 10px;">
+            
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Counter Type</mat-label>
+                <mat-select [formControl]="filterForm.controls['counterType']">
+                  <mat-option *ngFor="let option of counterTypeArray" [value]="option.value"> {{option.description}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="column" style="margin-left: 10px;">
+               
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Ccy Code</mat-label>
+                  <input matInput formControlName="currencyCode" [formControl]="filterForm.controls['currencyCode']" [matAutocomplete]="auto"  >
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" >
+                   
+                      <mat-option *ngFor="let option of filteredOptions | async"  [value]="option">{{option.ccyCode}}</mat-option>
+                    
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+  
+  
+           
+              <button mat-raised-button [disabled]="!filterForm.valid" class="buttonApplyfilter" (click)="searchFilter()">
+                Search
+              </button>
+           
+          </div>
+  
+        </div>
+  
+      </div>
+    </form>
+  
+  
+  </div>
+
+
+<div class="table-wrapper">
+    <div class="mat-elevation-z8" >
+      <div [ngStyle]="changeTableHeight()">
+        <table  class= "table" >
+         
+          <thead>
+            <tr>
+                  <th>CURRENCY CODE</th>
+                  <th>CURRENCY NO</th>
+                  <th>CURRENCY NAME</th>
+                  <th>COUNTER TYPE</th>
+                  <th>ACTUAL STOCK</th>
+                  <!-- <th>STOCK (ALL)</th>
+                  <th>STOCK (CURRENT DATE)</th>  -->
+                  <th>AVERAGE COST</th>
+                  <th>LAST UPDATED BY & TIME</th>
+                   <th>ACTION</th> 
+                  </tr>
+          </thead>
+         
+          <tbody>
+            <tr *ngFor="let search of stockListings | slice: (p - 1) * itemsPerPage : p * itemsPerPage ;index as i; "
+            [class.disabled]="search.disable">
+
+                <td>{{search.ccyCode}}</td>
+
+                  <td>{{search.ccyNo}}</td>
+
+                  <td>{{search.ccyName}}</td>
+
+                  <td>
+                    <div *ngIf="search.counterType == 'W'"> Wholesale </div>
+                    <div *ngIf="search.counterType == 'R'"> Retail </div>
+                  </td>
+
+                  <!-- <td *ngIf="search.editMode">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="position: relative;
+                    top: 10px;">
+                      <mat-label class="custom-label">Counter Type</mat-label>
+                      <mat-select [(ngModel)]="search.counterType">
+                        <mat-option *ngFor="let option of counterTypeEditArray" [value]="option.value">
+                          {{ option.description }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </td> -->
+
+                <!--Future Stock = Current Stock + All Future Stocks-->
+                <!-- <td *ngIf="!search.editMode" [ngClass]="{
+                  'negative-amount': (search?.futureStock + search?.dealStock) < 0, 
+                  'positive-amount': (search?.futureStock + search?.dealStock) >= 0
+                }">
+              {{ (search?.futureStock + search?.dealStock) | number }}
+            </td>
+
+                  <td *ngIf="search.editMode">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="position: relative;
+                    top: 10px;">
+                      <mat-label class="custom-label">Stock (All)</mat-label>
+                      <input matInput [(ngModel)]="search.futureStock">
+                    </mat-form-field>
+                </td>
+
+                  <td *ngIf="!search.editMode" [ngClass]="{'negative-amount': search.dealStock < 0, 'positive-amount': search.dealStock >= 0}">{{search.dealStock | number}}</td> 
+
+                   <td *ngIf="search.editMode">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="position: relative;
+                    top: 10px;">
+                      <mat-label class="custom-label">Stock (Current Date)</mat-label>
+                      <input matInput [(ngModel)]="search.dealStock">
+                    </mat-form-field>
+                </td>  -->
+
+                <td [ngClass]="{'negative-amount': search.actualStock < 0, 'positive-amount': search.actualStock >= 0}">{{search.actualStock | number }}</td>
+
+                  <td *ngIf="!search.editMode">{{search.avgCost}}</td>
+
+                  <td *ngIf="search.editMode">
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="position: relative;
+                    top: 10px;">
+                      <mat-label class="custom-label">Average Cost</mat-label>
+                      <input matInput [(ngModel)]="search.avgCost">
+                    </mat-form-field>
+                </td>
+
+                  <td>
+                    <div>
+                      <div> {{search.updatedBy ? search.updatedBy : search.createdBy }}</div>
+                      <div class="sub-value"> {{search.updatedDate ? (search.updatedDate | date : 'medium') : (search.createdDate | date : 'medium') }} </div>
+                      </div>
+                  </td>
+
+                  <td>
+                    <div fxLayout="row" fxLayoutAlign="start">
+                      <div>
+                          <button (click)="openCurrencyHistory(search.ccyNo, search.ccyName,search.ccyCode)"
+                          #tooltip="matTooltip"
+                          matTooltip="{{search.ccyName}} History"
+                          matTooltipPosition="above"
+                          matTooltipClass="accounts-custom-tooltip"
+                             class="icon_button" mat-icon-button type="button">
+                             <mat-icon>library_books</mat-icon>
+                          </button>
+                       </div>
+
+                    <div>
+                      <button
+                      #tooltip="matTooltip"
+                      matTooltip="Download Transaction Summary"
+                      matTooltipPosition="above"
+                      matTooltipClass="accounts-custom-tooltip"
+                     class="icon_button" mat-icon-button type="button"
+                     (click)="downloadLedgerFile(search.ccyNo, search.ccyCode)"> 
+                      <mat-icon class="picture-as-pdf-icon">picture_as_pdf</mat-icon>    
+                      </button>
+                   </div>
+
+                   </div>
+
+                  </td>
+
+                  <!-- <td>
+
+                     <button mat-button  #tooltip="matTooltip" matTooltip="Edit" matTooltipPosition="above"
+                    matTooltipClass="accounts-custom-tooltip"  *ngIf="!search.editMode" (click)="onEdit(i)" 
+                    [class.disabled]="search.disable" >
+                    <mat-icon>create</mat-icon>
+                  </button> 
+
+                  <button mat-button class="save-icon" 
+                  #tooltip="matTooltip"
+                  matTooltip="Save Changes"
+                  matTooltipPosition="above"
+                  matTooltipClass="accounts-custom-tooltip"
+                  *ngIf="search.editMode" (click)="onUpdateRecord(i,search,search.ccyNo, search.counterType, search.currentStock, search.dealStock, search.avgCost)"  >
+                    <mat-icon class="save-icon">save</mat-icon> 
+                  </button> 
+
+                  <button mat-button class="reset-icon" 
+                #tooltip="matTooltip"
+                matTooltip="Reset"
+                matTooltipPosition="above"
+                matTooltipClass="accounts-custom-tooltip"
+                *ngIf="search.editMode" (click)="onResetRecord(i, search.id)">
+                  <mat-icon>refresh</mat-icon> 
+                </button> 
+
+                  </td> -->
+
+            </tr>
+          </tbody>
+         
+      </table>
+      </div>
+      <mat-paginator class="pagination-class"
+      [length]="stockListings.length"
+      [pageSize]="itemsPerPage"
+      [pageIndex]="p - 1"
+      (page)="handlePageChange($event)"
+    ></mat-paginator>
+    </div> 
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+      </div>
+     </div>

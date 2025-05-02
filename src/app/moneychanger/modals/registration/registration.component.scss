@@ -1,0 +1,35 @@
+.text-danger{
+    white-space: normal;
+    line-height: 16px;
+}
+  
+.message-block .error-message  {
+    // Hidden by default
+    display: none;
+}
+.message-block .error-message:first-child {
+    display: block;
+    color: #e8316f;
+    margin-top: -8px;
+    white-space: break-spaces;
+    font-size: small;
+}
+
+.phn-code-prefix{
+    position: relative;
+    bottom: 7px;
+}
+
+.button-row{
+    margin-top: 260px;
+}
+
+.submit-mat-btn{
+    height: 47px;
+    border-radius: 5px;
+}
+.close-mat-btn{
+    width: 118px;
+    height: 47px;
+    border-radius: 5px;
+}

@@ -1,0 +1,10 @@
+
+<mat-tab-group  mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="activeTabIndex">
+    <mat-tab class="tab-name" label="ARCADE PLAZA TRADERS">
+        <app-organization-initiated [checkStatus]="check"></app-organization-initiated>
+    </mat-tab>
+
+    <mat-tab class="tab-name" label="{{agentName}}">
+       <app-agent-initiated [checkStatus]="check"></app-agent-initiated>
+    </mat-tab>
+  </mat-tab-group>

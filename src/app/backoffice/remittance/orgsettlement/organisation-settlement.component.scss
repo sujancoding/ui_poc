@@ -1,0 +1,48 @@
+  
+.icon_button {
+    color: #000000;
+}
+
+.title{
+  line-height: 0px;
+}
+
+
+img{
+    width: 29px;
+    height: 29px;
+}
+
+.logo{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.picture-as-pdf-icon{
+    font-size: 26px;
+}
+
+.negative-amount{
+    color: red;
+  }
+  
+  .positive-amount{
+    color: rgb(0, 0, 0);
+  }
+  .btn-account-history{
+    font-family: 'Roboto';
+    font-size: 21px;
+    color: #000000;
+  }
+
+  .line-divider{
+    margin-bottom: 26px;
+  }

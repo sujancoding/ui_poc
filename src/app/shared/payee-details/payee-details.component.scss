@@ -1,0 +1,33 @@
+.example-card {
+  background-color: blue;
+}
+
+
+
+.profile-card{
+  background-color: #123969;
+  height: 10.3cm;
+  width: 80%;
+  .hcont{
+   
+    margin: 0 auto;
+    margin-left: 0.2cm;
+   // padding-right: 3cm;
+    h4{
+      font-size: 0.7rem;
+      line-height: 1.4;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: white;
+      
+      small{
+        font-size: 1.1em;
+        opacity: 0.5;
+       display: block;
+        font-weight: bold;
+        color: brown;
+    }
+  }
+    
+}
+}

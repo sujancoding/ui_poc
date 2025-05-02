@@ -1,0 +1,96 @@
+
+<div *ngIf="deactivateCustomerFlag">
+<h4 class="red">Are you Sure? Enter reason to reject the Application</h4>
+<p>
+    <mat-form-field appearance="outline">
+        <input matInput aria-placeholder="Lorem ipsum dolor sit umlet , consectetur adipiscins clit">
+      </mat-form-field>
+</p>
+<div fxLayout="row" fxLayoutAlign="space-between">
+<button  class="white" [mat-dialog-close]="true">Close</button>
+<div *ngIf="rejectApplicant">
+<button mat-raised-button class="color" (click)="closeAll()" >Confirm</button>
+</div>
+
+<div *ngIf="inactiveFlag">
+  <button mat-raised-button class="color" (click)="inactive()" >Confirm</button>
+</div>
+</div>
+</div>
+
+<div *ngIf="inactiveCustomerFlag">
+  <h4 class="red">Are you Sure? Enter Reason to deactivate this customer</h4>
+  <p>
+      <mat-form-field appearance="outline">
+          <input matInput [(ngModel)]="customerStatusReason" aria-placeholder="Lorem ipsum dolor sit umlet , consectetur adipiscins clit">
+        </mat-form-field>
+  </p>
+  <div fxLayout="row" fxLayoutAlign="space-between">
+  <button  class="white" [mat-dialog-close]="true">Close</button>
+  <div *ngIf="showConfirmButton">
+    <button mat-raised-button class="color" (click)="inactive()" >Confirm</button>
+  </div>
+  </div>
+  </div>
+
+
+
+<div *ngIf="activateCustomerFlag">
+
+<h4>Are you sure ? Enter reason to Activate a Customer</h4>
+<p>
+  <mat-form-field appearance="outline">
+      <input matInput aria-placeholder="Not suspicion .. " [(ngModel)]="customerStatusReason">
+    </mat-form-field>
+</p>
+
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <button  class="white" [mat-dialog-close]="true">Close</button>
+  <div *ngIf="showConfirmButton">
+  <button mat-raised-button class="color" (click)="closeActivationDialog()" >Confirm</button>
+  </div>
+  </div>
+
+</div>
+
+<div *ngIf="InactivePayeeFlag">
+
+  <h4>Are you sure ? Enter reason to Reject a Payee</h4>
+  <p>
+    <mat-form-field>
+        <input matInput aria-placeholder="Not suspicion .. ">
+      </mat-form-field>
+  </p>
+  
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <button  class="white" [mat-dialog-close]="true">Close</button>
+    <div *ngIf="showConfirmButton">
+    <button mat-raised-button class="color" (click)="closeInactiveDialog()" >Confirm</button>
+    </div>
+    </div>
+  
+  </div>
+
+  <div *ngIf="activePayeeFlag">
+
+    <h4>Are you sure ? Enter reason to Activate a Payee</h4>
+    <p>
+      <mat-form-field>
+          <input matInput aria-placeholder="Not suspicion .. ">
+        </mat-form-field>
+    </p>
+    
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <button  class="white" [mat-dialog-close]="true">Close</button>
+      <div *ngIf="showConfirmButton">
+      <button mat-raised-button class="color" (click)="closeactiveDialog()" >Confirm</button>
+      </div>
+      </div>
+    
+    </div>
+
+
+    <div class="loader-container" *ngIf="loader">
+      <mat-spinner diameter="35" ></mat-spinner>
+  </div>
+

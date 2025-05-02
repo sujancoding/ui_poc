@@ -1,0 +1,96 @@
+
+<!--APPROVE PAYEE (BACKOFFICE)-->
+
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1">
+ 
+  <form [formGroup]="filterForm">
+  <div  fxLayout="row" fxLayoutGap="10px" style="margin-left: 15px;">
+    <div fxLayout="column" style="width: min-content;"> 
+      
+      <mat-form-field style="width: 300px;" appearance="{{'formFieldAppearance' | label}}">
+        <mat-label class="custom-label">Payee Name</mat-label>
+        <input  placeholder="Payee Name" matInput type="text" formControlName="payeeName" [formControl]="filterForm.controls['payeeName']" >
+      </mat-form-field>
+      <small class="error-message" *ngIf="filterForm.controls['payeeName'].hasError('pattern')" > {{'splCharsValidation' | label}} </small>     
+    </div>
+
+    <button [disabled]="!filterForm.valid"  mat-raised-button (click)="applyFilter()" type="button"  class="buttonApplyfilter">
+      Apply Filter
+    </button>
+  </div>
+  </form>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="8px">
+    <div class="table-wrapper" style="width:72%;">
+      <div class="mat-elevation-z8">
+      <div [ngStyle]="changeTableHeight()">
+    <table  class="table">
+      <thead>
+          <tr>
+              <th>CUSTOMER ID</th>
+              <th>PAYEE ID</th>
+              <th>PAYEE NAME</th>
+              <th>COUNTRY</th>  
+              <th>STATUS</th>
+              <th>ACTIONS</th>
+             
+          </tr> 
+      </thead>
+      <tbody>
+        
+        <tr *ngFor = "let payeeSearch of payeeSearch | slice: (p - 1) * itemsPerPage : p * itemsPerPage"
+        [class.selected]="payeeSearch.PAYEEID == this.n && this.color">
+              <td class="link" (click)="openCustomerDialog(payeeSearch.CUSTOMERID, payeeSearch.CUSTOMERTYPE)" >{{payeeSearch.CUSTOMERID}}</td>
+              <td>{{payeeSearch.PAYEEID}}</td>
+              <td style="color: #0176d3;">{{payeeSearch.NAME}}</td>
+              <td>{{payeeSearch.COUNTRY}}</td>
+              <td>
+                <div class="tags" [ngStyle]="{'color': getColor(payeeSearch.STATUS),'background-color': getBackgroundColor(payeeSearch.STATUS)}">
+                  <div  [ngStyle]="{'background-color': getColor(payeeSearch.STATUS)}" class="small-container"></div>
+                <span class="status-tag"   #tooltip="matTooltip"
+                [matTooltip]="getTooltipText(payeeSearch.STATUS)"
+                matTooltipPosition="above"
+                matTooltipClass="custom-tooltip"> 
+                {{payeeSearch.STATUS}} </span>
+                </div>
+              </td>
+              <td>
+                <div class="example-button-container">
+                  <button class="more-icon" (click)="toggleTag(payeeSearch.CUSTOMERID,payeeSearch.PAYEEID)"  mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                </div>   
+              </td>   
+            
+          </tr> 
+         
+      </tbody>
+     
+     
+  </table>
+  </div>
+  <mat-paginator class="pagination-class"
+  [length]="payeeSearch.length"
+  [pageSize]="itemsPerPage"
+  [pageIndex]="p - 1"
+  (page)="handlePageChange($event)"
+  ></mat-paginator>
+ </div>
+ <!--Loader-->
+ <div *ngIf="loader" class="loader-wrapper">
+  <mat-spinner> </mat-spinner>
+  </div>
+ </div>
+      
+      
+      
+<div fxFlex="30" *ngIf="showMe">
+
+<app-approve-details [payeeDetails]="rowData" (approvePayeeEventEmitter)="latestData()"></app-approve-details>
+
+
+</div>
+
+</div> 
+

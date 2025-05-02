@@ -1,0 +1,219 @@
+.small-title-text{
+    font-size: 17px;
+    font-family: Roboto;
+    margin-left: 15px;
+}
+
+.title-container{
+    height: 70px;
+    border-bottom: 1px solid #C8C8C8;
+    width: 100%;
+}
+
+.small-text{
+    margin-top: -1px;
+    color: grey;
+}
+
+.center-div{
+    display: flex;
+    justify-content: center;
+    position: relative;
+   // top: -46px;
+}
+
+.privacy-policy{
+    font-weight: 600;
+    position: relative;
+    top: -13px;
+}
+
+.red-content{
+    color: red;
+    font-size: 19px;
+    font-family: 'Roboto';
+    margin: 15px;
+}
+
+.content-margin{
+    margin: 15px;
+    text-align: justify;
+}
+
+.values{
+    font-size: 19px;
+    font-family: "Roboto";
+    /* margin: 15px; */
+    color: #494949;
+    position: relative;
+    top: -15px;
+}
+
+.sub-heads{
+    font-size: 20px;
+    font-family: "Roboto";
+}
+
+.values-1{
+    font-size: 19px;
+    font-family: "Roboto";
+    /* margin: 15px; */
+    color: #494949;
+    position: relative;
+    top: -29px;
+    margin: 15px;
+}
+
+.org-address{
+    font-size: 19px;
+    font-family: "Roboto";
+    /* margin: 15px; */
+    color: #494949;
+    position: relative;
+    top: -35px;
+    margin: 15px;
+      
+}
+
+.btn-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -26px;
+}
+
+.top-button{
+    background-color: #1187ce;
+    color: white;
+    width: 140px;
+    height: 43px;
+}
+
+.scroll-content{
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+.close-icon{
+    font-size: 34px;
+    position: relative;
+    top: 11px;
+    right: 14px;
+    cursor: pointer;
+}
+
+.listOfContents{
+    font-size: 19px;
+    font-family: "Roboto";
+    position: relative;
+    top: -15px;
+    text-decoration: underline;
+    color: #1376d3;
+    cursor: pointer;
+}
+//Media Query .
+@media screen and (max-width: 500px) {
+    /* Styles to apply when screen width is below 500 pixels */
+    .title-container {
+        height: 46px;
+        border-bottom: 1px solid #C8C8C8;
+        width: 100%;
+    }
+    .small-title-text {
+            font-size: 16px;
+            font-family: Roboto;
+            margin-left: 15px;
+        }
+    
+        .small-text {
+            margin-top: -5px;
+            color: grey;
+            position: relative;
+            left: 13px;
+            font-size: 14px;
+    
+        }
+    
+        .center-div {
+            display: flex;
+            justify-content: left;
+            position: relative;
+           // top: -32px;
+        }
+    
+        .privacy-policy {
+            font-weight: 600;
+            font-size: 21px;
+            position: relative;
+            left: -6px;
+            top: -24px;
+        }
+    
+        .red-content {
+            color: red;
+            font-size: 15px;
+            font-family: 'Roboto';
+            margin: 15px;
+            line-height: 19px;
+        }
+    
+        .values {
+            font-size: 15px;
+            font-family: "Roboto";
+            /* margin: 15px; */
+            color: #494949;
+            position: relative;
+            top: -10px;
+            line-height: 19px;
+        }
+
+        .listOfContents{
+            font-size: 15px;
+            font-family: "Roboto";
+            position: relative;
+            top: -10px;
+            text-decoration: underline;
+            color: #1376d3;
+            cursor: pointer;
+            line-height: 19px;
+        }
+    
+        .sub-heads {
+            font-size: 18px;
+            font-family: "Roboto";
+            line-height: normal;
+        }
+    
+        .values-1 {
+            font-size: 15px;
+            font-family: "Roboto";
+            color: #494949;
+            position: relative;
+            top: -29px;
+            margin: 15px;
+            line-height: 19px;
+        }
+    
+        .org-address {
+            font-size: 15px;
+            font-family: "Roboto";
+            color: #494949;
+            position: relative;
+            top: -40px;
+            margin: 15px;
+           
+            line-height: 19px;
+        }
+
+        .close-icon{
+            font-size: 24px;
+            position: relative;
+    top: 0px;
+    right: 0px;
+        }
+        .content-margin{
+            margin: 1px;
+            text-align: justify;
+        }
+  }

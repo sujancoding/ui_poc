@@ -1,0 +1,100 @@
+
+<!--AGENT SETTLEMENT HISTORY--> 
+
+<!-- Filter Section -->
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1" >
+
+    <form [formGroup]="filterForm">
+        <div  fxLayout="row" fxLayoutGap="10px" style="margin-left: 15px;  align-items: center;">
+            <mat-icon (click)="goToAgentSettlements()" class="arrow-back-icon">keyboard_arrow_left</mat-icon>
+            <div fxLayout="column" style="width: 403px;">
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Agent Name</mat-label>
+                        <input formControlName="agentName" [formControl]="filterForm.controls['agentName']" matInput
+                            class="form-control" readonly="true">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="column" style="max-width: 403px;" >
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">Start Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="startDate"
+                            [formControl]="filterForm.controls['startDate']" (dateChange)="onStartDateChange($event)" [min]="minStartDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="column" style="max-width: 403px;">
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                        <mat-label class="custom-label">End Date</mat-label>
+                        <input matInput formControlName="endDate" [formControl]="filterForm.controls['endDate']"
+                            [matDatepicker]="picker2" (dateChange)="onEndDateChange($event)" [min]="minEndDate" [max]="maxEndDate" >
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                        <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <button [disabled]="!filterForm.valid" mat-raised-button  (click)="searchFilter()"
+                class="buttonApplyfilter">Fetch</button>
+        </div>
+    </form>
+
+</div>
+
+
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+    
+    <div [ngStyle]="changeTableHeight()">
+    <table class="table">
+    <thead>
+       <th>SETTLEMENT ID</th>
+       <th>AGENT ID</th>
+       <th>AGENT NAME</th>
+       <th>AMOUNT SETTLED (SGD)</th> 
+       <th>SETTLEMENT TYPE</th>
+       <th>SETTLED BY</th>
+       <th>SETTLED ON</th>
+</thead>
+    
+<tbody>
+   
+      <tr *ngFor = "let settlementHistory of agentSettlementHistory | slice: (p - 1) * itemsPerPage : p * itemsPerPage;">
+         <td>{{settlementHistory.SETTLEMENTID}}</td>
+         <td style="color: #1E74E8;">{{settlementHistory.ENTITYID}}</td>
+         <td>{{settlementHistory.ENTITYNAME}}</td>
+         <td> {{settlementHistory.AMOUNTSETTLED | number}}  </td> 
+         <td> {{settlementHistory.MODE}} </td>
+         <td> {{settlementHistory.SETTLEDBY}} </td>
+         <td> {{settlementHistory.CREATEDDATE | date:'medium'}} </td>
+
+      </tr>
+</tbody>
+</table>
+</div>
+<mat-paginator class="pagination-class"
+[length]="agentSettlementHistory.length"
+[pageSize]="itemsPerPage"
+[pageIndex]="p - 1"
+(page)="handlePageChange($event)"
+></mat-paginator>
+</div>
+ <!--Loader-->
+<div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+</div>
+</div>
+
+<!-- <div class="SettlementButton">
+    <button mat-flat-button class="settlement" (click)="showSettlement()" color="primary">Back</button>
+    </div> -->
+    

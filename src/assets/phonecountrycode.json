@@ -1,0 +1,1185 @@
+[
+    {
+      "country": "Afghanistan",
+      "code": "+93",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-af"
+    },
+    {
+      "country": "Albania",
+      "code": "+355",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-al"
+    },
+    {
+      "country": "Algeria",
+      "code": "+213",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-dz"
+    },
+    {
+      "country": "Andorra",
+      "code": "+376",
+      "maxLength": 6,
+      "FLAG": "flag-icon flag-icon-ad"
+    },
+    {
+      "country": "Angola",
+      "code": "+244",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-ao"
+    },
+    {
+      "country": "Antigua and Barbuda",
+      "code": "+1-268",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-ag"
+    },
+    {
+      "country": "Argentina",
+      "code": "+54",
+      "maxLength": 13,
+      "FLAG": "flag-icon flag-icon-ar"
+    },
+    {
+      "country": "Armenia",
+      "code": "+374",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-am"
+    },
+    {
+      "country": "Australia",
+      "code": "+61",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-au"
+    },
+    {
+      "country": "Austria",
+      "code": "+43",
+      "maxLength": 13,
+      "FLAG": "flag-icon flag-icon-at"
+    },
+    {
+      "country": "Azerbaijan",
+      "code": "+994",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-az"
+    },
+    {
+      "country": "Bahamas",
+      "code": "+1-242",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-bs"
+    },
+    {
+      "country": "Bahrain",
+      "code": "+973",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-bh"
+    },
+    {
+      "country": "Bangladesh",
+      "code": "+880",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-bd"
+    },
+    {
+      "country": "Barbados",
+      "code": "+1-246",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-bb"
+    },
+    {
+      "country": "Belarus",
+      "code": "+375",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-by"
+    },
+    {
+      "country": "Belgium",
+      "code": "+32",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-be"
+    },
+    {
+      "country": "Belize",
+      "code": "+501",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-bz"
+    },
+    {
+      "country": "Benin",
+      "code": "+229",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-bj"
+    },
+    {
+      "country": "Bhutan",
+      "code": "+975",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-bt"
+    },
+    {
+      "country": "Bolivia",
+      "code": "+591",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-bo"
+    },
+    {
+      "country": "Bosnia and Herzegovina",
+      "code": "+387",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-ba"
+    },
+    {
+      "country": "Botswana",
+      "code": "+267",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-bw"
+    },
+    {
+      "country": "Brazil",
+      "code": "+55",
+      "maxLength": 13,
+      "FLAG": "flag-icon flag-icon-br"
+    },
+    {
+      "country": "Brunei Darussalam",
+      "code": "+673",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-bn"
+    },
+    {
+      "country": "Bulgaria",
+      "code": "+359",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-bg"
+    },
+    {
+      "country": "Burkina Faso",
+      "code": "+226",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-bf"
+    },
+    {
+      "country": "Burundi",
+      "code": "+257",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-bi"
+    },
+    {
+      "country": "Cambodia",
+      "code": "+855",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-kh"
+    },
+    {
+      "country": "Cameroon",
+      "code": "+237",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-cm"
+    },
+    {
+      "country": "Canada",
+      "code": "+1",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-ca"
+    },
+    {
+      "country": "Cape Verde",
+      "code": "+238",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-cv"
+    },
+    {
+      "country": "Central African Republic",
+      "code": "+236",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-cf"
+    },
+    {
+      "country": "Chad",
+      "code": "+235",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-td"
+    },
+    {
+      "country": "Chile",
+      "code": "+56",
+      "maxLength": 12,
+      "FLAG": "flag-icon flag-icon-cl"
+    },
+    {
+      "country": "China",
+      "code": "+86",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-cn"
+    },
+    {
+      "country": "Colombia",
+      "code": "+57",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-co"
+    },
+    {
+      "country": "Comoros",
+      "code": "+269",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-km"
+    },
+    {
+      "country": "Congo",
+      "code": "+242",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-cg"
+    },
+    {
+      "country": "Costa Rica",
+      "code": "+506",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-cr"
+    },
+    {
+      "country": "Côte d'Ivoire",
+      "code": "+225",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-ci"
+    },
+    {
+      "country": "Croatia",
+      "code": "+385",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-hr"
+    },
+    {
+      "country": "Cuba",
+      "code": "+53",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-cu"
+    },
+    {
+      "country": "Cyprus",
+      "code": "+357",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-cy"
+    },
+    {
+      "country": "Czech Republic",
+      "code": "+420",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-cz"
+    },
+    {
+      "country": "Democratic Republic of the Congo",
+      "code": "+243",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-cd"
+    },
+    {
+      "country": "Denmark",
+      "code": "+45",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-dk"
+    },
+    {
+      "country": "Djibouti",
+      "code": "+253",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-dj"
+    },
+    {
+      "country": "Dominica",
+      "code": "+1-767",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-dm"
+    },
+    {
+      "country": "Dominican Republic",
+      "code": "+1-809, +1-829, +1-849",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-do"
+    },
+    {
+      "country": "East Timor",
+      "code": "+670",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-tl"
+    },
+    {
+      "country": "Ecuador",
+      "code": "+593",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-ec"
+    },
+    {
+      "country": "Egypt",
+      "code": "+20",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-eg"
+    },
+    {
+      "country": "El Salvador",
+      "code": "+503",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-sv"
+    },
+    {
+      "country": "Equatorial Guinea",
+      "code": "+240",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-gq"
+    },
+    {
+      "country": "Eritrea",
+      "code": "+291",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-er"
+    },
+    {
+      "country": "Estonia",
+      "code": "+372",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-ee"
+    },
+    {
+      "country": "Eswatini",
+      "code": "+268",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-sz"
+    },
+    {
+      "country": "Ethiopia",
+      "code": "+251",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-et"
+    },
+    {
+      "country": "Fiji",
+      "code": "+679",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-fj"
+    },
+    {
+      "country": "Finland",
+      "code": "+358",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-fi"
+    },
+    {
+      "country": "France",
+      "code": "+33",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-fr"
+    },
+    {
+      "country": "Gabon",
+      "code": "+241",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-ga"
+    },
+    {
+      "country": "Gambia",
+      "code": "+220",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-gm"
+    },
+    {
+      "country": "Georgia",
+      "code": "+995",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-ge"
+    },
+    {
+      "country": "Germany",
+      "code": "+49",
+      "maxLength": 13,
+      "FLAG": "flag-icon flag-icon-de"
+    },
+    {
+      "country": "Ghana",
+      "code": "+233",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-gh"
+    },
+    {
+      "country": "Greece",
+      "code": "+30",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-gr"
+    },
+    {
+      "country": "Grenada",
+      "code": "+1-473",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-gd"
+    },
+    {
+      "country": "Guatemala",
+      "code": "+502",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-gt"
+    },
+    {
+      "country": "Guinea",
+      "code": "+224",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-gn"
+    },
+    {
+      "country": "Guinea-Bissau",
+      "code": "+245",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-gw"
+    },
+    {
+      "country": "Guyana",
+      "code": "+592",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-gy"
+    },
+    {
+      "country": "Haiti",
+      "code": "+509",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-ht"
+    },
+    {
+      "country": "Honduras",
+      "code": "+504",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-hn"
+    },
+    {
+      "country": "Hong Kong",
+      "code": "+852",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-hk"
+    },
+    {
+      "country": "Hungary",
+      "code": "+36",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-hu"
+    },
+    {
+      "country": "Iceland",
+      "code": "+354",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-is"
+    },
+    {
+      "country": "India",
+      "code": "+91",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-in"
+    },
+    {
+      "country": "Indonesia",
+      "code": "+62",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-id"
+    },
+    {
+      "country": "Iran",
+      "code": "+98",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-ir"
+    },
+    {
+      "country": "Iraq",
+      "code": "+964",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-iq"
+    },
+    {
+      "country": "Ireland",
+      "code": "+353",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-ie"
+    },
+    {
+      "country": "Israel",
+      "code": "+972",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-il"
+    },
+    {
+      "country": "Italy",
+      "code": "+39",
+      "maxLength": 12,
+      "FLAG": "flag-icon flag-icon-it"
+    },
+    {
+      "country": "Jamaica",
+      "code": "+1-876",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-jm"
+    },
+    {
+      "country": "Japan",
+      "code": "+81",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-jp"
+    },
+    {
+      "country": "Jordan",
+      "code": "+962",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-jo"
+    },
+    {
+      "country": "Kazakhstan",
+      "code": "+7",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-kz"
+    },
+    {
+      "country": "Kenya",
+      "code": "+254",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-ke"
+    },
+    {
+      "country": "Kiribati",
+      "code": "+686",
+      "maxLength": 5,
+      "FLAG": "flag-icon flag-icon-ki"
+    },
+    {
+      "country": "Kuwait",
+      "code": "+965",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-kw"
+    },
+    {
+      "country": "Kyrgyzstan",
+      "code": "+996",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-kg"
+    },
+    {
+      "country": "Laos",
+      "code": "+856",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-la"
+    },
+    {
+      "country": "Latvia",
+      "code": "+371",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-lv"
+    },
+    {
+      "country": "Lebanon",
+      "code": "+961",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-lb"
+    },
+    {
+      "country": "Lesotho",
+      "code": "+266",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-ls"
+    },
+    {
+      "country": "Liberia",
+      "code": "+231",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-lr"
+    },
+    {
+      "country": "Libya",
+      "code": "+218",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-ly"
+    },
+    {
+      "country": "Liechtenstein",
+      "code": "+423",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-li"
+    },
+    {
+      "country": "Lithuania",
+      "code": "+370",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-lt"
+    },
+    {
+      "country": "Luxembourg",
+      "code": "+352",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-lu"
+    },
+    {
+      "country": "Madagascar",
+      "code": "+261",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-mg"
+    },
+    {
+      "country": "Malawi",
+      "code": "+265",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-mw"
+    },
+    {
+      "country": "Malaysia",
+      "code": "+60",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-my"
+    },
+    {
+      "country": "Maldives",
+      "code": "+960",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-mv"
+    },
+    {
+      "country": "Mali",
+      "code": "+223",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-ml"
+    },
+    {
+      "country": "Malta",
+      "code": "+356",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-mt"
+    },
+    {
+      "country": "Marshall Islands",
+      "code": "+692",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-mh"
+    },
+    {
+      "country": "Mauritania",
+      "code": "+222",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-mr"
+    },
+    {
+      "country": "Mauritius",
+      "code": "+230",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-mu"
+    },
+    {
+      "country": "Mexico",
+      "code": "+52",
+      "maxLength": 13,
+      "FLAG": "flag-icon flag-icon-mx"
+    },
+    {
+      "country": "Micronesia",
+      "code": "+691",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-fm"
+    },
+    {
+      "country": "Moldova",
+      "code": "+373",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-md"
+    },
+    {
+      "country": "Monaco",
+      "code": "+377",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-mc"
+    },
+    {
+      "country": "Mongolia",
+      "code": "+976",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-mn"
+    },
+    {
+      "country": "Montenegro",
+      "code": "+382",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-me"
+    },
+    {
+      "country": "Morocco",
+      "code": "+212",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-ma"
+    },
+    {
+      "country": "Mozambique",
+      "code": "+258",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-mz"
+    },
+    {
+      "country": "Myanmar",
+      "code": "+95",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-mm"
+    },
+    {
+      "country": "Namibia",
+      "code": "+264",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-na"
+    },
+    {
+      "country": "Nauru",
+      "code": "+674",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-nr"
+    },
+    {
+      "country": "Nepal",
+      "code": "+977",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-np"
+    },
+    {
+      "country": "Netherlands",
+      "code": "+31",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-nl"
+    },
+    {
+      "country": "New Zealand",
+      "code": "+64",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-nz"
+    },
+    {
+      "country": "Nicaragua",
+      "code": "+505",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-ni"
+    },
+    {
+      "country": "Niger",
+      "code": "+227",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-ne"
+    },
+    {
+      "country": "Nigeria",
+      "code": "+234",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-ng"
+    },
+    {
+      "country": "North Korea",
+      "code": "+850",
+      "maxLength": 12,
+      "FLAG": "flag-icon flag-icon-kp"
+    },
+    {
+      "country": "North Macedonia",
+      "code": "+389",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-mk"
+    },
+    {
+      "country": "Norway",
+      "code": "+47",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-no"
+    },
+    {
+      "country": "Oman",
+      "code": "+968",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-om"
+    },
+    {
+      "country": "Pakistan",
+      "code": "+92",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-pk"
+    },
+    {
+      "country": "Palau",
+      "code": "+680",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-pw"
+    },
+    {
+      "country": "Palestine",
+      "code": "+970",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-ps"
+    },
+    {
+      "country": "Panama",
+      "code": "+507",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-pa"
+    },
+    {
+      "country": "Papua New Guinea",
+      "code": "+675",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-pg"
+    },
+    {
+      "country": "Paraguay",
+      "code": "+595",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-py"
+    },
+    {
+      "country": "Peru",
+      "code": "+51",
+      "maxLength": 12,
+      "FLAG": "flag-icon flag-icon-pe"
+    },
+    {
+      "country": "Philippines",
+      "code": "+63",
+      "maxLength": 12,
+      "FLAG": "flag-icon flag-icon-ph"
+    },
+    {
+      "country": "Poland",
+      "code": "+48",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-pl"
+    },
+    {
+      "country": "Portugal",
+      "code": "+351",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-pt"
+    },
+    {
+      "country": "Qatar",
+      "code": "+974",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-qa"
+    },
+    {
+      "country": "Romania",
+      "code": "+40",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-ro"
+    },
+    {
+      "country": "Russia",
+      "code": "+7",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-ru"
+    },
+    {
+      "country": "Rwanda",
+      "code": "+250",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-rw"
+    },
+    {
+      "country": "Saint Kitts and Nevis",
+      "code": "+1-869",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-kn"
+    },
+    {
+      "country": "Saint Lucia",
+      "code": "+1-758",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-lc"
+    },
+    {
+      "country": "Saint Vincent and the Grenadines",
+      "code": "+1-784",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-vc"
+    },
+    {
+      "country": "Samoa",
+      "code": "+685",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-ws"
+    },
+    {
+      "country": "San Marino",
+      "code": "+378",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-sm"
+    },
+    {
+      "country": "Sao Tome and Principe",
+      "code": "+239",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-st"
+    },
+    {
+      "country": "Saudi Arabia",
+      "code": "+966",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-sa"
+    },
+    {
+      "country": "Senegal",
+      "code": "+221",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-sn"
+    },
+    {
+      "country": "Serbia",
+      "code": "+381",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-rs"
+    },
+    {
+      "country": "Seychelles",
+      "code": "+248",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-sc"
+    },
+    {
+      "country": "Sierra Leone",
+      "code": "+232",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-sl"
+    },
+    {
+      "country": "Singapore",
+      "code": "+65",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-sg"
+    },
+    {
+      "country": "Slovakia",
+      "code": "+421",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-sk"
+    },
+    {
+      "country": "Slovenia",
+      "code": "+386",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-si"
+    },
+    {
+      "country": "Solomon Islands",
+      "code": "+677",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-sb"
+    },
+    {
+      "country": "Somalia",
+      "code": "+252",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-so"
+    },
+    {
+      "country": "South Africa",
+      "code": "+27",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-za"
+    },
+    {
+      "country": "South Korea",
+      "code": "+82",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-kr"
+    },
+    {
+      "country": "South Sudan",
+      "code": "+211",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-ss"
+    },
+    {
+      "country": "Spain",
+      "code": "+34",
+      "maxLength": 12,
+      "FLAG": "flag-icon flag-icon-es"
+    },
+    {
+      "country": "Sri Lanka",
+      "code": "+94",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-lk"
+    },
+    {
+      "country": "Sudan",
+      "code": "+249",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-sd"
+    },
+    {
+      "country": "Suriname",
+      "code": "+597",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-sr"
+    },
+    {
+      "country": "Sweden",
+      "code": "+46",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-se"
+    },
+    {
+      "country": "Switzerland",
+      "code": "+41",
+      "maxLength": 12,
+      "FLAG": "flag-icon flag-icon-ch"
+    },
+    {
+      "country": "Syria",
+      "code": "+963",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-sy"
+    },
+    {
+      "country": "Taiwan",
+      "code": "+886",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-tw"
+    },
+    {
+      "country": "Tajikistan",
+      "code": "+992",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-tj"
+    },
+    {
+      "country": "Tanzania",
+      "code": "+255",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-tz"
+    },
+    {
+      "country": "Thailand",
+      "code": "+66",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-th"
+    },
+    {
+      "country": "Togo",
+      "code": "+228",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-tg"
+    },
+    {
+      "country": "Tonga",
+      "code": "+676",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-to"
+    },
+    {
+      "country": "Trinidad and Tobago",
+      "code": "+1-868",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-tt"
+    },
+    {
+      "country": "Tunisia",
+      "code": "+216",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-tn"
+    },
+    {
+      "country": "Turkey",
+      "code": "+90",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-tr"
+    },
+    {
+      "country": "Turkmenistan",
+      "code": "+993",
+      "maxLength": 8,
+      "FLAG": "flag-icon flag-icon-tm"
+    },
+    {
+      "country": "Tuvalu",
+      "code": "+688",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-tv"
+    },
+    {
+      "country": "Uganda",
+      "code": "+256",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-ug"
+    },
+    {
+      "country": "Ukraine",
+      "code": "+380",
+      "maxLength": 12,
+      "FLAG": "flag-icon flag-icon-ua"
+    },
+    {
+      "country": "United Arab Emirates",
+      "code": "+971",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-ae"
+    },
+    {
+      "country": "United Kingdom",
+      "code": "+44",
+      "maxLength": 12,
+      "FLAG": "flag-icon flag-icon-gb"
+    },
+    {
+      "country": "United States",
+      "code": "+1",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-us"
+    },
+    {
+      "country": "Uruguay",
+      "code": "+598",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-uy"
+    },
+    {
+      "country": "Uzbekistan",
+      "code": "+998",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-uz"
+    },
+    {
+      "country": "Vanuatu",
+      "code": "+678",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-vu"
+    },
+    {
+      "country": "Vatican City",
+      "code": "+379",
+      "maxLength": 7,
+      "FLAG": "flag-icon flag-icon-va"
+    },
+    {
+      "country": "Venezuela",
+      "code": "+58",
+      "maxLength": 12,
+      "FLAG": "flag-icon flag-icon-ve"
+    },
+    {
+      "country": "Vietnam",
+      "code": "+84",
+      "maxLength": 11,
+      "FLAG": "flag-icon flag-icon-vn"
+    },
+    {
+      "country": "Yemen",
+      "code": "+967",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-ye"
+    },
+    {
+      "country": "Zambia",
+      "code": "+260",
+      "maxLength": 9,
+      "FLAG": "flag-icon flag-icon-zm"
+    },
+    {
+      "country": "Zimbabwe",
+      "code": "+263",
+      "maxLength": 10,
+      "FLAG": "flag-icon flag-icon-zw"
+    }
+  ]
+  

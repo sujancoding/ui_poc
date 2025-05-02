@@ -1,0 +1,339 @@
+<!--Agent SEND MONEY-->
+<div>
+<form [formGroup]="form" (keydown.enter)="$event.preventDefault()" (ngSubmit)="onSubmit()">
+
+<!-- Agent search Payee Name -->
+
+
+<div class="block">
+    <div class="sub-heads">
+        <span>Step 1. Transfer to</span>
+    </div>
+
+    <div fxLayout="row"  fxLayoutAlign="space-around"  >
+        <div fxLayout="row"  fxLayoutGap="10px" >
+        <mat-form-field appearance="outline" fxFlex="80">
+            <mat-icon matSuffix="search">search</mat-icon>
+            <mat-label class="custom-label"> Payee Name </mat-label>
+            <input matInput type="text" [formControl]="form.controls['name']" readonly>
+            <mat-error> 
+                <small *ngIf="form.controls['name'].hasError('required')
+                         && form.controls['name'].touched"> Payee Name required </small>
+                <small *ngIf="form.controls['name'].hasError('pattern')">{{'splCharsValidation' | label}} </small>
+            </mat-error>
+        </mat-form-field>
+    
+        <!-- Launch button > open Payee Table Component -->
+        <div>
+            <button mat-flat-button class="fetchPayeeButton" [disabled]="isDisableFields" *ngIf="launchButton" (click)="openPayeeTable()"  type="button">
+                <mat-icon>zoom_out_map</mat-icon> 
+            </button>
+            <mat-spinner style="margin-top:15px;" diameter="40" *ngIf="loader"></mat-spinner>
+        </div>
+        </div>
+
+        <div fxFlex="38" style="opacity: 0;cursor: default;" >
+            <button></button>
+        </div> 
+
+    </div>
+
+    
+    <!-- payee Details > will Show after Fetching the data from server -->
+    <div  *ngIf="showDetails" style="margin-left: 170px">
+    
+        <div fxLayout="row" class="payeeDetalis" fxLayoutGap="10px" style="margin-right: 50px;">
+            <div class="light">Payee Name</div>
+            <div class="Dark">{{payeeName}}</div>
+            <div class="light" style="margin-left: 20px;">Payee Country:</div>
+            <div class="Dark">{{payeeCountry}}</div>
+        </div> 
+
+        <div fxLayout="row" class="payeeDetalis" fxLayoutGap="10px" >
+            <div class="light">Account Number</div>
+            <div class="Dark">{{payeeAccNo}}</div>
+            <div class="light"style="margin-left: 20px;">Bank Name:</div>
+            <div class="Dark">{{payeeBankName}}</div>
+            <div class="light" style="margin-left: 20px;">Swift Code:</div>
+            <div class="Dark">{{swiftCode ? swiftCode : "N/A"}}</div>
+            <div class="light" style="margin-left: 20px;">Routing Code / Sort Code:</div>
+            <div class="Dark">{{routingCode ? routingCode : "N/A"}}</div>
+        </div>
+
+    </div>
+
+</div>
+<!-- Agent Enter the Amout to be send -->
+<div class="block">
+    <div class="sub-heads">
+        <span>Step 2: Enter Amount</span>
+    </div>
+    <div fxFlex="row" fxLayoutAlign="space-around" >
+        <div fxLayout="row"  fxLayoutGap="10px" style="width: 35%;" >
+        <mat-form-field appearance="outline" fxFlex="55" >
+            <mat-label class="custom-label"> Payee Gets Amount </mat-label>
+            <input matInput [formControl]="form.controls['sendCurrencyCode']" 
+             (keyup)="payeeGets(currencyCode.value,$event)" #currencyCode appCommaSeparatedInput>
+            <mat-error> 
+                <small *ngIf="form.controls['sendCurrencyCode'].hasError('required')
+                          && form.controls['sendCurrencyCode'].touched"> payee gets field required </small>
+            </mat-error>
+        </mat-form-field>
+
+       
+            <!-- <p class="p">Currency Code</p>     -->
+            <mat-form-field fxFlex="38" appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Currency</mat-label>
+                <span matPrefix  class="{{selectedCountryCode}}" style="position: relative;top: -4px;"></span>
+                <mat-select  [(value)]="selectedCountryCode" (selectionChange)="selectCurrencyCode(selectedCountryCode)">
+                  <mat-option *ngFor="let country of countryCode" [value]="country.FLAG" >
+                    <span class="{{country.FLAG}}"></span>
+                    {{country.CURRENCYCODE}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div>
+                <button mat-flat-button class="fetchContracts" [disabled]="isDisableFields" (click)="retrieveContracts(selectedCountryCode)"  type="button">
+                    Retrieve Contracts
+                </button>
+            </div>
+
+            </div>
+
+        
+
+
+            <div fxFlex="25" style="opacity: 0;cursor: default;" >
+                <button></button>
+            </div> 
+
+    </div>
+    <div fxFlex="row" fxLayoutAlign="space-around" >
+        <mat-form-field appearance="outline" fxFlex="30">
+            <mat-label class="custom-label">Deduct From Contract</mat-label>
+            <input matInput type="text" value="SGD" readonly>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" fxFlex="30">
+            <mat-label class="custom-label">Amount (SGD) </mat-label>
+            <input matInput type="text" [formControl]="form.controls['balanceAmount']" readonly>
+        </mat-form-field>
+    </div>
+</div>    
+
+<!-- Agent Select the respective Deal -->
+<div class="sub-heads">
+    <span>Step 3: Foreign Exchange Contracts</span>
+</div>
+
+
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+    <div style="overflow-y: auto; height: 580px;">
+    <table  class= "table" >
+      <thead>
+        <th><mat-icon>crop_square</mat-icon></th>
+        <th>CONTRACT ID</th>
+        <th>STATUS</th>
+        <th>TRADE DATE & TIME</th>
+        <th>FX RATE</th>
+        <th>CONTRACT BALANCE (SGD)</th>
+        <th>CONTRACT BALANCE ({{selectedCurrency}}) </th>
+        <th>AMOUNT TO USE ({{selectedCurrency}}) </th>
+        <th>AMOUNT TO USE (SGD) </th>
+      </thead>
+   
+      <tbody>
+        <tr *ngFor="let Data of getContracts | slice: (p - 1) * itemsPerPage : p * itemsPerPage" >
+            <td> <div class="checkbox"><mat-checkbox [disabled]="isCheckBoxDisable"  #checkboxes  #chkEnable  (change)="selectedCheckBox($event,Data.contractId,amount.value,Data.txnAmount,Data.sellRate,Data.contractBalance,Data.bookingId,Data.rate, Data.buyCurrency)"
+               (click)="dealIdArray.length == 0  ? true : amount.value=''" >  
+            </mat-checkbox> </div> </td>     
+            <td> {{Data.bookingId}} </td>
+            <td>
+                <div class="tags" [ngStyle]="{'color': getColor(Data.status),'background-color': getBackgroundColor(Data.status)}">
+                  <div  [ngStyle]="{'background-color': getColor(Data.status)}" class="small-container"></div>
+                <span class="status-tag"   #tooltip="matTooltip"
+                [matTooltip]="getTooltipText(Data.status)"
+                matTooltipPosition="above"
+                matTooltipClass="custom-tooltip"> 
+                {{Data.status | uppercase}} </span>
+                </div>
+  
+                <p class="text-label">
+                 Valid Till {{Data.validTill | date:'d MMM y , h:mm:ss'}}</p>
+  
+              </td>
+            
+            <td> {{Data.txnDateTime | date:'medium'}} </td> 
+            <td>  
+                <div fxLayout="column" fxLayoutGap="15px">
+                <div fxLayout="row" style="white-space: nowrap;"> 
+                    <div class="currencyCode"> SELL</div> 1 {{Data.sellCurrency}} =  {{Data.sellRate}} {{Data.buyCurrency}}
+                 </div>
+                <div fxLayout="row"> 
+                    <div class="currencyCode"> BUY </div> 1 {{Data.buyCurrency}} =  {{Data.rate}} {{Data.sellCurrency}}
+                </div>
+                </div>
+            </td>
+            <td> SGD {{Data.contractBalance}} </td>
+            <td> {{buyCurrencyCode}} {{Data.txnAmount}} </td>
+            <!-- <td> SGD {{Data.DEALBALANCE | number: '1.2-2'}} </td> -->
+            <td>
+                <div>
+                    <mat-form-field appearance="outline">                 
+                        <input  matInput [disabled]="!chkEnable.checked" (keyup)="onKeyUpInput(amount.value,Data.contractId,Data.sellRate,Data.txnAmount,$event,Data.bookingId,Data.rate)" #amount appCommaSeparatedInput>  
+                    </mat-form-field> 
+                    <div  class="message-block">
+                         <span class="error-message"  *ngIf="amount.value < 1 && chkEnable.checked"> Enter more than 1$ </span>   
+                      </div>
+                    <!-- <span style="margin-left:5px; margin-top: 25px;"> {{buyCurrencyCode}} </span>   -->
+                </div>
+            </td>
+            <td>
+               
+               <div fxLayout="row">
+                <mat-form-field appearance="outline">                 
+                    <input [disabled]="true"  matInput [value]="truncateDecimals(removeCommas(amount.value) * Data.rate, 2) | number: '1.0-2'" readonly>  
+                </mat-form-field> 
+                <span style="margin-left:5px; margin-top: 25px;">SGD</span>  
+            </div>
+            </td>
+            
+        </tr>         
+     </tbody>
+     
+    </table>
+    </div>
+    <mat-paginator class="pagination-class"
+    [length]="getContracts.length"
+    [pageSize]="itemsPerPage"
+    [pageIndex]="p - 1"
+    (page)="handlePageChange($event)"
+  ></mat-paginator>
+    </div>
+     <!--Loader-->
+  <div *ngIf="matspinner" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+    </div>
+
+<div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="end" style="margin-right: 100px;">
+    <h5 style="font-family: 'Roboto';font-weight: 400;font-size: 20px;">
+        Total Amount Used:  
+    </h5>
+    <h5 style="font-family: 'Roboto';font-weight: 400;font-size: 20px;">
+    {{totalAmount | number: '1.0-2'}} SGD
+    </h5>
+</div>
+<div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="end" style="margin-right: 100px;">
+    <h5 style="font-family: 'Roboto';font-weight: 400;font-size: 20px;">
+        Total Amount Used:  
+    </h5>
+    <h5 style="font-family: 'Roboto';font-weight: 400;font-size: 20px;">
+    {{fcyTotalAmount | number: '1.0-2'}} {{selectedCurrency}}
+    </h5>
+</div>
+
+</div> 
+
+
+
+    <!--NOTE ROW-->
+
+    <!--PAYMENT MODE FOR CHARGES-->
+    <div class="block">
+        <div class="sub-heads">
+            <div fxLayout="row" fxLayoutGap="10px">
+                <span>Step 4: Select Payment mode for charges</span>
+            </div>
+        </div>
+
+
+        <div fxFlex="row" 
+        style="margin-left: 30px;place-content: baseline;">
+        
+        <mat-radio-group [disabled]="isDisableSharingTypeRadioGroup"
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group"
+          (change)="sharingTypeChange($event)"
+          [formControl]="form.controls['sharingType']" >
+            <mat-radio-button class="example-radio-button" [value]="type.internalValue"
+            *ngFor="let type of sharingTypeArray" >
+            {{type.value}}
+            ( {{type.subValue}} )
+        </mat-radio-button>
+        </mat-radio-group>
+          
+        </div>
+
+
+    </div>
+
+
+<!--NOTE-->
+
+<div class="block">
+    <div class="sub-heads">
+        <span>Step 5: Admin Fee & Note</span>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-around"  style="margin-top: 12px;position: relative;">
+
+        <div fxLayout="row"  fxLayoutGap="30px" >
+
+        <div class="total-label">Admin Fee (SGD): </div>
+      
+        <div class="total-amount-label">{{adminFee}} SGD</div>
+        </div>
+
+        <div fxFlex="30"></div>
+
+      </div>
+
+
+    <div fxFlex="row" fxLayoutAlign="space-around" >
+        <mat-form-field appearance="outline" fxFlex="30">
+            <mat-label class="custom-label">Message to payee</mat-label>
+           <input matInput type="text" [formControl]="form.controls['Note']" >
+        </mat-form-field>
+
+        <mat-form-field  *ngIf="showAgentRelatedFields" appearance="outline" fxFlex="30">
+            <mat-label class="custom-label">Purpose Of Remittance</mat-label>
+           <input matInput type="text" [formControl]="form.controls['purposeOfRemittance']" >
+        </mat-form-field>
+       
+            <mat-form-field *ngIf="showAgentRelatedFields" appearance="outline" fxFlex="30" >
+                <mat-label class="custom-label">Originated Remitter Details</mat-label>
+               <input matInput type="text" [formControl]="form.controls['originatedRemitter']" >
+               <mat-error> 
+                <small *ngIf="form.controls['originatedRemitter'].hasError('pattern')"> *No Special Characters allowed </small>
+            </mat-error>
+            </mat-form-field>
+
+           
+        
+    </div>
+</div>
+
+<!-- Button -->
+
+<div  class="dialogButton"  fxLayout="row" fxLayoutAlign="end" fxlayoutGap="20px">
+<div style="width: 20%;">
+    <button mat-flat-button  class="mat-button" [disabled]="isDisableFields" (click)="resetForm()"  type="button">Reset</button>
+    </div>
+    <div style="width: 20%;">
+    <button *ngIf="showSubmitButton" mat-flat-button color="primary"  class="mat-button" [disabled]="isdisableSubmit"  type="submit">Submit</button>
+    <div *ngIf="submitButtonLoader" class="loader-container">
+        <mat-spinner diameter="40" ></mat-spinner>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+</form>
+
+</div>

@@ -1,0 +1,130 @@
+<h3 class="title">APT Accounts</h3>
+<mat-divider class="line-divider"></mat-divider>
+
+<div class="table-wrapper">
+  <div class="mat-elevation-z8">
+  <div [ngStyle]="changeTableHeight()">
+    <table class="table">
+    <thead>
+      <th>ACCOUNT NUMBER</th>
+       <th>ACCOUNT NAME</th>
+       <th>DEBIT</th> <!--New change on 23 Nov 2023 , backend will update the dt,cr,op bal,oa bal based on txn-->
+       <th>CREDIT</th>
+       <th>OPENING BALANCE</th> 
+       <th>OUTSTANDING BALANCE</th>
+       <th>ACTION</th>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let orgsettlement of orgsettlement">
+         <td>{{orgsettlement.ACCOUNTNO}}</td>
+           <td>{{orgsettlement.ENTITYNAME}}</td>
+           <td >{{orgsettlement.DEBIT | number}} </td>
+           <td>{{orgsettlement.CREDIT | number}} </td> 
+           <td [ngClass]="{'negative-amount': orgsettlement.OPENINGBALANCE < 0, 'positive-amount': orgsettlement.OPENINGBALANCE >= 0}">{{orgsettlement.OPENINGBALANCE | number}} </td> 
+           <td [ngClass]="{'negative-amount': orgsettlement.OUTSTANDINGBALANCE < 0, 'positive-amount': orgsettlement.OUTSTANDINGBALANCE >= 0}">{{orgsettlement.OUTSTANDINGBALANCE | number}} </td> 
+           <td>
+            <div fxLayout="row" fxLayoutAlign="start">
+
+              <div class="center-content" >
+              <button  (click)="openAccountsHistory('ORG',orgsettlement.ACCOUNTNO,orgsettlement.ENTITYID,orgsettlement.ENTITYNAME)"
+              #tooltip="matTooltip"
+              matTooltip="Accounts History"
+              matTooltipPosition="above"
+              matTooltipClass="accounts-custom-tooltip"
+                 class="btn-account-history" mat-icon-button type="button">
+                H
+              </button>
+              </div>
+
+                 <!--Fund Transfer ==> for CASH IN HAND A/c -->
+            <div class="center-content" *ngIf="orgsettlement.ACCOUNTNO == '90014'">
+              <button
+              #tooltip="matTooltip"
+              matTooltip="Fund Transfer"
+              matTooltipPosition="above"
+              matTooltipClass="accounts-custom-tooltip"
+             class="icon_button" style="font-size: 22px;" mat-icon-button type="button"
+             (click)="openMatdialog(orgsettlement,'FT')"> 
+              <mat-icon class="picture-as-pdf-icon">swap_horiz</mat-icon>    
+              </button>
+           </div>
+
+              <!-- 
+              EXPENSE TRANSACTION HISTORY REMOVED
+              <div class="center-content" *ngIf="orgsettlement.ACCOUNTNO == '90013' && orgsettlement.ACCOUNTNO != '90014' ">
+              <button (click)="openExpensesTransactionHistory(orgsettlement.ACCOUNTNO)"
+              #tooltip="matTooltip"
+              matTooltip="Transaction History"
+              matTooltipPosition="above"
+              matTooltipClass="accounts-custom-tooltip"
+              class="btn-account-history" mat-icon-button type="button">
+                 T
+              </button>
+              </div> -->
+
+
+             <div class="center-content" *ngIf="orgsettlement.ACCOUNTNO != '20003' && orgsettlement.ACCOUNTNO != '90014' && showSettlementIcon">
+              <button
+              #tooltip="matTooltip"
+              matTooltip="Reset Account"
+              matTooltipPosition="above"
+              matTooltipClass="accounts-custom-tooltip"
+             class="icon_button" style="font-size: 22px;" mat-icon-button type="button"
+             (click)="openResetDialog(orgsettlement)"> 
+              <mat-icon class="picture-as-pdf-icon">zoom_out_map</mat-icon>    
+              </button>
+             </div>
+           <div class="center-content" *ngIf="orgsettlement.ACCOUNTNO != '20003' && orgsettlement.ACCOUNTNO != '90014' && showSettlementIcon">
+            <button
+            #tooltip="matTooltip"
+            matTooltip="Reset History"
+            matTooltipPosition="above"
+            matTooltipClass="accounts-custom-tooltip"
+           class="icon_button" style="font-size: 22px;" mat-icon-button type="button"
+           (click)="openResetAccountHistory(orgsettlement.ACCOUNTNO)"> 
+            <mat-icon class="picture-as-pdf-icon">history</mat-icon>    
+            </button>
+         </div>
+
+             <!--Expenses window open ==> for only Expenses -->
+             <div class="center-content" *ngIf="orgsettlement.ACCOUNTNO == '90013' && showSettlementIcon">
+              <button
+              #tooltip="matTooltip"
+              matTooltip="Add Expense"
+              matTooltipPosition="above"
+              matTooltipClass="accounts-custom-tooltip"
+             class="icon_button" style="font-size: 22px;" mat-icon-button type="button"
+             (click)="openMatdialog(orgsettlement,'EXPENSE')"> 
+              <mat-icon class="picture-as-pdf-icon">add</mat-icon>    
+              </button>
+           </div>
+
+           <div class="center-content" *ngIf="orgsettlement.ENTITYNAME == 'APT Account in DBS' || orgsettlement.ACCOUNTNO == '90014' || orgsettlement.ACCOUNTNO == '90013' ">
+            <button
+            #tooltip="matTooltip"
+            matTooltip="Download Transaction Summary"
+            matTooltipPosition="above"
+            matTooltipClass="accounts-custom-tooltip"
+           class="icon_button" mat-icon-button type="button"
+           (click)="downloadLedgerFile(orgsettlement.ACCOUNTNO,orgsettlement.CREATEDDATE, orgsettlement.ENTITYNAME)"> 
+            <mat-icon class="picture-as-pdf-icon">picture_as_pdf</mat-icon>    
+            </button>
+         </div>
+
+           </div>
+
+
+           </td>
+        </tr>
+    </tbody>
+    </table>  
+  </div>
+    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+</div>
+ <!--Loader-->
+ <div *ngIf="loader" class="loader-wrapper">
+  <mat-spinner> </mat-spinner>
+  </div>
+</div>
+

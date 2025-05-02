@@ -1,0 +1,57 @@
+.label{
+    font-size: 19px;
+    color: black;
+    margin-left: -9px;
+    
+}
+.title-label{
+    font-weight: 700;
+    font-size: 20px;
+    color: black;
+}
+
+.yes-button{
+    width: 133px;
+    font-size: 17px;
+    background-color: #FF2727;
+    color: white;
+}
+
+.no-button{
+    width: 133px;
+    font-size: 17px;
+    margin-right: 14px;
+    background-color: #F4F4F4;
+    color: #191A1B;
+}
+
+.hint-label{
+    position: relative;
+    top: -21px;
+    color: grey;
+    font-size: 19px;
+}
+
+.warning-icon{
+    font-size: 64px;
+    position: relative;
+    top: 22px;
+    color: #FF2727;
+}
+
+.txn-divider{
+    position: relative;
+    top: -18px;
+}
+
+.header-line{
+    background: #FF2727;
+    width: 100%;
+    height: 6px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-top: -5px;
+    position: relative;
+    top: -19px;
+  //  left: -22px;
+}

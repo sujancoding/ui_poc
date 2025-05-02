@@ -1,0 +1,144 @@
+
+
+
+<div style="display: flex;margin-top: 50px;" fxLayoutAlign="center">
+    <mat-card appearance="outlined">
+        <div class="header">
+        </div>
+
+        <p class="title">Transaction Details </p>
+
+        <mat-divider class="divider"></mat-divider>
+
+        <div class="content">
+            <div fxLayout="row">
+                <p class="subTitle">Transfer Summary</p>
+            </div>
+
+            <div style="margin-top: -13px;">
+                <div fxLayout="row">
+                    <p class="label">Payee Gets :</p>
+                    <p class="value"> {{payeeGets | number }} {{payeeCurrencyCode}}</p>
+                </div>
+
+                <div fxLayout="row">
+                    <p class="label">Exchange Rate :</p>
+                    <p class="value"> 1 SGD = {{exchangeRate}} {{payeeCurrencyCode}} </p>
+
+                </div>
+
+                <div fxLayout="row">
+                    <p class="label">Amount :</p>
+                    <p class="value"> {{customerSends | number }} SGD </p>
+                </div>
+
+                <div fxLayout="row">
+                    <p class="label" style="line-height: normal"> Payment mode for charges :</p>
+                    <p class="value" style="line-height: normal"> {{displaySharingType}} </p>
+
+                </div>
+
+                <div fxLayout="row">
+                    <p class="label">Admin Fee :</p>
+                    <p class="value"> {{adminFee}} SGD </p>
+
+                </div>
+
+                <div fxLayout="row">
+                    <p class="label">Total Amount :</p>
+                    <p class="value"> {{totalAmount | number : '1.0-2'}} SGD </p>
+
+                </div>
+            </div>
+            <div fxLayout="row" style="margin-top: 22px;">
+                <p class="subTitle1">Other Details </p>
+            </div>
+
+            <div style="margin-top: -13px;">
+                <div fxLayout="row">
+                    <p class="label">Purpose of Remittance :</p>
+                    <p class="value"> {{remarks}} </p>
+
+                </div>
+
+                <div fxLayout="row">
+                    <p class="label">Transaction Date :</p>
+                    <p class="value"> {{transactionDate | date }}</p>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+
+
+    <mat-card appearance="outlined">
+         <div class="header">
+        </div>
+
+        <p class="title">Participants </p>
+        <mat-divider class="divider"></mat-divider>
+
+
+        <div class="content">
+
+            <div fxLayout="row">
+                <p class="subTitle">Customer Information </p>
+            </div>
+            <div style="margin-top: -13px;">
+
+                <div fxLayout="row">
+                    <p class="label">Company Name :</p>
+                    <p class="value"> {{customerName}} </p>
+                </div>
+
+                <div fxLayout="row">
+                    <p class="label">Company Phone Number :</p>
+                    <p class="value"> {{customerPhone}} </p>
+                </div>
+              
+            </div>
+            <div fxLayout="row" style="margin-top: 22px;">
+                <p class="subTitle1">Payee Information</p>
+            </div>
+            <div style="margin-top: -13px;">
+                <div fxLayout="row">
+                    <p class="label">Name :</p>
+                    <p class="value"> {{payeeName}} </p>
+
+                </div>
+
+                <div fxLayout="row">
+                    <p class="label">Relationship :</p>
+                    <p class="value"> {{relationship}} </p>
+
+                </div>
+
+                <div fxLayout="row">
+                    <p class="label">Account Number : </p>
+                    <p class="value"> {{payeeAccountNumber}} </p>
+
+                </div>
+
+                <div fxLayout="row">
+                    <p class="label">Country :</p>
+                    <p class="value"> {{payeeCountry}} </p>
+
+                </div>
+            </div>
+        </div>
+
+    </mat-card>
+</div>
+
+
+<div class="actions-btn">
+
+        <button mat-raised-button (click)="backSendMoney()" class="reset-button">Back</button>
+            <button *ngIf="showSubmitButton" mat-raised-button type="submit" (click)="onSubmit()"
+                class="submit-button">Submit</button>
+        <div class="loader-container">
+            <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="submitButtonLoader"></mat-spinner>
+        </div>
+
+</div>
+
+

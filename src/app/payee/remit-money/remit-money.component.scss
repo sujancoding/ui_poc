@@ -1,0 +1,197 @@
+.card{
+    background-color: #123969; 
+   
+}
+
+.send-money{
+    background-color: #123969; 
+    width: 100%;
+    margin-right: 0.5cm;
+    border-radius: 7px;
+}
+p{
+    color: white;
+    font-size: 13px;
+    font-family: 'Roboto';
+    font-weight: 600;
+}
+
+.mat-mdc-card .mat-mdc-card-content {
+     font-size: 13px; 
+     line-height: 5px; 
+     padding: 0.3cm; 
+     font-weight: lighter;
+}
+
+
+.p{
+    color: black;
+    font-size: 10px;
+    text-align: center;
+}
+
+.button1{
+
+    border-radius: 10px;
+    background-color: #123969;
+    color: white;
+    width: 100%;
+    //padding: 0.2cm;
+}
+
+img{
+    border-radius: 50%;
+    width: 51px;
+    height: 55px;
+   
+}
+
+ .arrow-icon{
+     font-size: 45px;
+     padding-top: 0.1cm;
+     padding-left: 3.2cm;
+     
+ }
+
+ .human-icon{
+     font-size: 45px;
+     margin-right: 20px;
+     transform: scale(2);
+     color: #b8b8b8;
+ }
+ 
+ h4{
+     margin-top: 0.1cm;
+     margin-left: 0;
+     font-weight: bold;
+     font-size: 15px;
+     height: 0.1cm;
+ }
+ h6{
+     margin-top: 0.1cm;
+     font-size: 15px;
+ }
+
+ .circle{
+    background-color: rgba(111, 111, 113, 0.81);
+    padding-top: 0.2cm;
+    margin-right: 6px;
+    width: 55px;
+    height: 55px;
+    border-radius: 2cm;
+    text-align: center;
+}
+
+.status{
+  color: white;
+  font-size: 18px;
+  margin-top: 0.3cm;
+  margin-right: 0.3cm;
+  //padding-top: 0.4cm;
+  //padding-bottom: 1cm;
+ 
+}
+
+
+.example-right-align{
+    text-align: right;
+}
+
+
+form{
+    margin-top: 17px;
+}
+
+.payeeName {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 650;
+    font-size: 14px;
+    white-space: nowrap;
+    padding-left: 2px;
+    margin-top: 17px;
+    color: #1C1939;
+  }
+  
+  .subGroups {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 0px;
+    // padding-left: 9px;
+    color: #2d2d2d;
+    white-space: nowrap;
+  }
+
+  .example-card {
+    border: 0.1px solid gainsboro;
+    border-radius: 0.4cm;
+    // height: 102px;
+    height: 85px;
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+  .wallet-icon {
+    font-size: 37px;
+  }
+  
+  .box {
+    padding: 11px;
+    height: 57px;
+    // width: 64px;
+    width: 57px;
+    background-color: #adcdf463;
+    // color: #123969;
+    // color: #363636;
+    // border-radius: 13px;
+    border-radius: 28px;
+    // margin-top: -14px;
+    margin-left: 12px;
+    margin-top: 12px;;
+  }
+
+  .button-layout{
+    display: flex;
+    height: 48px;
+    margin-top: 25px;
+  }
+
+  .message-block .error-message{
+    display: none;
+  }
+  .message-block .error-message:first-child{
+    display: block;
+    color: #e8316f;
+    margin-top: -20px;
+    margin-left: 6px;
+    white-space: break-spaces;
+  }
+
+  .block{
+    display: block;
+    line-height: 34px;
+    margin-left: 4px;
+}
+
+.sub-heads{
+      
+  font-size: 16px;
+  font-family: 'Roboto';
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/*TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version.*/
+.mat-radio-disabled, .mat-radio-disabled .mat-radio-label {
+  cursor: default;
+  height: 30px;
+}
+  
+
+

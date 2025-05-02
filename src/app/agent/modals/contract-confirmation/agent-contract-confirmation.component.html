@@ -1,0 +1,39 @@
+<div class="big-contain">
+    <div class="btn-1"><button mat-button  [mat-dialog-close]="true" (click)="rejectedScreen()"  type="button" class="btn1">Reject</button>
+      <button mat-button color="primary"  [mat-dialog-close]="true" (click)="confirmBookContract()" type="submit" class="rectangular-btn" *ngIf="showBookNow">Confirm</button></div>
+      <mat-spinner style="margin-bottom:5px;position: relative;right: 93px;" diameter="40" *ngIf="loader"></mat-spinner>
+    <div class="bodycontent1" fxLayout="row" fxLayoutAlign="space-around none">
+      <div fxLayout="column" fxLayoutAlign="space-evenly start">
+     <div style="margin-right: 301px"> 
+      <mat-label class="custom-label" class="label-1">YOU'RE BUYING</mat-label> </div>
+    <div>
+      <mat-label class="custom-label" class="label-2"> {{foreignCurrency}} {{buyingAmount}} </mat-label>
+    </div>
+  </div>
+    <div fxLayout="column" fxLayoutAlign="space-evenly start">
+     <div> <mat-label class="custom-label" class="label-1" style="margin-right: 46px;">YOU'RE SELLING</mat-label></div>
+    
+    <div  class="label-2" ><mat-label style="font-size: 30px !important;" class="custom-label">SGD {{sellingAmount}}</mat-label></div>
+  </div>
+  </div>
+  <div fxLayout="row" style="place-content: center; background-color: #3B5472;margin-left: -3px;
+  margin-right: -5px;">
+    <h4 class="text-label">BUY 1 {{foreignCurrency}}</h4>
+
+    <div class="arrow-icon">
+        <mat-icon class="icon1">keyboard_arrow_right</mat-icon> <mat-icon
+            class="icon2">keyboard_arrow_right</mat-icon>
+        <mat-icon class="icon3">keyboard_arrow_right</mat-icon> <mat-icon
+            class="icon4">keyboard_arrow_right</mat-icon>
+    </div>
+
+    <h4 class="text-label-2"> SELL {{exchangeRate}} SGD</h4>
+
+    <div class="timer-small-container">
+        <mat-icon style="margin: 9px;">alarm</mat-icon>
+        <h5 style="margin-top: 14px;"> {{counter}} </h5>
+
+    </div>
+    
+</div>
+  </div>

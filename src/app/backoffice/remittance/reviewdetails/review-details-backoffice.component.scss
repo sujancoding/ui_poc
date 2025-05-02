@@ -1,0 +1,112 @@
+.title {
+    font-style: normal;
+    font-size: 22px;
+    color: #000000;
+    text-align: left;
+    margin-left: 42px;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
+mat-card {
+    width: 480px;
+   // height: 60vh;
+    border: 1px solid #ececec;
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px
+}
+
+.subTitle {
+    font-size: 19px;
+    color: #123969;
+    margin-left: 0.2cm;
+    margin-top: 0px;
+}
+
+.divider {
+    border-top-color: #c6c6c6;
+    margin-top: -9px;
+    width: 85% !important;
+    margin-left: 44px;
+}
+
+.subTitle1 {
+    font-size: 20px;
+    color: #123969;
+    margin-left: 0.2cm;
+}
+
+.label {
+    font-size: 16px;
+    color: #000000;
+    margin-top: 9px;
+   // line-height: 0px;
+}
+
+.value {
+    font-size: 16px;
+    color: #626262;
+    margin-top: 10px;
+   // line-height: 0px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 35px;
+    padding-top: 8px;
+}
+
+.header {
+    background: #123969;
+    width: 99%;
+    margin: auto;
+    height: 4px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-top: 0px;
+}
+
+.height {
+    line-height: 4px;
+    margin-bottom: 22px;
+    font-size: 27px;
+}
+
+.loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 123%; /* Set to 100% to cover the width of the parent container */
+    position: relative;
+    top: -63px; /* Adjust the top position as needed for proper alignment */
+    margin-bottom: 20px;
+
+}
+
+.reset-button {
+    background-color: #fff;
+    cursor: pointer;
+    color: #123969;
+    font-size: 17px;
+    width: 110px;
+    height: 40px;
+    border-radius: .2cm;
+}
+
+.submit-button {
+    width: 110px;
+    height: 40px;
+    border-radius: .2cm;
+    margin: .4cm;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+    background-color: #123969;
+}
+
+.actions-btn{
+  text-align: center;
+}

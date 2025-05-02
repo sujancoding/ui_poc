@@ -1,0 +1,16 @@
+
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <div class="title-label">Confirmation Required</div>
+    <mat-icon style="cursor: pointer;" [mat-dialog-close]="true">close</mat-icon>
+</div>
+<div>
+    <h5 class="label">Do you want to view or save ?</h5>
+</div>
+<div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="15px" >
+    <button class="no-button" *ngIf="showViewButton" (click)="triggerConfirmation('VIEW')" mat-raised-button> View </button>
+    <button class="yes-button" type="button" (click)="triggerConfirmation('SAVE')" mat-raised-button 
+    style="background-color: #123969;color: white;">Save (.pdf)</button>
+    <button class="yes-button" type="button" (click)="triggerConfirmation('XLSX')" mat-raised-button 
+    style="background-color: #00803a;color: white;">Save (.xlsx)</button>
+</div>
+

@@ -1,0 +1,78 @@
+.header{
+    margin: 0px;
+    height: 83px;
+    color: #8e8a8a;
+    margin-left: 9px;
+   
+}
+
+.welcome-text{
+    font-size: 20px;
+    color: #123969;
+}
+
+.row{
+    justify-content: space-between;
+    display: flex;
+    margin: 20px;
+}
+
+.launch-icon {
+    color: #000000;
+    background-color: white;
+}
+
+.btn-div{
+    display: flex;
+    justify-content: right;
+        align-items: center;
+        height: 67px;
+        margin-top: -15px;
+        margin-bottom: -3px;
+}
+
+.buttonAddRole{
+    background-color: #123969;
+    color: white;
+    height: 50px;
+    width: 110px;
+}
+
+.add-icon{
+    margin-top: -3px;
+}
+
+.date{
+    line-height: 30px;
+}
+.tags
+{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.status-tag
+{
+  line-height: 20px;
+  padding: 5px 10px;
+  margin: 3px 0;
+  display: inline-block;
+  font-family: Roboto;
+  white-space: nowrap;
+}
+
+
+
+.small-container{
+  border: 1px solid #e6e6e6;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 12px;
+  left: 5px;
+  border-radius: 5px;
+
+}

@@ -1,0 +1,185 @@
+<div [ngStyle]="responsiveCardHeight()" class="mat-elevation-z1">
+<div class="info-content-layout">
+<div class="header mat-elevation-z1">
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <div>
+            <div style="margin-left: 85px" fxLayout="row" fxLayoutGap="30px">
+                <p class="label"> You need to pay {{organisationName}} ({{baseCurrency}}) </p>
+                <p class="value"> 0 </p>
+            </div>
+
+            <div style="margin-left: 85px;" fxLayout="row" fxLayoutGap="30px">
+                <p class="label"> {{organisationName}} to pay you ({{baseCurrency}}) </p>
+                <p class="value" style="padding-left: 40px;"> 0 </p>
+            </div>
+        </div>
+        <div>
+
+          <div>
+            <div style="margin-right: 185px;" fxLayout="row" fxLayoutGap="30px" >
+                <p class="label"> Contract tenor </p>
+                <div>
+                  <button mat-raised-button class="calendar-button" (click)="openDialog()" [disabled]="disableTenor">
+                    <div fxLayout="row" >
+                      <span class="btn-label"> Open Dialog</span>
+                      <div class="e-icon"><mat-icon >event</mat-icon></div>
+                    </div>
+                     </button>
+                </div>
+            
+            </div>
+            <div fxLayout="row" fxLayoutGap="30px" style="align-items: center;">
+                <p style="margin-left: 10px;"class="label1">From</p>
+                <p class="label2"> {{startDate}} </p>
+                <p style="margin-left: -20px;" class="label1">till</p>
+                <p class="label2"> {{endDate}}  </p>
+            </div>
+        </div>
+           
+            <!-- <div fxLayout="row" fxLayoutGap="10px"  style="margin-top:20px">
+              <h5 class="label">Book Contract for</h5>
+              <div>
+                <mat-form-field  appearance="outline" style="font-size: 14px;width: 122%;" >
+                    <mat-select [(value)]="selectedTenor" (selectionChange)="onChange($event.value)">
+                      <mat-option value="TODAY">Today</mat-option>
+                      <mat-option value="TOM">Tomorrow</mat-option>
+                      <mat-option value="twoDays">Current Date +2Days</mat-option>
+                      <mat-option value="threeDays">Current Date +3Days</mat-option>
+                      <mat-option value="1W">1 Week</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+            </div> -->
+
+            <!-- <div style="margin-top: 28px;margin-right: 185px;" fxLayout="column" fxLayoutGap="20px">
+                <div fxLayout="row" class="day-range-dropdown" fxLayoutGap="30px">
+                    <h6 class="name-field">Book Contract For :</h6>
+                    <div style="font-size: 17px;position: relative;top: -17px;" class="form-field-size">
+                      <mat-form-field appearance="standard">
+                        <mat-label class="custom-label"> </mat-label>
+                        <mat-select   (selectionChange)="timePeriodChange($event)" [(ngModel)]="selectedTenor">
+                          <mat-option style="cursor:pointer" *ngFor="let tenorRange of tenorRange" [value]="tenorRange.value" > {{tenorRange.viewValue}} </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+        
+            </div> -->
+           
+            <!-- <div fxLayout="row" style="margin-left: 10px;" fxLayoutGap="30px" fxLayoutAlign="space-between">
+  
+              <div fxLayout="column">
+                <h5 class="flexibledates-label">Start Date</h5>
+              <mat-form-field appearance="outline" class="Drop-down">
+                <input matInput [(ngModel)]="start" placeholder="Start Date" readonly>
+                <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+              </mat-form-field>
+             </div>
+        
+             <div fxLayout="column">
+              <h5 class="flexibledates-label">End Date</h5>
+            <mat-form-field appearance="outline" class="Drop-down">
+              <input matInput [(ngModel)]="end" placeholder="End Date" readonly>
+              <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+            </mat-form-field>
+           </div>
+            </div> -->
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div class="info-content-layout">
+<div [ngStyle]="responsiveContent()">
+    <form [formGroup]="form">
+    <div fxLayout="row wrap" fxLayoutAlign="space-around">
+
+        <div>
+            <div fxLayout="column" >
+                <mat-label class="custom-label" class="currency-label">YOU'RE BUYING EXACTLY</mat-label>
+                <select class="currency-dropdown" (change)="selectedForeignCurrency($event.target.value)" #buying >
+                    <option [disabled]="isValueDisable" [value]="country" *ngFor="let country of country"> {{country}} </option>
+                </select>
+                <mat-form-field  style="width: 109%;"  appearance="{{'formFieldAppearance' | label}}">
+                    <input (keyup)="disableSellAmountField || changeSellingAmount(sellValue.value,$event)" #sellValue formControlName="sellingAmount" [formControl]="form.controls['sellingAmount']"  matInput [readonly]="sellAmountReadOnly" appCommaSeparatedInput   >
+                  </mat-form-field>
+                  <small *ngIf="form.controls['sellingAmount'].hasError('pattern')" style="margin-top: -14px;font-family: 'Roboto';"
+                   class="text-danger support-text"> *Not a Valid Number </small>
+                   <small *ngIf="form.controls['sellingAmount'].hasError('forbiddenNumber')"  style="margin-top: -14px;font-family: 'Roboto';"
+                   class="text-danger support-text">
+                   Not a Valid Number
+                  </small>
+            </div>
+        </div>
+        <div>
+       <div fxLayout="row" fxLayoutAlign="space-around" style="position: relative;top: 105px;">     
+        <button mat-flat-button class="rectangular-btn" [disabled]="isDisabledGetQuote" *ngIf="showGetQuote" (click)="getQuote(selling.value,buying.value)" >Get Quote</button>
+        <mat-spinner class="get-quote-loader" diameter="40" *ngIf="getQuoteLoader"></mat-spinner>
+        <div style="padding-right: 40px; margin-inline: 14px;">
+        <button mat-flat-button class="reset-btn" type="button"  (click)="resetQuote()" >Reset</button>
+        </div>
+        </div>
+        </div>
+        <div>
+            <div fxLayout="column" >
+                <mat-label class="custom-label" class="currency-label">YOU'RE SELLING EXACTLY</mat-label>
+                <select class="currency-dropdown" #selling >
+                    <option [disabled]="isValueDisable" selected> SGD </option>  <!--Only value in sell currency - 'SGD'-->
+                </select>
+                <mat-form-field style="width: 109%;" fxFlex="65" appearance="{{'formFieldAppearance' | label}}">
+                    <input  (keyup)="disableBuyAmountField || changeBuyingAmount(buyValue.value,$event)" #buyValue matInput  formControlName="buyingAmount" [formControl]="form.controls['buyingAmount']" [readonly]="buyAmountReadOnly"  >
+                  </mat-form-field>
+                  <small *ngIf="form.controls['buyingAmount'].hasError('pattern')" style="margin-top: -14px;font-family: 'Roboto';"
+                  class="text-danger support-text"> *only numbers and greater than 1 </small>
+            </div>
+        </div>
+    </div>
+    </form>
+ 
+<div class="timer-content-layout">    
+  <div class="timer-content">
+    <div fxLayout="row" style="place-content: center;margin-left: 120px;
+    margin-right: 120px;">
+         <h4 class="text-label-2">BUY 1 {{foreignCurrency}}</h4>
+
+        <div class="arrow-icon">
+            <mat-icon class="icon1">keyboard_arrow_right</mat-icon> <mat-icon
+                class="icon2">keyboard_arrow_right</mat-icon>
+            <mat-icon class="icon3">keyboard_arrow_right</mat-icon> <mat-icon
+                class="icon4">keyboard_arrow_right</mat-icon>
+        </div>
+        <h4 class="text-label"> SELL {{exchangeRate}} SGD </h4>
+       
+
+        <div class="timer-small-container">
+            <mat-icon style="margin: 9px;">alarm</mat-icon>
+            <h5 *ngIf="showStaticTimer" style="margin-top: 14px;"> 15:00 </h5>
+            <h5 *ngIf="showRunningTimer" style="margin-top: 14px;"> {{counter}} </h5>
+
+        </div>
+        
+    </div>
+    </div>
+</div>
+
+<div class="info-content-layout">
+<div class="info-content">
+    <mat-icon class="info-icon">info</mat-icon>
+    <h5 style="margin-top: 22px;margin-right: 109px;font-family: 'Roboto';"> You'll need to utilise this FX contract. Avoid incurring losses from unwinding this FX Contract</h5>
+</div>
+</div>
+</div>
+</div>
+
+<div class="button-content-layout">
+<div class="whole-btn">
+<button mat-flat-button style="width: 17%;" class="rectangular-btn" [disabled]="bookNowDisabled" (click)="submitContract()" type="submit" *ngIf="showBookNow">Book Now</button>
+</div>
+<mat-spinner style="margin-bottom:5px;position: relative;right: 93px;" diameter="40" *ngIf="loader"></mat-spinner>
+</div>
+
+</div>
+
+
+

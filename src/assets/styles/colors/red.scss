@@ -1,0 +1,43 @@
+@use '/node_modules/@angular/material' as mat;
+
+// Material Theme Colors
+$red-app-primary: mat.define-palette(mat.$red-palette);
+$red-app-accent: mat.define-palette(mat.$indigo-palette, 200, 100, 400);
+$red-app-warn: mat.define-palette(mat.$pink-palette);
+
+// Create the theme object (a Sass map containing all of the palettes).
+
+
+// Define the mixin for applying the theme
+@mixin apply-red-theme {
+  $red-app-theme: mat.define-light-theme((
+  color: (
+    primary: $red-app-primary,
+    accent: $red-app-accent,
+    warn: $red-app-warn,
+  ),
+));
+}
+
+
+// Custom Color Variables
+$themecolor: #f44336;
+$themecolor-alt: #e53935;
+$white: #fff;
+
+// Example of using the theme in styles
+#snav {
+  .mat-nav-list .mat-mdc-list-item {
+    .mat-list-item-content {
+      &:hover {
+        > a {
+          color: $themecolor;
+        }
+      }
+    }
+    &.selected > .mat-list-item-content > a {
+      background: $themecolor-alt;
+      color: $white;
+    }
+  }
+}

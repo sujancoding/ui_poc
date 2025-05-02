@@ -1,0 +1,414 @@
+<!--DEAL SCREEN-->
+
+
+
+  <!--ORGANISATION INITIATED TAB-->
+  
+    <!--FILTER-SECTION-->
+    <div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter">
+      <form [formGroup]="filterForm" >
+      <!-- <div style="flex-direction: row;display: flex;justify-content: space-between;"> -->
+        <div fxLayout="row" fxLayoutAlign="space-between">
+      <div class="inner-container">
+            <button mat-raised-button (click)='xpandStatus = !xpandStatus' class="applyFilter-btn">
+              <mat-icon class="add-filter-icon">add</mat-icon>
+              Filter
+            </button>
+    
+                <mat-form-field style="
+                margin: 10px;" appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Search Agent Name</mat-label>
+                  <input  (input)="onCustomerNameChange()"   formControlName="agentName" [formControl]="filterForm.controls['agentName']"  matInput class="form-control"
+                   [(ngModel)]="searchName"
+                  type="text" >
+                  <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+                  <!-- <mat-error>
+                  <small *ngIf="filterForm.controls['agentName'].hasError('pattern')" > No Special Characters and Numbers are Allowed </small>   
+                  </mat-error>   -->
+                </mat-form-field>
+                
+            
+    
+        <mat-icon  matTooltipPosition="above"
+        matTooltipClass="custom-tooltip" class="tooltip-warning-icon" matTooltip="3 Characters Minimum">error_outline</mat-icon> 
+    </div>
+        <div>
+          <button mat-raised-button class="btnAdd" (click)="addDeal()">
+            <mat-icon style="padding-top: -1px;"> add </mat-icon> Deal
+          </button>
+        </div>
+       
+      </div>
+    
+      <mat-divider></mat-divider>
+    
+      <div  class="custom-filter-values">
+        <div *ngFor="let filterValues of filterValues" fxLayout="column" class="margin-space" fxLayoutGap="2px">
+          <p class="filter-key"> {{filterValues.fieldName ? filterValues.fieldName : ""}} </p>
+          <p class="filter-value"> {{filterValues.value ? filterValues.value : ""}} </p>
+        </div>
+    
+       
+      </div>
+    
+      
+    
+        <div fxLayout="column" fxLayoutGap="1px">
+    
+          <div class="div-height" fxLayout="row" fxLayoutGap="10px">
+    
+    
+    
+          </div>
+          <mat-accordion #accordion="matAccordion">
+            <mat-expansion-panel style="width: fit-content;background-color: #ffffff;z-index: 999;"
+              #mapanel="matExpansionPanel" [(expanded)]="xpandStatus">
+    
+               <h4 class="filter-title"> Filters </h4>
+            <!-- <mat-divider> </mat-divider> -->
+          <div fxLayout="row"  fxLayoutGap="8px" style="margin-top: 13px;">
+              <div fxLayout="column" fxFlex="50" >
+                
+                <mat-form-field fxFlex="20" appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label"> Agent Name</mat-label>
+                  <input  placeholder="Agent Name" formControlName="agentName" [formControl]="filterForm.controls['agentName']"  matInput class="form-control"
+                  (input)="filterForm.controls.agentName.setValue(filterForm.controls.agentName.value.toUpperCase())"  type="text" [(ngModel)]="searchName"
+                  >
+                </mat-form-field>
+                <small class="error-message" *ngIf="filterForm.controls['agentName'].hasError('pattern')" > No Special Characters and Numbers are Allowed </small>     
+              </div>
+              <div fxLayout="column" fxFlex="50" >
+                
+                <mat-form-field fxFlex="20" appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label"> Deal Id</mat-label>
+                  <input  placeholder="Deal Id" formControlName="dealId" [formControl]="filterForm.controls['dealId']"  matInput class="form-control"
+                    type="text" [(ngModel)]="searchDealId"
+                  >
+                </mat-form-field>
+                <small class="error-message" *ngIf="filterForm.controls['dealId'].hasError('pattern')" > Only Numbers </small>     
+              </div>
+            </div>
+    
+              <div fxLayout="row"  fxLayoutGap="8px">
+    
+                
+                 <div fxLayout="column" fxFlex="50" >
+                
+                <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+                   <mat-label class="custom-label"> Status</mat-label>
+                  <mat-select  [(ngModel)]="selectedDealStatus" [ngModelOptions]="{standalone: true}">
+                    <mat-option value="INPROGRESS"> Pending </mat-option>
+                    <mat-option value="CLOSED"> Completed </mat-option>
+                    <mat-option value="CANCELLED"> Cancelled </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              
+              
+                <div fxLayout="column" fxFlex="50">
+                <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label"> Foreign Currency</mat-label>
+                  <span matPrefix class="{{selectedCountryCode}}"
+                    style="position: relative;top: -4px; left: -4px;"></span>
+                  <mat-select [(value)]="selectedCountryCode" (selectionChange)="selectCurrencyCode(selectedCountryCode)"
+                    placeholder="--Select--" [formControl]="selectedForeginCurrency">
+                    <mat-option *ngFor="let country of currencyCodeArray" [value]="country.FLAG">
+                      <span class="{{country.FLAG}}"></span>
+                      {{country.CURRENCYCODE}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              
+    
+              </div>
+    
+              
+    
+              <div fxLayout="row"  fxLayoutGap="8px">
+    
+               
+                <div fxLayout="column" fxFlex="50" >
+                 
+                  <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                      <mat-label class="custom-label"> Start Date</mat-label>
+                      <input matInput [matDatepicker]="picker"  formControlName="startDate" [formControl]="filterForm.controls['startDate']" 
+                      (dateChange)="onStartDateChange($event)"  [min]="minStartDate" >
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+                
+    
+                
+                <div fxLayout="column" fxFlex="50">
+                 
+                  <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                      <mat-label class="custom-label"> End Date</mat-label>
+                      <input matInput formControlName="endDate" [formControl]="filterForm.controls['endDate']" 
+                       [matDatepicker]="picker2" (dateChange)="onEndDateChange($event)"   [min]="minEndDate" [max]="maxEndDate" >
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                      <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+                
+    
+              </div>
+    
+    
+              <mat-action-row style="padding: 0px !important;">
+                <div fxLayout="row" fxLayoutAlign="space-between" style="width: 100%;">
+                  <div>
+                    <button  mat-flat-button class="close-button" (click)="xpandStatus = !xpandStatus" type="button">Close</button>
+                  </div>
+                <div fxLayout="row">
+                  <button mat-flat-button class="reset-button" (click)="resetFilter()" type="button">Reset</button>
+                  <button mat-flat-button class="submit-button" [disabled]="!filterForm.valid"
+                  (click)="applyFilter(selectedDealStatus,'ORG')">
+                    Apply Filter</button>
+                </div>
+                </div>
+              </mat-action-row>
+    
+            </mat-expansion-panel>
+          </mat-accordion>
+    
+    
+    
+        </div>
+    
+      </form>
+    
+    
+    
+    
+    </div>
+
+
+    <span fxLayout="row" style="margin-top: -24px;margin-left: -16px;">
+      <p class="show-results">Showing</p> <p class="show-results" style="color: black;font-weight: 700;"> {{recordsCount}} </p> <p class="show-results">results</p> 
+     </span>
+     
+    <!--TABLE SECTION-->
+    <div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      <div [ngStyle]="changeTableHeight()">
+        <table class="table">
+          <thead>
+            <th><mat-icon>crop_square</mat-icon></th>
+            <th>DEAL ID</th>
+            <th>AGENT</th>
+            <th>ACTUAL DEAL AMOUNT</th>
+            <th>EXCH RATE (FCY to SGD)</th>
+            <th>DEAL BALANCE</th>
+            <th>DEAL BY & DATE</th>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let deal of getDeals | slice: (p - 1) * itemsPerPage : p * itemsPerPage ;  let i=index">
+            <tr>
+
+              <td>
+                <div class="checkbox">
+                  <mat-checkbox
+                    [checked]="isDealSelected(deal.DEALID)"
+                    (change)="onSelectCheckBox($event,deal,i, deal.DEALID)"> </mat-checkbox>
+                </div>
+              </td>
+
+              <td class="font1" (click)="toggleExpansionPanel(deal)"> {{deal.DEALID}}
+                <mat-icon *ngIf="expandedRecord != deal" style="position: relative;top: 7px" >expand_more</mat-icon>  
+                <mat-icon *ngIf="expandedRecord == deal" style="position: relative;top: 7px">expand_less</mat-icon>  
+              </td>
+              <td>
+                <div class="flex">
+                  <small class="accountNumber"> {{deal.AGENTACCTNUMBER}} </small>
+                  <small> {{deal.ENTITYNAME}} </small>
+                </div>
+              </td>
+              <td>
+                <div class="flex">
+                  <small> {{deal.BUYCURRENCY}} {{deal.BUYAMOUNT | number : '1.0-2'}}</small>
+                  <small> {{deal.SELLCURRENCY}} {{deal.SELLAMOUNT | number : '1.0-2'}}  </small>
+                </div>
+              </td>
+              <td> {{deal.BUYEXCHRATE}} </td>
+              <td>
+                <div class="flex">
+                  <small> {{deal.BUYCURRENCY}} {{deal.DEALBALANCEF | number : '1.0-2'}}</small>
+                  <small> {{deal.SELLCURRENCY}} {{ roundNegative(deal.DEALBALANCE) | number : '1.0-2'}}   </small>
+                </div>
+              </td>
+      
+              <td>
+                <div class="flex">
+                  <small style="font-weight:600;font-size:medium"> {{deal.DEALBY}} </small>
+                  <small> {{deal.DEALDATE | date:'medium'}} </small>
+                </div>
+              </td>
+
+            </tr>
+
+            <tr *ngIf="expandedRecord == deal" style="height: 80px; overflow-y: scroll;">
+              <td colspan="7">
+              <ng-container *ngIf="loading; else dataContent">
+                <div style="text-align: center; padding: 20px;" >
+                  <mat-spinner diameter="30" strokeWidth="2"></mat-spinner>
+                </div>
+              </ng-container>
+              <ng-template #dataContent>
+                <ng-container *ngIf="getTransactionInquiry.length > 0; else noData">
+                  <div *ngFor="let transaction of getTransactionInquiry; let i = index" style="width: 166%;">
+                    <div fxLayout="row" style="height: 30px;">
+                      <h3 class="txn-id-content">
+                        <div>Transaction Id {{ i+1 }} :</div>
+                        <div class="id-value">{{ transaction.TRANSACTIONID }}</div>
+                      </h3>
+                      <mat-icon class="forward-arrow-icon">arrow_forward</mat-icon>
+                      <h3 class="txn-id-content">
+                        <div>Transaction Amount :</div>
+                        <div class="id-value">{{ transaction.AMOUNT }} SGD</div>
+                      </h3>
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-template #noData>
+                  <div style="margin: 10px;font-family: 'Roboto';font-weight: 500;color: #cb3e3e;">No Records Found!</div>
+                </ng-template>
+              </ng-template>
+            </td>
+            </tr>
+            
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between" class="pagination-row">
+
+      <div fxLayout="row" fxLayoutGap="10px" class="container-label">
+        <span class="pagination-label"> Average Rate : </span>
+        <span class="pagination-value"> {{averageRate}} </span>
+          <button mat-icon-button [disabled]="checkBoxArray.length == 0 ? true : null" (click)="openDealSummary()" type="button">
+            <mat-icon class="zoom-out-icon"> zoom_out_map  </mat-icon> 
+          </button> 
+      </div>
+
+      <mat-paginator class="pagination-class"
+[length]="getDeals.length"
+[pageSize]="itemsPerPage"
+[pageIndex]="p - 1"
+(page)="handlePageChange($event)"
+></mat-paginator>
+
+</div>
+
+    </div>
+  <div *ngIf="loadOrgInitiated" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+    </div>
+    </div>
+  
+
+  <!--AGENT INITIATED TAB-->
+  <!-- <mat-tab label="Agent Initiated Deals">
+    FILTER-SEARCH SECTION
+    <div style="background-color: white;" [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive">
+      <div class="matcard">
+        <div class="div-height" fxLayout="row wrap" fxLayoutAlign="space-between">
+    
+          <div class="div-height" fxLayout="row wrap" fxLayoutGap="10px">
+            <div fxLayout="column">
+              <p class="p"> Agent Name </p>
+              <mat-form-field fxFlex="50" appearance="{{'formFieldAppearance' | label}}">
+                <input readonly placeholder="Agent Name" matInput class="form-control" type="text" [(ngModel)]="agentName" >
+              </mat-form-field>
+            </div>
+    
+           
+            <div fxLayout="column">
+              <p class="p"> Status </p>
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" fxFlex="20">
+                <mat-select placeholder="--Select--" [(ngModel)]="selectedDealStatus" [ngModelOptions]="{standalone: true}">
+                  <mat-option value="INPROGRESS"> Pending </mat-option>
+                  <mat-option value="CLOSED"> Completed </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+    
+            <button mat-raised-button fxFlex="24" (click)="applyFilter(agentName,selectedDealStatus,'Agent')" class="addButton">
+              <mat-icon style="color:white" matPrefix="Filter">filter_alt</mat-icon>
+              Apply Filter
+            </button>
+    
+          </div>
+    
+         
+        </div>
+      </div>
+    </div>
+    TABLE SECTION
+    <div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      <div [ngStyle]="changeTableHeight()">
+        <table class="table">
+          <thead>
+            <th>Deal ID</th>
+            <th>Agent</th>
+            <th>Buy Currency & Amount</th>
+            <th>Exch Rate</th>
+            <th>Sell Currency & Amount</th>
+            <th>Deal Balance(SGD)</th>
+            <th>Deal By & Date</th>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let deal of getAgentDeal | paginate:{itemsPerPage:25,currentPage:p}">
+              <td> {{deal.DEALID}} </td>
+              <td>
+                <div class="flex">
+                  <small class="accountNumber"> {{deal.AGENTACCTNUMBER}} </small>
+                  <small> {{deal.ENTITYNAME}} </small>
+                </div>
+              </td>
+
+              <td>
+                <div fxLayout="row" fxLayoutGap="15px">
+                  <small> {{deal.SELLCURRENCY}}</small> <small>{{deal.SELLAMOUNT | number}} </small>
+                </div>
+              </td>
+              <td> {{deal.SELLEXCHRATE}} </td>
+              <td>
+                <div fxLayout="row" fxLayoutGap="15px">
+                  <small>{{deal.BUYCURRENCY}}</small>
+                  <small> {{deal.BUYAMOUNT | number}}</small>
+                </div>
+              </td>
+              <td> {{deal.DEALBALANCE | number:'1.0-6'}} </td>
+              <td>
+                <div class="flex">
+                  <small style="font-weight:600;font-size:medium"> {{deal.DEALBY}} </small>
+                  <small> {{deal.DEALDATE | date:'medium'}} </small>
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+    <div *ngIf="loadAgentInitiated" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+      </div>
+    </div>
+  </mat-tab> -->
+
+
+
+

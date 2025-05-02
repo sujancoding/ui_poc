@@ -1,0 +1,91 @@
+<!-- <h4>Welcome {{customerName}} </h4> -->
+<div class="container">
+    <div class="flex_box">
+      <h4 class="align_left">Telegraphic Transfer </h4>
+      <button class="align_right" mat-stroked-button (click)="navigateAllPayee()">View all</button>
+    </div>
+
+    <swiper [slidesPerView]="4" [spaceBetween]="10" [freeMode]="true" class="mySwiper">
+      <ng-template swiperSlide>
+        <div fxLayout="column" fxLayoutAlign="space-evenly center">
+          <button class="button" mat-mini-fab color="primary" [disabled]="isDisabled" (click)="AddPayee()"
+            aria-label="Example icon button with a plus icon">
+            <mat-icon>add</mat-icon>
+          </button>
+
+          <h4 class="payee">Payee </h4>
+          <small>new</small>
+
+        </div>
+      </ng-template>
+      <ng-template swiperSlide *ngFor="let payeeData of payeeData">
+        <div fxLayout="column" fxLayoutAlign="space-evenly center"
+          (click)="navigateViewPayee(payeeData.CUSTOMERID,payeeData.PAYEEID)">
+          <div class="circle">
+            <h6 class="status">
+              <mat-icon style="font-size: 33px;">person</mat-icon>
+            </h6>
+          </div>
+          <h4 class="name">{{payeeData.NAME.length > 10 ? (payeeData.NAME | slice:0:10) + '...' : payeeData.NAME }}</h4>
+          <small> {{payeeData.ACCOUNTNBR}} </small>
+        </div>
+      </ng-template>
+
+    </swiper>
+
+    <mat-divider style="margin-top: 16px;"></mat-divider>
+
+
+    <div class="flex_box">
+      <div fxLayout="row" fxLayoutGap="-9px">
+      <h4 class="title">Recent Transactions</h4>
+      <button *ngIf="refreshIcon" [disabled]="isDisabled" mat-button style="margin-top:15px;text-align: center;" (click)="refresh()">
+        <mat-icon class="refresh_icon">refresh</mat-icon>
+      </button>
+      <div *ngIf="transactionLoader" class="loader-wrapper">
+      <mat-spinner></mat-spinner>
+      </div>
+      </div>
+      <button class="align_right" mat-stroked-button (click)="navigateAllTransaction()">View all</button>
+    </div>
+   
+    <ng-container *ngIf="showTransactionData">
+      <div class="scrollbar" style="margin-top: -10px;" >
+
+        <div style="min-height: 450px;">
+
+          <mat-card appearance="outlined" [ngClass]="{'blink_me': transactionLoader === true}" class="example-card" *ngFor="let transactions of transactionData" (click)="navigateReceipt(transactions.TRANSACTIONID)">
+    
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <div class="box">
+                <mat-icon class="wallet-icon">account_balance_wallet</mat-icon>
+              </div>
+              <div fxLayout="column" style="margin-left: -5px; line-height:1.1 ;">
+                <p class="payeeName" style="margin-left: -10px;height: 27px;">{{transactions.NAME.length > 15 ? (transactions.NAME | slice:0:15) + '...' : transactions.NAME }}</p>
+                <mat-card-subtitle class="subGroups" style="color: #7b7b7b; margin-left: -7px;font-size: 11.5px; "> {{transactions.CREATEDDATE | date:'medium'}} </mat-card-subtitle>
+              </div>
+              <div fxLayout="column" style="margin-left: -5px; line-height:1.1 ;">
+                <p class="payeeName" style="height: 27px;" >{{transactions.AMOUNTSENT | number : '1.0-2'}} SGD</p>
+                <mat-card-subtitle class="subGroups" style="margin-left: 5px;"  [ngStyle]="{'color': getColor(transactions.TXNSTATUS)}"> {{status}}</mat-card-subtitle>
+              </div>
+              <div fxLayout="column">
+                <p style="opacity:0;">s</p>
+                <mat-icon style="color: #b7b7b7;margin-top: -18px; margin-left: -13px;">navigate_next</mat-icon> 
+              </div>
+            </div>
+          </mat-card>
+        </div>               
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="showNoTransactionMessage">
+      <div style="display: flex;justify-content: center;">
+       <div fxLayout="column" fxLayoutGap="5px" style="justify-content: center;"> 
+      <div class="hourglass-empty-circle">
+        <mat-icon class="hourglass-empty-icon">description</mat-icon> 
+      </div>  
+      <h5 class="no-transaction-message">No Transaction Records</h5> 
+      </div>
+      </div>
+    </ng-container>
+  </div>

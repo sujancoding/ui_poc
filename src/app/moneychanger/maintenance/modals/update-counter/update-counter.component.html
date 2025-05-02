@@ -1,0 +1,98 @@
+<div>
+
+  <!--Add Counter Toolbar-->
+    <div fxLayout="row" *ngIf="showAddCounterContent" fxLayoutAlign="space-between center" class="header-container">
+  
+      <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+  
+        <span class="head-label-1">Add Counter </span>
+  
+      </div>
+      <div>
+        <span (click)="onClose()" class="close-icon">
+          <mat-icon>close</mat-icon>
+        </span>
+      </div>
+    </div>
+
+ <!--Edit Counter Toolbar-->
+    <div fxLayout="row" *ngIf="showUpdateCounterContent" fxLayoutAlign="space-between center" class="header-container">
+  
+      <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+  
+        <span class="head-label-1">Edit and Update Counter </span>
+  
+      </div>
+      <div>
+        <span (click)="onClose()" class="close-icon">
+          <mat-icon>close</mat-icon>
+        </span>
+      </div>
+    </div>
+  
+    <div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div fxLayout="column" class="formfield-section">
+          <!-- Email Address-->
+          <div>
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Counter ID</mat-label>
+              <input matInput formControlName="counterId"
+                [formControl]="form.controls['counterId']" [readonly]="isReadOnly" />
+            </mat-form-field>
+            <div  class="message-block">
+              <span class="error-message" *ngIf="form.controls['counterId'].hasError('required') && form.controls['counterId'].touched">{{'counterIdRequired' | label}}</span> 
+          </div>
+           
+          </div>
+          <!-- Password-->
+          <div>
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Counter IP</mat-label>
+              <input matInput 
+                formControlName="counterIp" [formControl]="form.controls['counterIp']" />
+            </mat-form-field>
+            <div  class="message-block">
+              <span class="error-message" *ngIf=" form.controls['counterIp'].hasError('pattern')">{{'invalidIpAddress'| label}}</span>
+              <span class="error-message" *ngIf="form.controls['counterIp'].hasError('required') && form.controls['counterIp'].touched">{{'ipAddressRequired' | label}}</span> 
+          </div>
+         
+          </div>
+        
+          <!-- AgentName-->
+          <div>
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Counter Type</mat-label>
+              <mat-select formControlName="counterType" placeholder="--Select--" >
+                <mat-option *ngFor="let counterType of getCounterType" [value]="counterType.internalValue"> {{counterType.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div  class="message-block">
+              <span class="error-message" *ngIf="form.controls['counterType'].hasError('required') && form.controls['counterType'].touched">{{'counterTypeRequired' | label}}</span> 
+          </div>
+          </div>
+  
+  
+        </div>
+  
+        <!--Add Counter Button-->
+        <div class="register-btn" *ngIf="showAddCounterContent">
+          <button *ngIf="showRegister" class="addCounterBtn" mat-raised-button color="primary" [disabled]="!form.valid"
+             type="submit">Submit </button>
+        </div>
+
+          <!--Update Counter Button-->
+        <div class="register-btn" *ngIf="showUpdateCounterContent">
+          <button *ngIf="showRegister" class="addCounterBtn" mat-raised-button color="primary" [disabled]="!form.valid"
+             type="submit">Update </button>
+        </div>
+        
+  
+        <mat-spinner style="margin:33px auto;" diameter="40" *ngIf="loader"></mat-spinner>
+  
+      </form>
+    </div>
+  
+   
+  </div>

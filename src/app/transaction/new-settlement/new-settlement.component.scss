@@ -1,0 +1,72 @@
+.green{
+    background-color: #27AE60;
+    width: 3cm;
+    border-radius: 1cm;
+    color: white;
+  }
+  
+  .blue{
+  background-color: #123969;
+  width: 3cm;
+  border-radius: 1cm;
+  color: white;
+  }
+  
+  .deactivate{
+   justify-content: center;
+   align-items: center;
+   margin-top: 42px;
+    margin-bottom: 14px;
+   }
+
+   .task-header {
+font-size: 18px;
+    background-color:#123969;
+   color: white;
+   height: 50px;
+  
+  }
+  .fx-spacer {
+    flex: 1 1 auto;
+  }
+  
+
+
+  .user-icon{
+    font-size: 27px;
+    margin-right: 10px;
+  }
+
+  .collection-icon{
+    font-size: 27px;
+    color: #27AE60;
+    margin-right: 10px;
+  }
+
+  .payout-icon{
+    font-size: 27px;
+    color: #cc1717;
+    margin-right: 10px;
+  }
+
+  .help-icon{
+    font-size: 27px;
+    color: black;
+    margin-right: 10px;
+  }
+
+  .container-hint{
+    background-color: #261deb12;
+    border-radius: 6px;
+    height: 34px;
+    padding-left: 8px;
+    padding-top: 4px;
+    margin-top: 12px;
+    margin-left: -9px;
+  }
+
+  .error-message{
+    color: #e91e63;
+    font-size: 14px;
+    margin-top: 11px;
+  }

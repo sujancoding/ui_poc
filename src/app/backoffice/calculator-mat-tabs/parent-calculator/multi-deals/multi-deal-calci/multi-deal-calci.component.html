@@ -1,0 +1,169 @@
+<!-- MULTI-Deal CALCULATOR -->
+
+<form [formGroup]="form">
+    <!-- <div style="margin-left:20px; margin-top: 20px;"> -->
+        <div class="bolder"> Enter Amount </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label">Customer To APT (SGD) </mat-label>
+                    <input matInput formControlName="custSends">
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label">Org Exchange Rate </mat-label>
+                    <input matInput formControlName="exchRate" (blur)="payeeGets()">
+                </mat-form-field>
+            </div>
+        
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label">Payee Gets </mat-label>
+                    <input matInput formControlName="payeeGets" class="disabledField">
+                </mat-form-field>
+            </div>
+        </div>
+     
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label"> <span class="dark">Deal 1</span> Balance </mat-label>
+                    <input matInput formControlName="dealBalance1" >
+                </mat-form-field>
+            </div>
+        
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label"> <span class="dark">Deal 1</span> Rate </mat-label>
+                    <input matInput formControlName="deal_1Rate" >
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="18" style="opacity: 0;">
+                <mat-form-field>
+                    <mat-label class="custom-label"></mat-label>
+                    <input matInput>
+                </mat-form-field>
+            </div>
+        </div>
+            
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label"> <span class="dark"> Deal 2 </span> Balance </mat-label>
+                    <input matInput formControlName="dealBalance2" >
+                </mat-form-field>
+            </div>
+        
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label"> <span class="dark">Deal 2</span> Rate </mat-label>
+                    <input matInput formControlName="deal_2Rate" (blur)="deal1()">
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="18" style="opacity: 0;">
+                <mat-form-field>
+                    <mat-label class="custom-label"></mat-label>
+                    <input matInput>
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label"> <span class="dark">Deal 1</span> Amount Reduced (SGD)</mat-label>
+                    <input matInput formControlName="dealAmount_SGD" class="disabledField">
+                </mat-form-field>
+            </div>
+       
+            <div fxFlex="18">
+                <mat-form-field>
+                <mat-label class="custom-label"> <span class="dark">Deal 1</span> Amount Reduced (FCY)</mat-label>
+                    <input matInput formControlName="dealAmount_FCY" class="disabledField">
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="18" style="opacity: 0;">
+                <mat-form-field>
+                    <mat-label class="custom-label"></mat-label>
+                    <input matInput>
+                </mat-form-field>
+            </div>
+       </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label"> Balance Reduced from <span class="dark"> Deal 2 </span> (FCY) </mat-label>
+                    <input matInput formControlName="reducedBalance" class="disabledField">
+                </mat-form-field>
+            </div>
+       
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label"> Amount Reduced from <span class="dark"> Deal 2 </span> (SGD) </mat-label>
+                    <input matInput formControlName="reducedDealBalance" class="disabledField">
+                </mat-form-field>
+            </div>
+        
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label"> <span class="dark">Deal 2 </span> Final Balance (SGD) </mat-label>
+                    <input matInput formControlName="finalBalance" class="disabledField">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label"> APT To Agent (SGD) </mat-label>
+                    <input matInput formControlName="sell" class="disabledField">
+                </mat-form-field>
+            </div>
+        </div>
+ 
+    <!-- </div> -->
+    <div class="bolder"> Post Approval </div>
+
+    <!-- <div style="margin-left:20px;"> -->
+        <div>
+            <!-- <h3>Outstanding Amount:</h3> -->
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxFlex="18">
+                    <mat-form-field>
+                        <mat-label class="custom-label">APT Bank Account (DBS) </mat-label>
+                        <input matInput formControlName="bankAmount" class="disabledField">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxFlex="18">
+                    <mat-form-field>
+                        <mat-label class="custom-label">Org Profit/Loss </mat-label>
+                        <input matInput formControlName="profitLoss" class="disabledField">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+  
+        <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxFlex="18">
+                <mat-form-field>
+                    <mat-label class="custom-label"> Verification </mat-label>
+                    <input matInput formControlName="verification" class="disabledField">
+                </mat-form-field>
+            </div>
+        </div>        
+    <!-- </div> -->
+</form>
+<div class="btn">
+<button style="width: 150px;" mat-raised-button color="primary" (click)="resetData()">Reset</button>
+</div>

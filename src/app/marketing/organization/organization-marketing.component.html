@@ -1,0 +1,100 @@
+<mat-sidenav-container>
+  <mat-sidenav [(opened)]="opened"> 
+
+    <img class="menu-wallpaper" [src]="menuWallpaper" type="file">
+    <h3 class="menu-title">Sign In</h3>
+    <mat-list style="margin-top: -12px;">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="list-menuicon">account_circle</mat-icon> <mat-list-item class="item-list" (click)="navigateLoginScreen('I')">Personal </mat-list-item>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="list-menuicon">domain</mat-icon> <mat-list-item class="item-list" (click)="navigateLoginScreen('C')">Business </mat-list-item>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="list-menuicon">account_balance</mat-icon>  <mat-list-item class="item-list" (click)="navigateLoginScreen('B')">Staff </mat-list-item>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="list-menuicon">supervisor_account</mat-icon>  <mat-list-item class="item-list" (click)="navigateLoginScreen('A')">Agent </mat-list-item>
+      </div>
+    </mat-list>  
+
+  </mat-sidenav>
+
+    <mat-sidenav-content style="overflow-x: hidden;"> 
+      <mat-toolbar class="header-toolbar">
+
+        <button mat-icon-button class="menu-button" (click)="opened=!opened" aria-label="Example icon-button with menu icon">
+          <mat-icon class="menu-icon">menu</mat-icon>
+        </button>
+      
+        <img class="logo" [src]="logo" type="file">
+      
+      <div fxLayout="row" fxLayoutAlign="space-between" style="width: inherit;position: relative;">
+      
+        
+        <div *ngIf="!showShortCutMenu" fxLayout="row" fxLayoutAlign="space-around">
+      
+          <span class="text-links" (click)="scrollToHome()">Home</span>
+      
+          <span class="text-links" (click)="scrollToAboutUs()">About Us</span>
+      
+          <span class="text-links" (click)="scrollToOurMission()">Our Mission</span>
+
+          <span class="text-links" (click)="scrollToOffers()">What we Offer</span>
+      
+          <span class="text-links" (click)="scrollToOurTeam()">Our Team</span>
+
+          <span class="text-links" (click)="scrollToOurServices()">Our services</span>
+
+          <span class="text-links" (click)="scrollTowhyChooseUs()">Why Choose Us</span>
+
+          <span class="text-links" (click)="scrollTocompliance()">Compliance</span>
+
+          <span class="text-links" (click)="scrollToFaq()">FAQ</span>
+      
+          <span class="text-links" (click)="scrollToSupport()">Contact Us</span>
+      
+        </div  >
+
+        
+        <div *ngIf="showShortCutMenu">
+
+          <!-- Button to open the dropdown for ShortCutLinksArray -->
+            <button [matMenuTriggerFor]="shortcutMenu" class="shortcut-mat-btn" style="padding-left: 10px;" mat-raised-button>Link</button>
+          
+          <!-- Dropdown Menu for ShortCutLinksArray -->
+          <mat-menu #shortcutMenu="matMenu">
+            <div style="width: 154px !important;">
+              <button mat-menu-item *ngFor="let record of ShortCutLinksArray" class="menu-badge-item-1" (click)="openShortCutLink(record.displayLink)">
+                <span>{{ record.displayLink }}</span>
+              </button>
+
+              </div>
+            
+          </mat-menu>
+        
+        </div>
+        <div fxLayout="row" fxLayoutGap="60px" class="location-row">
+      
+          <button [matMenuTriggerFor]="menu" class="mat-btn" mat-raised-button>Sign-In</button>
+          <mat-menu #menu="matMenu">
+            <div style="width: 154px !important;">
+            <button class="menu-badge-item" (click)="navigateLoginScreen('I')" mat-menu-item>Personal</button>
+            <button class="menu-badge-item" (click)="navigateLoginScreen('C')" mat-menu-item>Business</button>
+            <button class="menu-badge-item"  (click)="navigateLoginScreen('B')" mat-menu-item>Staff</button>
+            <button class="menu-badge-item"  (click)="navigateLoginScreen('A')" mat-menu-item>Agent</button>
+            </div>
+          </mat-menu>
+      
+        </div>
+      
+      </div>
+      
+      </mat-toolbar>
+      
+    <app-organization-content [selectionChanges]="selectionChanges"
+     [counter]="counter" ></app-organization-content>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+

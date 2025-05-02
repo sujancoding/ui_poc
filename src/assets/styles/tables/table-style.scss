@@ -1,0 +1,208 @@
+pagination-controls {
+    text-align: center;
+    position: sticky;
+    justify-content: center;
+    width: 100%;
+    border: solid 0.1px #ffffff;
+  }
+  .table {
+    width: 100%;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+    background-color: white;
+  }
+  
+  table {
+    //margin-top: 0.5cm;
+    border-collapse: collapse; width: 100%;
+  }
+  
+  thead {
+    position: sticky;
+    top: -1px;
+   z-index: 2;
+  }
+  
+  td {
+    text-align: left;
+    padding: 2px 2px 2px 7px !important;
+    font-family: 'Roboto-Regular';
+    font-weight: 540;
+    font-size: 16px;
+    color: black;
+    border: .1px solid #9c9c9c;
+
+   
+  }
+  tr:hover td {
+    -moz-box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+    -webkit-box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+}
+tr:hover td:first-child {
+    -moz-box-shadow: 4px 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+    -webkit-box-shadow: 4px 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 4px 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+}
+tr:hover td:last-child {
+    -moz-box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+    -webkit-box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5) inset;
+}
+  
+  th {
+    padding: 7px 0 10px 9px;
+    /* color: #000000d6; */
+    font-weight: 300;
+    opacity: 20;
+    font-size: 15px;
+    font-family: 'Roboto';
+    background-color: #e5e5e5;
+    border: 0.1px solid #9c9c9c;
+    text-align: left;
+    color: black;
+
+  }
+
+  .table-wrapper{
+    margin-top: 12px;
+    position: relative;
+    top: -10px;
+  }
+  .loader-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ::ng-deep.loader-wrapper circle,.loader-wrapper circle {stroke: #123969 !important;} 
+
+
+  .form-field-size{
+    font-size : 13px;
+  }
+
+  .pagination-class{
+    font-size: 14px;
+    font-family: "Roboto";
+    display: flex;
+    justify-content: end;
+    font-weight: 600;
+    height: 32px;
+    border-top: 1px solid #d5d5d5;
+    align-items: center;
+}
+
+//Below are relavant to search filter sections
+.filter-key{
+  font-family: "Roboto";
+    font-size: 16px;
+    white-space: nowrap;
+    color: #8f8f8f;
+
+}
+
+.filter-value{
+  font-family: "Roboto";
+    /* font-style: normal; */
+    font-size: 16px;
+    /* color: #000000; */
+    position: relative;
+    bottom: 5px;
+
+}
+
+.search-filter{
+  background-color: white;
+    // margin-left: 12px;
+    // margin-right: 12px;
+    border-radius: 10px;
+    height: 139px;
+    border: 1px solid #d2d2d2;
+    position: relative;
+    top: -8px;
+  }
+
+  .custom-filter-values{
+    /* margin-top: 22px; */
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    background-color: #f3f3f3;
+    height: 62px;
+    justify-content: left;
+    align-items: center;
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
+  }
+
+  .inner-container{
+    height: 75px;
+    background-color: #ffffff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+  
+  }
+
+  .margin-space{
+    position: relative;
+    top: -7px;
+  }
+
+  .reset-button{
+    width: 105px;
+    height: 53px;
+      border-radius: 0.2cm;
+      margin: 10px;
+      background-color: #ffffff;
+      cursor: pointer;
+      color: #123969;
+      font-size: 15px;
+      font-family: 'Roboto';
+  
+  }
+  .close-button{
+    width: 90px;
+      height: 40px;
+      /* border-radius: 20px; */
+      margin: 10px;
+      position: relative;
+      left: 22px;
+      top: 6px;
+      color: #123969;
+    background-color: #e8e8e8;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: "Roboto";
+  }
+  
+  .submit-button{
+    width: 115px;
+    height: 40px;
+    /* border-radius: 0.2cm; */
+    margin-right: 15px;
+    background-color: #123969;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+    font-family: "Roboto";
+  }
+  
+
+  ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgb(136 136 136 / 50%);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  }
+
+ 

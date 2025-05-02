@@ -1,0 +1,158 @@
+
+p {
+    margin: 0.6cm;
+    height: 3px;
+}
+
+.sorting {
+    margin: 0.4cm;
+    height: 2px;
+}
+
+.filter-button {
+    height: 48px;
+    margin-top: 0.2cm;
+    font-weight: 12px;
+    padding-right: 0.7cm;
+}
+
+
+.red {
+    color: rgb(18, 135, 231)
+}
+
+img {
+    height: 32px;
+    border-radius: 4.2cm;
+}
+
+.example-section {
+    margin: 12px 0;
+}
+
+
+
+
+
+.icon {
+    color: rgb(15, 132, 228);
+}
+
+small {
+    margin: 0;
+    font-size: 14px;
+    color: black;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.accountNumber {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.font {
+    font-size: 14px;
+}
+
+.date {
+    font-size: 13.5px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.font1 {
+    font-size: 16px;
+    font-family: 'Roboto';
+    color: #123969;
+    ;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.font1:hover {
+    color: #2896df;
+}
+
+small {
+    font-size: 15px;
+    font-family: 'Roboto';
+}
+
+.bold {
+    font-size: 15px;
+}
+
+.font2 {
+    font-size: 16px;
+    font-family: 'Roboto';
+    font-style: normal;
+}
+
+.p {
+    font-family: 'Roboto';
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 30px;
+    margin-bottom: 16px;
+}
+
+.icon {
+    color: rgb(255, 255, 255);
+}
+
+.buttonApplyfilter {
+    background-color: #123969;
+    color: white;
+    height: 48px;
+    margin-top: 9px;
+}
+
+.buttonApplyfilter:hover {
+    background-color: #123969;
+}
+
+mat-form-field {
+    padding: 0.1cm;
+}
+
+.id-value {
+    color: #8f8f8f;
+    margin-left: 10px;
+}
+
+.txn-id-content {
+    font-size: 15px;
+    line-height: 8px;
+    margin-left: 11px;
+    display: flex;
+    font-family: 'Roboto';
+    font-weight: 500;
+}
+
+.forward-arrow-icon {
+    position: relative;
+    top: 7px;
+    left: 6px;
+    color: #606060;
+}
+
+.search-filter-1{
+
+    background-color: white;
+    /* margin-left: 12px; */
+    /* margin-right: 12px; */
+    border-radius: 10px;
+    height: 90px;
+   
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .div-height-1{
+    margin-left: 10px;
+  }

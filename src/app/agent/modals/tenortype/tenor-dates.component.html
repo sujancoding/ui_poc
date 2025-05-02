@@ -1,0 +1,106 @@
+<form [formGroup]="tenorForm">
+<mat-card appearance="outlined" style="margin: -24px;height: -webkit-fill-available;">
+  <mat-card-content class="header">Tenor Dates</mat-card-content> <!-- label and radio section -->
+  <mat-icon class="class-icon" (click)="close()">close</mat-icon>
+
+  <div fxLayout="column" style="margin-top: -29px;" fxLayoutAlign="space-evenly none">
+      <!-- <mat-radio-group  (change)="timePeriodChange($event,tenorForm.controls['timePeriod'].value)" class="mat-radio-group"  [formControl]="tenorForm.controls['timePeriod']">
+        <mat-radio-button class="mat-radio-button" value="TODAY">Today</mat-radio-button>
+        <mat-radio-button class="mat-radio-button" value="time-option">Time-Option</mat-radio-button>
+      </mat-radio-group> -->
+
+      <div fxLayout="column" style="margin-left: 22px;">
+        
+        <div style="width: 280px;font-size: 15px;margin-bottom: -3px;" >
+          <mat-form-field appearance="outline">
+            <mat-label class="custom-label">Tenor</mat-label>
+            <mat-label class="custom-label"> </mat-label>
+            <mat-select  [formControl]="tenorForm.controls['timePeriod']" (selectionChange)="timePeriodChange($event,tenorForm.controls['timePeriod'].value)">
+              <mat-option style="cursor:pointer" *ngFor="let tenorRange of tenorRange" [value]="tenorRange.value" > {{tenorRange.viewValue}} </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+   
+    <div class="h-label">Open forward contract with a date range that allows
+      utilisation of booked Fx rate between selected dates</div>
+    <div class="divider"></div>
+  </div>
+  <!-- Tenor form field section -->
+    <div fxLayout="column" fxLayoutAlign="space-evenly none" style="margin-top: 15px;">
+      <div fxLayout="row" fxLayoutAlign="space-around">
+        <div fxFlex="45">
+            <mat-form-field appearance="outline" >
+              <mat-label class="custom-label">Start Date</mat-label>
+              <input matInput [matDatepicker]="picker" readonly="true" (click)="picker.open()" 
+                (dateChange)="onStartDateChange($event)" [formControl]="startDate" [min]="minStartDate" >
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+            </mat-form-field>
+        </div>
+        <div  fxFlex="45">
+            <mat-form-field appearance="outline" >
+              <mat-label class="custom-label">End Date</mat-label>
+              <input matInput [matDatepicker]="picker2" readonly="true" (click)="picker2.open()" 
+                (dateChange)="onEndDateChange($event)"   [min]="minEndDate" [max]="maxEndDate"  [formControl]="endDate">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+              <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+            </mat-form-field>
+        </div>
+
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-around">
+
+        <div fxFlex="45">
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label">Start Tenor</mat-label>
+              <mat-select [(ngModel)]="selectedValue" [formControl]="tenorForm.controls['startTenor']">
+                <mat-option *ngFor="let day of days" [value]="day.viewValue" [disabled]="isFieldDisable">
+                  {{day.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="45">
+          <mat-form-field appearance="outline" >
+            <input matInput readonly="true" [formControl]="tenorForm.controls['startTenorDate']" formControlName="startTenorDate">
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-around">
+        <div  fxFlex="45">
+            <mat-form-field appearance="outline" >
+              <mat-label class="custom-label">End Tenor</mat-label>
+              <mat-select [formControl]="tenorForm.controls['endTenor']">
+                <mat-option *ngFor="let status of status" [value]="status.viewValue" [disabled]="isFieldDisable">
+                  {{status.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="45">
+          <mat-form-field appearance="outline" >
+            <input matInput readonly="true" [formControl]="tenorForm.controls['endTenorDate']" formControlName="endTenorDate">
+          </mat-form-field>
+        </div>
+      </div>
+    
+      <div class="divder-below"></div>
+     <div fxLayout="row" fxLayoutAlign="space-evenly" >
+      
+         <div class="button1">
+          <button  class="shared-button" mat-stroked-button (click)="close()">Cancel</button>
+        </div>
+        <div class="button2">
+           <button class="shared-button" type="submit" (click)="onSubmit()" mat-flat-button color="primary" [disabled]="!tenorForm.valid || isDisabledButton" >Apply</button>
+          </div>
+     </div>
+    </div>
+</mat-card>
+</form>

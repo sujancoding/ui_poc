@@ -1,0 +1,96 @@
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1">
+
+   <form>
+      <div  fxLayout="row wrap" fxLayoutGap="10px" style="margin-left: 15px;display:flex">
+
+        
+           
+            <mat-form-field style="width: 300px;" appearance="{{'formFieldAppearance' | label}}" >
+               <mat-label class="custom-label">Currency Pair</mat-label>
+               <span matPrefix  class="{{selectedCountryCode}}" style="position: relative;top: -4px; left: -4px;"></span>
+               <mat-select  [(value)]="selectedCountryCode" (selectionChange)="selectedCurrencyPair(selectedCountryCode)">
+                 <mat-option *ngFor="let country of currencyPairsArray" [value]="country.FLAG" >
+                   <span class="{{country.FLAG}}"></span>
+                   {{country.CURRENCYCODE}}
+                 </mat-option>
+               </mat-select>
+             </mat-form-field>
+      
+         
+         <button mat-raised-button  (click)="searchCurrencyPair()" class="buttonApplyfilter">
+
+           Search
+         </button>
+      </div>
+   </form>
+
+</div>
+
+<!-- Table Section -->
+<div class="table-wrapper">
+   <div class="mat-elevation-z8">
+      <form [formGroup]="form">
+      <div [ngStyle]="changeTableHeight()">
+
+         <table class="table">
+            <thead>
+               <th>CURRENCY PAIRS</th>
+               <th>MARGIN TIER</th>
+               <th>PIPS VALUE</th>
+               <th>ACTIONS</th>
+
+            </thead>
+
+            <tbody>
+               <ng-container *ngFor="let pips of searchPips | slice: (p - 1) * itemsPerPage : p * itemsPerPage ">
+                  <tr>
+                     <td style="color: #4380cb;
+                   font-size: 17px;font-family: 'Roboto';padding: 18px;">
+                        <span [ngClass]="getFlagClass(pips.PIPSCCYPAIR)"></span>
+                        {{pips.PIPSCCYPAIR}}
+                     </td>
+                     <td style="padding: 18px;">{{pips.CUSTMARGINRATE}}</td>
+                     <td style="padding: 18px;color: #000000;
+                   font-weight: 600;
+                   font-size: 17px;">{{pips.PIPSRATE}}</td>
+                     <td class="font1" style="padding: 18px;" (click)="toggleExpansionPanel(pips)">
+                        <mat-icon *ngIf="expandedRecord != pips"
+                           style="position: relative;top: 7px">expand_more</mat-icon>
+                        <mat-icon *ngIf="expandedRecord == pips"
+                           style="position: relative;top: 7px">expand_less</mat-icon>
+                     </td>
+                  </tr>
+                  <tr *ngIf="expandedRecord == pips" style="height: 80px; overflow-y: scroll;">
+                     <ng-container>
+                        <td colspan="1" style="color: #4380cb;
+                        font-size: 17px;font-family: 'Roboto';">
+                           <span [ngClass]="getFlagClass(pips.PIPSCCYPAIR)"></span>
+                           {{pips.PIPSCCYPAIR}}
+                        </td>
+                        <td colspan="1">{{pips.CUSTMARGINRATE}}</td>
+                        <td colspan="1" style="width: 23%;">
+                           <!-- Add a text field for pips value -->
+                           <mat-form-field appearance="{{'formFieldAppearance' | label}}"  class="form-field">
+                              <input matInput type="text" [(ngModel)]="enteredPipsValue" formControlName="pipsRate" [formControl]="form.controls['pipsRate']">
+                           </mat-form-field>
+                        </td>
+                        <td colspan="1" style="width: 19%;">
+                           <!-- Add a Save button -->
+                           <button class="save-btn" mat-raised-button color="primary" [disabled]="!form.valid" (click)="saveChanges(pips)">Save
+                              Changes</button>
+                        </td>
+                     </ng-container>
+                  </tr>
+               </ng-container>
+            </tbody>
+         </table>
+      </div>
+   </form>
+      <mat-paginator class="pagination-class" [length]="searchPips.length" [pageSize]="itemsPerPage" [pageIndex]="p - 1"
+         (page)="handlePageChange($event)"></mat-paginator>
+   </div>
+   <!--Loader-->
+   <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+   </div>
+</div>

@@ -1,0 +1,96 @@
+.div-height{
+  height: 0.4cm;
+  font-size: 13px;
+}
+p{
+  margin: 0.6cm;
+  height: 3px;
+}
+.sorting{
+  margin: 0.4cm;
+  height: 2px;
+}
+
+.filter-button{
+  height: 48px;
+  margin-top: 0.2cm;
+  font-weight: 12px;
+  padding-right: 0.7cm;
+}
+
+.icon{
+  color: rgb(15, 132, 228);
+}
+
+mat-form-field{
+  padding: 0.1cm;
+}
+table{
+  margin-top: 0.5cm;
+  }
+  
+  .table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ddd;
+    background-color: white;
+   }
+  
+    td {
+     text-align: left;
+     padding: 10px;
+     font-style: normal;
+     font-weight: 400;
+     font-size: 14px;
+     border: solid 0.5px #ebe8e8;
+     font-family: 'Roboto';
+   }
+   th{
+     text-align: left;
+     padding: 6px;
+     color: gray;
+     font-weight: 500;
+     font-family: revert;
+     font-size: 13px;
+     font-style: normal;
+     border: solid 0.5px #ebe8e8;
+   }
+   
+   tr:nth-child(even) {
+     background-color: #f2f2f2;
+   }
+  
+  
+.example-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+ } 
+ pagination-controls{
+  text-align: center;
+  position: static;
+  justify-content: center;
+  width: 100%;
+  border: solid 0.2px rgb(160, 158, 158);
+}
+
+h4{
+  font-weight: bold;
+  text-align: center;
+}
+.flex{
+  display: flex;
+  flex-direction: column;
+}
+small{
+margin: 0;
+font-family: 'Roboto';
+font-weight: 500;
+font-size: 10px;
+color: black;
+}
+.green{
+  color: #27AE60;
+}

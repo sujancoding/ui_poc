@@ -1,0 +1,74 @@
+<!--ADMIN VIEW DOCUMENT-->
+<!-----------------------------APPLICATION SEARCH--------------------------------------------------------->
+<!-- <div *ngIf="applicationSearchPreview">
+    
+<button style="border: 0.5px solid #b8b8b8;margin-top: 12px;" mat-button color="primary" (click)="navigatetoDocument('APPLICATION_SEARCH')">
+    <mat-icon class="backButton">keyboard_backspace</mat-icon>
+    back</button>
+    <h3 style="text-align:center;font-family:'Roboto';font-weight:600;margin-top: -34px;"> {{documentName}} </h3>
+    
+<div class="content-fit">
+<object [data]="pdfUrl"  type="application/pdf"
+ width="1300px" height="950px" > </object>
+ </div>
+ </div> -->
+
+<!--Modal Dialg Box-->
+<!-----------------------------APPLICATION SEARCH--------------------------------------------------------->
+ <div *ngIf="applicationSearchPreview">
+    <div>
+        <h4 mat-dialog-title>
+        <mat-toolbar  class="task-header" fxLayout="row" fxLayoutAlign="space-between center">
+          <span> View Document </span>
+          <span [mat-dialog-close]="true" style="cursor: pointer;">
+            <mat-icon>close</mat-icon>
+          </span>        
+        </mat-toolbar>
+        </h4>
+    </div>
+    <h3 style="text-align:center;font-family:'Roboto';font-weight:600;"> {{documentName}} </h3>
+    <div class="content-fit">
+        <object [data]="pdfUrl"  type="application/pdf" width="900px" height="610px" > </object>
+     </div>
+   
+</div>
+
+
+ <!-----------------------------CUSTOMER SEARCH--------------------------------------------------------->
+<div *ngIf="customerSearchPreview">
+    <div>
+        <h4 mat-dialog-title>
+        <mat-toolbar  class="task-header" fxLayout="row" fxLayoutAlign="space-between center">
+          <span> View Document </span>
+          <span [mat-dialog-close]="true" style="cursor: pointer;">
+            <mat-icon>close</mat-icon>
+          </span>        
+        </mat-toolbar>
+        </h4>
+    </div>
+ 
+    <h3 style="text-align:center;font-family:'Roboto';font-weight:600;"> {{documentName}} </h3>
+    <div class="content-fit">
+        <object [data]="pdfUrl"  type="application/pdf" width="900px" height="610px" > </object>
+    </div>
+  
+</div>
+
+<!-----------------------------AGENT DOCUMENT PREVIEW--------------------------------------------------------->
+<div *ngIf="agentDocumentPreview">
+  <div>
+      <h4 mat-dialog-title>
+      <mat-toolbar  class="task-header" fxLayout="row" fxLayoutAlign="space-between center">
+        <span> View Document </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+          <mat-icon>close</mat-icon>
+        </span>        
+      </mat-toolbar>
+      </h4>
+  </div>
+  <h3 style="text-align:center;font-family:'Roboto';font-weight:600;"> {{documentName}} </h3>
+  <div class="content-fit">
+      <object [data]="pdfUrl"  type="application/pdf" width="900px" height="610px" > </object>
+   </div>
+ 
+</div>

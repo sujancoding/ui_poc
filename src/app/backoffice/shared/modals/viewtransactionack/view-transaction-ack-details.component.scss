@@ -1,0 +1,95 @@
+.label{
+    font-size: 19px;
+    color: black;
+    margin-left: -9px;
+    
+}
+.title-label{
+    font-weight: 700;
+    font-size: 20px;
+    color: black;
+}
+
+
+
+.no-button{
+    width: 117px;
+    font-size: 14px;
+    background-color: #123969;
+    color: #ffffff;
+    height: 40px;
+    margin-top: 10px;
+    margin-right: 11px;
+
+}
+
+.hint-label{
+    position: relative;
+    top: -21px;
+    color: grey;
+    font-size: 19px;
+}
+
+
+.txn-divider{
+    position: relative;
+    top: -18px;
+}
+
+.label{
+    font-size: 16px;
+    font-family: 'Roboto';
+}
+
+.value{
+    font-size: 16px;
+    font-family: 'Roboto';
+    position: relative;
+    left: -13px;
+}
+
+.customer-type-icon{
+    color: #123969;
+    font-size: 35px;
+    position: relative;
+    top: -8px;
+    margin-right: 7px;
+}
+
+.wrap-title{
+    position: relative;
+    top: 4px;
+    left: 11px;
+}
+
+.tags
+{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px;
+  position: relative;
+ top: -10px;
+}
+
+.status-tag
+{
+  line-height: 20px;
+  padding: 5px 10px;
+  margin: 3px 0;
+  display: inline-block;
+  font-family: Roboto;
+  white-space: nowrap;
+}
+
+.small-container{
+  border: 1px solid #e6e6e6;
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 12px;
+  left: 5px;
+  border-radius: 5px;
+
+}

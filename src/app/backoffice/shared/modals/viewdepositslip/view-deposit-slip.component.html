@@ -1,0 +1,97 @@
+<div style="margin: -24px;">
+    <div>
+        <h4 mat-dialog-title>
+            <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+                <span> Transaction Documents </span>
+                <span [mat-dialog-close]="true" style="cursor: pointer;">
+                    <mat-icon>close</mat-icon>
+                </span>
+            </mat-toolbar>
+        </h4>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <div class="dropzone">
+            <h4 class="subTitle"> Deposit Slip </h4>
+            <div class="container">
+              <img *ngIf="showDepositedImage" [src]="url['2001']" height="220" width="100%"> <!--[src]="url[nricFront]"-->
+              <!--this object tag only enables when document type is pdf or docs-->
+              <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatDeposited" (click)="loadDocumentData('DEPOSITED_SLIP','2001',depositedSlipId)">
+              <object class="content"style="cursor: pointer;" [data]="pdfDeposited"  type="application/pdf" width="100%" height="220" > </object>
+              </button>
+              <!---->
+              <button class="btn" *ngIf="uploadDepositSlipIcon"> <mat-icon [disabled]="disableDepositSlipUpload" class="icon">file_upload</mat-icon> </button>
+              <button class="btn" *ngIf="showDepositedSlipButton"  (click)="loadDocumentData('DEPOSITED_SLIP','2001',depositedSlipId)"
+              type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+              <input [ngClass]="disableDepositSlipUpload ? 'disable'  : ''" type="file" *ngIf="uploadDepositSlip" [disabled]="disableDepositSlipUpload" (change)="onSelectFile($event,'2001','DEPOSITED_SLIP')" >
+          </div>
+     
+          <button type="button" mat-raised-button color="primary"  *ngIf="reuploadDepositSlip" [disabled]="disableDepositSlipUpload"> Reupload </button>
+          <input type="file"  class="reupload-input" *ngIf="reuploadDepositSlip" [disabled]="disableDepositSlipUpload" (change)="onSelectFile($event,'2001','DEPOSITED_SLIP')">
+        </div>
+        <div class="dropzone">
+            <h4 class="subTitle"> Transaction Screening Doc 1 </h4>
+            <div class="container">
+              <img *ngIf="showDocOneImage" [src]="url['2002']" height="220" width="100%">
+              <!--this object tag only enables when document type is pdf or docs-->
+              <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatDocOne" (click)="loadDocumentData('TXN_SCREENING_DOC_1','2002',docOneId)">
+                <object class="content"style="cursor: pointer;" [data]="pdfDocOne"  type="application/pdf" width="100%" height="220" > </object>
+                </button>
+              <!--Upload-->
+              <button class="btn"  *ngIf="uploadDocOne"> <mat-icon class="icon">file_upload</mat-icon> </button>
+              <button class="btn" *ngIf="showDocOneButton"  (click)="loadDocumentData('TXN_SCREENING_DOC_1','2002',docOneId)"
+                type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+                <input type="file" *ngIf="uploadDocumentOne" (change)="onSelectFile($event,'2002','TXN_SCREENING_DOC_1')" >
+            </div>
+            <button type="button" mat-raised-button color="primary" style="cursor: pointer;" *ngIf="reuploadDocOne"> Reupload </button>
+            <input type="file" class="reupload-input" *ngIf="reuploadDocOne"  (change)="onSelectFile($event,'2002','TXN_SCREENING_DOC_1')">
+    
+          </div>
+          
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div class="dropzone">
+            <h4 class="subTitle"> Transaction Screening Doc 2</h4>
+            <div class="container">
+              <img *ngIf="showDocTwoImage" [src]="url['2003']" height="220" width="100%">
+              <!--this object tag only enables when document type is pdf or docs-->
+              <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatDocTwo" (click)="loadDocumentData('TXN_SCREENING_DOC_2','2003',docTwoId)">
+              <object class="content"style="cursor: pointer;" [data]="pdfDocTwo"  type="application/pdf" width="100%" height="220" > </object>
+              </button>
+              <!---->
+              <button class="btn"  *ngIf="uploadDocTwo"> <mat-icon class="icon">file_upload</mat-icon> </button>
+              <button class="btn" *ngIf="showDocTwoButton"  (click)="loadDocumentData('TXN_SCREENING_DOC_2','2003',docTwoId)"
+                type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+                <input type="file" *ngIf="uploadDocumentTwo" (change)="onSelectFile($event,'2003','TXN_SCREENING_DOC_2')" >
+            </div>
+            <button type="button" mat-raised-button color="primary" *ngIf="reuploadDocTwo"> Reupload </button>
+            <input type="file" class="reupload-input" *ngIf="reuploadDocTwo"  (change)="onSelectFile($event,'2003','TXN_SCREENING_DOC_2')">
+
+        
+          </div>
+          <div class="dropzone">
+            <h4 class="subTitle"> Transaction Screening Doc 3 </h4>
+            <div class="container">
+              <img *ngIf="showDocThreeImage" [src]="url['2004']" height="220" width="100%">
+              <!--this object tag only enables when document type is pdf or docs-->
+              <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatDocThree" (click)="loadDocumentData('TXN_SCREENING_DOC_3','2004',docThreeId)">
+              <object class="content"style="cursor: pointer;" [data]="pdfDocThree"  type="application/pdf" width="100%" height="220" > </object>
+              </button>
+              <!---->
+              <button class="btn"  *ngIf="uploadDocThree"> <mat-icon class="icon">file_upload</mat-icon> </button>
+              <button class="btn" *ngIf="showDocThreeButton"  (click)="loadDocumentData('TXN_SCREENING_DOC_3','2004',docThreeId)"
+                type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+                <input type="file" *ngIf="uploadDocumentThree" (change)="onSelectFile($event,'2004','TXN_SCREENING_DOC_3')" >
+            </div>
+            <button type="button" mat-raised-button color="primary" *ngIf="reuploadDocThree"> Reupload </button>
+            <input type="file" class="reupload-input" *ngIf="reuploadDocThree"  (change)="onSelectFile($event,'2004','TXN_SCREENING_DOC_3')">
+
+    </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around">
+      <button type="button" class="close-btn" [mat-dialog-close]="true"> Close </button>
+    </div>
+    <div *ngIf="loader" class="spinner-container">
+      <mat-spinner class="spinner" diameter="50" ></mat-spinner>
+    </div>
+</div>

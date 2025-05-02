@@ -1,0 +1,361 @@
+<div *ngIf="flag">
+  <h4 mat-dialog-title>
+    <mat-toolbar  class="task-header" fxLayout="row" fxLayoutAlign="space-between center">
+     
+        <span> View Application </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+          <mat-icon>close</mat-icon>
+        </span>
+       
+    </mat-toolbar>
+  </h4>
+  </div>
+
+  <div *ngIf="customerflag">
+    <h4 mat-dialog-title>
+      <mat-toolbar  class="task-header" fxLayout="row" fxLayoutAlign="space-between center">
+       
+          <span> View Customer </span>
+          <span [mat-dialog-close]="true" style="cursor: pointer;">
+            <mat-icon>close</mat-icon>
+          </span>
+         
+      </mat-toolbar>
+    </h4>
+    </div>
+
+    <div *ngIf="convertedFlag">
+      <h4 mat-dialog-title>
+        <mat-toolbar  class="task-header" fxLayout="row" fxLayoutAlign="space-between center">
+         
+            <span> View Application </span>
+            <span [mat-dialog-close]="true" style="cursor: pointer;">
+              <mat-icon>close</mat-icon>
+            </span>
+           
+        </mat-toolbar>
+      </h4>
+      </div>
+
+<!-- <div *ngIf="showEmptyFields">
+    <h4 mat-dialog-title>
+      <mat-toolbar role="toolbar" class="task-header">
+          <span> Add Application </span>
+          <span class="fx-spacer"></span>
+      </mat-toolbar>
+    </h4>
+   </div>   -->
+
+ <!--BACKOFFICE APPLICATION SEARCH - IF NO DOCUMENTS FOUND (SHOW THIS MESSAGE)-->
+<div *ngIf="showNoDocuments" [ngClass]="{'zero-content':customerFlag || flag  || convertedFlag }"  fxLayoutAlign="center">
+  <div class="box">
+    <mat-icon class="report_icon">error_outline</mat-icon>
+ <h4 style="font-size:40px;font-family:'Roboto';color: #123969;font-weight: 650;">NO DOCUMENTS FOUND </h4>
+</div>
+</div>
+  
+<form *ngIf="!showNoDocuments" [formGroup]="form" (ngSubmit)="onSave('this.id')"
+ [ngClass]="{'scrollable-form': customerflag  || flag  || convertedFlag ,
+             'scrollable-form-mc': showEmptyFields }">
+  <alert></alert> 
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+ <!--type="file" this is filepicker .. The src attribute specifies the location (URL) of the external resource.--> 
+        
+            
+          <div class="dropzone" *ngIf="showFEImage">
+            <h4 class="subTitle"> NRIC Front Image </h4>
+            <div class="container">
+              <img *ngIf="showImageFE" [src]="url[nricFront]" height="220" width="100%">
+              <!--this object tag only enables when document type is pdf or docs-->
+              <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatFEDoc" (click)="loadBinaryData('NRIC_FRONT_IMAGE')">
+              <object class="content"style="cursor: pointer;" [data]="pdfUrlFE"  type="application/pdf" width="100%" height="220" > </object>
+              </button>
+              <!---->
+              <button class="btn" *ngIf="viewNRIC_FE" (click)="loadDocumentData('NRIC_FRONT_IMAGE',nricFront)" type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4> </button>
+              <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noNricFrontDocument" >{{noDocumentMessage}}  </button>
+              <button class="btn"  *ngIf="uploadFE"> <mat-icon class="icon">file_upload</mat-icon> </button>
+              <button class="btn" *ngIf="showFEButton"  (click)="loadBinaryData('NRIC_FRONT_IMAGE')"
+                type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+                <input type="file" *ngIf="showFEInput" [attr.disabled]="disableFEInput ? '' : null" (change)="onSelectFile($event,nricFront,'NRIC_FRONT_IMAGE')" formControlName="NRICFront"
+                [formControl]="form.controls['NRICFront']">
+                <input type="file" *ngIf="uploadFENric" [attr.disabled]="disableFENric ? '' : null" (change)="onSelectFile($event,nricFront,'NRIC_FRONT_IMAGE')" formControlName="NRICFront"
+                [formControl]="form.controls['NRICFront']">
+            </div>
+            <button type="button" mat-raised-button color="primary" *ngIf="reuploadNricFront"> Reupload </button>
+            <input type="file" class="reupload-input" *ngIf="reuploadNricFront"  (change)="onSelectFile($event,nricFront,'NRIC_FRONT_IMAGE')" formControlName="NRICFront"
+                [formControl]="form.controls['NRICFront']">
+            <mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loadNRICFRONT"></mat-spinner>
+            <mat-error *ngIf=" form.controls['NRICFront'].hasError('required') &&
+                form.controls['NRICFront'].touched && uploadFE"> {{'NRIC_FRONT_Required'|label}} </mat-error>
+
+                <div>
+                  <button mat-raised-button  class="blue" *ngIf="showEditInfoNricFront" [disabled]="isDisableEditCustomerDetails"  type="button" (click)="editData('1001','NRIC Front is editable')">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+                  <button mat-raised-button  class="file-reupload" *ngIf="showReuploadCustomerNricFront"> Upload <mat-icon>file_upload</mat-icon>
+                  <input type="file" (change)="onSelectFile($event,nricFront,'NRIC_FRONT_IMAGE')" formControlName="NRICFront"
+                  [formControl]="form.controls['NRICFront']">
+                  </button>
+                </div>
+          </div>
+  
+    
+     
+
+
+          <div class="dropzone" *ngIf="showBEImage">
+            <h4 class="subTitle"> NRIC Back Image </h4>
+            <div class="container">
+              <img *ngIf="showImageBE" [src]="url[nricBack]" height="220" width="100%">
+              <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatBEDoc" (click)="loadBinaryData('NRIC_BACK_IMAGE')">
+                <object class="content" style="cursor: pointer;" [data]="pdfUrlBE"  type="application/pdf" width="100%" height="220" > </object>
+              </button>
+              <button class="btn" *ngIf="viewNRIC_BE" (click)="loadDocumentData('NRIC_BACK_IMAGE',nricBack)" type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+              <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noNricBackDocument" >{{noDocumentMessage}}  </button>
+              <button class="btn"  *ngIf="uploadBE"> <mat-icon class="icon">file_upload</mat-icon> </button>
+              <button class="btn" *ngIf="showBEButton"  (click)="loadBinaryData('NRIC_BACK_IMAGE')"
+                type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+                <input type="file" *ngIf="showBEInput" [attr.disabled]="disableBEInput ? '' : null" (change)="onSelectFile($event,nricBack,'NRIC_BACK_IMAGE')" formControlName="NRICBack"
+                [formControl]="form.controls['NRICBack']">
+            <input type="file" *ngIf="uploadBENric" [attr.disabled]="disableBENric ? '' : null" (change)="onSelectFile($event,nricBack,'NRIC_BACK_IMAGE')"    formControlName="NRICBack"
+                        [formControl]="form.controls['NRICBack']">
+            </div>
+            <button type="button" mat-raised-button color="primary" *ngIf="reuploadNricBack"> Reupload </button>
+            <input type="file" class="reupload-input" *ngIf="reuploadNricBack"  (change)="onSelectFile($event,nricBack,'NRIC_BACK_IMAGE')" formControlName="NRICBack"
+                [formControl]="form.controls['NRICBack']">
+                <div fxlayoutAlign="space-between">
+            <mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loadNRICBACK"></mat-spinner>
+           
+            <mat-error *ngIf=" form.controls['NRICBack'].hasError('required') &&
+              form.controls['NRICBack'].touched && uploadBE"> {{'NRIC_BACK_Required'|label}} </mat-error>
+
+              <div>
+                <button mat-raised-button  class="blue" *ngIf="showEditInfoNricBack" [disabled]="isDisableEditCustomerDetailsNricBack"  type="button" (click)="editData('1002','NRIC Back is editable')">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+                <button mat-raised-button  class="file-reupload" *ngIf="showReuploadCustomerNricBack"> Upload <mat-icon>file_upload</mat-icon>
+                  <input type="file"  (change)="onSelectFile($event,nricBack,'NRIC_BACK_IMAGE')" formControlName="NRICBack"
+                  [formControl]="form.controls['NRICBack']">
+                  </button>
+              </div>
+              </div>
+          </div>
+  
+
+
+
+
+
+          <div class="dropzone" *ngIf="showOFEImage">
+            <h4 class="subTitle"> Other NRIC Front Image </h4>
+            <div class="container">
+              <img *ngIf="showImageOFE" [src]="url[otherNRICfront]" height="220" width="100%">
+              <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatOFEDoc" (click)="loadBinaryData('OTHER_NRIC_FRONT')">
+                <object class="content" style="cursor: pointer;" [data]="pdfUrlOFE"  type="application/pdf" width="100%" height="220" > </object>
+              </button>
+              <button class="btn" *ngIf="viewOTHER_NRIC_FE" (click)="loadDocumentData('OTHER_NRIC_FRONT',otherNRICfront)" type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+              <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noOtherNricFrontDocument" >{{noDocumentMessage}}  </button>
+              <button class="btn"  *ngIf="uploadOFE"><mat-icon class="icon">file_upload</mat-icon> </button>
+              <button class="btn" *ngIf="showOFEButton"  (click)="loadBinaryData('OTHER_NRIC_FRONT')"
+                type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+             <input type="file"  *ngIf="showOFEInput" [attr.disabled]="disableOFEInput ? '' : null" (change)="onSelectFile($event,otherNRICfront,'OTHER_NRIC_FRONT')"
+              formControlName="OtherNRICFront" [formControl]="form.controls['OtherNRICFront']">
+             <input type="file" *ngIf="uploadOFENric" [attr.disabled]="disableOFENric ? '' : null" (change)="onSelectFile($event,otherNRICfront,'OTHER_NRIC_FRONT')" formControlName="OtherNRICFront"
+                        [formControl]="form.controls['OtherNRICFront']">
+            </div>
+            <button type="button" mat-raised-button color="primary" *ngIf="reuploadOtherNricFront"> Reupload </button>
+            <input type="file" class="reupload-input" *ngIf="reuploadOtherNricFront"  (change)="onSelectFile($event,otherNRICfront,'OTHER_NRIC_FRONT')" formControlName="OtherNRICFront"
+                [formControl]="form.controls['OtherNRICFront']">
+            <mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loadOTHERNRICFRONT"></mat-spinner>
+            <div>
+              <button mat-raised-button  class="blue" *ngIf="showEditInfoOtherNricFront" [disabled]="isDisableEditCustomerDetailsOtherNricFront"  type="button" (click)="editData('1003','Other NRIC Front is editable')">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+              <button mat-raised-button  class="file-reupload" *ngIf="showReuploadCustomerOtherNricFront"> Upload <mat-icon>file_upload</mat-icon>
+                <input type="file"  (change)="onSelectFile($event,otherNRICfront,'OTHER_NRIC_FRONT')" formControlName="OtherNRICFront"
+                [formControl]="form.controls['OtherNRICFront']">
+                </button>
+            </div>
+          </div>
+        </div>
+
+
+<div fxLayout="row wrap"  fxLayoutAlign="space-between">
+
+  
+
+  <div class="dropzone" *ngIf="showOBEImage">
+    <h4 class="subTitle">  Other NRIC Back Image </h4>
+    <div class="container">
+      <img *ngIf="showImageOBE" [src]="url[otherNRICback]" height="220" width="100%">
+      <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatOBEDoc" (click)="loadBinaryData('OTHER_NRIC_BACK')">
+        <object class="content" style="cursor: pointer;" [data]="pdfUrlOBE"  type="application/pdf" width="100%" height="220" > </object>
+      </button>
+      <button class="btn" *ngIf="viewOTHER_NRIC_BE" (click)="loadDocumentData('OTHER_NRIC_BACK',otherNRICback)" type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+      <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noOtherNricBackDocument" >{{noDocumentMessage}}  </button>
+      <button class="btn"  *ngIf="uploadOBE"> <mat-icon class="icon">file_upload</mat-icon> </button>
+      <button class="btn" *ngIf="showOBEButton"  (click)="loadBinaryData('OTHER_NRIC_BACK')"
+        type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+      <input type="file" *ngIf="showOBEInput" [attr.disabled]="disableOBEInput ? '' : null" (change)="onSelectFile($event,otherNRICback,'OTHER_NRIC_BACK')" formControlName="OtherNRICBack" [formControl]="form.controls['OtherNRICBack']">
+      <input type="file" *ngIf="uploadOBENric" [attr.disabled]="disableOBENric ? '' : null" (change)="onSelectFile($event,otherNRICback,'OTHER_NRIC_BACK')" formControlName="OtherNRICBack"
+                [formControl]="form.controls['OtherNRICBack']">
+    </div>
+    <button type="button" mat-raised-button color="primary" *ngIf="reuploadOtherNricBack"> Reupload </button>
+            <input type="file" class="reupload-input" *ngIf="reuploadOtherNricBack"  (change)="onSelectFile($event,otherNRICback,'OTHER_NRIC_BACK')" formControlName="OtherNRICBack"
+                [formControl]="form.controls['OtherNRICBack']">
+    <mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loadOTHERNRICBACK"></mat-spinner>
+    <div>
+      <button mat-raised-button  class="blue" *ngIf="showEditInfoOtherNricBack" [disabled]="isDisableEditCustomerDetailsOtherNricBack"  type="button" (click)="editData('1004', 'Other NRIC Back is editable')">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+      <button mat-raised-button  class="file-reupload" *ngIf="showReuploadCustomerOtherNricBack"> Upload <mat-icon>file_upload</mat-icon>
+        <input type="file"  (change)="onSelectFile($event,otherNRICback,'OTHER_NRIC_BACK')" formControlName="OtherNRICBack"
+        [formControl]="form.controls['OtherNRICBack']">
+        </button>
+    </div>
+  <br>
+</div>
+  
+
+
+
+<div class="dropzone" *ngIf="showAddressProof" >
+  <h4 class="subTitle"> Address Proof </h4>
+  <div class="container">
+    <img *ngIf="showImageAddress" [src]="url[addressProof]" height="220" width="100%">
+    <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatAddressDoc" (click)="loadBinaryData('ADDRESS_PROOF')">
+      <object class="content" style="cursor: pointer;" [data]="pdfUrlAddress"  type="application/pdf" width="100%" height="220" > </object>
+    </button>
+    <button class="btn" *ngIf="viewAddressProof" (click)="loadDocumentData('ADDRESS_PROOF',addressProof)" type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+    <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noAddressProofDocument" >{{noDocumentMessage}}  </button>
+    <button class="btn"  *ngIf="UploadAddress"> <mat-icon class="icon">file_upload</mat-icon> </button>
+    <button class="btn" *ngIf="showAddressProofButton" (click)="loadBinaryData('ADDRESS_PROOF')"
+      type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+   <input type="file" *ngIf="showAddressInput" [attr.disabled]="disableAddressInput ? '' : null"  (change)="onSelectFile($event,addressProof,'ADDRESS_PROOF')" formControlName="AddressProof"   [formControl]="form.controls['AddressProof']">
+   <input type="file" *ngIf="uploadAddressNric" [attr.disabled]="disableAddressNric ? '' : null" (change)="onSelectFile($event,addressProof,'ADDRESS_PROOF')" formControlName="AddressProof"
+              [formControl]="form.controls['AddressProof']">
+  </div>
+  <button type="button" mat-raised-button color="primary" *ngIf="reuploadAddress"> Reupload </button>
+  <input type="file" class="reupload-input" *ngIf="reuploadAddress"  (change)="onSelectFile($event,addressProof,'ADDRESS_PROOF')" formControlName="AddressProof"
+      [formControl]="form.controls['AddressProof']">
+  <mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loadAddressProof"></mat-spinner>
+  <div>
+    <button mat-raised-button  class="blue" *ngIf="showEditInfoAddressProof" [disabled]="isDisableEditCustomerDetailsAddressProof"  type="button" (click)="editData('1005', 'Address Proof is editable')">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+    <button mat-raised-button  class="file-reupload" *ngIf="showReuploadCustomerAddressProof"> Upload <mat-icon>file_upload</mat-icon>
+      <input type="file"  (change)="onSelectFile($event,addressProof,'ADDRESS_PROOF')" formControlName="AddressProof"
+      [formControl]="form.controls['AddressProof']">
+      </button>
+  </div>
+</div>
+
+
+
+
+
+ <div class="dropzone" *ngIf="showPayslip">
+  <h4 class="subTitle"> Payslip </h4>
+   <div class="container">
+    <img *ngIf="showImagePayslip" [src]="url[paySlip]" height="220" width="100%">
+    <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatPaySlipDoc" (click)="loadBinaryData('PAYSLIP')">
+      <object class="content" style="cursor: pointer;" [data]="pdfUrlPaySlip"  type="application/pdf" width="100%" height="220" > </object>
+    </button>
+    
+    <button class="btn" *ngIf="viewPayslip"  (click)="loadDocumentData('PAYSLIP',paySlip)" type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+    <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noPayslipDocument" >{{noDocumentMessage}}  </button>
+    <button class="btn"  *ngIf="UploadPayslip"> <mat-icon class="icon">file_upload</mat-icon> </button>
+    <button class="btn" *ngIf="showPayslipButton"  (click)="loadBinaryData('PAYSLIP')"
+      type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+    <input type="file" *ngIf="showPayslipInput" [attr.disabled]="disablePayslipInput ? '' : null" (change)="onSelectFile($event,paySlip,'PAYSLIP')" formControlName="PaySlip"  [formControl]="form.controls['PaySlip']">
+   <input type="file" *ngIf="uploadPayslipNric" [attr.disabled]="disablePayslipNric ? '' : null" (change)="onSelectFile($event,paySlip,'PAYSLIP')" formControlName="PaySlip"
+              [formControl]="form.controls['PaySlip']">
+              <button *ngIf="reuploadIcon" > <mat-icon class="icon">cloud_upload</mat-icon> </button>
+  </div>
+  <button type="button" mat-raised-button color="primary" *ngIf="reuploadPayslip"> Reupload </button>
+  <input type="file" class="reupload-input" *ngIf="reuploadPayslip"  (change)="onSelectFile($event,paySlip,'PAYSLIP')" formControlName="PaySlip"
+      [formControl]="form.controls['PaySlip']">
+  <mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loadPayslip"></mat-spinner>
+  <div>
+    <button mat-raised-button  class="blue" *ngIf="showEditInfoPayslip" [disabled]="isDisableEditCustomerDetailsPayslip"  type="button" (click)="editData('1006', 'Payslip is editable')">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+    <button mat-raised-button  class="file-reupload" *ngIf="showReuploadCustomerPayslip"> Upload <mat-icon>file_upload</mat-icon>
+      <input type="file"  (change)="onSelectFile($event,paySlip,'PAYSLIP')" formControlName="PaySlip"
+      [formControl]="form.controls['PaySlip']">
+      </button>
+  </div>
+</div>
+   
+
+
+
+  </div>
+
+
+  
+<div fxLayout="row wrap">
+  <div class="dropzone" *ngIf="showOnboardingDoc">
+    <h4 class="subTitle"> Onboarding Document </h4>
+     <div class="container">
+      <img *ngIf="showImageOnboardingDoc" [src]="url[onboardingDoc]" height="220" width="100%">
+      <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatOnboardingDoc" (click)="loadBinaryData('ONBOARDING_DOCUMENT')">
+        <object class="content" style="cursor: pointer;" [data]="pdfUrlOnboardingDoc"  type="application/pdf" width="100%" height="220" > </object>
+      </button>
+      
+      <button class="btn" *ngIf="viewOnboardingDoc"  (click)="loadDocumentData('ONBOARDING_DOCUMENT',onboardingDoc)" type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+      <button class="no-doc-btn" type="button" (click)="loadEmptyDocuments()" *ngIf="noOnboardingDocument" >{{noDocumentMessage}}  </button>
+      <button class="btn"  *ngIf="uploadOnboardingDocIcon"> <mat-icon class="icon">file_upload</mat-icon> </button>
+      <button class="btn" *ngIf="showOnboardingDocButton"  (click)="loadBinaryData('ONBOARDING_DOCUMENT')"
+        type="button">{{buttonMessage}} <br> <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4></button>
+      <input type="file" *ngIf="showOnboardingDocInput" [attr.disabled]="disableOnboardingDocInput ? '' : null" (change)="onSelectFile($event,onboardingDoc,'ONBOARDING_DOCUMENT')" formControlName="OnboardingDoc"  [formControl]="form.controls['OnboardingDoc']">
+     <input type="file" *ngIf="uploadOnboardingDoc" [attr.disabled]="disableOnboardingDoc ? '' : null" (change)="onSelectFile($event,onboardingDoc,'ONBOARDING_DOCUMENT')" formControlName="OnboardingDoc"
+                [formControl]="form.controls['OnboardingDoc']">
+                <button *ngIf="reuploadIcon" > <mat-icon class="icon">cloud_upload</mat-icon> </button>
+    </div>
+    <button type="button" mat-raised-button color="primary" *ngIf="reuploadOnboardingDoc"> Reupload </button>
+    <input type="file" class="reupload-input" *ngIf="reuploadOnboardingDoc"  (change)="onSelectFile($event,onboardingDoc,'ONBOARDING_DOCUMENT')" formControlName="OnboardingDoc"
+        [formControl]="form.controls['OnboardingDoc']">
+    <mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loadOnboardingDoc"></mat-spinner>
+    <div>
+      <button mat-raised-button  class="blue" *ngIf="showEditInfoOnboardingDoc" [disabled]="isDisableEditCustomerDetailsOnboardingDoc"  type="button" (click)="editData('1007', 'Onboarding Document is editable')">Edit Details<mat-icon class="edit-icon">create</mat-icon> </button>
+      <button mat-raised-button  class="file-reupload" *ngIf="showReuploadCustomerOnboardingDoc"> Upload <mat-icon>file_upload</mat-icon>
+        <input type="file"  (change)="onSelectFile($event,onboardingDoc,'ONBOARDING_DOCUMENT')" formControlName="OnboardingDoc"
+        [formControl]="form.controls['OnboardingDoc']">
+        </button>
+    </div>
+  </div>
+</div>
+
+  <div *ngIf="saveDocuments" class="saveDocButtonLayout">
+    <button class="saveDocButton" mat-raised-button type="submit" [disabled]="!form.valid" >Save</button>
+    </div>
+    <mat-spinner style="margin:0 auto;"diameter="40" *ngIf="loader"></mat-spinner>
+  
+  </form>
+  <div style="margin-top: -40px">
+  <!--datas prepopulated and approve/reject by branch user-->
+  <div class="dialogButton" *ngIf="flag" style="display: flex;">
+    <button  mat-raised-button color="primary" class="mat-button" [mat-dialog-close]="true" (click)="back()"  type="button">Back</button>
+     <div *ngIf="approveRejectFlag" class="approve-reject" fxLayout="row wrap" fxLayoutGap="30px">
+      <button mat-raised-button class="red" [disabled]="isDisableReject" (click)="openRejected()"   type="submit">Reject</button>
+      <button mat-raised-button  class="green"  [disabled]="isDisableApprove" (click)="openApproved()"  type="submit">Approve</button>
+       </div>
+       </div>
+
+       <div class="dialogButton" *ngIf="convertedFlag" style="display: flex;">
+        <button  mat-raised-button color="primary" class="mat-button" [mat-dialog-close]="true" (click)="back()"  type="button">Back</button>
+           </div>
+
+ <!--customer search -> view documents-->
+       <div *ngIf="customerflag" class="dialogButton" fxLayout="row wrap" fxLayoutAlign="space-between">
+        <button mat-raised-button color="primary" class="mat-button" [mat-dialog-close]="true" (click)="goSOW()"  type="button">Back</button>
+         </div>
+
+       <!--customer on premises-->
+<div class="dialogButton" *ngIf="showEmptyFields" fxLayout="row" fxLayoutAlign="space-between">
+
+  <!-- Back Button -->
+  <button class="close-mat-btn" matStepperPrevious type="button" mat-raised-button>Previous</button>
+
+  <!-- Approve & Reject Button -->
+  <!-- <div *ngIf="showEmptyFields" fxLayout="row" fxLayoutGap="30px">
+    <button mat-raised-button class="red" style="height: 40px;margin-top: 10px;margin-top: 6px;" type="submit">Reject</button>
+    <button mat-raised-button  class="green" style="height: 40px;margin-top: 10px;margin-top: 6px;" type="submit">Approve</button>
+     </div> -->
+
+     <!-- Save and Close button -->
+  <div>
+    <button class="submit-mat-btn" (click)="onSaveDocuments()" type="button" [mat-dialog-close]="true" mat-raised-button color="primary">Save and Close</button>
+  </div>
+  
+</div>
+</div>

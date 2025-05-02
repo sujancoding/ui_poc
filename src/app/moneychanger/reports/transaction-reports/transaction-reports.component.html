@@ -1,0 +1,241 @@
+<!--Search filter Section-->
+
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter">
+    <form [formGroup]="filterForm">
+
+      <div fxLayout="row" fxLayoutAlign="space-between">
+
+        <div class="inner-container">
+
+
+          <!--Removed *ngIf="showAction" because we are going to show filter button in both Posted and UnPosted Transaction Screen in BackOffice-->
+          <button mat-raised-button (click)='xpandStatus = !xpandStatus' class="applyFilter-btn">
+            <mat-icon class="add-filter-icon">add</mat-icon>
+             Filter
+          </button>
+
+
+          <!-- <mat-form-field style="width: 40%;
+    font-size: 15px;
+    margin: 8px;" appearance="{{'formFieldAppearance' | label}}">
+            <mat-label class="custom-label">Search Customer Name</mat-label>
+            <input matInput (input)="onCustomerNameChange()" formControlName="custName"
+              [formControl]="filterForm.controls['custName']" class="form-control" type="text"
+              [(ngModel)]="searchCustomerName">
+            <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+          </mat-form-field>
+
+          <mat-icon matTooltipPosition="above" matTooltipClass="custom-tooltip" class="tooltip-warning-icon"
+            matTooltip="3 Characters Minimum">error_outline</mat-icon> -->
+        </div>
+
+
+
+      </div>
+
+
+
+      <mat-divider></mat-divider>
+
+      <div class="custom-filter-values">
+        <div *ngFor="let filterValues of filterValues" style="margin-left: 20px;" fxLayout="column" class="margin-space" fxLayoutGap="-4px">
+          <p class="filter-key"> {{filterValues.fieldName ? filterValues.fieldName : ""}} </p>
+          <p class="filter-value"> {{filterValues.value ? filterValues.value : ""}} </p>
+        </div>
+
+
+      </div>
+
+
+
+      <div fxLayout="column" fxLayoutGap="1px">
+
+        <div fxLayout="row" fxLayoutGap="10px">
+
+
+
+        </div>
+        <mat-accordion #accordion="matAccordion">
+          <mat-expansion-panel style="width: fit-content;background-color: #ffffff;z-index: 999;"
+            #mapanel="matExpansionPanel" [(expanded)]="xpandStatus">
+
+            <h4 class="filter-title"> Filters </h4>
+            <!-- <mat-divider> </mat-divider> -->
+<div fxLayout="column">
+  
+            <div fxLayout="column" fxFlex="100">
+              
+              <mat-form-field  appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Customer Name</mat-label>
+                <input matInput
+                  (input)="filterForm.controls.custName.setValue(filterForm.controls.custName.value.toUpperCase())"
+                  formControlName="custName" [formControl]="filterForm.controls['custName']" class="form-control"
+                  type="text" [(ngModel)]="searchCustomerName">
+                <mat-icon matPrefix class="formfield-icon">search</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+
+              <div fxLayout="column" fxFlex="48">
+               
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Ccy Code</mat-label>
+                  <input matInput formControlName="ccyCode" [formControl]="filterForm.controls['ccyCode']">
+                </mat-form-field>
+              </div>
+
+
+              <div fxLayout="column" fxFlex="48">
+              
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Type</mat-label>
+                  <mat-select [formControl]="filterForm.controls['buySellInd']">
+                    <mat-option *ngFor="let type of typeList" [value]="type.value"> {{type.description}} </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+
+
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+
+              <div fxLayout="column" fxFlex="48">
+              
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Transaction Status</mat-label>
+                  <mat-select [formControl]="filterForm.controls['status']">
+                    <mat-option *ngFor="let status of statusList" [value]="status.value"> {{status.description}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="column" fxFlex="48">
+               
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Suspicious</mat-label>
+                  <mat-select [formControl]="filterForm.controls['suspicious']">
+                    <mat-option *ngFor="let type of suspiciousList" [value]="type.value"> {{type.description}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+
+
+
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+
+              <div fxLayout="column" fxFlex="48">
+               
+                <div>
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                    <mat-label class="custom-label">Start Date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="startDate"
+                      [formControl]="filterForm.controls['startDate']" (dateChange)="onStartDateChange($event)"
+                      [min]="minStartDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div fxLayout="column" fxFlex="48">
+                
+                <div>
+                  <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                    <mat-label class="custom-label">End Date</mat-label>
+                    <input matInput formControlName="endDate" [formControl]="filterForm.controls['endDate']"
+                      [matDatepicker]="picker2" (dateChange)="onEndDateChange($event)" [min]="minEndDate"
+                      [max]="maxEndDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-hint align="end">(DD/MM/YYYY)</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+            <mat-action-row style="padding: 0px !important;">
+              <div fxLayout="row" fxLayoutAlign="space-between" style="width: 100%;">
+                <div>
+                  <button mat-flat-button class="close-button" (click)="xpandStatus = !xpandStatus"
+                    type="button">Close</button>
+                </div>
+                <div>
+                  <button mat-flat-button class="reset-button" type="button" (click)="resetFilter()">Reset</button>
+                  <button mat-flat-button class="submit-button" type="button" (click)="searchFilter()" [disabled]="!filterForm.valid">
+                    Fetch</button>
+                </div>
+              </div>
+            </mat-action-row>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+
+      </div>
+
+    </form>
+
+
+
+
+  </div>
+
+
+
+
+
+<div class="table-wrapper">
+    <div class="mat-elevation-z8" >
+      <div [ngStyle]="changeTableHeight()">
+        <table  class= "table" >
+         
+          <thead>
+            <tr *ngIf="retrievedReportsData">
+              <th *ngFor="let headers of transactionListings[0] | keys"> {{headers | uppercase}} </th>
+            </tr>
+          </thead>
+         
+          <tbody *ngIf="retrievedReportsData">
+          
+            <tr *ngFor="let datas of transactionListings | slice: (p - 1) * itemsPerPage : p * itemsPerPage  ">
+              <td *ngFor="let list of datas | keys"> {{datas[list]}} </td>
+            </tr>
+  
+          </tbody>
+  
+          <tbody *ngIf="noReportsData">
+            <tr>
+              <td>No Datas Found</td>
+            </tr>
+          </tbody>
+         
+      </table>
+      </div>
+      <mat-paginator class="pagination-class"
+      [length]="transactionListings.length"
+      [pageSize]="itemsPerPage"
+      [pageIndex]="p - 1"
+      (page)="handlePageChange($event)"
+    ></mat-paginator>
+    </div> 
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+      </div>
+     </div>
+     
+
+

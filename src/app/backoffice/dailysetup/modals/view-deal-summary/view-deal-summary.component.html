@@ -1,0 +1,42 @@
+<div class="toolbar-header">
+    <h3>View Summary</h3>
+    <button type="button" mat-icon-button [mat-dialog-close]="true">
+      <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<div class="txn-details-row" fxLayout="row" fxLayoutGap="10px" >
+    <p class="txn-id" >No of Deals selected :</p>
+    <p class="txnid-value" > {{dealsCount}} </p>
+</div>
+
+<div class="txn-details-row" fxLayout="row" fxLayoutGap="10px" >
+    <p class="txn-id">Foreign currency :</p>
+    <p class="txnid-value"> {{fCcy}} </p>
+</div>
+
+<div class="txn-details-row" fxLayout="row" fxLayoutGap="10px" >
+    <p class="txn-id" >Total balance (SGD) :</p>
+    <p class="txnid-value" > {{dealBalanceL | number}} SGD </p>
+</div>
+
+<div class="txn-details-row" fxLayout="row" fxLayoutGap="10px" >
+    <p class="txn-id"> Total balance ({{fCcy}}) : </p>
+    <p class="txnid-value"> {{dealBalanceF | number}} {{fCcy}} </p>
+</div>
+
+<div class="txn-details-row" fxLayout="row" fxLayoutGap="10px" >
+    <p class="txn-id"> Average Rate : </p>
+    <p class="txnid-value"> {{averageRate}} </p>
+</div>
+
+
+
+<mat-divider class="section-divider"></mat-divider>
+
+<div class="button-row" fxLayoutGap="10px">
+    <button class="close-btn" type="button" [mat-dialog-close]="true">
+        Close
+    </button>
+</div>
+

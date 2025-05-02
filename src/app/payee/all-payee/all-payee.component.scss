@@ -1,0 +1,168 @@
+@import "src/assets/styles/buttons/button.scss";
+.icon{
+    color: rgb(91, 94, 96); 
+}
+
+.p{
+    margin-top: 0.1cm;
+    // color: #3b3b3b;
+    font-size: 11px;
+    font-family: 'Roboto';
+
+}
+
+.pr{
+    padding-right: 1cm;
+}
+
+.pr1{
+    padding-right: 3cm;
+}
+
+.circle{
+    height: 0.5cm;
+    width: 2cm;
+    border-radius: 2cm;
+    text-align: center;
+    margin-top: 0.4cm;
+}
+
+.cloud{
+    font-size: 40px;
+    margin-top: 0.1cm;
+    color: rgb(196, 190, 190);
+}
+
+.addApplicant{
+  position: fixed;
+  text-align: right;
+  /* left: 7.5cm; */
+  right: 10px;
+  /* top: 16cm; */
+  bottom: 70px;
+  
+} 
+
+.circular-btn{
+  
+  width: 55px;
+  height: 53px;
+  text-align: center;
+  
+}
+mat-icon{
+    font-size: 25px;
+}
+
+img{
+    height: 45px;
+    width: 45px;
+    margin-top: 0.1cm;
+}
+
+.mat-divider{
+    margin: 4px;
+}
+
+.clickableRecord:hover{
+    cursor: pointer;
+    background-color: rgb(238, 236, 236);
+}
+.payee-label{
+    font-size: 14px;
+    font-family: 'Roboto';
+    width: 80%;
+}
+
+.payeePersonIcon{
+    background-color: rgb(217 217 217 / 41%);
+    padding-top: 0.2cm;
+    color: #123969;
+    margin-right: 6px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2cm;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+@media only screen and (min-width: 768px) { /* Anything larger than a tablet */
+    .circular-btn{
+        width: 85px;
+        height: 84px;
+        text-align: center;
+    }
+    
+  } 
+  @media only screen and (min-width: 768px) { /* Anything larger than a tablet */
+    .payee-label{
+        font-size: 16px;
+        font-family: 'Roboto';
+    }
+  } 
+//   @media only screen and (min-width: 768px) { /* Anything larger than a tablet */
+//     .reduce-width{
+//         width: 70%  !important;
+//      }
+//   } 
+ 
+  .no-transaction-message{
+    position: relative;
+    top: -20px;
+    color: grey;
+  }
+  
+  .hourglass-empty-circle{
+      height: 129px;
+      width: 129px;
+      border-radius: 77px;
+      border: 1px solid #e8e8e86b;
+      background-color: #e3e3e3e6;;
+      text-align: center;
+      justify-content: center;
+      display: flex;
+      position: relative;
+  }
+  
+  .hourglass-empty-icon{
+    position: relative;
+      top: 38px;
+      /* bottom: 1%; */
+      left: -12px;
+      font-size: 48px;
+      color: grey;
+  
+  }
+  .search-btn {
+    height: 48px;
+    background-color: #123969;
+    color: white;
+    font-size: 16px;
+    font-family: inherit;
+    border-radius: 6px;
+    margin-left: 20px;
+    width: 88px;
+    position: relative;
+    top: -4px;
+  }
+  .message-block .error-message{
+    display: none;
+  }
+  .message-block .error-message:first-child{
+    display: block;
+    color: #e8316f;
+    margin-top: -15px;
+    margin-bottom: 7px;
+  }
+  .loader-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ::ng-deep.loader-wrapper circle,.loader-wrapper circle {stroke: rgb(40, 97, 194) !important;} 

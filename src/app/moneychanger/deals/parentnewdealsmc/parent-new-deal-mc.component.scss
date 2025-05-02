@@ -1,0 +1,644 @@
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  position: relative;
+  top: 15px;
+}
+
+.btn-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 41px;
+}
+
+.btn-save {
+  height: 35px;
+  border-radius: 10px;
+  /* width: 60px; */
+  padding: 0px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vertical {
+  border-left: 2px solid #b5b5b5;
+  position: relative;
+  right: 10px;
+  height: 44px;
+}
+
+.back-arrow-icon {
+  font-size: 28px;
+  position: relative;
+  top: -3px;
+}
+
+
+//NEW
+.example-card {
+  background-color: blue;
+}
+
+
+
+.profile-card {
+  background-color: #123969;
+  position: relative;
+  margin-top: 11px;
+  width: 90%;
+  height: 407px;
+
+  .hcont {
+
+    margin: 0 auto;
+    margin-left: 0.2cm;
+
+    // padding-right: 3cm;
+    h4 {
+      font-size: 0.7rem;
+      line-height: 1.4;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: white;
+      white-space: nowrap;
+
+      small {
+        font-size: 1.1em;
+        // opacity: 0.5;
+        display: block;
+        font-weight: bold;
+        color: brown;
+      }
+    }
+
+  }
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  margin-top: -11px;
+ // line-height: 1.3;
+}
+
+
+
+.disabled-button {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+
+
+
+// .info-card {
+//   box-shadow: 1px 2px 3px 4px rgba(102, 102, 102, 0.2) !important
+// }
+
+.customer-card-header {
+  color: #252525d6;
+  height: 0px;
+  top: -11px;
+  position: relative;
+  font-size: 14px;
+  font-family: 'Roboto';
+  font-weight: 600;
+}
+
+
+
+.panel-title {
+  font-size: 18px;
+  color: #0651A9;
+  position: relative;
+  text-align: left;
+}
+
+.fetchCustomerButton {
+  background-color: #e6e6e6;
+  color: #123969;
+  height: 36px;
+  margin-top: 6px;
+  min-width: 45px;
+  max-width: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.panel-add-btn{
+  background-color: #123969;
+  color: white;
+  height: 40px;
+  margin-left: 10px;
+  width: 98px;
+}
+ 
+.panel-add-btn{
+  background-color: #123969;
+  color: white;
+  margin-left: 10px;
+  height: 34px;
+  /* width: 88px; */
+    position: relative;
+    top: -5px;
+}
+ 
+.panel-clear-btn{
+  background-color: white;
+  color: #123969;
+  height: 34px;
+  /* width: 88px; */
+  position: relative;
+  top: -5px;
+}
+
+.panel-btn-pairs{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 52px;
+}
+  
+  
+.task-header {
+font-size: 18px;
+  background-color: #123969;
+  color: white;
+}
+
+.delete-icon{
+  color: #ce0000c2;
+  margin-inline: -4px;
+}
+
+.edit-icon{
+  color: #123969 ;
+  margin-inline: -4px;
+}
+
+.save-icon{
+  color: #12dc4c ;
+  margin-inline: -4px;
+}
+
+
+.message-block .error-message {
+  // Hidden by default
+  display: none;
+}
+
+.message-block .error-message:first-child {
+  display: block;
+    color: #e8316f;
+    margin-bottom: 12px;
+    margin-top: -15px;
+    font-size: 12px;
+    font-family: "Roboto";
+    white-space: nowrap;
+ 
+}
+
+.custname-row{
+  margin-left: 4px;
+ }
+
+.div-btn-tally{
+  text-align: right;
+    position: relative;
+    top: 31px;
+    right: 14px;
+}
+
+.btn-tally{
+  height: 30px;
+    border-radius: 10px;
+    padding: 0px;
+    background-color: yellow;
+    color: black;
+    font-size: 12px;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.highlight-row {
+  background-color: rgb(254, 254, 189); 
+}
+
+.reset-icon{
+  color: black;
+  margin-inline: -4px;
+}
+
+.btn-reset{
+  height: 25px;
+  border-radius: 10px;
+  padding: 0px;
+  background-color: #f9f9f9;
+  color: #062bb1;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.total-tally-label-row{
+  place-content: flex-end;
+    margin-right: 14px;
+    margin-top: 17px;
+}
+
+.total-key{
+  font-size: 18px;
+  color: #000000;
+  font-family: 'Roboto';
+  margin-bottom: 5px;
+}
+
+.total-value{
+  font-size: 19px;
+  color: #464646;
+  white-space: break-spaces;
+}
+
+
+.function-hint{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnAdd{
+  background-color: #123969;
+  color: white;
+  height: 31px;
+  border-radius: 30px;
+  width: 32px;
+  margin-right: -14px;
+}
+
+.btnCapture{
+  color: white;
+  height: 25px;
+    border-radius: 10px;
+   padding: 0px;
+   font-size: 12px;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+  
+
+}
+
+.kill-history-icon{
+  color: #666666;
+  font-size: 20px;
+  position: relative;
+  left: 0px;
+  top: -8px;
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  background: #e0e0e0;
+  color: grey;
+  height: 25px;
+  border-radius: 10px;
+  padding: 0px;
+ 
+}
+
+.add-manual-deal-label{
+  position: relative;
+  top: -16px;
+  left: 14px;
+  font-size: 16px;
+  }
+
+  .rate-description{
+    font-size: 14px;
+    color: #ffffff;
+    background: #d77030cc;
+    margin-top: 7px;
+    height: 43px;
+    border-radius: 6px;
+    padding-left: 14px;
+    padding-top: 5px;
+    padding-right: 15px;
+  }
+
+  .currencyno-shortcut-icon{
+    cursor: pointer;
+  }
+
+
+.hidden-print-button{
+  display: none;
+}
+
+// .receipt {
+//   width: 500px;
+//   font-family: 'Courier New', Courier, monospace, 'Roboto';
+//   font-size: 14px;
+//   line-height: 1.4;
+//   margin: 0 auto;
+//   padding: 10px;
+//   border: 1px solid #000;
+// }
+
+// .company-name {
+//   text-align: center;
+//   font-weight: bold;
+//   font-size: 13px;
+//   margin-bottom: 5px;
+// }
+
+//.company-details,
+//.transaction-info,
+//.footer-text,
+.customer-info {
+  text-align: center;
+  margin: 3px 0;
+}
+
+//.transaction-info,
+// .customer-info {
+//   font-size: 14px;
+// }
+
+// .transaction-table {
+//   width: 100%;
+//   margin: 10px 0;
+//   border-collapse: collapse;
+// }
+
+// .transaction-table th,
+// .transaction-table td {
+//   border-bottom: 1px solid #000;
+//   padding: 4px;
+//   text-align: left;
+// }
+
+// .transaction-table th {
+//   font-weight: bold;
+// }
+
+// .footer-text {
+//   font-size: 12px;
+//   text-align: center;
+// }
+
+
+.receipt-table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+}
+.receipt-td, .receipt-th {
+  padding: 2px !important;
+  font-size: 11px !important;
+  border: 0px !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+.receipt-th {
+  text-align: left !important;
+}
+
+@media print {
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  #printarea {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 7.8cm !important;
+  }
+}
+
+// .openingBalance{
+// padding-left: 1cm;
+// }
+
+.total-amount-label-row{
+  place-content: flex-start;
+  margin-top: -10px;
+  background: #e2e2e2;
+  padding: 13px;
+  border-radius: 8px;
+}
+
+.outstanding-balance-values {
+  font-family: 'Roboto-Regular';
+}
+
+.negative-amount{
+  color: red;
+  font-size: 14px;
+}
+
+.positive-amount{
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+}
+
+
+
+.expansion-button{
+  background-color: #F3F4FB;
+  border-radius: 7px;
+  border: 1px solid #e8e8e8;
+  margin-left : 10px;
+  height: 30px;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  margin: 8px;
+}
+
+.flex-row-1{
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  margin: 8px;
+  position: absolute;
+  right: 12px;
+}
+
+
+.key {
+  font-size: 14px;
+  /* opacity: 0.5; */
+  /* font-weight: bold; */
+  color: #000000;
+  font-family: 'Roboto-Regular';
+  line-height: 18px;
+}
+
+.values {
+  font-family: 'Roboto-Regular';
+  font-size: 14px;
+  color: rgb(255, 0, 0);
+  white-space: break-spaces;
+  position: relative;
+ // top: -10px;
+}
+
+.customer-name-value{
+  font-family: 'Roboto-Regular';
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+ // white-space: break-spaces;
+  position: relative;
+}
+
+// added style for US balance 
+.us-key{
+  width:92px;
+  font-size: 14px;
+  color: #000000;
+  font-family: 'Roboto-Regular';
+}
+
+.bg-sell{
+ background-color: #ff000038;
+}
+.bg-buy{
+  background-color:#90c0ff7d;
+  ;
+}
+
+.mat-mdc-form-field {
+  font-size: 8px !important; /* Increase font size */
+  padding: 2px 0px !important; /* Reduce padding */
+  margin-bottom: 13px;
+  margin-top: -2px;
+}
+
+
+.mat-mdc-input-element {
+  font-size: 17px !important; /* Bigger font inside input */
+  
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-infix {
+  padding: 0px 0px !important; /* Adjust the spacing between label and input */
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+.mat-form-field-label {
+  font-size: 12px !important; /* Slightly reduce label size */
+}
+
+.customer-form{
+  margin-top: -15px !important;
+}
+
+.label-formfield{
+  font-size: 14px !important;
+}
+
+.txn-item-td {
+  text-align: left;
+      padding: 0px 3px 0px 7px !important;
+      font-family: 'Roboto-Regular' !important;
+      font-weight: 540 !important;
+      font-size: 16px !important;
+      border: .1px solid #9c9c9c !important;
+}
+
+.txn-item-th {
+  padding: 4px 0 4px 9px !important;
+      color: #000000d6 !important;
+      font-weight: 200 !important;
+      opacity: 20 !important;
+      font-size: 15px !important;
+      font-family: 'Roboto-Regular' !important;
+      background-color: #e5e5e5 !important;
+      border: .1px solid #9c9c9c !important;
+      text-align: left !important;
+}
+
+.panel-row{
+
+  line-height: 0px;
+  margin: 5px;
+  
+}
+
+.xpand-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.table {
+  width: 100%;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+
+table {
+  //margin-top: 0.5cm;
+  border-collapse: collapse; width: 100%;
+}
+
+thead {
+  position: sticky;
+  top: -1px;
+ z-index: 2;
+}
+
+
+
+.table-wrapper{
+  margin: 2px;
+  position: relative;
+}
+.loader-wrapper{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+::ng-deep.loader-wrapper circle,.loader-wrapper circle {stroke: rgb(40, 97, 194) !important;} 
+
+.card-panel{
+  border-radius: 7px;
+  margin-top: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  border: 1px solid #c7c7c7;
+  background-color: #f5f5f5;
+}
+
+mat-error{
+  font-size: 12px;
+    margin-top: 5px;
+}
+
+
+
+
+
+  

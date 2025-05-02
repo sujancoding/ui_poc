@@ -1,0 +1,66 @@
+.alert-label{
+    font-family: 'Roboto-Regular';
+    width: 80%;
+    font-size: 19px;
+    color: black;
+    line-height: 27px;
+    text-align: left;
+}
+.title-label{
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 20px;
+    color: black;
+}
+
+.yes-button{
+    width: 84px;
+    font-size: 16px;
+}
+
+.no-button{
+    width: 84px;
+    font-size: 16px;
+    margin-right: 11px;
+    color: #1c487e;
+    background-color: white;
+}
+
+.mat-mdc-raised-button.mat-warn{
+  background-color: #164279 !important;
+}
+.custom-toolbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px !important;
+  }
+.dialog-box{
+    margin:-24px;
+}
+.alert-icon{
+    font-size: 46px;
+    width: 20%;
+    position: relative;
+    top: 37px;
+    left: 4px;
+    color: #164279;
+}
+@media only screen and (min-width: 450px) {
+    .alert-icon{
+        width: 15%;
+    }
+    .alert-label{
+        width: 85%;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    .alert-icon{
+        font-size: 39px;
+        position: relative;
+        top: 36px;
+    }
+    .alert-label{
+        font-size: 16px;
+    }
+  }

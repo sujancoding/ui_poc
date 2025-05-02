@@ -1,0 +1,121 @@
+<!-- <div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter" >
+
+      <div class="div-height" fxLayout="row" fxLayoutGap="17px" >
+        <div fxLayout="column"> 
+          <p class="p"> Currency Code </p> 
+          <mat-form-field  fxFlex="20" appearance="{{'formFieldAppearance' | label}}">
+            <input matInput  type="text"  >
+          </mat-form-field>
+        </div>
+        
+      
+        <button mat-raised-button fxFlex="10" [disabled]="isDisableFilter"
+          class="buttonApplyFilter">
+          <mat-icon class="icon" matPrefix="Filter">filter_alt</mat-icon>
+         Apply Filter</button>
+      
+      
+      
+      </div>
+      </div> -->
+
+<div *ngIf="showUpdateFlag">
+        <h4 mat-dialog-title>
+            <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+                <span> Update Exchange Rate </span>
+                <span [mat-dialog-close]="true" style="cursor: pointer;">
+                  <mat-icon>close</mat-icon>
+                  </span>
+            </mat-toolbar>
+        </h4>
+</div>      
+
+<!-- <div class="header mat-elevation-z1" *ngIf="showGreetingCard">
+  <div class="row">
+    <h5 class="welcome-text"> Hello {{userName | titlecase}} ! </h5>
+    <h5> {{myDate | date}}</h5>
+  </div>
+</div> -->
+
+
+<!--Table-->
+<form [formGroup]="tableForm">
+  <div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      <div [style.height.px]="changeTableHeight()" [style.overflow-y]="getOverFlow()">
+        <table class="table">
+
+          <thead>
+
+
+            <th>CURRENCY CODE</th>
+            <th>EXCHANGE RATE (SGD to FCY)</th>
+            <th>EXCHANGE RATE (FCY to SGD)</th>
+            <th>LAST UPDATED BY</th>
+            <th>ACTIONS</th>
+
+
+
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let list of currencyArrayList | slice: (p - 1) * itemsPerPage : p * itemsPerPage ; let i = index">
+
+              <td>
+                <div fxLayout="row" fxLayoutGap="30px">
+                  <span style="font-size: x-large;" class="{{list.FLAG}}"></span>
+
+                  <label class="label-text"> {{list.CURRENCYCODE}} </label>
+                </div>
+              </td>
+              <td>
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 55%;">
+                  <mat-label class="custom-label"> {{list.COUNTRY}} </mat-label>
+                  <input matInput [formControl]="tableForm.controls['forwardRate']"
+                    [formControlName]="'forwardRate' + i"
+                    (keyup)="calculateForwardRate(tableForm.controls['forwardRate'].value,i,$event)" #forwardRate>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width: 55%;">
+                  <mat-label class="custom-label"> {{list.COUNTRY}} </mat-label>
+                  <input matInput [formControl]="tableForm.controls['backwardRate']"
+                    [formControlName]="'backwardRate' + i"
+                    (keyup)="calculateBackwardRate(tableForm.controls['backwardRate'].value,i,$event)" #backwardRate>
+                </mat-form-field>
+              </td>
+
+              <td>
+                {{list.UPDATEDBY}}
+              </td>
+
+              <td>
+                <div fxLayout="row">
+                  <!-- <button mat-stroked-button class="reset-button" (click)="resetField(i)" color="primary">Reset</button> -->
+                  <button mat-flat-button class="submit-button" type="button"
+                    (click)="currentRowIndex=i; onSave(list.CURRENCYCODE,forwardRate.value,backwardRate.value)"
+                    ><mat-icon  class="icon">save</mat-icon> Save</button>
+                </div>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+      <!--Pagination-->
+      <mat-paginator class="pagination-class"
+      [length]="currencyArrayList.length"
+      [pageSize]="itemsPerPage"
+      [pageIndex]="p - 1"
+      (page)="handlePageChange($event)"
+      ></mat-paginator>
+    </div>
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+      <mat-spinner> </mat-spinner>
+    </div>
+  </div>
+
+</form>

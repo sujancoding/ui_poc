@@ -1,0 +1,38 @@
+.task-header {
+font-size: 18px;
+    background-color: #123969;
+    color: #ffffff;
+    height: 50px;
+    padding: 16px;
+}
+
+.message{
+    font-size: 18px;
+    color: black;
+    line-height: 24px;
+    text-align: left;
+    font-family: 'Roboto';
+    position: relative;
+    left: 14px;
+    width: 94%;
+}
+
+.title-label{
+    font-family: 'Roboto';
+}
+
+.yes-btn{
+    background-color: #123969;
+    color: white;
+}
+
+.no-btn{
+    background-color: white;
+    color: #123969;
+}
+
+.btn-row{
+    justify-content: right;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}

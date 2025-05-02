@@ -1,0 +1,97 @@
+@import "src/assets/styles/buttons/button.scss";
+.task-header {
+font-size: 18px;
+    background-color:#123969;
+   color: white;
+   height: 50px;
+  
+}
+.fx-spacer {
+    flex: 1 1 auto;
+}
+
+// form{
+//     margin: 10px;
+// }
+.scrollable-form{
+    height: 446px;
+    overflow-y: scroll; 
+    margin: 10px;
+}
+
+
+.mat-mdc-button{
+    width: 13%;
+    margin: 10px;
+}
+
+.dialogButton{
+       /* margin-left: 20px; */
+    /* margin-right: 20px; */
+    bottom: 9px;
+    /* display: flex; */
+    height: 59px;
+    /* margin-bottom: -8px; */
+    background-color: #ffffff;
+    
+}
+.submit-button{
+    background-color: rgb(10, 182, 10);
+    width: 13%;
+    margin: 10px;
+}
+.info{
+margin: 0;
+padding-bottom: 9px;
+font-style: normal;
+font-weight: 540;
+font-size: medium;
+color: black;
+}
+
+.task-header {
+font-size: 18px;
+    background-color:#123969;
+    color: white;  
+  }
+  .oval-btn{
+    width: 50%;
+  }
+  @media only screen and (min-width: 768px) { /* Anything larger than a tablet */
+    .oval-btn {
+      font-size: 18px; /* Increases every font size */
+      width: 17%;
+      height: 46px;
+    }
+  } 
+
+  .formfield-icon{
+    position: relative;
+      top: 2px;
+      font-size: 23px;
+  }
+
+  ::ng-deep .mat-mdc-select-panel::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+}
+
+mat-error{
+   
+    font-size: 14px;
+    margin-top: 8px;
+    margin-left: -1px;
+}

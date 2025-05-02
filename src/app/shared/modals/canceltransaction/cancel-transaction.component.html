@@ -1,0 +1,25 @@
+<div class="header-line"> </div>
+
+<div style="text-align: right;">
+    <mat-icon style="cursor: pointer;" (click)="onClose()">close</mat-icon>
+</div>
+
+<div fxLayout="row" fxLayoutGap="45px" style="position: relative; top: -11px;">
+<div>
+<mat-icon class="warning-icon">warning</mat-icon>
+</div>
+
+<div>
+    <h5 class="label">{{labelMessage}} {{entityId}} ?</h5>
+    <h5 class="hint-label">This action cannot be undone .</h5>
+</div>
+
+</div>
+
+<mat-divider class="txn-divider"> </mat-divider>
+
+
+<div fxLayout="row" fxLayoutAlign="end" style="height: 43px;margin-top: 7px;" >
+    <button class="no-button" (click)="onClose()" mat-raised-button>Cancel</button>
+    <button class="yes-button" type="button" mat-raised-button (click)="onDeleteEntity()" >Delete</button>
+</div>

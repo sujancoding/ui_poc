@@ -1,0 +1,79 @@
+<div class="add-btn-area">
+    <button class="add-btn" type="button" (click)="openAddKycDialog('ADD', '', '',
+    '', '', '', '')"  mat-button >
+      <mat-icon > add </mat-icon> KYC
+    </button>
+  </div>
+
+<div class="table-wrapper">
+    <div class="mat-elevation-z8">
+        <div [ngStyle]="changeTableHeight()">
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>NAME</th>
+                        <th>VOLUME FROM</th>
+                        <th>VOLUME TO</th>
+                        <th>FREQUENCY FROM</th>
+                        <th>FREQUENCY TO</th>
+                        <th>CREATED BY & TIME</th>
+                        <th>UPDATED BY & TIME</th>
+                        <th>ACTIONS</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr *ngFor="let search of kycListings | slice: (p - 1) * itemsPerPage : p * itemsPerPage ">
+                        <td>{{search.LABEL}}</td>
+                        <td>{{ formatNumberWithCommas(search.MINAMOUNT) }}</td>
+                        <td>{{ formatNumberWithCommas(search.MAXAMOUNT)  }}</td>
+                        <td>{{ formatNumberWithCommas(search.MINFREQUENCY) }}</td>
+                        <td>{{ formatNumberWithCommas(search.MAXFREQUENCY) }}</td>
+                        <td>
+                            <div fxLayout="column" fxLayoutGap="10px">
+                              <div>{{search.CREATEDBY}}</div>
+                              <div class="sub-value">{{search.CREATEDDATE | date:'medium' }}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div fxLayout="column" fxLayoutGap="10px">
+                              <div>{{search.UPDATEDBY ? search.UPDATEDBY : search.CREATEDBY }}</div>
+                              <div class="sub-value">{{search.UPDATEDDATE ? (search.UPDATEDDATE | date:'medium' ) : (search.CREATEDDATE | date:'medium' ) }}</div>
+                            </div>
+                        </td>
+                      
+                        <td>
+                            <div fxLayout="row" fxLayoutAlign="space-around">
+                                <div>
+                                    <button mat-icon-button class="editButton" type="button"
+                                        (click)="openAddKycDialog('UPD', search.ID, search.LABEL,
+                                        search.MINAMOUNT, search.MAXAMOUNT, search.MINFREQUENCY, search.MAXFREQUENCY)">
+                                        <mat-icon class="icon_button">create</mat-icon>
+                                    </button>
+                                </div>
+                                <div>
+                                    <button mat-icon-button class="editButton" type="button"
+                                        (click)="openDeleteKycDialog(search.LABEL, search.ID)">
+                                        <mat-icon class="icon_button">delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+        <mat-paginator class="pagination-class" [length]="kycListings.length" [pageSize]="itemsPerPage"
+            [pageIndex]="p - 1" (page)="handlePageChange($event)"></mat-paginator>
+    </div>
+    <!--Loader-->
+    <div *ngIf="loader" class="loader-wrapper">
+        <mat-spinner> </mat-spinner>
+    </div>
+</div>

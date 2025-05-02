@@ -1,0 +1,366 @@
+
+<mat-card  appearance="outlined"  class="profile-card1">
+    <mat-card-content style="padding: 7px;">
+     <p class="agent">Select Agent </p>
+
+<div class="card-content">    
+    <div fxLayout="row">
+        <div fxFlex="100" class="textField">
+        <mat-form-field appearance="outline" *ngIf="agentList"> 
+            <mat-label class="custom-label">Agent Name</mat-label>
+            <mat-select [disabled]="diasbleDropdown">
+                <mat-option *ngFor="let getAgents of getAgents" (click)="getDeals(getAgents.ENTITYID)" [value]="getAgents">{{getAgents.ENTITYNAME}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="agentListForAgents"> 
+            <mat-label class="custom-label">Agent Name</mat-label>
+            <mat-select [(ngModel)]="selectedEntity" placeholder="Select Agent Name" [disabled]="diasbleDropdown">
+                <mat-option *ngFor="let getExternalPartyAgent of getExternalPartyAgent" [value]="getExternalPartyAgent" (click)="enableButton(getExternalPartyAgent.ENTITYID)"> {{getExternalPartyAgent.ENTITYNAME}} </mat-option>
+            </mat-select>
+        </mat-form-field>
+        </div>
+        </div>
+</div> 
+     </mat-card-content>
+  </mat-card>
+
+<mat-card  appearance="outlined"  [ngStyle]="responsiveCard()">
+    <div class="loader-wrapper" style="top: 75px !important;"  *ngIf="loadDeals">
+    <mat-spinner> </mat-spinner>
+    </div>
+    <mat-card-content style="padding: 7px;" *ngIf="showSelectDeals">
+     <p class="agent">Select Deals </p>
+     <div [ngStyle]="contentScrollable()">
+        <div>
+<div class="example-table">   
+    <table class="table" [class.disabled-table]="isDisableDealTable">
+        <thead>
+           <th></th>
+           <th>DEAL ID & ON</th>
+           <th>DEAL BALANCE & RATE</th>
+           <th>DEAL BALANCE</th>
+    </thead>
+        
+    <tbody>
+          <tr *ngFor = "let retrieveDeals of retrieveDeals">
+             <td>
+                <div class="checkbox"><mat-checkbox  (change)="selectedDeal($event,retrieveDeals.DEALID,retrieveDeals.DEALBALANCE,retrieveDeals.DEALBALANCEF)"></mat-checkbox> 
+                </div>
+             </td>
+             <td>
+                <div class="flex">
+                    <small class="accountNumber"> {{retrieveDeals.DEALID}} </small>
+                   <small class="font"> {{retrieveDeals.DEALDATE | date}} </small>
+                  </div>
+             </td>
+             <td>
+                <div class="flex">
+                    <small class="accountNumber"> {{retrieveDeals.BUYCURRENCY}} {{retrieveDeals.DEALBALANCEF | number}} </small>
+                   <small class="font"> {{retrieveDeals.SELLEXCHRATE}} </small>
+                  </div>
+             </td>
+             <td>
+                    <small class="accountNumber"> {{retrieveDeals.DEALBALANCE | number}} SGD </small>
+             </td>
+          </tr>
+    </tbody>
+    </table>
+   </div>
+</div>
+</div>
+        
+     </mat-card-content>
+
+     <mat-card-content style="padding: 7px;"  *ngIf="showContracts">
+        <p class="agent">Select Contracts </p>
+        <div [ngStyle]="contentScrollable()">
+           <div>
+   <div class="example-table">   
+       <table  [class.disabled-table]="isDisableContractTable"  class="table">
+           <thead>
+              <th></th>
+              <th>CONTRACT ID & ON</th>
+              <th>CONTRACT BALANCE ({{fetchBuyCurrencyCode}}) & RATE</th>
+              <th>CONTRACT BALANCE (SGD)</th>
+       </thead>
+           
+       <tbody>
+             <tr *ngFor = "let contracts of getContracts; index as i;">
+                <td>
+                   <div class="checkbox"><mat-checkbox [(ngModel)]="checkedarray[i]" (change)="selectedContract($event,contracts.contractId,contracts.contractBalance,contracts.txnAmount)"></mat-checkbox> 
+                   </div>
+                </td>
+                <td>
+                   <div class="flex">
+                       <small class="accountNumber"> {{contracts.bookingId}} </small>
+                      <small class="font"> {{contracts.txnDateTime | date}} </small>
+                     </div>
+                </td>
+                <td>
+                   <div class="flex">
+                       <small class="accountNumber"> {{contracts.buyCurrency}} {{contracts.txnAmount | number}} </small>
+                      <small class="font"> {{contracts.rate}} </small>
+                     </div>
+                </td>
+                <td>
+                       <small class="accountNumber"> SGD {{contracts.contractBalance | number}} </small>
+                </td>
+             </tr>
+       </tbody>
+       </table>
+      </div>
+   </div>
+   </div>
+           
+        </mat-card-content>
+                                       <!--UNUSED-->
+     <!-- <mat-card-content style="padding: 7px;" *ngIf="manualExchangeRate">
+        <p class="agent">Exchange Rate :</p>
+      
+           <div class="textField">
+            <mat-form-field appearance="outline">
+                <mat-label class="custom-label">DBS Bank Rate</mat-label>
+                <input matInput type="number" [(ngModel)]="rate"  (blur)="enableButton(account,rate,agentName)" >
+          </mat-form-field>
+   </div>
+   
+
+   <p class="agent">Bank :</p>
+      <div class="textField">
+       <mat-form-field appearance="outline">
+        <mat-label class="custom-label">Deposit in Account</mat-label>
+        <mat-select [(ngModel)]="account" >
+            <mat-option value="DBS Bank - APT" (click)="enableButton(account,rate,agentName)" >DBS Bank - APT</mat-option>
+        </mat-select>
+     </mat-form-field>
+</div>
+
+                    
+        </mat-card-content> -->
+
+        <!-- <mat-card-content style="padding: 7px;" *ngIf="manualContractId">
+            <p class="agent">Enter Contract Id and Amount :</p>
+            <div [ngStyle]="contentScrollableForDbs()">
+               <div>
+       <div class="example-table">
+           <table class="table">
+               <thead>
+                  <th> <mat-icon>crop_square</mat-icon> </th>
+                  <th>Contract ID</th>
+                  <th>Amount & Exchange Rate</th>
+           </thead>
+               
+           <tbody>
+           
+          
+                 <tr>
+                    <td>
+
+                       <div class="checkbox"><mat-checkbox #checkboxes  #chkEnable
+                        (click)="removeValues.length == 0  ? true : firstContractId.value='';firstContractAmount.value = '';firstContractExchRate.value = '' "
+                        (change)="selectOtherContract($event,firstContractId.value,firstContractAmount.value,'firstContract')"
+                        ></mat-checkbox> 
+                       </div>
+                    </td>
+                    <td>
+                         
+                         <div fxLayout="column">
+                        <div fxLayout="row">
+                            <div style="font-size: 11px; width: 147px;">
+                            <mat-form-field appearance="outline"> 
+                                <mat-label class="custom-label"> id </mat-label>                
+                                <input  matInput [disabled]="!chkEnable.checked" (blur)="onBlurOtherContracts(firstContractId.value,firstContractAmount.value,firstContractExchRate.value,'firstContract')" #firstContractId  >  
+                            </mat-form-field> 
+                            </div>
+                        </div>
+                      
+                        <div style="margin-top: 61px;"></div>
+                        </div>
+                    </td>
+                    <td>
+                        
+                         <div fxLayout="column">
+                        <div fxLayout="row">
+                            <div style="font-size: 11px; width: 147px;">
+                            <mat-form-field appearance="outline"> 
+                                <mat-label class="custom-label"> amount </mat-label>                   
+                                <input  matInput type="number" (blur)="onBlurOtherContracts(firstContractId.value,firstContractAmount.value,firstContractExchRate.value,'firstContract')" #firstContractAmount [disabled]="!chkEnable.checked" >  
+                            </mat-form-field> 
+                            </div>
+                            <span style="margin-left:5px; margin-top: 25px;font-size: 13px;">SGD</span>  
+                        </div> 
+                        <div style="font-size: 11px; width: 147px;">
+                            <mat-form-field appearance="outline"> 
+                                <mat-label class="custom-label"> exchange rate </mat-label>                   
+                                <input  matInput type="number" #firstContractExchRate (blur)="onBlurOtherContracts(firstContractId.value,firstContractAmount.value,firstContractExchRate.value,'firstContract')"  [disabled]="!chkEnable.checked" >  
+                            </mat-form-field> 
+                        </div> 
+                        </div>
+                    </td>
+                   
+                    
+                 </tr>
+               
+                 <tr>
+                    <td>
+                       <div class="checkbox"><mat-checkbox #checkboxes1  #chkEnable1 
+                        (click)="removeValues.length == 0  ? true : secondContractId.value='';secondContractAmount.value = '';secondContractExchRate.value = '' "
+                         (change)="selectOtherContract($event,secondContractId.value,secondContractAmount.value,'secondContract')"></mat-checkbox> 
+                       </div>
+                    </td>
+                    <td>
+                        <div fxLayout="column">
+                        <div fxLayout="row">
+                            <div style="font-size: 11px; width: 147px;">
+                            <mat-form-field appearance="outline">   
+                                <mat-label class="custom-label"> id </mat-label>                
+                                <input  matInput (blur)="onBlurOtherContracts2(secondContractId.value,secondContractAmount.value,secondContractExchRate.value,'secondContract')"
+                                  #secondContractId [disabled]="!chkEnable1.checked"  >  
+                            </mat-form-field> 
+                            </div>
+                        </div>
+                        
+                         <div style="margin-top: 61px;"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div fxLayout="column">
+                        <div fxLayout="row">
+                            <div style="font-size: 11px; width: 147px;">
+                            <mat-form-field appearance="outline">    
+                                <mat-label class="custom-label"> amount </mat-label>               
+                                <input type="number" matInput (blur)="onBlurOtherContracts2(secondContractId.value,secondContractAmount.value,secondContractExchRate.value,'secondContract')"
+                                 #secondContractAmount [disabled]="!chkEnable1.checked"  >  
+                            </mat-form-field> 
+                            </div>
+                            <span style="margin-left:5px; margin-top: 25px;font-size: 13px;">SGD</span>  
+                        </div> 
+                        <div fxLayout="row">
+                            <div style="font-size: 11px; width: 147px;">
+                            <mat-form-field appearance="outline">  
+                                <mat-label class="custom-label"> exchange rate </mat-label>                 
+                                <input  matInput type="number" #secondContractExchRate (blur)="onBlurOtherContracts2(secondContractId.value,secondContractAmount.value,secondContractExchRate.value,'secondContract')" [disabled]="!chkEnable1.checked" >  
+                            </mat-form-field> 
+                            </div>
+                        </div> 
+                        </div>
+                    </td>
+                   
+                 </tr>
+                
+                 
+           </tbody>
+           </table>
+          </div>
+       </div>
+       <h4 style="position: absolute; 
+              background: #123969;
+              bottom: -18px;
+              width: 97%;height: 32px;" > Total Amount : {{ ConvertToInt(firstContractAmount.value)   + ConvertToInt(secondContractAmount.value) }} SGD </h4>
+       </div>
+      
+            </mat-card-content>       -->
+  </mat-card>
+
+  <mat-card appearance="outlined" class="card">
+    <mat-card-content style="padding: 7px;">
+        <p class="agent" >Summary </p>
+
+    <div style="margin-left: 12px;">
+        <div  class="height">
+            <p class="totTrans">Number of Transactions :</p>  <p class="allignright">{{transactionIdsLength}}</p>
+         </div>
+         <div class="height">
+            <p class="totTrans">Amount : </p>  <p class="allignright">{{totalAmount | number}} SGD</p>
+            </div>
+            <div class="height">
+                <p class="totTrans">Org Commission : </p>  <p class="allignright">{{adminFee | number}} SGD</p>
+                </div>
+                
+                    <div class="agent-commission-row" *ngIf="showAgentCommission" >
+                        <div class="height">
+                        <p class="totTrans" style="line-height: 15px;">Agent Commission/ Txn : </p>
+                        </div>
+
+                        <div class="flex-5">
+                        <mat-form-field style="font-size: 5px !important;margin-bottom: -10px;width: 90px;" appearance="{{'formFieldAppearance' | label}}">
+                            <input  matInput [formControl]="agentCommission">
+                            <mat-icon matTooltip="Fee applies to selected transactions" 
+                            matTooltipPosition="above"
+                            matTooltipClass="custom-tooltip"
+                            matPrefix class="info-icon">info_outline</mat-icon>
+                            <mat-error> 
+                                <small class="error-message" *ngIf="agentCommission.errors?.required"> required. </small>
+                                <small class="error-message" *ngIf="agentCommission.errors?.invalidNumber"> only numbers. </small>
+                                <small  class="error-message" *ngIf="agentCommission.errors?.maxLimit"> value < 11 </small>
+                                          </mat-error>
+
+                        </mat-form-field>
+                        <p class="agent-fee-label">SGD</p>
+                        </div>
+                    </div>
+                
+    
+                <div class="height">
+                    <p class="totTrans">Total Amount (SGD): </p>  <p class="allignright">{{totalAmount + adminFee | number}} SGD</p>
+                    </div>
+                      
+                <div class="height">
+             <p class="totTrans">Total Amount ({{fetchBuyCurrencyCode}}): </p>  <p class="allignright">{{payeeGets | number}} {{fetchBuyCurrencyCode}}</p>
+             </div>
+        </div>    
+        
+   <div *ngIf="showApproveTxnButton">     
+    <div fxLayout="row" fxLayoutAlign="space-between" >
+        <div>
+        <section class="example-section">
+            <mat-checkbox
+                class="example-margin"
+                [(ngModel)]="suspiciousChecked"
+                [(indeterminate)]="indeterminate"
+                (change)="markAsSuspicious($event)"
+                [disabled]="disableSubmit">
+                Is Transaction Suspicious ?
+        </mat-checkbox>
+      </section>
+        </div>
+      <div>
+      <button 
+      matTooltip="Enter Suspicious Remarks"
+                matTooltipPosition="above"
+                matTooltipClass="custom-tooltip"
+      [ngClass]="{ 'disabled-btn': disableSubmit || isSuspicious !== 'Y' }" class="remraks-btn" mat-button type="button" (click)="openRemarks()">
+        <mat-icon style="position: relative; top: -3px; font-size: 22px;" >zoom_out_map</mat-icon>
+    </button>
+    </div>
+    </div>  
+        <section class="example-section">
+            <mat-checkbox
+                class="example-margin"
+                [(ngModel)]="checked"
+                [(indeterminate)]="indeterminate"
+                (change)="approvalCheckBox($event)"
+                [disabled]="disableSubmit">
+              Yes, I want to approve this transaction
+            </mat-checkbox>
+          </section>
+
+    <div fxLayout="row" fxLayoutAlign="center" style="position: relative;
+    left: -17px;top: 8px;">      
+          <button  *ngIf="showPostButton" class="no-btn" mat-raised-button   (click)="withdrawAction()" type="button" >No</button> 
+       
+       <div  *ngIf="showPostButton" >
+        <button class="btn" [disabled]="isDisablePosting || (showAgentCommission && conditionAgentCommission()) " mat-raised-button   (click)="onSubmit()" type="submit" >
+           <mat-icon style="position: relative;top: -2px;">check_circle_outline</mat-icon> Post {{transactionIdsLength}} Transaction</button> 
+     </div>
+
+     </div>
+
+     </div>
+<div class="loader-container">
+     <mat-spinner style="margin:0 auto;position: absolute;top: 6px;" diameter="40" *ngIf="postButtonLoader"></mat-spinner>
+</div>
+
+    </mat-card-content>
+
+</mat-card>

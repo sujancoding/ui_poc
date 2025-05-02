@@ -1,0 +1,62 @@
+<div class="div-height" fxLayout="row wrap" fxLayoutGap="10px">
+  <button class="filter-button"  mat-stroked-button color="primary"  [matMenuTriggerFor]="menu">
+      <mat-icon class="icon" matPrefix="Filter">filter_alt</mat-icon>
+      Filter</button>
+
+      <mat-menu #menu="matMenu">
+        <h6 class="sorting">SORT BY:</h6>
+       <p> <mat-radio-button >Name</mat-radio-button> </p>
+       <p> <mat-radio-button >Status</mat-radio-button> </p>
+       <p> <mat-radio-button >Nationality</mat-radio-button> </p>
+       <br>
+        <h6 class="sorting">STATUS:</h6>
+        <p><mat-radio-button>All</mat-radio-button></p>
+        <p><mat-radio-button>Active</mat-radio-button></p>
+        <p><mat-radio-button>Inactive</mat-radio-button></p>
+   </mat-menu>
+<mat-form-field fxFlex="50" appearance="outline">
+      <mat-icon class="icon" matPrefix="search">search</mat-icon>
+      <mat-label class="custom-label">Search Applications by Name</mat-label>
+      <input matInput class="form-control" type="text">
+</mat-form-field>
+
+</div>
+
+
+  <div class="example-table">
+    <table  class="table" >
+      <thead>
+              <th>Agent ID</th>
+              <th>NAME</th>
+              <th>Status</th>
+              <th>Mobile Number</th>
+              <th>Country</th>
+              <th>Actions</th>     
+      </thead>
+   
+      <tbody>
+        
+        <tr *ngFor = "let agent of agent | paginate:{itemsPerPage:10,currentPage:p};">
+              <td> {{agent.agentId}} </td>
+              <td> {{agent.name}} </td>
+              <td style="color: green;">{{agent.status}}</td>
+              <td>{{agent.mobileNumber}}</td>
+              <td>{{agent.country}}</td>
+              <td>
+                <button class="btn" mat-icon-button type="button">
+                    <mat-icon>launch</mat-icon> 
+                    </button>
+              </td>
+          </tr> 
+      </tbody>
+  </table>
+   <pagination-controls (pageChange)="p = $event"></pagination-controls> 
+  </div>
+
+
+  <div class="addApplicant">
+    <button class="btnAdd" mat-mini-fab aria-label="Example icon button with a plus icon" >
+      <mat-icon> add </mat-icon>
+    </button>
+  </div>
+ 

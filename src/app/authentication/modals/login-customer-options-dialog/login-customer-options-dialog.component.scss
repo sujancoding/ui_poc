@@ -1,0 +1,29 @@
+
+.margin-space{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 47%;
+}
+
+.sign-in-label{
+    line-height: 0;
+    margin-left: 15px;
+    margin-top: 30px;
+    color: #363636;
+}
+
+.close-icon{
+    line-height: 0;
+    margin-right: 15px;
+    margin-top: 30px;
+    cursor: pointer;
+    color: #363636;
+}
+
+.mat-btn{
+    color: #0e7aff;
+    position: relative;
+    top: -4px;
+    background-color: #dceaff;
+  }

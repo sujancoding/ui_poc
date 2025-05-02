@@ -1,0 +1,383 @@
+.div-height{
+  //  height: 0.4cm;
+    font-size: 13px;
+}
+p{
+    margin: 0.6cm;
+    height: 3px;
+}
+.sorting{
+    margin: 0.4cm;
+    height: 2px;
+}
+
+.filter-button{
+    height: 48px;
+    margin-top: 0.2cm;
+    font-weight: 12px;
+    padding-right: 0.7cm;
+}
+
+  
+  .matcard {
+    height: 125px;
+    margin-right: 12px;
+    margin-left: 12px;
+    background-color: #ffffff;
+    
+  }
+  .example-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+ 
+
+.icon{
+    color: rgb(15, 132, 228);
+}
+
+.addApplicant{
+    text-align: right;
+    margin: 10px;
+} 
+   
+.btnAdd{
+  background-color: #123969;
+  color: white;
+  height: 45px;
+  width: 100px;
+  position: relative;
+  top: 16px;
+  border-radius: 6px;
+  font-size: 15px;
+  right: 15px;
+}
+
+small{
+    margin: 0;
+    font-style: normal;
+    font-weight: 540;
+    font-size: medium;
+    color: black;
+    margin-bottom: 3px;
+}
+.flex{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.accountNumber{
+    font-weight:600;
+    font-size:medium
+}
+.btn{
+  height: 35px;
+}
+
+.height{
+  line-height: 4px;
+  margin-bottom: 22px;
+}
+
+.p {
+  font-family: 'Roboto';
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.mat-mdc-tabs{
+  border: 1px solid #e8e8e8;
+  border-bottom: none;
+  margin-top: -6px;
+}
+/*  TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.*/
+::ng-deep.mat-tab-label.mat-tab-label:not(.mat-tab-disabled) {
+  background-color: #f6f6f6;
+  color: black;
+  opacity: 1;
+  font-size: initial;
+  font-family: 'Roboto';
+}
+
+.addButton {
+  background-color: #123969;
+  color: white;
+  font-family: 'Roboto';
+  height: 48px;
+  margin-top: 50px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.addDeal{
+  background-color: #123969;
+  color: white;
+  height: 48px;
+  margin-top: 48px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.icon{
+  color: white;
+  margin-top: 6px;
+}
+
+.noDataMessage{
+  text-align: center;
+}
+
+.table-wrapper{
+  position: relative;
+}
+.loader-wrapper{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+::ng-deep.loader-wrapper circle,.loader-wrapper circle {stroke: rgb(40, 97, 194) !important;}
+
+.error-message{
+  font-size: 14px;
+  white-space: nowrap;
+  position: relative;
+  left: 8px;
+  top: 40px;
+  color: red;
+  text-wrap: auto;
+}
+
+.font1 {
+  font-size: 16px;
+  font-family: 'Roboto';
+  color: #123969;
+  ;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.font1:hover {
+  color: #2896df;
+}
+
+.id-value {
+  color: #8f8f8f;
+  margin-left: 10px;
+}
+
+.txn-id-content {
+  font-size: 15px;
+  line-height: 8px;
+  margin-left: 11px;
+  display: flex;
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+
+.forward-arrow-icon {
+  position: relative;
+  top: 7px;
+  left: 6px;
+  color: #606060;
+}
+
+
+
+  .date-filters-col{
+    margin-top: -35px;
+    margin-left: 10px;
+    font-size: 13px;
+   }
+ 
+   .m-l{
+   margin-left: -36px;
+   }
+ 
+   .close-button{
+    width: 111px;
+      height: 40px;
+      border-radius: 20px;
+      margin: 15px;
+      position: relative;
+      left: 22px;
+      top: 6px;
+      color: white;
+      background-color: #504e4e;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: "Roboto";
+      /* border: 1px solid #b6b4b4;*/
+  }
+
+ .reset-button{
+   width: 105px;
+   height: 53px;
+     border-radius: 0.2cm;
+     margin: 0.4cm;
+     background-color: #ffffff;
+     cursor: pointer;
+     color: #5E5ADB;
+      font-family: 'Roboto';
+     font-size: 15px;
+ }
+ 
+ .submit-button{
+   width: 140px;
+   height: 50px;
+   border-radius: 0.2cm;
+   margin: 0.4cm;
+   background-color: #123969;
+   font-family: 'Roboto';
+   cursor: pointer;
+   color: white;
+   font-size: 15px;
+ }
+ 
+ 
+ 
+ .inner-container{
+   height: 53px;
+     background-color: #ffffff;
+     border-top-left-radius: 10px;
+     border-top-right-radius: 10px;
+     display: flex;
+ 
+ }
+ 
+ .text-search-filters{
+   font-family: 'Roboto';
+     font-weight: 600;
+     color: #1D62A2;
+     font-size: 18px;
+     position: relative;
+     top: 19px;
+     left: 15px;
+ }
+ 
+ .add-filter-icon{
+   position: relative;
+   top: -1px;
+ }
+ 
+ .formfield-icon{
+   position: relative;
+     top: 2px;
+     font-size: 23px;
+ }
+ 
+ 
+ 
+ .subGroups{
+   font-family: 'Roboto';
+   font-style: normal;
+  
+   font-size: 14px;
+   white-space: nowrap;
+  // padding-left: 16px;
+  color: #8f8f8f;
+  position: relative;
+     top: 7px;
+ }
+ .payeeName{
+   font-family: 'Roboto';
+   font-style: normal;
+   font-size: large;
+  color: #000000;
+  position: relative;
+     top: 1px;
+ }
+ 
+ .margin-space{
+   position: relative;
+     top: -12px;
+ }
+ 
+ .show-results{
+   margin-right: -14px;
+   color: grey;
+   font-size: 18px;
+   font-family: 'Roboto';
+ }
+ 
+ .filter-title{
+   
+   color: #100f0f;
+   font-family: 'Roboto';
+   margin-bottom: -10px;
+   margin-top: 20px;
+   position: relative;
+   left: 5px;
+   font-size: 22px;
+ 
+ }
+ 
+
+ .tooltip-warning-icon{
+   position: relative;
+   top: 26px;
+ }
+ 
+ .buttonApplyfilter {
+   background-color: #123969;
+   color: white;
+   height: 51px;
+   width: 130px;
+   position: relative;
+   top: 13px;
+   margin-left: 16px;
+ }
+ 
+ .filtericon {
+   color: rgb(255, 255, 255);
+ }
+  
+
+ .checkbox {
+  margin: 5px;
+
+}
+
+.pagination-row{
+  border: 1px solid #c5c5c5;
+}
+
+.pagination-class{
+  font-size: initial;
+  font-family: 'Roboto';
+  display: flex;
+  justify-content: end;
+  font-weight: 600;
+  border-top: 0px solid #ffffff !important;
+}
+
+.container-label{
+  align-items: center;
+  position: relative;
+  left: 15px;
+}
+
+.pagination-label{
+  font-size: 18px;
+  color: rgb(85, 85, 85);
+  font-family: 'Roboto-Regular';
+}
+
+.pagination-value{
+  font-size: 18px;
+  color: black;
+  font-family: 'Roboto-Regular';
+}
+
+.zoom-out-icon{
+    color: #123969;
+    font-size: 20px;
+}

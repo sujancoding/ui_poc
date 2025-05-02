@@ -1,0 +1,161 @@
+<div>
+
+    <!--Add Counter Toolbar-->
+      <div fxLayout="row" *ngIf="showAddCurrencyContent" fxLayoutAlign="space-between center" class="header-container">
+    
+        <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+    
+          <span class="head-label-1">Add Currency </span>
+    
+        </div>
+        <div>
+          <span (click)="onClose()" class="close-icon">
+            <mat-icon>close</mat-icon>
+          </span>
+        </div>
+      </div>
+  
+   <!--Edit Counter Toolbar-->
+      <div fxLayout="row" *ngIf="showUpdateCurrencyContent" fxLayoutAlign="space-between center" class="header-container">
+    
+        <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+    
+          <span class="head-label-1">Edit and Update Currency </span>
+    
+        </div>
+        <div>
+          <span (click)="onClose()" class="close-icon">
+            <mat-icon>close</mat-icon>
+          </span>
+        </div>
+      </div>
+    
+      <div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div fxLayout="column" class="formfield-section">
+          
+            <div>
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Currency Number</mat-label>
+                <input matInput formControlName="currencyNo"
+                  [formControl]="form.controls['currencyNo']" [readonly]="isReadOnly" />
+              </mat-form-field>
+              <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['currencyNo'].hasError('required') && form.controls['currencyNo'].touched">{{'currencyNumberRequired' | label}}</span> 
+                <span class="error-message" *ngIf="form.controls['currencyNo'].hasError('pattern')">{{'onlyAlphanumeric' | label}}</span>
+                <span class="error-message" *ngIf="form.controls['currencyNo'].hasError('maxlength')">{{'currencyNoMaxlength' | label}}</span>
+                <span class="error-message" *ngIf="form.controls['currencyNo'].hasError('whitespace')"> {{'whiteSpaceValidator' | label}} </span> 
+            </div>
+             
+            </div>
+           
+            <div>
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Currency Code</mat-label>
+                <input matInput (input)="form.controls.currencyCode.setValue(form.controls.currencyCode.value.toUpperCase())"
+                  formControlName="currencyCode" [formControl]="form.controls['currencyCode']" />
+              </mat-form-field>
+              <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['currencyCode'].hasError('required') && form.controls['currencyCode'].touched">{{'currencyCodeRequired' | label}}</span>
+                <span class="error-message" *ngIf="form.controls['currencyCode'].hasError('pattern')"> {{'NoSpecialCharacters' | label}} </span> 
+            </div>
+           
+            </div>
+          
+            <div>
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Currency Name</mat-label>
+                <input matInput (input)="form.controls.currencyName.setValue(form.controls.currencyName.value.toUpperCase())"
+                  formControlName="currencyName" [formControl]="form.controls['currencyName']" />
+              </mat-form-field>
+              <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['currencyName'].hasError('required') && form.controls['currencyName'].touched">{{'currencyNameRequired' | label}}</span>  
+                <span class="error-message"  *ngIf="form.controls['currencyName'].hasError('pattern')"> {{'specialCharacterValidation' | label}} </span> 
+                <span class="error-message"  *ngIf="form.controls['currencyName'].hasError('maxlength')"> {{'transactionIdMaxlength' | label}} </span> 
+            </div>
+            </div>
+          
+            <div>
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Units</mat-label>
+                <input matInput (input)="form.controls.units.setValue(form.controls.units.value.toUpperCase())"
+                  formControlName="units" [formControl]="form.controls['units']" />
+              </mat-form-field>
+              <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['units'].hasError('required') && form.controls['units'].touched">{{'unitRequired' | label}}</span> 
+                <span class="error-message"  *ngIf="form.controls['units'].hasError('whitespace')"> {{'whiteSpaceValidator' | label}} </span> 
+                <span class="error-message"  *ngIf="form.controls['units'].hasError('pattern')"> Special character only hyphen is allowed </span> 
+            </div>
+            </div>
+
+            <div>
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Variance Percentage(%)</mat-label>
+                <input matInput 
+                  formControlName="variance" [formControl]="form.controls['variance']" />
+              </mat-form-field>
+              <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['variance'].hasError('required') && form.controls['variance'].touched">{{'varianceRequired' | label}}</span> 
+                <span class="error-message" *ngIf="form.controls['variance'].hasError('pattern')"> *Enter valid number between 1 and 100  </span>
+            </div>
+            </div>
+
+            <div>
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                <mat-label class="custom-label">Variance Exch Rate</mat-label>
+                <input matInput 
+                  formControlName="exchRate" appendZero [formControl]="form.controls['exchRate']" />
+              </mat-form-field>
+              <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['exchRate'].hasError('required') && form.controls['exchRate'].touched">{{'exchRateRequired' | label}}</span> 
+                <span class="error-message" *ngIf="form.controls['exchRate'].hasError('pattern')"> *Enter Valid Rate  </span>
+            </div>
+            </div>
+
+            <!-- <div>
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Currency Major</mat-label>
+                  <input matInput 
+                    formControlName="major" [formControl]="form.controls['major']" />
+                </mat-form-field>
+                <div  class="message-block">
+                  <span class="error-message" *ngIf="form.controls['major'].hasError('required') && form.controls['major'].touched">{{'currencyMajorRequired' | label}}</span> 
+              </div>
+              </div> -->
+
+              <!-- <div>
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Currency Minor</mat-label>
+                  <input matInput 
+                    formControlName="minor" [formControl]="form.controls['minor']" />
+                </mat-form-field>
+                <div  class="message-block">
+                  <span class="error-message" *ngIf="form.controls['minor'].hasError('required') && form.controls['minor'].touched">{{'currencyMinorRequired' | label}}</span> 
+              </div>
+              </div> -->
+    
+    
+    
+          </div>
+    
+          <!--Add Currency Button-->
+          <div class="register-btn" *ngIf="showAddCurrencyContent">
+            <button *ngIf="showRegister" class="addCurrencyBtn" mat-raised-button color="primary" [disabled]="!form.valid"
+               type="submit">Submit </button>
+          </div>
+  
+            <!--Update Currency Button-->
+          <div class="register-btn" *ngIf="showUpdateCurrencyContent">
+            <button *ngIf="showRegister" class="addCurrencyBtn" mat-raised-button color="primary" [disabled]="!form.valid"
+               type="submit">Update </button>
+          </div>
+          
+    
+          <mat-spinner style="margin:33px auto;" diameter="40" *ngIf="loader"></mat-spinner>
+    
+        </form>
+      </div>
+    
+     
+    </div>
+  

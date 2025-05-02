@@ -1,0 +1,132 @@
+p {
+  margin: 0.6cm;
+  height: 3px;
+}
+
+.sorting {
+  margin: 0.4cm;
+  height: 2px;
+}
+
+.filter-button {
+  height: 48px;
+  // margin-top: 0.2cm;
+  margin-top: 52px;
+  font-weight: 12px;
+  padding-right: 0.7cm;
+}
+
+.history {
+  width: 13%;
+  height: 50px;
+  bottom: 11px;
+}
+
+.SettlementHistoryButton {
+  text-align: right;
+
+}
+
+.icon {
+  color: rgb(15, 132, 228);
+}
+
+mat-form-field {
+  padding: 0.1cm;
+}
+
+.height {
+  line-height: 4px;
+  margin-bottom: 22px;
+}
+
+.disable {
+  color: rgb(155, 155, 155);
+  pointer-events: none;
+}
+
+.enable {
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+}
+
+
+
+.p {
+  font-family: 'Roboto';
+  font-size: 16px;
+  margin-left: 8px;
+  margin-bottom: 16px;
+}
+
+
+
+
+.example-button-container {
+  width: 60px;
+  height: 41px;
+}
+
+
+
+
+
+// .icon_button:hover {
+//   background-color: #a2e6f7
+// }
+
+//for Apply Filter button
+.buttonApplyfilter {
+  background-color: #123969;
+  color: white;
+  height: 50px;
+  /* margin-top: 0px; */
+  width: 140px;
+}
+
+
+
+.filtericon {
+  color: rgb(255, 255, 255);
+}
+
+.error-message{
+  font-size: 14px;
+  white-space: nowrap;
+  position: relative;
+  left: 7px;
+  top: -6px;
+  color: red;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.picture-as-pdf-icon{
+  color: black;
+  font-size: 26px;
+}
+
+.negative-amount{
+  color: red;
+}
+
+.positive-amount{
+  color: rgb(0, 0, 0);
+}
+
+.search-filter-1{
+padding-top: 10px;
+  background-color: white;
+  /* margin-left: 12px; */
+  /* margin-right: 12px; */
+  border-radius: 10px;
+  height: 90px;
+ 
+  align-items: center;
+  margin-bottom: 22px;
+  padding-top: 10px;
+}

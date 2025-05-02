@@ -1,0 +1,49 @@
+.green{
+    background-color: #27AE60;
+    width: 3cm;
+    border-radius: 1cm;
+    color: white;
+  }
+  
+  .blue{
+  background-color: #123969;
+  width: 3cm;
+  border-radius: 1cm;
+  color: white;
+  }
+  
+  .deactivate{
+   justify-content: center;
+   align-items: center;
+   margin-top: 61px
+   }
+
+   .task-header {
+font-size: 18px;
+    background-color:#123969;
+   color: white;
+   height: 50px;
+  
+  }
+  .fx-spacer {
+    flex: 1 1 auto;
+  }
+  
+
+
+  .user-icon{
+    font-size: 27px;
+    margin-right: 10px;
+  }
+
+  .container-hint{
+    background-color: #261deb12;
+    border-radius: 6px;
+    height: 34px;
+    padding-left: 8px;
+    padding-top: 4px;
+  }
+
+  .error-message{
+    font-size: 16px;
+  }

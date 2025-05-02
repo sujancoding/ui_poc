@@ -1,0 +1,74 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="header-container">
+    
+    <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+
+      <span class="head-label-1"> {{toolBarName}} </span>
+
+    </div>
+    <div>
+      <span (click)="onClose()" class="close-icon">
+        <mat-icon>close</mat-icon>
+      </span>
+    </div>
+  </div>
+
+  <div>
+    <form [formGroup]="form">
+        <div fxLayout="column" class="formfield-section">
+
+            <div>
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+              <mat-label class="custom-label">Bag Number</mat-label>
+              <input [readonly]="isReadOnly" matInput formControlName="bagNo" [formControl]="form.controls['bagNo']">
+            </mat-form-field>
+            <div  class="message-block">
+                <span class="error-message" *ngIf="form.controls['bagNo'].hasError('required') && form.controls['bagNo'].touched">{{'bagNoRequired' | label}}</span> 
+                <span class="error-message" *ngIf="form.controls['bagNo'].hasError('pattern')">{{'onlyNumbers' | label}}</span> 
+            </div>
+            </div>
+
+            <div>
+                <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                  <mat-label class="custom-label">Bag Dimension</mat-label>
+                  <input matInput formControlName="bagDimension" [formControl]="form.controls['bagDimension']">
+                  <mat-hint align="end">L*B*H</mat-hint>
+                </mat-form-field>
+                <div  class="message-block">
+                    <span class="error-message" *ngIf="form.controls['bagDimension'].hasError('required') && form.controls['bagDimension'].touched">{{'bagDimensionRequired' | label}}</span> 
+                    <span class="error-message" *ngIf="form.controls['bagDimension'].hasError('pattern')">{{'onlyNumbersAndSpecificSpecialCharacter' | label}}</span> 
+                </div>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="{{'formFieldAppearance' | label}}">
+                      <mat-label class="custom-label">Bag Weight</mat-label>
+                      <input matInput formControlName="bagWeight" [formControl]="form.controls['bagWeight']">
+                    </mat-form-field>
+                    <div  class="message-block">
+                        <span class="error-message" *ngIf="form.controls['bagWeight'].hasError('required') && form.controls['bagWeight'].touched">{{'bagWeightRequired' | label}}</span> 
+                        <span class="error-message" *ngIf="form.controls['bagWeight'].hasError('pattern')">{{'onlyAlphanumeric' | label}}</span> 
+                    </div>
+                    </div>
+
+                    <div fxLayout="row" style="justify-content: center;margin-top: 5px;
+    margin-bottom: 10px;" fxLayoutAlign="space-evenly center">
+
+                        <div>
+                            <button mat-button class="cancelButton" (click)="onClose()">
+                                Cancel
+                              </button>
+                    </div>
+
+                    <div>
+                            <button mat-button class="addButton" type="button" (click)="addBagDetails(buttonName)" [disabled]="!form.valid">
+                                {{buttonName}}
+                              </button>
+                    </div>
+
+                    </div>
+
+            </div>
+    </form>
+  </div>
+
+

@@ -1,0 +1,148 @@
+<div fxLayout="row"  fxLayoutAlign="space-between center" class="header-container">
+    
+    <div fxLayout="column" fxLayoutAlign="space-evenly start" >
+
+      <span class="head-label-1"> Denominaton Setup </span>
+
+    </div>
+    <div>
+      <span (click)="onCloseDialog()" class="close-icon">
+        <mat-icon>close</mat-icon>
+      </span>
+    </div>
+  </div>
+
+  <form [formGroup]="form">
+    <div [ngStyle]="changeTableHeight()" >
+    <table>
+      <thead>
+        <tr>
+          
+         
+          <th>Currency Code </th>
+          <th> Currency Number </th>
+          <th>Denomination </th>
+          <th>Quantity </th>
+          <th>Amount </th>
+          <th>Actions </th>
+        </tr>
+      </thead>
+      <tbody formArrayName="rows">
+        <tr *ngFor="let row of rows.controls; let i = index ;" [formGroupName]="i">
+          
+          <td>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Enter CurrencyCode" pattern="^[a-zA-Z]+$" [formControl]="row.controls['ccyCode']" formControlName="ccyCode" [matAutocomplete]="auto"  [readonly]="isReadOnly" (focus)="initializeAutocomplete(i)">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onOptionSelectedCustomer($event,i)">
+                <mat-option *ngFor="let option of filteredOptions[i] | async"
+                [attr.data-option-ccyNo]="option.ccyNo" [disabled]="isReadOnly" [value]="option.ccyCode">{{option.ccyCode}}</mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <div  class="message-block">
+              <span class="error-message" *ngIf="row.controls['ccyCode'].hasError('pattern')">{{'onlyAlphabets' | label}}</span> 
+              <span class="error-message" *ngIf="row.controls['ccyCode'].hasError('required') &&
+              row.controls['ccyCode'].touched"> Currency Code Required </span>
+            </div>
+
+          </td>
+
+          <td>
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label">Currency Number</mat-label>
+              <input matInput  [formControl]="row.controls['ccyNo']" readonly="true">
+            </mat-form-field>
+            <div  class="message-block">
+              <span class="error-message" *ngIf="row.controls['ccyNo'].hasError('required') &&
+              row.controls['ccyNo'].touched"> Currency Number Required </span>
+            </div>
+           
+          </td>
+          <td>
+            <mat-form-field appearance="outline">
+              <mat-label class="custom-label">Denomination</mat-label>
+              <mat-select [formControl]="row.controls['ccyValue']" (selectionChange)="onDenominationChange($event, i)">
+                <mat-option [disabled]="isReadOnly" *ngFor="let option of filteredDenominations[i]" [value]="option.VALUE">
+                  {{ option.VALUE }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div  class="message-block">
+              <span class="error-message" *ngIf="row.controls['ccyValue'].hasError('required') &&
+              row.controls['ccyValue'].touched"> Denomination Required </span>
+            </div>
+           
+          </td>
+          <td>
+            <mat-form-field appearance="outline">
+              <input matInput type="number" [readonly]="isReadOnly"  placeholder="Enter Quantity" formControlName="count" [formControl]="row.controls['count']" (input)="onDenominationChange('',i)">
+            </mat-form-field>
+            <div  class="message-block">
+              <span class="error-message" *ngIf="row.controls['count'].hasError('pattern')">{{'onlyNumbers' | label}}</span> 
+              <span class="error-message" *ngIf="row.controls['count'].hasError('required') &&
+              row.controls['count'].touched"> Quantity Required </span>
+            </div>
+          </td>
+          <td>
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Enter Amount"  [formControl]="row.controls['amount']" formControlName="amount" [readonly]="isReadOnlyAmount">
+            </mat-form-field>
+            <div  class="message-block">
+              <span class="error-message" *ngIf="row.controls['amount'].hasError('required') &&
+              row.controls['amount'].touched"> Amount Required </span>
+            </div>
+          </td>
+          <td>
+            <div>
+              <button mat-icon-button type="button" class="editButton" [disabled]="isDisableRemoveIcon" (click)="removeRecord(i)"> 
+              <mat-icon>delete</mat-icon>  
+              </button>
+            </div>
+          </td>
+          
+          <!-- <td>
+            <mat-form-field appearance="outline">
+                <mat-select formControlName="status" placeholder="--Select--">
+              <mat-option *ngFor="let options of statusArray" [value]="options.internalValue"> {{options.displayValue}} </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+    </div>
+   
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <button class="add-btn" mat-raised-button #tooltip="matTooltip" matTooltip="Add new row" matTooltipPosition="above"
+      matTooltipClass="accounts-custom-tooltip" mat-button type="button" [disabled]="isDisableAddNew" (click)="addRow()">+ Add new</button>
+  
+      <button class="save-btn" mat-raised-button type="button" [disabled]="!form.valid || isDisabled" (click)="onSave()"> Save </button>
+      </div>
+
+  </form>
+
+  <div class="table-wrapper" style="margin-top: 20px !important">
+    <div class="mat-elevation-z8" >
+      <div [ngStyle]="changeDealTableHeight()">
+        <table class="table">
+
+          <thead>
+            <tr>
+                  <th>CCY CODE</th>
+                  <th>CCY NO</th>
+                  <th>F.AMOUNT</th>
+                  </tr>
+          </thead>
+         
+          <tbody>
+            <tr *ngFor="let search of dealListings ">
+                 <td>{{search.ccyCode}}</td>
+                 <td>{{search.ccyNo}}</td>
+                 <td>{{search.amountF | number}}</td>
+            </tr>
+          </tbody>
+         
+      </table>
+      </div>
+    </div> 
+     </div>
+

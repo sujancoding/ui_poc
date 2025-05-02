@@ -1,0 +1,103 @@
+<!--Modal Dialog - view payee listings in customer search table-->
+
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar" class="task-header"  fxLayoutAlign="space-between center">
+        <span> {{customerName | titlecase}} - All Payee </span>
+        <div fxLayout="row">
+        <span [mat-dialog-close]="true" style="cursor: pointer; padding-top: 5px;">
+            <mat-icon>close</mat-icon>
+            </span>
+            </div>
+    </mat-toolbar>
+  </h4>
+  <div class="scrollable-content">
+    <form [formGroup]="filterForm">   
+  <div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" style="background-color:white;margin-left: 12px;width: 98%; height: 75px;margin-top: 2px;">
+  <div class="div-height" fxLayout="row" >
+    <div fxLayout="column"> 
+      <mat-form-field fxFlex="20" appearance="{{'formFieldAppearance' | label}}">
+        <mat-label class="custom-label">Payee Name</mat-label>
+        <input  matInput type="text"  formControlName="payeeName">
+      </mat-form-field>
+      <small class="error-message" *ngIf="filterForm.controls['payeeName'].hasError('pattern')" >{{'splCharsValidation' | label}} </small>     
+
+    </div>
+    
+  <span>
+    <span fxLayout="column"> 
+    <mat-form-field appearance="{{'formFieldAppearance' | label}}" style="width:57%;">
+      <mat-label class="custom-label">Status</mat-label>
+      <mat-select [(ngModel)]="selectedStatus" [ngModelOptions]="{standalone: true}">
+        <mat-option value="ACTIVE"> Active </mat-option>
+        <mat-option value="INACTIVE"> InActive </mat-option>
+      </mat-select>  
+    </mat-form-field>  
+  </span>  
+  </span>
+  
+    <button mat-raised-button fxFlex="13" (click)="applyFilter(selectedStatus)"
+      class="buttonApplyfilter" [disabled]="!filterForm.valid">
+     Apply Filter</button>
+  
+  
+  
+  </div>
+  </div>
+</form>
+  <div class="table-wrapper">
+    <div class="mat-elevation-z8">
+      <div [ngStyle]="isCustomerSearch ? customerSearchTableHeight() : changeTableHeight()"> <!--responsive table height-->
+      <table class="table">
+        <thead>
+            <th>Payee ID</th>
+            <th>Payee Name</th>
+            <th>Account Number</th>
+            <th>Relationship</th>
+            <th>Payee Address</th>
+            <th>Bank Info</th>
+            <th>Status</th>
+            <th><mat-icon>adjust</mat-icon></th>
+        </thead>
+    
+        <tbody>
+            <tr  *ngFor = "let payee of searchpayee | slice: (p - 1) * itemsPerPage : p * itemsPerPage ">
+               <td> {{payee.PAYEEID}} </td>
+               <td>{{payee.NAME}}</td>
+               <td>{{payee.ACCOUNTNBR}}</td>
+               <td>{{ getRelationDescription(payee.RELATIONSHIP) }} </td>
+               <td>{{payee.ADDRESS}} ,{{payee.STATE}}, {{payee.COUNTRY}}</td>
+               <td> {{payee.BANKNAME}},SWIFT CODE: {{payee.SWIFTCODE ? payee.SWIFTCODE : "N/A"}} , {{getBankCodeDescription(payee.BANKBRANCHTYPE)}} : {{payee.ROUTINGCODE ? payee.ROUTINGCODE : "N/A"}} , {{payee.BRANCHNAME}}</td>
+               <td [ngStyle]="{'color': getColor(payee.STATUS)}" > {{payee.STATUS}} </td>
+               <td><div class="checkBox">
+                <mat-radio-button (click)="inactivePayee(payee.PAYEEID)"></mat-radio-button>
+            </div></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <mat-paginator class="pagination-class"
+    [length]="searchpayee.length"
+    [pageSize]="itemsPerPage"
+    [pageIndex]="p - 1"
+    (page)="handlePageChange($event)"
+    ></mat-paginator>
+    <!--Loader-->
+  <div *ngIf="loader" class="loader-wrapper">
+    <mat-spinner> </mat-spinner>
+    </div>
+    </div>
+</div>
+    
+</div>
+
+    <div *ngIf="deactivateButtons" class="dialogButton" fxLayout="row wrap" fxLayoutAlign="space-around">
+        <button mat-raised-button color="warn" [disabled]="isDisabledInActive" class="mat-button"  (click)="openInActive()"  type="button">Inactive</button>
+         <button mat-raised-button color="primary" class="mat-button" [mat-dialog-close]="true"   type="button">Close</button>
+         </div>
+
+    
+    <div *ngIf="activateButtons" class="dialogButton" fxLayout="row wrap" fxLayoutAlign="space-around">
+        <button mat-raised-button  [disabled]="isDisabledActive" class="mat-button"  (click)="openActive()"  type="button">Activate</button>
+         <button mat-raised-button color="primary" class="mat-button" [mat-dialog-close]="true"   type="button">Close</button>
+         </div> 
+        

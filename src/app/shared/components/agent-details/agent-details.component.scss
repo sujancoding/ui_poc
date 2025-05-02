@@ -1,0 +1,55 @@
+.example-card {
+    background-color: #123969;
+  }
+  
+  
+  
+  .profile-card{
+    background-color: #123969;
+    height: 10.2cm;
+    margin-top: 1.4cm;
+    width: 90%;
+    .hcont{
+     
+      margin: 0 auto;
+      margin-left: 0.2cm;
+     // padding-right: 3cm;
+      h4{
+        font-size: 0.7rem;
+        line-height: 1.4;
+        font-weight: 500;
+        margin-bottom: 0;
+        color: white;
+        white-space: nowrap;
+        
+        small{
+          font-size: 1.1em;
+         // opacity: 0.5;
+         display: block;
+          font-weight: bold;
+          color: brown;
+      }
+    }
+      
+  }
+  }
+  
+  .flex{
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    margin: 8px;
+    line-height: 1.3;
+  }
+  .key{
+    font-size: 0.9em;
+    opacity: 0.5;
+    font-weight: bold;
+    color: brown;
+    font-family: Roboto;
+  }
+  .values{
+    font-weight:500;
+    font-size:small;
+    color: rgb(255 255 255 / 100%);
+  }

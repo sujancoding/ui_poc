@@ -1,0 +1,280 @@
+<!--Success receipt for sending money-->
+
+
+        <!-- <div class="icon-position">
+    <mat-icon class="maticon">check_circle</mat-icon>
+    </div>
+    <div class="poppers">
+      <div class="hoverme">
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+      </div>
+    
+        <div class="leftPop">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+         
+          <i></i>
+        </div>
+
+        <div class="rightPop">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+         
+          <i></i>
+        </div>
+        
+      <div  class="text-center" style="margin-top: -6px;">
+        <h4 class="text">Transaction Initiated Successfully</h4>
+        </div> -->
+
+        <!-- <h5 style="margin-top: 96px;
+        font-family: 'Roboto';
+        font-weight: 700;
+        text-align: center;
+        color: #484848;"> Transaction Details </h5> -->
+    <!-- <div class="flex">
+        <h4>
+          <small>Recipient</small>
+          {{payeeName}}
+        </h4>
+      </div>
+
+      <div class="flex">
+        <h4>
+          <small>Recipeint Number</small>
+          {{referenceNumber}}
+        </h4>
+      </div>
+    
+
+   <div class="row" fxLayoutGap="70px">
+    <div class="flex" style="margin-inline:10px;">
+        <h4>
+          <small>Amount Sent</small>
+          {{customerSends}} SGD
+        </h4>
+      </div>
+
+      <div class="flex">
+        <h4>
+          <small>Transfer Fee</small>
+          {{adminFee}} SGD
+        </h4>
+      </div> 
+        
+   </div>     -->
+
+  
+
+   <div>
+    <div class="inner-box">
+      <div class="box" id="content1" #content1>
+        <div fxLayout="column" fxLayoutAlign="space-between center" style="height: 185px;">
+            <div style=" height: 46px;">
+                <h5 class="receipt-text">Transfer Receipt</h5>
+            </div>
+            <div class="icon">
+                <mat-icon style="transform: scale(1.5); color: white;">done</mat-icon>
+            </div>
+            <mat-divider style="width: 90%;margin-top: 20px;"></mat-divider>
+            <div>
+                <div fxLayout="column" fxLayoutAlign="space-between" class="content-1">
+                    <span class="payeegets-label">Payee Gets Amount</span>
+                    <span  class="payeegets-value">{{ payeeGets | number : '1.2-2' }} {{remitForeignCcy}}</span>
+                </div>
+            </div>
+        </div>
+        <div>
+
+            <!--Reference number and Payment date-->
+
+        <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 45px">
+            <div class="content-container">
+                <div>
+                    <p class="label">Reference Number</p>
+                    <p style="margin-top: -6px" class="value">{{referenceNumber}}</p>
+                </div>
+            </div>
+            <div class="content-container">
+                <p class="label">Payment Date</p>
+                <p  style="margin-top: -6px" class="value">{{formattedDate}}</p>
+            </div>
+        </div>
+
+        <!--Sender name and receiving party-->
+        <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 10px">
+            <div class="content-container">
+                <div>
+                    <p  class="label">Sender Name</p>
+                    <p  style="margin-top: -6px" class="value">{{customerInquiry.name.name}}</p>
+                </div>
+            </div>
+            <div class="content-container">
+                <p  class="label">Reciever Name</p>
+                <p  style="margin-top: -6px"class="value">{{payeename}}</p>
+            </div>
+        </div>
+
+        <!--Account Number and swift code , routing code-->
+        <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 10px">
+          <div class="content-container">
+              <div>
+                  <p  class="label">Account Number</p>
+                  <p  style="margin-top: -6px" class="value">{{accountno ? accountno : "Acc No not found"}}</p>
+              </div>
+          </div>
+          <div class="content-container">
+            <p  class="label">Relationship</p>
+            <p  style="margin-top: -6px" class="value">{{ relationship }}</p>
+             </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 10px">
+        <div class="content-container-1">
+            <div>
+              <p  class="label">Swift Code / Routing Code</p>
+              <p  style="margin-top: -6px"class="value"> {{swiftCode ? swiftCode : "N/A"}} / {{routingCode ? routingCode : "N/A"}} </p>
+          
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+    <div>
+<div class="summary-container">
+<p class="summary-label">Transfer Summary</p>
+<div fxLayout="column" fxLayoutAlign="space-between" style="position: relative;top: -13px;">
+<div fxLayout="row" fxLayoutAlign="space-between" >
+<div  fxLayout="column" fxLayoutAlign="space-between">
+  <p class="label">Amount</p>
+  <p class="value">{{customerSends}} SGD</p>
+</div>
+<div fxLayout="column" fxLayoutAlign="space-between">
+    <p class="label-1" >Admin Fee</p>
+    <p class="value-1">{{adminFee}} SGD</p>
+</div>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between" >
+
+<div fxLayout="column" fxLayoutAlign="space-between" class="small-container">
+    <p class="label" >Exchange rate</p>
+    <p class="value">{{orgRate}}</p>
+</div>
+<div fxLayout="column" fxLayoutAlign="space-between" class="small-container">
+    <p class="label-1" >Total amount</p>
+    <p class="value-1">{{totalCustomerSends  | number : '1.0-2' }} SGD</p>
+</div>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-between" >
+
+<div fxLayout="column" fxLayoutAlign="start" class="small-container">
+    <p class="label" >Status</p>
+    <p class="value" [ngStyle]="{'color': getColor('AMOUNT RECEIVED')}">{{status}}</p>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="start" class="small-container">
+  <p class="label-1">Payment mode for charges</p>
+  <p class="value-1" >{{displaySharingType}}</p>
+</div>
+
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+    </div>
+</div>
+
+<div class="center" *ngIf="downloadReceiptButton" style="margin-top: 41px;text-align: center;" >
+  <button class="download-btn" (click)="downloadReceipt()" mat-raised-button color="primary" type="button">Download</button>
+  </div>
+  <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loader"></mat-spinner>
+
+ 
+
+<div class="text-center" style="margin-top: 10px;">
+  <a routerLink="/dashboard/custdash" style="text-decoration: underline;
+  color: #123969;" routerLinkActive="active">Go Back!</a>
+  </div>
+
+
+

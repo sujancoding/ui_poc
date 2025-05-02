@@ -1,0 +1,149 @@
+<div class="scrollable-content">
+  <div class="spinner-overlay" *ngIf="isScreenLoader">
+    <mat-spinner diameter="60"></mat-spinner>
+  </div>
+  <form [formGroup]="form">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between">
+      <!--type="file" this is filepicker .. The src attribute specifies the location (URL) of the external resource.-->
+
+      <!-- Multiple Owner NRIC Field -->
+      <div>
+        <div *ngFor="let owner of owners ; let i=index">
+        <div class="dropzone">
+          <h4 class="subTitle"> {{ owner.name }} OWNER NRIC </h4>
+          <div class="container">
+             <img [src]="fileOwnerData[i]" *ngIf="showImageOwner[i]" height="220" width="100%">
+            <!--this object tag only enables when document type is pdf or docs-->
+            <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatOwner[i]"
+              (click)="loadBinaryData('OWNER_NRIC',i)">
+              <object class="content" style="cursor: pointer;" [data]="pdfUrlOwner[i]" type="application/pdf" width="100%"
+                height="220"> </object>
+            </button>
+            <button class="btn" *ngIf="showOWNER[i]"  (click)="loadBinaryData('OWNER_NRIC',i)"
+              type="button">{{buttonMessage}} <br>
+              <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+            </button>
+            <button class="btn" *ngIf="uploadIconOWNER[i]"> <mat-icon class="icon">file_upload</mat-icon> </button>
+            <input type="file" *ngIf="showOwnerInput[i]" [attr.disabled]="disableOwnerInput[i] ? '' : null"
+              (change)="onSelectFile($event,ownerNric, 'OWNER_NRIC',i)" formControlName="ownerNric"
+              [formControl]="form.controls['ownerNric']">
+          </div>
+          <button type="button" mat-raised-button color="primary" *ngIf="reuploadOwner[i]" style="margin-top: 5px;">
+            Reupload </button>
+          <input type="file" class="reupload-input" *ngIf="reuploadOwner[i]"
+            (change)="onSelectFile($event,ownerNric,'OWNER_NRIC',i)" formControlName="ownerNric"
+            [formControl]="form.controls['ownerNric']">
+          <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadOWNER[i]"></mat-spinner>
+          <!-- <mat-error *ngIf=" form.controls['ownerNric'].hasError('required') &&
+      form.controls['ownerNric'].touched && uploadIconOWNER"> *Owner NRIC Image Required </mat-error> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Multiple Dealer NRIC Field -->
+      <div>
+        <div *ngFor="let dealer of dealers ; let i=index">
+        <div class="dropzone">
+          <h4 class="subTitle">{{ dealer.name }} DEALER NRIC </h4>
+          <div class="container">
+            <img [src]="fileDealerData[i]" *ngIf="showImageDealer[i]" height="220" width="100%">
+            <!--this object tag only enables when document type is pdf or docs-->
+            <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatDealer[i]"
+              (click)="loadBinaryData('DEALER_NRIC',i)">
+              <object class="content" style="cursor: pointer;" [data]="pdfUrlDealer[i]" type="application/pdf" width="100%"
+                height="220"> </object>
+            </button>
+            <button class="btn" *ngIf="showDEALER[i]"  (click)="loadBinaryData('DEALER_NRIC',i)"
+              type="button">{{buttonMessage}} <br>
+              <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+            </button>
+            <button class="btn" *ngIf="uploadIconDEALER[i]"> <mat-icon class="icon">file_upload</mat-icon> </button>
+            <input type="file" *ngIf="showDealerInput[i]" [attr.disabled]="disableDealerInput[i] ? '' : null"
+              (change)="onSelectFile($event,dealerNric, 'DEALER_NRIC',i)" formControlName="dealerNric"
+              [formControl]="form.controls['dealerNric']">
+          </div>
+          <button type="button" mat-raised-button color="primary" *ngIf="reuploadDealer[i]" style="margin-top: 5px;">
+            Reupload </button>
+          <input type="file" class="reupload-input" *ngIf="reuploadDealer[i]"
+            (change)="onSelectFile($event,dealerNric,'DEALER_NRIC',i)" formControlName="dealerNric"
+            [formControl]="form.controls['dealerNric']">
+          <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadDEALER[i]"></mat-spinner>
+          <!-- <mat-error *ngIf=" form.controls['dealerNric'].hasError('required') &&
+      form.controls['dealerNric'].touched && uploadIconDEALER"> *Dealer NRIC Image Required </mat-error> -->
+        </div>
+        </div>
+      </div>
+
+      <!-- Multiple Runner NRIC field -->
+      <div>
+        <div *ngFor="let runner of runners ; let i=index">
+        <div class="dropzone">
+          <h4 class="subTitle"> {{ runner.name }} RUNNER NRIC </h4>
+          <div class="container">
+            <img [src]="fileRunnerData[i]" *ngIf="showImageRunner[i]" height="220" width="100%">
+            <!--this object tag only enables when document type is pdf or docs-->
+            <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatRunner[i]"
+              (click)="loadBinaryData('RUNNER_NRIC',i)">
+              <object class="content" style="cursor: pointer;" [data]="pdfUrlRunner[i]" type="application/pdf" width="100%"
+                height="220"> </object>
+            </button>
+            <button class="btn" *ngIf="showRUNNER[i]"  (click)="loadBinaryData('RUNNER_NRIC',i)"
+              type="button">{{buttonMessage}} <br>
+              <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+            </button>
+            <button class="btn" *ngIf="uploadIconRUNNER[i]"> <mat-icon class="icon">file_upload</mat-icon> </button>
+            <input type="file" *ngIf="showRunnerInput[i]" [attr.disabled]="disableRunnerInput[i] ? '' : null"
+              (change)="onSelectFile($event,runnerNric, 'RUNNER_NRIC',i)" formControlName="runnerNric"
+              [formControl]="form.controls['runnerNric']">
+          </div>
+          <button type="button" mat-raised-button color="primary" *ngIf="reuploadRunner[i]" style="margin-top: 5px;">
+            Reupload </button>
+          <input type="file" class="reupload-input" *ngIf="reuploadRunner[i]"
+            (change)="onSelectFile($event,runnerNric,'RUNNER_NRIC',i)" formControlName="runnerNric"
+            [formControl]="form.controls['runnerNric']">
+          <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadRUNNER[i]"></mat-spinner>
+          <!-- <mat-error *ngIf=" form.controls['runnerNric'].hasError('required') &&
+      form.controls['runnerNric'].touched && uploadIconRUNNER"> *Runner NRIC Image Required </mat-error> -->
+        </div>
+        </div>
+      </div>
+      
+      <!-- ACRA field -->
+      <div>
+        <div class="dropzone">
+          <h4 class="subTitle"> ACRA </h4>
+          <div class="container">
+            <img *ngIf="showImageAcra" [src]="fileAcraData[0]" height="220" width="100%">
+            <!--this object tag only enables when document type is pdf or docs-->
+            <button class="scroll" style="overflow-y:scroll;" type="button" *ngIf="showOtherFormatAcra"
+              (click)="loadBinaryData('ACRA', 0)">
+              <object class="content" style="cursor: pointer;" [data]="pdfUrlAcra" type="application/pdf" width="100%"
+                height="220"> </object>
+            </button>
+            <button class="btn" *ngIf="uploadIconACRA"> <mat-icon class="icon">file_upload</mat-icon> </button>
+            <button class="btn" *ngIf="showACRA"  (click)="loadBinaryData('ACRA', 0)"
+              type="button">{{buttonMessage}} <br>
+              <h4 class="uploaded-text"> Uploaded <mat-icon class="uploaded-icon">check_circle</mat-icon> </h4>
+            </button>
+            <input type="file" *ngIf="showAcraInput" [attr.disabled]="disableAcraInput ? '' : null"
+              (change)="onSelectFile($event,acra, 'ACRA',0)" formControlName="acra" [formControl]="form.controls['acra']">
+            <!-- It will preview image/pdf file which user selected-->
+          </div>
+          <button type="button" mat-raised-button color="primary" *ngIf="reuploadAcra" style="margin-top: 5px;">
+            Reupload </button>
+          <input type="file" class="reupload-input" *ngIf="reuploadAcra" (change)="onSelectFile($event,acra,'ACRA',0)"
+            formControlName="acra" [formControl]="form.controls['acra']">
+          <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loadACRA"></mat-spinner>
+          <!-- <mat-error *ngIf="form.controls['acra'].hasError('required') &&
+               form.controls['acra'].touched && uploadIconACRA"> *ACRA Image Required </mat-error> -->
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div style="margin-top:53px;" fxLayout="row" fxLayoutAlign="space-between">
+  <button mat-raised-button class="stepper-back-btn" matStepperPrevious type="button">Previous</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" class="save-documents" matStepperNext
+    type="submit" (click)="onSave()">Save and Close</button>
+</div>

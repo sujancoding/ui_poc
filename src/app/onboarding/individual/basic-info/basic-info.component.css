@@ -1,0 +1,20 @@
+
+.mat-mdc-radio-button ~ .mat-radio-button {
+  margin-left: 15px;
+}
+
+.mat-mdc-button {
+  width: 13%;
+}
+
+.basic-information {
+  background-color: white;
+}
+
+.address-styles {
+  margin-top: 4px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #000000;
+}

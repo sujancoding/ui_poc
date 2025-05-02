@@ -1,0 +1,72 @@
+.task-header {
+font-size: 18px;
+    background-color: #123969;
+    color: white;
+    height: 50px;
+}
+
+.task-header-cancel{
+    background-color: #9b0000;
+    color: white;  
+    height: 50px;
+}
+
+.panel-add-btn{
+    background-color: #123969;
+    color: #fff;
+    height: 49px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+ 
+.panel-cancel-btn{
+    background-color: #9b0000;
+    color: white;
+    height: 49px;
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 100px;
+}
+
+  
+
+
+form{
+    margin: 19px
+}
+
+.message-block .error-message {
+    // Hidden by default
+    display: none;
+}
+  
+.message-block .error-message:first-child {
+    display: block;
+    color: #e8316f;
+    margin-bottom: 12px;
+    margin-top: -20px;
+    margin-left: 6px;
+    font-size: 14px;
+    font-family: "Roboto";
+    white-space: break-spaces;
+}
+
+.panel-btn-pairs{
+    display: flex;
+}
+
+.panel-close-btn{
+    background-color: #eee;
+    color: #0c47a6;
+    height: 48px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    width: 100px;
+}
+
+.alert-message{
+    font-size: 20px;
+    border-radius: 6px;
+    margin: 0 15px;
+}

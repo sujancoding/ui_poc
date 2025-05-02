@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="card">
+      <div class="card__header">
+        <div class="card__image" width="600">
+            <p class="highlight-subGroups">Recipient Gets</p>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+            <p class="payeeName">{{this.payeeCountryCode}}</p>
+            <p class="highlight-payeeName">{{payeeGets | number }}</p>
+            </div>
+            <mat-divider class="divider"></mat-divider>
+            </div> 
+            <div class="info">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <p class="subGroups">Exchange Rate</p>
+                <p class="payeeName">1 SGD = {{this.exchangeRate}} {{this.payeeCountryCode}}</p>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                  <p class="subGroups">Amount</p>
+                  <p class="payeeName">{{customerSends | number : '1.0-2'}} SGD</p>
+                  </div>
+
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <p class="subGroups">Admin Fee</p>
+                    <p class="payeeName">{{adminFee}} SGD</p>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <p class="highlight-subGroups">Total Amount</p>
+                        <p class="highlight-payeeName"> {{addedConsumerSends | number : '1.0-2'}} SGD </p>
+                        </div>
+                        </div>
+      </div>
+      <div class="card__body">
+        <span class="subGroups">From</span>
+        <p class="value">{{username}}</p>
+      </div>
+
+      <div class="card__body">
+        <span class="subGroups">To</span>
+        <p class="value"> {{payeeName}} </p>
+      </div>
+
+      <div class="card__body">
+        <span class="subGroups">Relationship</span>
+        <p class="value">{{relationship }}</p>
+      </div>
+
+      <div class="card__body">
+        <span class="subGroups">Recipient's Mobile No.</span>
+        <p class="value"> {{payeePhoneNo}} </p>
+      </div>
+
+      <div class="card__body">
+        <span class="subGroups">Purpose Of Transfer</span>
+        <p class="value">{{this.remarks}}</p>
+      </div>
+
+      <div class="card__body">
+        <span class="subGroups">Payment mode for charges </span>
+        <p class="value">{{displaySharingType}}</p>
+      </div>
+
+
+     
+    </div>
+    <div class="checkbox">
+      <mat-checkbox  (change)="onSelect($event)">
+          <span class="checkbox-label">Processing time is up to 2 working days. Please double-check all details as we are not responsible for any mistakes or omissions on the part of the applicant hereafter.</span>
+      </mat-checkbox>
+    </div>
+   
+  </div>
+  <div fxLayout="column" fxLayoutAlign="space-evenly center" style="max-width: 1200px;">
+  <div class="text-center" *ngIf="remitButton">
+    <button class="button1" mat-raised-button type="button" [disabled]="disableSubmit" (click)="remitMoney()">REMIT {{addedConsumerSends | number : '1.0-2'}} SGD to {{payeeName}} </button>
+    </div>
+    <mat-spinner style="margin:0 auto;" diameter="40" *ngIf="loader"></mat-spinner>
+
+     <div>
+        <p class="p">APT Provides best Exchange rate in Singapore</p>
+    </div>
+  </div>

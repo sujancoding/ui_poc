@@ -1,0 +1,64 @@
+<div>
+<div>
+    <h4 mat-dialog-title>
+      <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+          <div class="mat-header-content">
+            <span class="title-label">{{agentName | uppercase}} </span>
+             <!-- <div class="tags" [ngStyle]="{'color': getColor(agentStatus),'background-color': getBackgroundColor(agentStatus)}">
+              <div  [ngStyle]="{'background-color': getColor(agentStatus)}" class="small-container"></div>
+            <span class="status-tag"> 
+            {{agentStatus | uppercase}} </span>
+            </div> -->
+          </div>
+          <span [mat-dialog-close]="true" style="cursor: pointer;padding-top: 5px;">
+            <mat-icon>close</mat-icon>
+            </span>
+      </mat-toolbar>
+    </h4>
+    </div>
+
+<div class="stepper-container">
+<mat-stepper  [linear]="true" #stepper (selectionChange)="onSelectionChange($event)">
+  <div>
+  <mat-step [stepControl]="agentProfile.form">
+    <ng-template matStepLabel>
+       <div class="steper-content-container">
+      <!-- <span class="content-1">Step Name </span> -->
+      <span class="content-2">Agent Profile </span>
+      <div class="small-tag">
+        <span class="small-status-tag" [ngStyle]="{'color': getColor(profileStatus),'background-color': getBackgroundColor(profileStatus)}">{{profileStatus}}</span>
+       </div>
+    </div>
+   </ng-template>
+  <app-agent-profiles #agentProfile [status]="agentStatus"></app-agent-profiles>
+</mat-step>
+</div>
+
+   <!-- <mat-step [stepControl]="agentAssoicates.ownerMainGroup"> previous code -->
+    <mat-step> <!--new code , stepControl removed because associates any one of group is mandatory-->
+        <ng-template matStepLabel>
+          <div class="steper-content-container">
+            <!-- <span class="content-1">Step Name </span> -->
+            <span class="content-2">Agent Associates </span>
+            <div class="small-tag">
+              <span class="small-status-tag" [ngStyle]="{'color': getColor(assoicatesStatus),'background-color': getBackgroundColor(assoicatesStatus)}">{{assoicatesStatus}}</span>
+             </div>
+          </div>
+        </ng-template>
+     <app-agent-associates #agentAssoicates></app-agent-associates>
+    </mat-step>
+    <mat-step [stepControl]="agentDocument.form">
+        <ng-template matStepLabel> 
+          <div class="steper-content-container">
+          <!-- <span class="content-1">Step Name </span> -->
+          <span class="content-2">Agent Documents </span>
+          <div class="small-tag">
+            <span class="small-status-tag" [ngStyle]="{'color': getColor(documentStatus),'background-color': getBackgroundColor(documentStatus)}">{{documentStatus}}</span>
+           </div>
+        </div></ng-template>
+     <app-agent-documents #agentDocument></app-agent-documents>
+    </mat-step>
+  </mat-stepper>
+</div>
+
+</div>

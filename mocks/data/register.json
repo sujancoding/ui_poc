@@ -1,0 +1,29 @@
+{
+    "register": {
+        "status": {
+            "type": "success",
+            "message": "Success",
+            "code": 200,
+            "error": false
+        },
+        "data": [
+            {
+                "status": "Registered",
+                "user": {
+                    "username": "karthik.v",
+                    "email": "karthikeyan.bv@gmail.com",
+                    "firstname": "karthik",
+                    "lastname": "v",
+                    "id": 88888888
+                },
+                "application": {
+                    "status": "PENDING",
+                    "profileStatus": "PENDING",
+                    "docStatus": "PENDING"
+                },
+                "expires_at": "2016/01/07 05:56:21 +0000",
+                "access_token": "9x8869x31134x7906x6x54474x21x18xxx90857x"
+            }
+        ]
+    }
+}

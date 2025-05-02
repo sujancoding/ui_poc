@@ -1,0 +1,238 @@
+<!--CLOSE ICON-->
+<h4 mat-dialog-title>
+    <mat-toolbar role="toolbar"  class="task-header" fxLayoutAlign="space-between center">
+      <span>  <span class="currencyFlag"> </span> {{selectedCountryCode}} : Edit and Save  </span>
+      <span [mat-dialog-close]="true" style="cursor: pointer;">
+        <mat-icon>close</mat-icon>
+        </span>
+  </mat-toolbar>
+    </h4>
+<!--CONTENT STARTS HERE-->
+
+
+<!--Table-->
+<form [formGroup]="form" style="margin-top: 59px;">
+<table class="table">
+  <div class="fix-width scroll-inner">
+  <thead>
+    <tr>
+      <th colspan="2">TO CONSUMER</th>
+      <th colspan="2">TO CORPORATE</th>
+      <th colspan="2">TO AGENT</th> 
+     
+      </tr>
+      <tr>
+        <th>Org</th>
+        <th>Bank</th>
+  
+        <th>Org</th>
+        <th>Bank</th>
+  
+        <th>Org</th>
+        <th>Bank</th>
+        </tr>
+
+  </thead>
+
+  <tbody>
+   
+
+      <tr *ngFor="let commissionArrayList of commissionArrayList   "  >
+      
+        <!--Consumer Org-->
+        <td>
+            <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+             
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Shared</mat-label>
+                <input matInput formControlName="consumerOrgShared"  >
+                <mat-error *ngIf="form.controls.consumerOrgShared.errors?.required">Shared is required</mat-error>
+                <mat-error *ngIf="form.controls.consumerOrgShared.errors?.pattern">Invalid number format</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Ours</mat-label>
+                <input matInput formControlName="consumerOrgOurs" >
+                <mat-error *ngIf="form.controls.consumerOrgOurs.errors?.required">Ours is required</mat-error>
+                <mat-error *ngIf="form.controls.consumerOrgOurs.errors?.pattern">Invalid number format</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+              <mat-label class="custom-label">They</mat-label>
+              <input matInput formControlName="consumerOrgThey" >
+              <mat-error *ngIf="form.controls.consumerOrgThey.errors?.required">Ours is required</mat-error>
+              <mat-error *ngIf="form.controls.consumerOrgThey.errors?.pattern">Invalid number format</mat-error>
+          </mat-form-field>
+         
+
+          </div>
+          
+        </td>
+         <!--Consumer Bank-->
+        <td >
+          <div fxLayout="row">
+            <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Shared</mat-label>
+                  <input matInput formControlName="consumerBankShared"  >
+                  <mat-error *ngIf="form.controls.consumerBankShared.errors?.required">Shared is required</mat-error>
+                  <mat-error *ngIf="form.controls.consumerBankShared.errors?.pattern">Invalid number format</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Ours</mat-label>
+                <input matInput formControlName="consumerBankOurs" >
+                <mat-error *ngIf="form.controls.consumerBankOurs.errors?.required">Ours is required</mat-error>
+                <mat-error *ngIf="form.controls.consumerBankOurs.errors?.pattern">Invalid number format</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+              <mat-label class="custom-label">They</mat-label>
+              <input matInput formControlName="consumerBankThey">
+              <mat-error *ngIf="form.controls.consumerBankThey.errors?.required">They is required</mat-error>
+              <mat-error *ngIf="form.controls.consumerBankThey.errors?.pattern">Invalid number format</mat-error>
+          </mat-form-field>
+
+          </div>
+
+          </div>
+        </td>
+
+         <!--corporate Org-->
+        <td >
+          <div fxLayout="row">
+            <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Shared</mat-label>
+                  <input matInput formControlName="corporateOrgShared"  >
+                  <mat-error *ngIf="form.controls.corporateOrgShared.errors?.required">Shared is required</mat-error>
+                  <mat-error *ngIf="form.controls.corporateOrgShared.errors?.pattern">Invalid number format</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Ours</mat-label>
+                <input matInput formControlName="corporateOrgOurs"  >
+                <mat-error *ngIf="form.controls.corporateOrgOurs.errors?.required">Ours is required</mat-error>
+                <mat-error *ngIf="form.controls.corporateOrgOurs.errors?.pattern">Invalid number format</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+              <mat-label class="custom-label">They</mat-label>
+              <input matInput formControlName="corporateOrgThey" >
+              <mat-error *ngIf="form.controls.corporateOrgThey.errors?.required">They is required</mat-error>
+                <mat-error *ngIf="form.controls.corporateOrgThey.errors?.pattern">Invalid number format</mat-error>
+          </mat-form-field>
+
+          </div>
+          </div>
+        </td>
+
+         <!--corporate Bank-->
+         <td >
+          <div fxLayout="row">
+            <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Shared</mat-label>
+                  <input matInput formControlName="corporateBankShared"  >
+                  <mat-error *ngIf="form.controls.corporateBankShared.errors?.required">Shared is required</mat-error>
+                  <mat-error *ngIf="form.controls.corporateBankShared.errors?.pattern">Invalid number format</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Ours</mat-label>
+                <input matInput formControlName="corporateBankOurs" >
+                <mat-error *ngIf="form.controls.corporateBankOurs.errors?.required">Ours is required</mat-error>
+                <mat-error *ngIf="form.controls.corporateBankOurs.errors?.pattern">Invalid number format</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+              <mat-label class="custom-label">They</mat-label>
+              <input matInput formControlName="corporateBankThey"  >
+              <mat-error *ngIf="form.controls.corporateBankThey.errors?.required">They is required</mat-error>
+              <mat-error *ngIf="form.controls.corporateBankThey.errors?.pattern">Invalid number format</mat-error>
+          </mat-form-field>
+
+          </div>
+          </div>
+        </td>
+
+         <!--Agent Org-->
+         <td >
+          <div fxLayout="row">
+            <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Shared</mat-label>
+                  <input matInput formControlName="agentOrgShared" >
+                  <mat-error *ngIf="form.controls.agentOrgShared.errors?.required">Shared is required</mat-error>
+                  <mat-error *ngIf="form.controls.agentOrgShared.errors?.pattern">Invalid number format</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Ours</mat-label>
+                <input matInput formControlName="agentOrgOurs"  >
+                <mat-error *ngIf="form.controls.agentOrgOurs.errors?.required">Ours is required</mat-error>
+                <mat-error *ngIf="form.controls.agentOrgOurs.errors?.pattern">Invalid number format</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+              <mat-label class="custom-label">They</mat-label>
+              <input matInput formControlName="agentOrgThey"  >
+              <mat-error *ngIf="form.controls.agentOrgThey.errors?.required">They is required</mat-error>
+              <mat-error *ngIf="form.controls.agentOrgThey.errors?.pattern">Invalid number format</mat-error>
+          </mat-form-field>
+
+          </div>
+          </div>
+        </td>
+
+         <!--Agent Bank-->
+         <td >
+          <div fxLayout="row">
+            <div fxLayout="column" fxLayoutGap="9px" style="position: relative;top: 6px;">
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                  <mat-label class="custom-label">Shared</mat-label>
+                  <input matInput formControlName="agentBankShared" >
+                  <mat-error *ngIf="form.controls.agentBankShared.errors?.required">Shared is required</mat-error>
+                  <mat-error *ngIf="form.controls.agentBankShared.errors?.pattern">Invalid number format</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+                <mat-label class="custom-label">Ours</mat-label>
+                <input matInput formControlName="agentBankOurs"  >
+                <mat-error *ngIf="form.controls.agentBankOurs.errors?.required">Ours is required</mat-error>
+                <mat-error *ngIf="form.controls.agentBankOurs.errors?.pattern">Invalid number format</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="{{'formFieldAppearance' | label}}" >
+              <mat-label class="custom-label">They</mat-label>
+              <input matInput  formControlName="agentBankThey"  >
+              <mat-error *ngIf="form.controls.agentBankThey.errors?.required">They is required</mat-error>
+                <mat-error *ngIf="form.controls.agentBankThey.errors?.pattern">Invalid number format</mat-error>
+          </mat-form-field>
+
+          </div>
+          </div>
+        </td>
+
+        
+
+      </tr>
+   
+
+  </tbody>
+  </div>
+
+</table>
+
+</form>
+
+
+
+
+<!-- Button -->
+
+<div fxLayout="row" fxLayoutAlign="end" style="height: 37px;margin-top: 15px;" >
+    <button class="no-button" [mat-dialog-close]="true" mat-flat-button>Cancel</button>
+    <button class="yes-button" type="button" [disabled]="!form.valid"
+     (click)="onSubmit()" mat-raised-button color="primary">Save Changes</button>
+</div>

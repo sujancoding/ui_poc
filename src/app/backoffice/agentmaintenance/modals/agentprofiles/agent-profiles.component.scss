@@ -1,0 +1,120 @@
+.task-header {
+font-size: 18px;
+  background-color: #123969;
+  color: white;
+}
+
+.save-profile {
+  width: 18%;
+  height: 47px;
+  font-size: 16px;
+  border-radius: 6px;
+  font-family: 'Roboto';
+  background-color: #123969;
+  color: white;
+}
+
+.message-block .error-message {
+  // Hidden by default
+  display: none;
+}
+
+.message-block .error-message:first-child {
+  display: block;
+  color: #e8316f;
+  margin-top: -9px;
+  white-space: break-spaces;
+  font-size: 14px;
+  margin-bottom: 5px;
+  margin-left: 3px;
+  font-family: Roboto;
+}
+
+.subTitle-1 {
+  font-family: 'Roboto';
+  font-size: 18px;
+  line-height: 0px;
+  margin-top: 43px;
+  margin-bottom: 30px;
+  color: #000000;
+}
+
+.subTitle-2 {
+  font-family: 'Roboto';
+  font-size: 18px;
+  line-height: 0px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.scrollable-content {
+  overflow-y: auto;
+  height: 464px;
+  margin-top: -20px;
+}
+
+.stepper-back-btn {
+  width: 15%;
+  height: 47px;
+  border-radius: 6px;
+  background-color: #F8F8F8;
+  color: black;
+  border: 1px solid #F8F8F8;
+  font-size: 16px;
+  font-family: 'Roboto';
+}
+
+.red{
+  background-color:red;
+  width: 4cm;
+  height: 40px;
+  border-radius: 9px;
+  color: white;
+  }
+  .green{
+    background-color:#198754;
+    width: 4cm;
+    height: 40px;
+    border-radius: 9px;
+    color: white;
+
+  }
+  
+  .deactivate{
+   justify-content: center;
+   align-items: center;
+    margin: 10px;
+   }
+
+   .spinner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ::ng-deep .mat-mdc-select-panel::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+::ng-deep .mat-mdc-select-panel::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+}
+  
+  

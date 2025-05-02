@@ -1,0 +1,93 @@
+//container for QR code which is not expired
+.container {
+  position: relative;
+  width: 91%;
+  margin-left: 15px;
+  
+  margin-top: 7px;
+  height: 307px;
+  
+ }
+  .container img {
+    width: 100%;
+  }
+ 
+  //container for QR code which is  expired
+  .expired-container {
+    position: relative;
+    width: 91%;
+    margin-left: 15px;
+    /* border: 1px solid #a8a8a8; */
+    margin-top: 7px;
+    height: 307px;
+ }
+  .expired-container img{
+    filter: blur(4px);
+    display: block;
+  }
+  .matbutton{
+    text-align: center;
+    margin-top: -5px;
+    
+  }
+ 
+  .message-text{
+    text-align: center;
+     font-size: 13px;
+     margin-top: 2px;
+     font-family: 'Roboto';
+  }
+ 
+  .icon{
+    position: absolute;
+    bottom: 171px;
+    left: 130px;
+    background-color: #8d0c2e;
+    color: #ffffff;
+    font-size: 30px;
+    padding: 4px;
+    width: 40px;
+    border: 1px solid grey;
+    height: 40px;
+    border-radius: 50px;
+  }
+  .steps{
+    margin-bottom: -9px;
+  }
+
+  .div-position{
+    margin-top: -41px;
+  }
+
+  .imp-notes{
+    text-align: center;
+    text-decoration: underline;
+    color: brown;
+    margin-top: 2px;
+    margin-bottom: 7px;
+  }
+
+  .message-text-expired{
+    text-align: center;
+    margin-top: -3px;
+  }
+
+  .matbutton-expired{
+    text-align: center;
+    margin-top: 1px;
+  }
+
+  .loader-wrapper{
+    position: absolute;
+    top: 0px;
+    left: 0;
+    zoom: 0.5;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 48%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ::ng-deep.loader-wrapper circle,.loader-wrapper circle {stroke: rgb(0, 0, 0) !important;} 
+  

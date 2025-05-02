@@ -1,0 +1,125 @@
+.task-header {
+font-size: 18px;
+    background-color:#123969;
+   color: white;
+   height: 50px;
+  
+  }
+
+
+ .checkBox{
+    margin: 0.1cm;
+ } 
+  
+.scrollable-content{
+  height: 606px;
+  overflow-y: scroll;
+}
+
+  .dialogButton{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 18px;
+    margin-top: 20px;
+    
+  }
+
+.mat-mdc-button{
+    width: 13%;
+  }
+    
+
+  .div-height {
+    font-size: 13px;
+    padding-top: 5px;
+    //margin-left: 10px;
+  }
+  
+  p {
+    margin: 0.6cm;
+    height: 3px;
+  }
+  
+  .filter-button {
+    height: 48px;
+    margin-top: 0.2cm;
+    font-weight: 12px;
+    padding-right: 0.7cm;
+  }
+  
+  .example-section {
+    margin: 12px 0;
+  }
+  
+  .example-button-container {
+    width: 100px;
+    height: 41px;
+  }
+  
+  
+  
+  .matcard {
+    height: 120px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: inherit;
+    margin-left: 1px;
+  
+  }
+  
+  
+  .red {
+    color: rgb(18, 135, 231)
+  }
+  
+  
+  
+  
+  .icon {
+    color: rgb(255, 255, 255);
+  }
+  
+  mat-form-field {
+    padding: 0.1cm;
+  }
+  
+  .buttonApplyfilter {
+    background-color: #123969;
+    color: white;
+    height: 45px;
+    margin-top: 10px;
+    margin-left: -83px;
+  }
+  
+ 
+  
+  .height{
+    line-height: 4px;
+    margin-bottom: 22px;
+  }
+  
+  .p {
+    font-family: 'Roboto';
+    font-size: 16px;
+    margin-left: 8px;
+    margin-bottom: 8px;
+    margin-top: 0px;
+  }
+
+  .error-message{
+    font-size: 14px;
+        white-space: nowrap;
+        position: relative;
+        left: 4px;
+        top: 38px;
+        color: red;
+    }
+.table{
+  margin: 6px -31px 5px 12px;
+  width: 98% !important;
+}
+
+.mat-mdc-dialog-title {
+  margin: 0 0 6px !important;
+  display: block;
+}

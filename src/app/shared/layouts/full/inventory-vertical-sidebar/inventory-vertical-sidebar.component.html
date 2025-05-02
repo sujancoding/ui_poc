@@ -1,0 +1,57 @@
+<mat-nav-list hasBackdrop="false" appAccordion >
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <button mat-button type="button" (click)="closeSideBar()">
+            <mat-icon class="inventory-close-icon">close</mat-icon>
+        </button>
+        <h2 class="inventory-sidebar-title"> Cash Inventory: {{counterTypeDescription}}</h2>
+    </div>
+
+
+    <div class="table-wrapper" style="margin-top: -5px;">
+        <div class="mat-elevation-z8">
+          <div [ngStyle]="changeTableHeight()">
+            <table  class= "table" >
+             
+              <thead>
+                <tr>
+                      <th>Ccy</th>
+                      <th> Valid Deal</th>
+                      <th>Forward Stock</th> 
+                      <th>Avg Cost</th>
+                      </tr>
+              </thead>
+             
+              <tbody>
+                <tr *ngFor="let search of stockListing">
+                    <td>
+                      <div fxLayout="row" fxLayoutGap="5px">
+                        <div>  {{search.ccyNo}} </div>
+                        <div class="sub-value">  {{search.ccyName}} </div>
+                      </div>
+                    </td>
+
+                      <td [ngClass]="{'negative-amount': search.dealStock < 0, 'positive-amount': search.dealStock >= 0}">{{search.dealStock | number}}</td> 
+
+                      <td [ngClass]="{
+                        'negative-amount': (search?.futureStock + search?.dealStock) < 0, 
+                        'positive-amount': (search?.futureStock + search?.dealStock) >= 0
+                      }">
+                    {{ (search?.futureStock + search?.dealStock) | number }}
+                  </td>
+
+                      <td>{{search.avgCost}}</td>
+                  
+                </tr>
+              </tbody>
+             
+          </table>
+          </div>
+        </div> 
+        <!--Loader-->
+        <div *ngIf="loader" class="loader-wrapper">
+          <mat-spinner  diameter="50" > </mat-spinner>
+          </div>
+         </div>
+
+
+</mat-nav-list>

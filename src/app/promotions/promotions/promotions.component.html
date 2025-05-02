@@ -1,0 +1,45 @@
+<div style="height: 1.4cm;font-size: 13px;">
+    <mat-form-field fxFlex="50" appearance="outline">
+        <mat-icon class="icon" matPrefix="search">search</mat-icon>
+        <mat-label class="custom-label">Search By Description</mat-label>
+        <input matInput class="form-control" type="text" [(ngModel)]="searchDescription" name="description" id="search">
+ </mat-form-field>
+</div>
+
+
+<div class="example-table">
+<table class="table">
+    <thead>
+        <th>Promo ID</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Created by</th>
+        <th>Created On</th>
+        <th>Actions</th>
+    </thead>
+
+    <tbody>
+        <tr *ngFor = "let promotionMaintenance of promotionMaintenance | paginate:{itemsPerPage:10,currentPage:p} | filterdescription : searchDescription; ">
+           <td  style="color: #1E74E8;">{{promotionMaintenance.promoId}}</td>
+           <td>{{promotionMaintenance.Description}}</td>
+           <td>{{promotionMaintenance.StartDate | date}}</td>
+           <td>{{promotionMaintenance.EndDate | date}}</td>
+           <td>{{promotionMaintenance.createdBy}}</td>
+           <td>{{promotionMaintenance.createdOn}}</td>
+           <td>
+            <button (click)="deleteProduct(promotionMaintenance.id)" mat-icon-button type="button">
+                <mat-icon>delete</mat-icon> 
+                </button>
+           </td>
+        </tr>
+    </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<div class="addPromotion">
+    <button class="btnAdd" (click)="openPromotion()" mat-mini-fab aria-label="Example icon button with a plus icon" >
+      <mat-icon> add </mat-icon>
+    </button>
+  </div>

@@ -1,0 +1,69 @@
+<div class="example-table">
+  <table class="table">
+  <thead>
+      <th>TXN ID & ON</th>
+      <th>Sender</th>
+      <th>Payee</th>
+      <th>Amount & Currency</th>
+      <th>Exch Rate</th>
+      <th>Deal ID</th>
+      <th>Status</th>
+      <th>Actions</th>
+  </thead>
+  
+  <tbody>
+      <tr *ngFor = "let agentTransactions of agentTransactions | paginate:{itemsPerPage:14,currentPage:p}">
+  
+          <td>
+               <div class="flex">
+                  <small style="font-weight:500;font-size:14px"> {{agentTransactions.txnId}} </small>
+                 <small> {{agentTransactions.txnOn}} </small>
+                </div> 
+          </td>
+          <td>{{agentTransactions.sender}}</td>
+          <td>
+              <div fxLayout="row" fxLayoutGap="50px">
+                  <div class="flex">
+                      <small style="font-weight:500;font-size:14px"> {{agentTransactions.payeeAccountNo}} </small>
+                     <small> {{agentTransactions.payeeName}} </small>
+                    </div> 
+
+                    <div class="flex">
+                      <small style="font-weight:500;font-size:14px"> {{agentTransactions.bankName}} </small>
+                     <small> {{agentTransactions.swiftCode}} </small>
+                    </div> 
+
+                    </div>
+          </td>
+          <td>
+              <div fxLayout="row" fxLayoutGap="20px">
+                  <small style="font-weight:500;font-size:14px"> {{agentTransactions.amount}} </small>
+                 <small style="font-weight:500;font-size:14px"> {{agentTransactions.currency}} </small>
+                </div> 
+          </td>
+          <td>{{agentTransactions.exchRate}}</td>
+          <td>{{agentTransactions.dealId}}</td>
+          <td class="green">{{agentTransactions.status}}</td>
+          <td> <button class="btn" (click)="openDialog()" mat-icon-button type="button">
+              <mat-icon>launch</mat-icon> 
+              </button> </td>
+      </tr>
+  </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+ 
+
+    
+    
+    
+<!-- <div fxFlex="30" *ngIf="showMe">
+<app-agent-details  *ngFor="let agentTable of agentTable|slice:0:1" [object]="agentTable"></app-agent-details>
+<app-revise-exchange></app-revise-exchange>
+</div> -->
+
+
+
+
+
+  

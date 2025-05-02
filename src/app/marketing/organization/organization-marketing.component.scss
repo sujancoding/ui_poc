@@ -1,0 +1,539 @@
+mat-sidenav-container{
+  height: 100vh;
+}
+
+.mat-icon{
+    font-size: 28px;
+    position: relative;
+    left: 4px;
+    
+}
+mat-sidenav{
+ background-color: rgb(245, 245, 245);
+ width: 200px;
+}
+.menu-wallpaper{
+    width: 208px;
+    height: 207px;
+    position: relative;
+    left: -7px;
+}
+.menu-badge-item{
+    font-size: 21px;
+    font-family: 'Roboto';
+}
+.menu-title{
+    color: grey;
+    margin: 11px;
+    position: relative;
+    top: 2px;
+}
+
+.item-list{
+    cursor: pointer;
+    font-family: 'Roboto';
+    font-size: 15px;
+    margin-left: -5px;
+    height: 47px;
+}
+.list-menuicon{
+    font-size: 22px;
+}
+.item-list:hover{
+    cursor: pointer;
+    background-color: rgb(225, 225, 225);
+}
+
+.header-toolbar{
+    height: 130px;
+    background: #ffffff;
+    position: sticky;
+}
+.example-container {
+    width: 500px;
+    height: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-sidenav {
+    padding: 20px;
+  }
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.logo{
+        /* margin: 0 auto; */
+       // width: 5%;
+       position: relative;
+       left: -16px;
+       height: 110px;
+}
+
+.text-links{
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    padding-inline: 23px;
+      background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  //padding: 5px 0;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  font-size: 22px;
+    font-family: 'Roboto';
+}
+
+.text-links:before{
+    content: "";
+    background: #3c81c4;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .text-links:hover {
+   background-position: 0;
+  }
+  
+  .text-links:hover::before{
+    width: 100%;
+  }
+
+.mat-btn{
+    font-size: 19px;
+    height: 45px;
+    width: 152px;
+    color: #208ec6;
+    position: relative;
+    right: 49px;
+}
+
+.shortcut-mat-btn{
+    font-size: 19px;
+    height: 45px;
+    width: 162px;
+    color: #208ec6;
+}
+
+.mat-btn-2{
+    font-size: 19px;
+    height: 45px;
+    width: 152px;
+    color: #208ec6;  
+}
+
+.mat-btn:hover{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(17, 158, 214);
+}
+
+.shortcut-mat-btn:hover{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(17, 158, 214);
+}
+
+.location-icon{
+    color: white;
+    margin-top: 4px;
+}
+
+.text-country-location{
+    position: relative;
+    left: -33px;
+    color: white;
+    font-size: 21px;
+}
+
+.home-wallpaper{
+    width: -webkit-fill-available;
+    filter : blur(2px);
+    height: 697px;
+}
+
+.scroll-body{
+    height: 80vh!important;
+    overflow-y: scroll;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.centered{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 27px;
+    font-family: none;
+    line-height: 25px;
+   // animation: zoom-in-zoom-out 1s ease infinite;
+}
+
+.centered-2{
+    font-size: 36px;
+    font-family: 'Roboto';
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.play-store-logo{
+    position: absolute;
+    top: 77%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    cursor: pointer;
+    background-color: black;
+}
+
+.mySwiper{
+    width: 100%;
+    height: -webkit-fill-available;
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   
+    
+  }
+
+ .sub-heads{
+    color: #1D6DBB;
+    font-size: 30px;
+    font-weight: 500;
+    font-family: 'Roboto';
+ } 
+
+ .divider{
+    width: 6%;
+    margin: 0 auto;
+    /* stroke: darkblue; */
+    border-top-color: #cecece;
+    /* height: 53px; */
+    margin-top: -22px;
+ }
+
+.singapore-money-image{
+    display: block;
+    width: 46%;
+    margin: 30px;
+    border-radius: 20px;
+} 
+.div-aboutus{
+    width: 45%;
+    margin-top: 27px;
+}
+.about-us{
+    color: black;
+    text-align: left;
+    font-size: 23px;
+    font-family: 'Roboto';
+    line-height: 31px;
+}
+
+.what-we-offer-img{
+    width: 97%;
+    height: 602px;
+    border: 1px solid gainsboro;
+    border-radius: 20px;
+    margin-top: 26px;
+}
+
+.what-we-offer-layout{
+    position: relative; 
+    margin: 20px;
+}
+
+.what-we-offer-content{
+    position: absolute;
+    top: 49px;
+    left: 22px;
+    width: 95%;
+    color: black;
+    text-align: justify;
+    font-size: 23px;
+    font-family: 'Roboto';
+}
+
+.sub-heads-label{
+    position: relative;
+    top: 35px;
+    left: 22px;
+    font-weight: unset;
+    font-family: 'Roboto';
+}
+
+.what-we-offer-content-2{
+    position: absolute;
+    top: 119px;
+    left: 22px;
+    width: 90%;
+    color: black;
+    text-align: justify;
+    font-size: 23px;
+    font-family: 'Roboto';
+}
+
+.sub-heads-label-2{
+    position: relative;
+    top: 105px;
+    left: 22px;
+    font-weight: unset;
+    font-family: 'Roboto';
+}
+
+.example-action-buttons {
+    padding-bottom: 20px;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+    margin-left: 8px;
+  }
+.expansion-panel{
+    margin: 20px;
+    border-radius: 20px;
+}  
+
+.panel-title{
+    font-size: 21px;
+    color: #0651A9;
+    position: relative;
+}
+
+.panel-content{
+    font-size: 20px;
+    color: #808080;
+    position: relative;
+    top: -27px;
+    /* left: -1px; */
+    text-align: justify;
+    line-height: 28px;
+}
+
+.container{
+    margin: 20px;
+    height: 195%;
+    background-color: #545454;
+}
+
+.contact-heading{
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 500;
+    font-family: 'Roboto';
+    position: relative;
+    top: 27px;
+}
+
+.contact-divider{
+    width: 6%;
+    margin: 0 auto;
+    /* stroke: darkblue; */
+    border-top-color: #cecece;
+}
+
+.org-location-img{
+    display: block;
+    margin: 23px;
+    border-radius: 20px;
+}
+
+.label{
+    font-size: 23px;
+    margin-top: 30px;
+}
+
+.value{
+    position: relative;
+    top: -24px;
+    left: 12px;
+    font-size: 19px;
+    font-family: 'Roboto';
+}
+
+
+  
+  .example-full-width {
+    width: 244%;
+  }
+
+.mat-btn-3{
+    font-size: 18px;
+    height: 47px;
+    width: 170px;
+    position: relative;
+    color: #ffffff;
+    background-color: #072982;
+    top: 61px;
+}  
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #545454;
+    color: white;
+    text-align: center;
+ }
+
+ .vl {
+    border-left: 1px solid grey;
+    height: 25px;
+  }
+
+ .menu-icon{
+    font-size: 50px;
+    color: rgb(0, 0, 0);
+    margin-right: 25px;
+ } 
+ 
+ .menu-badge-item-1{
+    font-size: 15px;
+    font-family: 'Roboto';
+}
+  @media screen and (max-width: 1300px) {
+    .text-links, .location-row  {
+      display: none;
+      visibility: hidden;
+      color: black;
+    }
+  }
+
+ 
+  
+  @media (min-width: 1300px) {
+    .menu-button {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+ 
+  //mobile device
+  @media (max-width: 920px) {
+    .header-toolbar{
+        height: 65px !important;
+        background: #ffffff;
+        position: sticky;
+    }
+    .mat-btn{
+        font-size: 14px;
+    height: 33px;
+    width: 105px;
+    color: #208ec6;
+    position: relative;
+    right: 9px;
+    top: -11px;
+    }
+
+    .shortcut-mat-btn{
+        font-size: 14px;
+        height: 33px;
+        width: 125px;
+        color: #208ec6;
+    }
+    .centered{
+        position: relative;
+        top: 18%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 19px;
+        font-family: none;
+        line-height: 22px;
+    }
+    .centered-2{
+        font-size: 19px;
+    font-family: 'Roboto';
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 700;
+    white-space: inherit
+    }
+    .singapore-money-image{
+        width: 85%;
+    }
+    .about-us{
+        text-align: center;
+    }
+    .div-aboutus{
+        width: 100%;
+    margin-top: 0px;
+    }
+  }
+  
+//   @keyframes zoom-in-zoom-out {
+    
+//     0% {
+//         position: absolute;
+//         top: 30%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
+//       transform: scale(1, 1);
+//     }
+//     50% {
+//         position: absolute;
+//         top: 30%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
+//       transform: scale(1.5, 1.5);
+//     }
+//     100% {
+//       transform: scale(1, 1);
+//     }
+//   }  
+@media (min-width: 100px) and (max-width: 480px) {
+    .menu-icon {
+        font-size: 29px !important;
+    } 
+    .logo {
+        position: relative;
+        left: -16px;
+        top: 5px;
+        height: 52px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 920px) {
+    .menu-icon {
+        font-size: 37px !important;
+    } 
+    .logo {
+        position: relative;
+        left: -7px;
+        top: 3px;
+        height: 59px;
+    }
+}
+@media (min-width: 920px) {
+
+.logo{
+    position: relative;
+    left: 0px;
+}
+
+
+}

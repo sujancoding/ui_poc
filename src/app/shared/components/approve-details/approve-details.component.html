@@ -1,0 +1,98 @@
+<mat-card appearance="outlined" [ngStyle]="responsiveCard()" *ngFor="let payeeDetails of payeeDetails" class="info-card">
+    <mat-card-content>
+  <div fxLayout="row" fxLayoutAlign="start center" class="content-header">
+   
+    <div class="customer-icon">
+      <mat-icon class="customer-icon-ic" *ngIf="payeeDetails.CUSTOMERTYPE == 'I'">person</mat-icon>
+      <mat-icon class="customer-icon-ic" *ngIf="payeeDetails.CUSTOMERTYPE == 'A'">supervised_user_circle</mat-icon>  
+      <mat-icon class="customer-icon-ic" *ngIf="payeeDetails.CUSTOMERTYPE == 'C'">domain</mat-icon>  
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-evenly" style="margin-left: 23px;position: relative;top: 2px;">
+    <div>
+      <p class="head-content">{{payeeDetails.NAME.length > 20 ? (payeeDetails.NAME | slice:0:20) + '...' : payeeDetails.NAME }}</p>
+    </div>
+    <div>
+     <div class="tags" [ngStyle]="{'color': getColor(payeeDetails.STATUS),'background-color': getBackgroundColor(payeeDetails.STATUS)}">
+      <div  [ngStyle]="{'background-color': getColor(payeeDetails.STATUS)}" class="small-container"></div>
+      <span class="status-tag"> 
+        {{payeeDetails.STATUS}} </span>
+      </div>
+    </div>
+  </div>
+   
+
+    </div>
+    
+
+<div class="payee-deatails" [ngStyle]="responsiveContent()">
+    <div fxLayout="row" style="padding-top: 17px;"> 
+      <div class="flex">
+        <small class="title-content">Payee Details</small>
+      </div>
+  </div>
+   
+    <div fxLayout="row" fxLayoutAlign="space-between"> 
+
+        <div class="flex">
+          
+            <small class="key">Account Number</small>
+           <small class="values"> {{payeeDetails.ACCOUNTNBR}}</small>
+          
+        </div>
+        <div class="flex">
+          <small class="key">Name</small>
+          <small class="values"> {{payeeDetails.NAME}} </small>
+         </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <div class="flex">
+        <small class="key">Relationship</small>
+        <small class="values">{{ getRelationDescription(payeeDetails.RELATIONSHIP) }}</small>
+       </div>
+      <div class="flex">
+        <small class="key">Payee Country</small>
+        <small class="values">{{payeeDetails.COUNTRY}}</small>
+       </div>
+  </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div class="flex">
+          <small class="key">Payee Bank</small>
+          <small class="values"> {{payeeDetails.BANKNAME}} </small>
+         </div>
+         <div class="flex" >
+          <small class="key">Bank Swift Code</small>
+          <small class="values">{{payeeDetails.SWIFTCODE ? payeeDetails.SWIFTCODE : "N/A"}}</small>
+      </div>
+        </div>
+       
+          <div fxLayout="row" fxLayoutAlign="space-between">
+          <div class="flex">
+            <small class="key">Branch</small>
+            <small class="values">{{payeeDetails.BRANCHNAME}}</small>
+           </div>
+        <div class="flex" >
+          <small class="key">{{ bankCodeTypeLabel(payeeDetails.BANKBRANCHTYPE) | titlecase}}</small>
+          <small class="values">{{payeeDetails.ROUTINGCODE ? payeeDetails.ROUTINGCODE : "N/A"}}</small>
+      </div>
+      
+    </div>
+  </div>
+
+
+<div [ngStyle]="responsiveButton()" fxLayoutAlign="space-around" class="view-card-buttons">
+    <button [ngClass]="isDisableApproveButton ? 'btn-disable' : 'btn'" [disabled]="isDisableApproveButton" *ngIf="showApproveButton" (click)="fulfillPayee(payeeDetails.CUSTOMERID , payeeDetails.PAYEEID, 'APPROVED')" type="button" >Approve Payee</button> 
+    <div class="loader-container">
+      <mat-spinner  diameter="30" *ngIf="approveButtonLoader"></mat-spinner>
+ </div>
+    <button [ngClass]="isDisableApproveButton ? 'btn-disable' : 'btn-reject'" [disabled]="isDisableApproveButton" *ngIf="showRejectButton" (click)="fulfillPayee(payeeDetails.CUSTOMERID , payeeDetails.PAYEEID, 'REJECTED')" type="button" >Reject Payee</button> 
+    <div class="loader-container">
+      <mat-spinner  diameter="30" *ngIf="rejectButtonLoader"></mat-spinner>
+ </div>
+ </div>
+<!--Loader-->
+<div *ngIf="loader" class="loader-wrapper">
+  <mat-spinner> </mat-spinner>
+  </div>
+  </mat-card-content>
+  </mat-card>

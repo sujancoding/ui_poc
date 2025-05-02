@@ -1,0 +1,126 @@
+
+<!-- Agent Login > Send Money > Modal popup ToolBar -->
+<div *ngIf="showMatToolbar">
+    <h4 mat-dialog-title>
+      <mat-toolbar role="toolbar" class="task-header" fxLayoutAlign="space-between center">
+        <span> Payee Listings </span>
+        <span [mat-dialog-close]="true" style="cursor: pointer;">
+          <mat-icon>close</mat-icon>
+        </span>
+      </mat-toolbar>
+    </h4>
+</div>
+<!--Search filter Section-->
+<div  [ngClass]="{'scrollable-content':showMatToolbar == true}" style="margin-top: -10px;" >
+<div [class.mat-elevation-z2]="!isActive" [class.mat-elevation-z8]="isActive" class="search-filter-1">
+  <form [formGroup]="filterForm">
+  <div class="div-height" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="10px" style="margin-left:10px;">
+    <div fxLayout="row"  style="padding-top: 15px;" >
+    <div fxLayout="column"> 
+      <mat-form-field fxFlex="20" appearance="{{'formFieldAppearance' | label}}">
+        <mat-label class="custom-label">Payee Name</mat-label>
+        <input  placeholder="Payee Name" matInput type="text" formControlName="payeeName" [formControl]="filterForm.controls['payeeName']">
+      </mat-form-field>
+      <small class="error-message" *ngIf="filterForm.controls['payeeName'].hasError('pattern')" >{{'splCharsValidation' | label}}</small>     
+    </div>
+    <div fxLayout="column"> 
+      <mat-form-field fxFlex="20" appearance="{{'formFieldAppearance' | label}}">
+        <mat-label class="custom-label">Status</mat-label>
+        <mat-select  [(ngModel)]="searchStatus" [ngModelOptions]="{standalone: true}" [disabled]="disableDropdown">
+          <mat-option value="">--Select--</mat-option>
+          <mat-option value="PENDING">Pending</mat-option>
+          <mat-option value="APPROVED">Approved</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button [disabled]="!filterForm.valid" mat-raised-button fxFlex="25"  class="buttonApplyfilter" (click)="applyFilter(searchStatus)">
+      Apply Filter
+    </button>
+    </div>
+  <div *ngIf="showColumn">
+    <button class="btnAdd" type="button" mat-raised-button [disabled]="isDisableAddPayee" (click)="addPayee()"   >
+      <mat-icon style="margin-left: 6px;"> add </mat-icon> Payee
+    </button>
+</div>
+  </div>
+  </form>
+
+  </div>
+
+<!-- <div class="example-table"> -->
+<div class="table-wrapper">
+  <div class="mat-elevation-z8">
+    <div [ngStyle]="changeTableHeight()">
+    <table class="table">
+        <thead>
+            <th>Payee ID</th>
+            <th>Payee Name</th>
+            <th>Relationship</th>
+            <th>Account Number</th>
+            <th>Payee Address</th>
+            <th>Bank Info</th>
+            <th>Status</th> 
+            <th *ngIf="showColumn">Actions</th>
+            <th *ngIf="showButton"></th>
+        </thead>
+    
+        <tbody>
+            <tr *ngFor = "let payee of payee | slice: (p - 1) * itemsPerPage : p * itemsPerPage">
+               <td> {{payee.PAYEEID}} </td>
+               <td>{{payee.NAME}}</td>
+               <td>{{getRelationDescription(payee.RELATIONSHIP)}}</td>
+               <td>{{payee.ACCOUNTNBR}}</td>
+               <td>{{payee.ADDRESS}} ,{{payee.STATE}}, {{payee.COUNTRY}}</td>
+               <td> {{payee.BANKNAME ? payee.BANKNAME : "No Bank Name"}}, {{payee.SWIFTCODE ? payee.SWIFTCODE : "N/A"}} ,
+                {{payee.ROUTINGCODE ? payee.ROUTINGCODE : "N/A"}} , 
+                {{payee.BRANCHNAME ? payee.BRANCHNAME : "No Branch Name"}} , {{payee.COUNTRY ? payee.COUNTRY : "No Country"}}</td>
+               <td>
+                <div class="tags" [ngStyle]="{'color': getColor(payee.STATUS),'background-color': getBackgroundColor(payee.STATUS)}">
+                  <div  [ngStyle]="{'background-color': getColor(payee.STATUS)}" class="small-container"></div>
+                <span class="status-tag">{{payee.STATUS}} </span>
+                </div>
+               </td>
+               <td *ngIf="showColumn">
+                <div fxLayout="row">
+                  <div class="example-button-container">
+                    <button mat-icon-button type="button" class="icon_button"  (click)="editPayee(payee.CUSTOMERID,payee.PAYEEID)">
+                      <mat-icon>create</mat-icon> 
+                    </button>
+                  </div>
+                  <div class="example-button-container">
+                    <button mat-icon-button type="button" class="icon_button" [disabled]="isDisableDeleteIcon">
+                      <mat-icon>delete</mat-icon> 
+                    </button>
+                  </div>
+                </div>
+               </td>
+
+               <td *ngIf="showButton">
+                <mat-radio-button ngDefaultControl [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedRadio" (change)="radioSelected(payee.PAYEEID,payee.NAME,payee.ACCOUNTNBR,payee.COUNTRY,payee.BANKNAME,payee.SWIFTCODE, payee.ROUTINGCODE)"></mat-radio-button>
+               </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+ <!--Pagination-->
+ <mat-paginator class="pagination-class"
+ [length]="payee.length"
+ [pageSize]="itemsPerPage"
+ [pageIndex]="p - 1"
+ (page)="handlePageChange($event)"
+></mat-paginator>   </div>
+  
+  <!--Loader-->
+ <div *ngIf="loader" class="loader-wrapper">
+  <mat-spinner> </mat-spinner>
+  </div>
+
+    <div class="btn" *ngIf="showOKButton">
+        <button mat-raised-button fxFlex="10" (click)="navigateParentScreen()" [disabled]="disableOkButton" class="fetchPayeeButton">Ok</button>
+        </div>
+    </div>
+
+
+</div>
+
+
